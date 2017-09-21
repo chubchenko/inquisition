@@ -1,0 +1,20 @@
+exclude_paths:
+  - db/migrate
+
+Attribute:
+  enabled: false
+
+ControlParameter:
+  enabled: false
+
+FeatureEnvy:
+  enabled: false
+
+IrresponsibleModule:
+  enabled: false
+
+TooManyStatements:
+  max_statements: 6
+
+UtilityFunction:
+  enabled: false

@@ -1,0 +1,11 @@
+attributes:
+  - primary_keys
+  - foreign_key
+  - content
+  - inheritance
+  - timestamps
+filename: doc/erd
+filetype: svg
+notation: bachman
+inheritance: true
+polymorphism: true

@@ -1,0 +1,66 @@
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+
+  EmptyMessage:
+    enabled: false
+
+  TrailingPeriod:
+    enabled: true
+
+  TextWidth:
+    enabled: false
+
+PreCommit:
+  ALL:
+    on_warn: fail
+
+  AuthorEmail:
+    enabled: false
+
+  AuthorName:
+    enabled: false
+
+  MergeConflicts:
+    enabled: true
+
+  TrailingWhitespace:
+    enabled: true
+    exclude: ['vendor/**/*', 'spec/support/vcr_cassets/**/*']
+
+  YamlSyntax:
+    enabled: true
+
+  RuboCop:
+    enabled: true
+
+  # CssLint:
+  #   enabled: true
+  #   description: 'Analyze with stylelint'
+  #   required_executable: 'stylelint'
+  #   flags: []
+  #   install_command: 'npm install -g stylelint'
+  #   command: ['npm', 'run', 'stylelint', '--', '-f', 'string']
+  #   include: '**/*.css'
+
+  # EsLint:
+  #   enabled: true
+  #   required_executable: 'npm'
+  #   command: ['webpack/node_modules/.bin/eslint', '--', '-f', 'compact']
+  #   include:
+  #     - 'webpack/src/**/*.js'
+
+  # Foodcritic:
+  #   enabled: true
+  #   cookbooks_directory: 'chef/site-cookbooks'
+  #   environments_directory: 'chef/environments'
+  #   roles_directory: 'chef/roles'
+  #   include:
+  #     - 'chef/site-cookbooks/**/*'
+  #     - 'chef/environments/**/*'
+  #     - 'chef/roles/**/*'
+  #   flags:
+  #     - '--epic-fail=any'
+  #     - '-t~FC011' # Missing README in markdown format
+  #     - '-t~FC064' # Ensure issues_url is set in metadata
+  #     - '-t~FC065' # Ensure source_url is set in metadata
