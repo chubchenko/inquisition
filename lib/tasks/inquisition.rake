@@ -28,7 +28,7 @@ namespace :inquisition do
     file = File.join(Dir.pwd, 'config', 'environments', 'development.rb')
     content = File.read(file)
 
-    unless content.match?(/Bullet/)
+    unless content =~ /Bullet/
       config = <<~BULLET
         config.after_initialize do
           Bullet.tap do |bullet|
@@ -58,10 +58,19 @@ namespace :inquisition do
     file = File.join(Dir.pwd, 'spec', 'spec_helper.rb')
     content = File.read(file)
 
-    unless content.match?(/simplecov/)
+    unless content =~ /simplecov/
       config = <<~SIMPLECOV
         require 'simplecov'
-        SimpleCov.start
+
+        SimpleCov.start 'rails' do
+          coverage_dir File.join('doc', 'coverage')
+
+          groups = %w[channels commands controllers decorators features forms
+                      helpers jobs libs mailers models policies queries
+                      serializers services tasks uploaders values]
+
+          groups.each { |name| add_group name.capitalize, "/app/\#{name}" }
+        end
       SIMPLECOV
 
       File.write(file, config + "\n" + content)
@@ -92,7 +101,7 @@ namespace :inquisition do
     puts <<~INFO
       You can run all linters using this command:
 
-        $ rake inquisition:all
+        $ rails inquisition:all
 
       Check output into the console and go to the <project_root>/doc directory.
       There you will find diagrams and some reports in html format.
