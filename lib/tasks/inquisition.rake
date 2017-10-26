@@ -127,6 +127,11 @@ namespace :inquisition do
     end
   end
 
+  desc 'Bundler audit'
+  task :bundler_audit do
+    system 'bundle audit check --update'
+  end
+
   desc 'Generate ER-diagram'
   task :erd do
     system 'bundle exec erd'
@@ -257,7 +262,19 @@ namespace :inquisition do
 
   desc 'Run ALL linters'
   task :all do
-    %w[erd railroady reek rubocop rails_best_practices rubycritic fasterer brakeman traceroute stats].each do |task|
+    %w[
+      bundler_audit
+      erd
+      railroady
+      reek
+      rubocop
+      rails_best_practices
+      rubycritic
+      fasterer
+      brakeman
+      traceroute
+      stats
+    ].each do |task|
       box task
 
       Rake::Task["inquisition:#{task}"].invoke
