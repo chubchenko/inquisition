@@ -163,8 +163,8 @@ namespace :inquisition do
   end
 
   desc 'Run Rubocop'
-  task :rubocop do
-    system 'bundle exec rubocop'
+  task :rubocop, :rubocop_arguments do |task, args|
+    system "bundle exec rubocop #{args.rubocop_arguments}"
   end
 
   desc 'Run Rails Best Practices'
