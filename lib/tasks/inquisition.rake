@@ -3,23 +3,51 @@ require 'traceroute'
 namespace :inquisition do
   task :create_configs do
     configs = [
-      { gem: 'Overcommit', file: '.overcommit.yml' },
-      { gem: 'RSpec',      file: '.rspec' },
-      { gem: 'Rails ERD',  file: '.erdconfig' },
-      { gem: 'Rubocop',    file: '.rubocop.yml' },
-      { gem: 'Reek',       file: '.reek.yml' },
-      { gem: 'Fasterer',   file: '.fasterer.yml' }
+      { analyzer: 'Overcommit', file: '.overcommit.yml' },
+      { analyzer: 'RSpec',      file: '.rspec' },
+      { analyzer: 'Rails ERD',  file: '.erdconfig' },
+      { analyzer: 'Rubocop',    file: '.rubocop.yml' },
+      { analyzer: 'Reek',       file: '.reek.yml' },
+      { analyzer: 'Fasterer',   file: '.fasterer.yml' },
+      { analyzer: 'ESLint',     file: '.eslintrc.json' }
     ]
 
     configs.each do |config|
-      print "Creating config for #{config[:gem]}... "
+      file_name_without_extension = config[:file][/^\.\w+/]
 
-      cp File.join(File.join(File.dirname(__dir__), 'configs'), config[:file]), Dir.pwd, preserve: true, verbose: false
-
-      puts 'Done!'.green
+      # Find existing configs (for example: .reek.yml, .rspec) recursively
+      if Dir.glob("**/#{file_name_without_extension}{.*,}").any?
+        puts "Use existing config for #{config[:analyzer]}. "
+      else
+        print "Creating config for #{config[:analyzer]}... "
+        cp File.join(File.join(File.dirname(__dir__), 'configs'), config[:file]), Dir.pwd, preserve: true, verbose: false
+        puts 'Done!'.green
+      end
     end
 
     mkdir_p File.join(Dir.pwd, 'doc'), verbose: false
+  end
+
+  task :install_eslint do
+    puts "Installing eslint locally (without configuration)..."
+
+    system 'sudo npm install eslint --save-dev' # Install eslint locally
+
+    # You can also create package.json and configure .eslintrc from scratch.
+    # Uncomment following lines for this:
+    # system 'npm init -y'
+    # system 'sudo ./node_modules/.bin/eslint --init'
+
+    box 'Important!', color: :red do
+      "You need to create package.json file with all required dependencies for ESLint by yourself."
+    end
+
+    puts 'Done!'.green
+  end
+
+  desc 'Run ESLint'
+  task :eslint do
+    system "sudo ./node_modules/.bin/eslint #{Dir.pwd} -c .eslintrc.json"
   end
 
   task :install_bullet do
@@ -122,7 +150,7 @@ namespace :inquisition do
   task :install do
     box '~ * ~   Inquisition   ~ * ~'.upcase
 
-    %w[create_configs install_bullet install_simplecov info].each do |task|
+    %w[create_configs install_bullet install_simplecov install_eslint info].each do |task|
       Rake::Task["inquisition:#{task}"].invoke
     end
   end
@@ -273,6 +301,7 @@ namespace :inquisition do
       fasterer
       brakeman
       traceroute
+      eslint
       stats
     ].each do |task|
       box task
