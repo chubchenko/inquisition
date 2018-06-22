@@ -9,15 +9,15 @@ namespace :inquisition do
       { analyzer: 'Rubocop',    file: '.rubocop.yml' },
       { analyzer: 'Reek',       file: '.reek.yml' },
       { analyzer: 'Fasterer',   file: '.fasterer.yml' },
-      { analyzer: 'ESLint',     file: '.eslintrc.json' },
+      { analyzer: 'ESLint',     file: '.inquisition_eslintrc.json' },
       { analyzer: 'Stylelint',  file: '.stylelintrc.json' }
     ]
 
     configs.each do |config|
       file_name_without_extension = config[:file][/^\.\w+/]
 
-      # Find existing configs (for example: .reek.yml, .rspec) recursively
-      if Dir.glob("**/#{file_name_without_extension}{.*,}").any?
+      # Find existing configs (for example: .reek.yml, .rspec)
+      if Dir.glob("#{file_name_without_extension}{.*,}").any?
         puts "Use existing config for #{config[:analyzer]}. "
       else
         print "Creating config for #{config[:analyzer]}... "
@@ -34,13 +34,15 @@ namespace :inquisition do
 
     system 'sudo npm install eslint --save-dev'
 
-    # You can also create package.json and configure .eslintrc from scratch.
-    # Uncomment following lines for this:
-    # system 'npm init -y'
-    # system 'sudo ./node_modules/.bin/eslint --init'
+    print 'Would you like to create default .eslintrc config file?(Y/n): '
 
-    box 'Important!', color: :red do
-      "You need to create package.json file with all required dependencies for ESLint by yourself."
+    if STDIN.gets.chomp =~ /^y{1}/i # https://stackoverflow.com/a/577851
+      system 'npm init -y'
+      system 'sudo ./node_modules/.bin/eslint --init'
+    else
+      box 'Important!', color: :red do
+        "You need to create package.json file with and add all required dependencies for ESLint by yourself"
+      end
     end
 
     puts 'Done!'.green
@@ -54,7 +56,8 @@ namespace :inquisition do
 
   desc 'Run ESLint'
   task :eslint do
-    system "sudo ./node_modules/.bin/eslint '**/*.{js,jsx}' -c .eslintrc.json"
+    config_file_name = Dir.glob('.eslintrc.*').first || '.inquisition_eslintrc.json'
+    system "sudo ./node_modules/.bin/eslint '**/*.{js,jsx}' -c #{config_file_name}"
   end
 
   desc 'Run Stylelint'
