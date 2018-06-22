@@ -9,7 +9,8 @@ namespace :inquisition do
       { analyzer: 'Rubocop',    file: '.rubocop.yml' },
       { analyzer: 'Reek',       file: '.reek.yml' },
       { analyzer: 'Fasterer',   file: '.fasterer.yml' },
-      { analyzer: 'ESLint',     file: '.eslintrc.json' }
+      { analyzer: 'ESLint',     file: '.eslintrc.json' },
+      { analyzer: 'Stylelint',  file: '.stylelintrc.json' }
     ]
 
     configs.each do |config|
@@ -31,7 +32,7 @@ namespace :inquisition do
   task :install_eslint do
     puts "Installing eslint locally (without configuration)..."
 
-    system 'sudo npm install eslint --save-dev' # Install eslint locally
+    system 'sudo npm install eslint --save-dev'
 
     # You can also create package.json and configure .eslintrc from scratch.
     # Uncomment following lines for this:
@@ -45,9 +46,20 @@ namespace :inquisition do
     puts 'Done!'.green
   end
 
+  task :install_stylelint do
+    puts "Installing stylelint locally..."
+    system 'sudo npm install stylelint'
+    puts 'Done!'.green
+  end
+
   desc 'Run ESLint'
   task :eslint do
-    system "sudo ./node_modules/.bin/eslint #{Dir.pwd} -c .eslintrc.json"
+    system "sudo ./node_modules/.bin/eslint '**/*.{js,jsx}' -c .eslintrc.json"
+  end
+
+  desc 'Run Stylelint'
+  task :stylelint do
+    system "sudo ./node_modules/.bin/stylelint '**/*.{css,scss}' --config .stylelintrc.json"
   end
 
   task :install_bullet do
@@ -150,7 +162,7 @@ namespace :inquisition do
   task :install do
     box '~ * ~   Inquisition   ~ * ~'.upcase
 
-    %w[create_configs install_bullet install_simplecov install_eslint info].each do |task|
+    %w[create_configs install_bullet install_simplecov install_eslint install_stylelint info].each do |task|
       Rake::Task["inquisition:#{task}"].invoke
     end
   end
@@ -302,6 +314,7 @@ namespace :inquisition do
       brakeman
       traceroute
       eslint
+      stylelint
       stats
     ].each do |task|
       box task
