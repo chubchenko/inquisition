@@ -1,5 +1,15 @@
 ## What Inquisition gem is?
-Ruby and Ruby on Rails have plenty of tools that help you analyze your codebase quality. However, setting up and configuring every single tool takes too much time. We at RubyGarage decided to save developers' time and create a gem that encompasses all the code analysis tools we use on a daily basis as well as configuration files for each tool and Rake tasks for launching these tools.
+Ruby and Ruby on Rails have plenty of tools that help you analyze your codebase quality. However, setting up and configuring every single tool takes too much time. We at RubyGarage decided to save developers' time and create a gem that encompasses all the code analysis tools we use on a daily basis as well as configuration files for each tool and Rake tasks for launching these tools:
+
+*Brakeman - a static analysis security vulnerability scanner for Ruby on Rails applications
+*Bullet - a gem that finds and kills N+1 queries and unused eager loading
+*Bundler-audit - a patch-level verification for Bundler
+*Fasterer - a gem that helps Rubies go faster
+*RailRoady - a gem that helps you generate Rails 3/4/5 model (ActiveRecord, Mongoid, Datamapper) and controller UML diagrams
+*Rails ERD - a gem that generates Entity-Relationship Diagrams for Rails applications
+*Rails_best_practices - a code metric tool for rails projects 
+*Reek - a code smell detector
+*RuboCop - a Ruby static code analyzer and code formatter
 
 The tools are configured for displaying output to the console in a single format which results in better readability and no need to switch between the tools.
 
