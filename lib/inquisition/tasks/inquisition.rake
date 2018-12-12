@@ -1,6 +1,10 @@
 require 'traceroute'
 
 namespace :inquisition do
+  task :testss do
+    puts 'test'
+  end
+
   task :create_configs do
     configs = [
       { analyzer: 'Overcommit', file: '.overcommit.yml' },

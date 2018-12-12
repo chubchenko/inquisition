@@ -1,0 +1,33 @@
+# inquisition:
+#   linters:
+#     backend:
+#       bundler_audit:
+#         Enabled: true
+#       brakeman:
+#         Enabled: true
+#       rails_best_practices:
+#         Enabled: true
+#       reek:
+#         Enabled: true
+#       rubocop:
+#         Enabled: true
+#       bullet:
+#         Enabled: true
+#       fasterer:
+#         Enabled: true
+#       railroady:
+#         Enabled: true
+#       erd:
+#         Enabled: true
+#       traceroute:
+#         Enabled: true
+#       lol_dba:
+#         Enabled: true
+#       active_record_doctor:
+#         Enabled: true
+#       rspec:
+#         Enabled: true
+#       rspec_rubocop:
+#         Enabled: true
+#       simplecov:
+#         Enabled: true
