@@ -4,7 +4,7 @@ module Inquisition
       module Fasterer
         class Configer < Inquisition::Core::Configer
           class << self
-            def config_path
+            def config_name
               '.fasterer.yml'
             end
 

@@ -16,7 +16,7 @@ module Inquisition
       end
 
       def output_complete_message
-        puts 'Done!'.green
+        puts '...Done!'.green
       end
 
       def config_exists?
