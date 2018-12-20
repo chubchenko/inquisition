@@ -7,6 +7,8 @@
 /pkg/
 /spec/reports/
 /tmp/
+.history
+inquisition.yml
 
 # rspec failure tracking
 .rspec_status
