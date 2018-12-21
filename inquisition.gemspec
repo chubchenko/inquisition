@@ -24,6 +24,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'undercover'
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'rubocop'
 
   spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print
