@@ -1,5 +1,7 @@
 require 'inquisition/cli'
-
+binding.pry
+require 'inquisition/errors/authentication'
+require 'inquisition/authentication'
 require 'inquisition/installer'
 require 'inquisition/configer'
 

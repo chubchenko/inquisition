@@ -1,12 +1,17 @@
 module Inquisition
   class Installer
-    CONFIG_FILE_NAME = 'inquisition.yml'.freeze
-    TARGET_DIRECTORY = Dir.pwd
-
     class << self
+
+      CONFIG_FILE_NAME = 'inquisition.yml'.freeze
+      TARGET_DIRECTORY = Dir.pwd
+
       def call
         config_exists? ? output_existing_message : create_config
         output_complete_message
+      end
+
+      def config_exists?
+        Dir.glob(CONFIG_FILE_NAME).any?
       end
 
       private
@@ -17,10 +22,6 @@ module Inquisition
 
       def output_complete_message
         puts '...Done!'.green
-      end
-
-      def config_exists?
-        Dir.glob(CONFIG_FILE_NAME).any?
       end
 
       def create_config
