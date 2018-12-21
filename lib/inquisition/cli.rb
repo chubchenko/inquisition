@@ -1,5 +1,5 @@
 require 'thor'
-require './lib/inquisition/authentication'
+require 'inquisition/authentication'
 
 module Inquisition
   class CLI < Thor

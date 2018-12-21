@@ -2,9 +2,7 @@ module Inquisition
   module Errors
     class AuthenticationError < StandardError
       def initialize
-        # puts 'run     s install first'
-        super('asd')
-        # exit
+        super('run inquisition install first')
       end
     end
   end
