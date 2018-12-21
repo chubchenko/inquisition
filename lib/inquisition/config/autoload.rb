@@ -1,7 +1,9 @@
 require 'inquisition/cli'
-binding.pry
-require 'inquisition/errors/authentication'
-require 'inquisition/authentication'
+
+require 'inquisition/errors/base_error'
+require 'inquisition/errors/base_config_absense_error'
+
+require 'inquisition/authorization'
 require 'inquisition/installer'
 require 'inquisition/configer'
 
@@ -9,7 +11,5 @@ require 'inquisition/core/configer'
 
 require 'inquisition/auditors/backend/configer'
 require 'inquisition/auditors/backend/fasterer/configer'
-
 require 'inquisition/auditors/frontend/configer'
-
 require 'inquisition/auditors/common/configer'

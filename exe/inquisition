@@ -4,6 +4,6 @@ require 'inquisition'
 
 begin
   Inquisition::CLI.start(ARGV)
-rescue Inquisition::Errors::AuthenticationError => e
+rescue Inquisition::Errors::BaseConfigAbsenseError => e
   puts e.message
 end
