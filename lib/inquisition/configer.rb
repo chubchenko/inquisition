@@ -1,5 +1,3 @@
-require 'inquisition/authorization'
-
 module Inquisition
   class Configer
     extend Inquisition::Authorization
