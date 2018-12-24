@@ -1,0 +1,87 @@
+defaults: &defaults
+  working_directory: ~/inquisition
+  docker:
+    - image: circleci/ruby:2.5.1-node
+
+references:
+  restore_bundle_cache: &restore_bundle_cache
+    restore_cache:
+      keys:
+        - inquisition-{{ checksum "Gemfile.lock" }}
+
+  bundle_install: &bundle_install
+    run:
+      name: Installing gems
+      command: bundle install --path vendor/bundle
+
+  save_bundle_cache: &save_bundle_cache
+    save_cache:
+      key: inquisition-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
+
+version: 2
+
+jobs:
+  linters:
+    <<: *defaults
+
+    enviromnment:
+      - RAILS_ENV: test
+
+    steps:
+      - checkout
+
+      - run:
+          name: Installing dependency for undercover gem
+          command: sudo apt-get install cmake
+
+      - <<: *restore_bundle_cache
+      - <<: *bundle_install
+      - <<: *save_bundle_cache
+
+      - run:
+          name: Running overcommit
+          command: |
+            bundle exec overcommit -s
+            bundle exec overcommit -r
+  tests:
+    <<: *defaults
+
+    enviromnment:
+      - RAILS_ENV: test
+
+    steps:
+      - checkout
+
+      - run:
+          name: Installing dependency for undercover gem
+          command: sudo apt-get install cmake
+
+      - <<: *restore_bundle_cache
+      - <<: *bundle_install
+      - <<: *save_bundle_cache
+
+      - run:
+          name: Develop
+          command: git pull -f origin develop:develop
+
+      - run:
+          name: Running tests
+          command: bundle exec rspec
+
+      - run:
+          name: Coverage
+          command: bundle exec undercover -c develop
+
+      - store_artifacts:
+          path: ~/inquisition/coverage
+          destination: coverage
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - linters
+
+      - tests
