@@ -2,6 +2,11 @@ defaults: &defaults
   working_directory: ~/inquisition
   docker:
     - image: circleci/ruby:2.5.1-node
+      environment:
+        - RAILS_ENV: test
+  environment:
+    CIRCLE_TEST_REPORTS: test_reports
+    CIRCLE_ARTIFACTS: tmp/coverage
 
 references:
   restore_bundle_cache: &restore_bundle_cache
@@ -20,68 +25,60 @@ references:
       paths:
         - vendor/bundle
 
+  install_undercover_dependencies: &install_undercover_dependencies
+    run:
+      name: Installing dependency for undercover gem
+      command: sudo apt-get install cmake
+
+  run_overcommit: &run_overcommit
+    run:
+      name: Running overcommit
+      command: |
+        bundle exec overcommit -s
+        SKIP=AuthorEmail,AuthorName bundle exec overcommit -r
+
+  run_tests: &run_tests
+    run:
+      name: Running tests
+      command: bundle exec rspec
+
+  run_coverage: &run_coverage
+    run:
+      name: Coverage
+      command: bundle exec undercover -c develop
+
 version: 2
 
 jobs:
   linters:
     <<: *defaults
-
-    enviromnment:
-      - RAILS_ENV: test
-
     steps:
       - checkout
-
-      - run:
-          name: Installing dependency for undercover gem
-          command: sudo apt-get install cmake
-
+      - <<: *install_undercover_dependencies
       - <<: *restore_bundle_cache
       - <<: *bundle_install
       - <<: *save_bundle_cache
+      - <<: *run_overcommit
 
-      - run:
-          name: Running overcommit
-          command: |
-            bundle exec overcommit -s
-            bundle exec overcommit -r
   tests:
     <<: *defaults
-
-    enviromnment:
-      - RAILS_ENV: test
-
     steps:
       - checkout
-
-      - run:
-          name: Installing dependency for undercover gem
-          command: sudo apt-get install cmake
-
+      - run: mkdir -p $CIRCLE_TEST_REPORTS $CIRCLE_ARTIFACTS
+      - <<: *install_undercover_dependencies
       - <<: *restore_bundle_cache
       - <<: *bundle_install
       - <<: *save_bundle_cache
-
-      - run:
-          name: Develop
-          command: git pull -f origin develop:develop
-
-      - run:
-          name: Running tests
-          command: bundle exec rspec
-
-      - run:
-          name: Coverage
-          command: bundle exec undercover -c develop
-
+      - <<: *run_tests
+      - <<: *run_coverage
+      - store_test_results:
+          path: $CIRCLE_TEST_REPORTS
       - store_artifacts:
-          path: ~/inquisition/coverage
-          destination: coverage
+          path: $CIRCLE_ARTIFACTS
 
 workflows:
   version: 2
   build:
     jobs:
       - linters
-
       - tests
