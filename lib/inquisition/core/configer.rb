@@ -2,8 +2,9 @@ module Inquisition
   module Core
     class Configer
       class << self
-        def call(with_configuration: true)
+        def call(*)
           return output_already_exists if config_exists?
+
           copy_config_file
         end
 
@@ -27,7 +28,7 @@ module Inquisition
         end
 
         def config_exists?
-          File.exists?(File.join(Dir.pwd, config_name))
+          File.exist?(File.join(Dir.pwd, config_name))
         end
 
         def config_path

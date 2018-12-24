@@ -1,7 +1,6 @@
 module Inquisition
   class Installer
     class << self
-
       CONFIG_FILE_NAME = 'inquisition.yml'.freeze
       TARGET_DIRECTORY = Dir.pwd
 
