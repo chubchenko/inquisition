@@ -1,6 +1,6 @@
 module Inquisition
   module Errors
-    class BaseConfigAbsenseError < StandardError
+    class BaseConfigAbsenseError < BaseError
       def initialize
         super('run inquisition install first')
       end

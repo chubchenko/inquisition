@@ -1,12 +1,19 @@
 module Inquisition
   class Configer
     extend Inquisition::Authorization
+    class << self
+      def call
+        authenticate_installer
+        run_configers
+      end
 
-    def self.call
-      authenticate_installer
-      Inquisition::Auditors::Backend::Configer.call
-      Inquisition::Auditors::Frontend::Configer.call
-      Inquisition::Auditors::Common::Configer.call
+      private
+
+      def run_configers
+        Inquisition::Auditors::Backend::Configer.call
+        Inquisition::Auditors::Frontend::Configer.call
+        Inquisition::Auditors::Common::Configer.call
+      end
     end
   end
 end
