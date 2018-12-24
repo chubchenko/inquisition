@@ -1,6 +1,6 @@
 require 'inquisition/cli'
 
-require 'inquisition/errors/authentication'
+require 'inquisition/errors/base_config_absense_error'
 require 'inquisition/authentication'
 require 'inquisition/installer'
 require 'inquisition/configer'
