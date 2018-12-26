@@ -16,15 +16,15 @@ module Inquisition
       private
 
       def output_existing_message
-        puts 'Using existing config for inquisition...'
+        puts I18n.t('messages.using_existing_config')
       end
 
       def output_complete_message
-        puts '...Done!'.green
+        puts I18n.t('messages.done').green
       end
 
       def create_config
-        puts 'Inquisition setuping... '
+        puts I18n.t('messages.inquisition_setuping')
         FileUtils.cp config_file, TARGET_DIRECTORY, preserve: true, verbose: false
       end
 

@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://rubygarage.org'
   spec.license       = 'MIT'
 
-  spec.files = `git ls-files -z`.split("\x0")
+  spec.files         = `git ls-files -z`.split("\x0")
   spec.bindir        = 'exe'
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }

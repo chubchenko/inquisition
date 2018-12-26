@@ -2,7 +2,7 @@ module Inquisition
   module Errors
     class BaseConfigAbsenseError < BaseError
       def initialize
-        super('run inquisition install first')
+        super(I18n.t('errors.config_absense_error'))
       end
     end
   end

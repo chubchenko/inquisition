@@ -3,7 +3,7 @@ module Inquisition
     module Common
       class Configer
         def self.call
-          puts 'Common configs setuped'
+          puts I18n.t('messages.common_configs_setuped')
         end
       end
     end

@@ -1,0 +1,11 @@
+en:
+  messages:
+    using_existing_config: "Using existing config for inquisition..."
+    common_configs_setuped: "Common configs setuped"
+    front_configs_setuped: "Front configs setuped"
+    inquisition_setuping: "Inquisition setuping..."
+    creates_config_files: "Creates configuration file"
+    setups_all_conf_linters: "Setups all configs for linters"
+    done: "...Done!"
+  errors:
+    config_absense_error: "Run inquisition install first"
