@@ -1,5 +1,3 @@
-require 'thor'
-
 module Inquisition
   class CLI < Thor
     desc 'install', 'Creates configuration file'

@@ -1,57 +1,57 @@
 # Here you can see all the gems/linters what are included into inquisition by default
 # Feel free to change configurations
-#
-# inquisition:
-#   linters:
-#     backend:
-#       Enabled: true
-#       bundler_audit:
-#         Enabled: true
-#       brakeman:
-#         Enabled: true
-#       rails_best_practices:
-#         Enabled: true
-#       reek:
-#         Enabled: true
-#       rubocop:
-#         Enabled: true
-#       bullet:
-#         Enabled: true
-#       fasterer:
-#         Enabled: true
-#       railroady:
-#         Enabled: true
-#       erd:
-#         Enabled: true
-#       traceroute:
-#         Enabled: true
-#       lol_dba:
-#         Enabled: true
-#       active_record_doctor:
-#         Enabled: true
-#       rspec:
-#         Enabled: true
-#       rspec_rubocop:
-#         Enabled: true
-#       simplecov:
-#         Enabled: true
-#     frontend:
-#       Enabled: true
-#       i18n-tasks:
-#         Enabled: true
-#       haml_lint:
-#         Enabled: true
-#       slim-lint:
-#         Enabled: true
-#       erb-lint:
-#         Enabled: true
-#       scss_lint:
-#         Enabled: true
-#       stylelint:
-#         Enabled: true
-#       eslint:
-#         Enabled: true
-#       yarn check:
-#         Enabled: true
-#       npm audit:
-#         Enabled: true
+
+inquisition:
+  linters:
+    backend:
+      Enabled: true
+      bundler_audit:
+        Enabled: true
+      brakeman:
+        Enabled: true
+      rails_best_practices:
+        Enabled: true
+      reek:
+        Enabled: true
+      rubocop:
+        Enabled: true
+      bullet:
+        Enabled: true
+      fasterer:
+        Enabled: true
+      railroady:
+        Enabled: true
+      erd:
+        Enabled: true
+      traceroute:
+        Enabled: true
+      lol_dba:
+        Enabled: true
+      active_record_doctor:
+        Enabled: true
+      rspec:
+        Enabled: true
+      rspec_rubocop:
+        Enabled: true
+      simplecov:
+        Enabled: true
+    frontend:
+      Enabled: true
+      i18n-tasks:
+        Enabled: true
+      haml_lint:
+        Enabled: true
+      slim-lint:
+        Enabled: true
+      erb-lint:
+        Enabled: true
+      scss_lint:
+        Enabled: true
+      stylelint:
+        Enabled: true
+      eslint:
+        Enabled: true
+      yarn check:
+        Enabled: true
+      npm audit:
+        Enabled: true

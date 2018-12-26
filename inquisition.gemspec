@@ -29,6 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'rubocop'
 
+  spec.add_dependency 'i18n'
   spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print
   spec.add_dependency 'benchmark-ips'        # https://github.com/evanphx/benchmark-ips
   spec.add_dependency 'brakeman'             # https://github.com/presidentbeef/brakeman
