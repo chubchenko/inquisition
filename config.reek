@@ -1,0 +1,11 @@
+UnusedPrivateMethod:
+  enabled: true
+
+IrresponsibleModule:
+  enabled: false
+
+UtilityFunction:
+  enabled: false
+
+UnusedPrivateMethod:
+  enabled: false

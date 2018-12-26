@@ -7,7 +7,7 @@ Ruby and Ruby on Rails have plenty of tools that help you analyze your codebase 
 * Fasterer - a gem that helps Rubies go faster
 * RailRoady - a gem that helps you generate Rails 3/4/5 model (ActiveRecord, Mongoid, Datamapper) and controller UML diagrams
 * Rails ERD - a gem that generates Entity-Relationship Diagrams for Rails applications
-* Rails_best_practices - a code metric tool for rails projects 
+* Rails_best_practices - a code metric tool for rails projects
 * Reek - a code smell detector
 * RuboCop - a Ruby static code analyzer and code formatter
 
