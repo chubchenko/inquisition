@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rspec-command'
 
   spec.add_dependency 'i18n'
   spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print

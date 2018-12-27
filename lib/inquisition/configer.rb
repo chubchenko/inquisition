@@ -1,6 +1,7 @@
 module Inquisition
   class Configer
     extend Inquisition::Authorization
+
     class << self
       def call
         authenticate_installer

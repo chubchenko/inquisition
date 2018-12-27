@@ -9,3 +9,7 @@ UtilityFunction:
 
 UnusedPrivateMethod:
   enabled: false
+
+'spec/support/':
+  ControlParameter:
+    enabled: false

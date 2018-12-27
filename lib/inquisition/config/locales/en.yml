@@ -7,5 +7,6 @@ en:
     creates_config_files: "Creates configuration file"
     setups_all_conf_linters: "Setups all configs for linters"
     done: "...Done!"
+    config_already_exist: "Config for %{linter_name} already exists"
   errors:
     config_absense_error: "Run inquisition install first"
