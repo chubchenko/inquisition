@@ -1,3 +1,4 @@
+require 'inquisition/config/initializers/i18n'
 require 'inquisition/cli'
 
 require 'inquisition/errors/base_error'
@@ -6,6 +7,7 @@ require 'inquisition/errors/base_config_absense_error'
 require 'inquisition/authorization'
 require 'inquisition/installer'
 require 'inquisition/configer'
+require 'inquisition/base_config'
 
 require 'inquisition/core/configer'
 

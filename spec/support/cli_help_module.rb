@@ -24,7 +24,7 @@ module CLIHelpModule
   private
 
   def base_config_file
-    File.join(Dir.pwd, 'lib', 'inquisition', 'utils', BASE_CONFIG_FILE_NAME)
+    File.join(Dir.pwd, 'spec', 'fixtures', BASE_CONFIG_FILE_NAME)
   end
 
   def remove_file(file)
