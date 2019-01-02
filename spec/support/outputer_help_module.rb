@@ -1,11 +1,9 @@
 module OutputerHelpModule
-  OUTPUT_FILE = File.join(Dir.pwd, 'spec/tmp/io.txt')
-
   def silence_output
     @original_stderr = $stderr
     @original_stdout = $stdout
-    $stderr = open_output_file
-    $stdout = open_output_file
+    $stderr = empty_file
+    $stdout = empty_file
   end
 
   def enable_output
@@ -17,10 +15,7 @@ module OutputerHelpModule
 
   private
 
-  def open_output_file
-    unless File.directory?(OUTPUT_FILE)
-      FileUtils.mkdir_p(File.dirname(OUTPUT_FILE))
-    end
-    File.open(OUTPUT_FILE, 'w')
+  def empty_file
+    File.open(File::NULL, "w")
   end
 end

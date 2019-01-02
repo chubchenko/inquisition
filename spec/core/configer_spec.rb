@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Inquisition::Core::Configer do
   describe '#call' do
     subject { Inquisition::Core::Configer.call }
-    let(:output) { capture(:stdout) { subject } }
+    let(:output) { capture { subject } }
 
     it 'show config already exist' do
       allow(Inquisition::Core::Configer).to receive(:config_exists?).and_return(true)
