@@ -9,14 +9,11 @@ module CLIHelpModule
     remove_file(File.join(Dir.pwd, BASE_CONFIG_FILE_NAME))
   end
 
-  def capture(stream)
+  def capture
     begin
-      stream = stream.to_s
-      eval "$#{stream} = StringIO.new"
+      $stdout = StringIO.new
       yield
-      result = eval("$#{stream}").string
-    ensure
-      eval("$#{stream} = #{stream.upcase}")
+      result = $stdout.string
     end
     result
   end

@@ -7,7 +7,7 @@ RSpec.describe Inquisition::CLI do
   after { remove_base_config }
 
   describe '#install' do
-    let(:output) { capture(:stdout) { subject.install } }
+    let(:output) { capture { subject.install } }
 
     context 'when config file is present' do
       before { create_base_config }
@@ -31,7 +31,7 @@ RSpec.describe Inquisition::CLI do
   end
 
   describe '#setup' do
-    let(:output) { capture(:stdout) { subject.setup } }
+    let(:output) { capture { subject.setup } }
 
     context 'when config file is present' do
       before { create_base_config }
