@@ -4,12 +4,13 @@ require 'spec_helper'
 
 RSpec.describe Inquisition::BaseConfig, type: :unit do
   subject { Inquisition::BaseConfig }
+  before { stub_const("Inquisition::BaseConfig::TARGET_DIRECTORY", temp_folder) }
   after { remove_base_config }
 
   describe '#initialize_config' do
     before { subject.initialize_config }
 
-    it_behaves_like 'present file', CLIHelpModule::BASE_CONFIG_FILE_NAME => 'base config'
+    it { expect(File).to exist(base_config_file) }
   end
 
   describe '#config_exist?' do
@@ -23,7 +24,7 @@ RSpec.describe Inquisition::BaseConfig, type: :unit do
 
     context 'when config file not exist' do
       it 'return false' do
-        expect(subject.config_exist?).to be_falsy
+        expect(subject.config_exist?).to be_falsey
       end
     end
   end
@@ -33,14 +34,14 @@ RSpec.describe Inquisition::BaseConfig, type: :unit do
 
     context 'when config enabled' do
       it 'return true' do
-        expect(subject.config_enabled?('linters', 'backend')).to be_truthy
+        expect(subject.config_enabled?(:linters, :backend)).to be_truthy
       end
     end
 
     context 'when config not enabled or not exist' do
       it 'return false' do
-        expect(subject.config_enabled?('linters', 'bundler_audit')).to be_falsey
-        expect(subject.config_enabled?('linters', 'unknow_linter')).to be_falsey
+        expect(subject.config_enabled?(:linters, :bundler_audit)).to be_falsey
+        expect(subject.config_enabled?(:linters, :unknow_linter)).to be_falsey
       end
     end
   end

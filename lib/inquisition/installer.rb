@@ -3,22 +3,12 @@ module Inquisition
     class << self
       def call
         if BaseConfig.config_exist?
-          output_existing_message
+          Outputer.base_config_exist
         else
           BaseConfig.initialize_config
-          puts I18n.t('messages.inquisition_setuping')
+          Outputer.setuping_inquisition
         end
-        output_complete_message
-      end
-
-      private
-
-      def output_existing_message
-        puts I18n.t('messages.using_existing_config')
-      end
-
-      def output_complete_message
-        puts I18n.t('messages.done').green
+        Outputer.done
       end
     end
   end

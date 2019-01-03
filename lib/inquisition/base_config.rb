@@ -9,11 +9,11 @@ module Inquisition
       end
 
       def config_exist?
-        Dir.glob(CONFIG_FILE_NAME).any?
+        Dir.glob(File.join(TARGET_DIRECTORY, CONFIG_FILE_NAME)).any?
       end
 
       def config_enabled?(*args)
-        args.unshift('inquisition').push('Enabled')
+        args.unshift(:inquisition).push(:Enabled)
         configs.dig(*args) == true
       end
 

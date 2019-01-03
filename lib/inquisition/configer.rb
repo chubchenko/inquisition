@@ -11,9 +11,9 @@ module Inquisition
       private
 
       def run_configers
-        Auditors::Backend::Configer.call if BaseConfig.config_enabled?('linters', 'backend')
-        Auditors::Frontend::Configer.call if BaseConfig.config_enabled?('linters', 'frontend')
-        Auditors::Common::Configer.call if BaseConfig.config_enabled?('linters', 'common')
+        Auditors::Backend::Configer.call if BaseConfig.config_enabled?(:linters, :backend)
+        Auditors::Frontend::Configer.call if BaseConfig.config_enabled?(:linters, :frontend)
+        Auditors::Common::Configer.call if BaseConfig.config_enabled?(:linters, :common)
       end
     end
   end

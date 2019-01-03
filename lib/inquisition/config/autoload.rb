@@ -1,4 +1,5 @@
 require 'inquisition/config/initializers/i18n'
+require 'inquisition/outputer'
 require 'inquisition/cli'
 
 require 'inquisition/errors/base_error'

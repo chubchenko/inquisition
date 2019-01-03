@@ -23,8 +23,8 @@ module Inquisition
         end
 
         def output_already_exists
-          puts I18n.t('messages.config_already_exist', linter_name: linter_name)
-          puts I18n.t('messages.done').green
+          Outputer.config_already_exist(linter_name)
+          Outputer.done
         end
 
         def config_exists?
