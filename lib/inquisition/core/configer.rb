@@ -23,8 +23,8 @@ module Inquisition
         end
 
         def output_already_exists
-          puts "Config for #{linter_name} already exists"
-          puts 'Done'.green
+          Outputer.config_already_exist(linter_name)
+          Outputer.done
         end
 
         def config_exists?

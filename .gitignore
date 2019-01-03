@@ -6,9 +6,11 @@
 /doc/
 /pkg/
 /spec/reports/
-/tmp/
+/spec/tmp/**
+!/spec/tmp/.keep
+/tmp/*
 .history
-inquisition.yml
+/inquisition.yml
 
 # rspec failure tracking
 .rspec_status

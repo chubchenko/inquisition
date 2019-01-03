@@ -1,6 +1,7 @@
 module Inquisition
   class Configer
     extend Inquisition::Authorization
+
     class << self
       def call
         authenticate_installer
@@ -10,9 +11,9 @@ module Inquisition
       private
 
       def run_configers
-        Inquisition::Auditors::Backend::Configer.call
-        Inquisition::Auditors::Frontend::Configer.call
-        Inquisition::Auditors::Common::Configer.call
+        Auditors::Backend::Configer.call if BaseConfig.config_enabled?(:linters, :backend)
+        Auditors::Frontend::Configer.call if BaseConfig.config_enabled?(:linters, :frontend)
+        Auditors::Common::Configer.call if BaseConfig.config_enabled?(:linters, :common)
       end
     end
   end

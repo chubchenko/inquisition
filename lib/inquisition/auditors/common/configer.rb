@@ -3,7 +3,7 @@ module Inquisition
     module Common
       class Configer
         def self.call
-          puts I18n.t('messages.common_configs_setuped')
+          Outputer.common_configs_setuped
         end
       end
     end
