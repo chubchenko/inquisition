@@ -10,7 +10,7 @@ require 'undercover'
 RSpec.configure do |config|
   config.include CLIHelpModule
 
-  # redirect console output to file for unit tests
+  # redirect console output for unit tests
   config.include OutputerHelpModule
   config.before(:all, type: :unit, &:silence_output)
 

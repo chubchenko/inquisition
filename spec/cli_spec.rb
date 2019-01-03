@@ -2,9 +2,13 @@
 
 require 'spec_helper'
 
-RSpec.describe Inquisition::CLI do
+RSpec.describe Inquisition::CLI, type: :unit do
   subject { Inquisition::CLI.new }
   after { remove_base_config }
+
+  before do
+    stub_const("Inquisition::BaseConfig::TARGET_DIRECTORY", temp_folder)
+  end
 
   describe '#install' do
     let(:output) { capture { subject.install } }
@@ -16,7 +20,7 @@ RSpec.describe Inquisition::CLI do
         expect(output).to have_output_message(I18n.t('messages.using_existing_config'))
       end
 
-      it_behaves_like 'present file', CLIHelpModule::BASE_CONFIG_FILE_NAME => 'base config'
+      it { expect(File).to exist(base_config_file) }
     end
 
     context 'configuration file is not present' do
@@ -26,7 +30,7 @@ RSpec.describe Inquisition::CLI do
         expect(output).to have_output_message(I18n.t('messages.inquisition_setuping'))
       end
 
-      it_behaves_like 'present file', CLIHelpModule::BASE_CONFIG_FILE_NAME => 'base config'
+      it { expect(File).to exist(base_config_file) }
     end
   end
 
@@ -39,7 +43,7 @@ RSpec.describe Inquisition::CLI do
       xit 'show information message' do
       end
 
-      it_behaves_like 'present file', CLIHelpModule::BASE_CONFIG_FILE_NAME => 'base config'
+      it { expect(File).to exist(base_config_file) }
     end
 
     context 'configuration file is not present' do

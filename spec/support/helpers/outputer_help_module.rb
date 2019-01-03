@@ -9,8 +9,6 @@ module OutputerHelpModule
   def enable_output
     $stderr = @original_stderr
     $stdout = @original_stdout
-    @original_stderr
-    @original_stdout
   end
 
   private

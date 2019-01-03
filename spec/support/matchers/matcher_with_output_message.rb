@@ -6,14 +6,14 @@ RSpec::Matchers.define :have_output_message do |expected, line|
   end
 
   failure_message do |actual|
-    "expected that output should include #{expected}
-    output: #{output_line(actual, line)}
-    expected #{expected}"
+    "expected that output should include expected value
+      output: #{output_line(actual, line)}
+    expected: #{expected}"
   end
 
   private
 
   def output_line(output, line)
-    output.lines[line || 0]&.chop
+    output.lines[line || 0]&.chop&.gsub(/\e\[([;\d]+)?m/, '')
   end
 end
