@@ -1,4 +1,4 @@
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
@@ -24,32 +24,44 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'undercover'
-  spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-lcov'
-  spec.add_development_dependency 'rubocop'
 
-  spec.add_dependency 'i18n'
   spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print
   spec.add_dependency 'benchmark-ips'        # https://github.com/evanphx/benchmark-ips
-  spec.add_dependency 'brakeman'             # https://github.com/presidentbeef/brakeman
-  spec.add_dependency 'bullet'               # https://github.com/flyerhzm/bullet
-  spec.add_dependency 'bundler-audit'        # https://github.com/rubysec/bundler-audit
   spec.add_dependency 'colorize'             # https://github.com/fazibear/colorize
-  spec.add_dependency 'fasterer'             # https://github.com/DamirSvrtan/fasterer
   spec.add_dependency 'hirb'                 # https://github.com/cldwalker/hirb
+  spec.add_dependency 'i18n'
   spec.add_dependency 'overcommit'           # https://github.com/brigade/overcommit
   spec.add_dependency 'pry-byebug'           # https://github.com/deivid-rodriguez/pry-byebug
   spec.add_dependency 'pry-rails'            # https://github.com/rweng/pry-rails
   spec.add_dependency 'pry-rescue'           # https://github.com/ConradIrwin/pry-rescue
   spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
-  spec.add_dependency 'railroady'            # https://github.com/preston/railroady
-  spec.add_dependency 'rails-erd'            # https://github.com/voormedia/rails-erd
-  spec.add_dependency 'rails_best_practices' # https://github.com/flyerhzm/rails_best_practices
-  spec.add_dependency 'reek'                 # https://github.com/troessner/reek
-  spec.add_dependency 'rubocop'              # https://github.com/bbatsov/rubocop
-  spec.add_dependency 'rubycritic'           # https://github.com/whitesmith/rubycritic
-  spec.add_dependency 'simplecov'            # https://github.com/colszowka/simplecov
   spec.add_dependency 'thor'
-  spec.add_dependency 'traceroute'           # https://github.com/amatsuda/traceroute
+
+  spec.add_dependency 'lol_dba'
+  spec.add_dependency 'active_record_doctor'
+  spec.add_dependency 'rspec-rails'
+  spec.add_dependency 'rubocop-rspec'
+  spec.add_dependency 'simplecov'
+  spec.add_dependency 'undercover'
+  spec.add_dependency 'i18n-tasks'
+  spec.add_dependency 'haml_lint'
+  spec.add_dependency 'slim_lint'
+  spec.add_dependency 'erb_lint'
+  spec.add_dependency 'yamllint'
+  spec.add_dependency 'traceroute'
+  spec.add_dependency 'rubrowser'
+  spec.add_dependency 'rails_best_practices'
+  spec.add_dependency 'dawnscanner'
+  spec.add_dependency 'reek'
+  spec.add_dependency 'rubocop'
+  spec.add_dependency 'rubycritic'
+  spec.add_dependency 'sandi_meter'
+  spec.add_dependency 'ruby-lint'
+  spec.add_dependency 'bullet'
+  spec.add_dependency 'fasterer'
+  spec.add_dependency 'railroady'
+  spec.add_dependency 'rails-erd'
+  spec.add_dependency 'brakeman'
+  spec.add_dependency 'bundler-audit'
 end

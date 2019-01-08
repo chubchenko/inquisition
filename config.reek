@@ -13,3 +13,5 @@ UnusedPrivateMethod:
 'spec/support/':
   ControlParameter:
     enabled: false
+  NilCheck:
+    enabled: false

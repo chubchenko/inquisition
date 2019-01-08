@@ -8,4 +8,4 @@ AllCops:
     - 'spec/support/**/*'
     - 'spec/spec_helper.rb'
 Documentation:
-    Enabled: false
+  Enabled: false
