@@ -33,6 +33,10 @@ module Inquisition
         puts_message('messages.setups_all_conf_linters')
       end
 
+      def additional_software_not_found(command)
+        puts_message('errors.absence_additional_software', command: command)
+      end
+
       private
 
       def puts_message(translate, color: :uncolorize, **args)

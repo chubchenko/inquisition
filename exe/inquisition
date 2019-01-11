@@ -4,6 +4,10 @@ require 'inquisition'
 
 begin
   Inquisition::CLI.start(ARGV)
-rescue Inquisition::Errors::BaseConfigAbsenseError => e
+rescue Inquisition::Errors::BaseConfigAbsenseError,
+       Inquisition::Errors::NoConfigFileError,
+       Inquisition::Errors::InvalidRubyVersionError,
+       Inquisition::Errors::AdditionalSoftwareAbsenceError,
+       Inquisition::Errors::NoGemError => e
   puts e.message
 end
