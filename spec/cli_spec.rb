@@ -7,11 +7,11 @@ RSpec.describe Inquisition::CLI, type: :unit do
   after { remove_base_config }
 
   before do
-    stub_const("Inquisition::BaseConfig::TARGET_DIRECTORY", temp_folder)
+    stub_const('Inquisition::BaseConfig::TARGET_DIRECTORY', temp_folder)
   end
 
   describe '#install' do
-    let(:output) { capture { subject.install } }
+    let(:output) { capture { subject.build } }
 
     context 'when config file is present' do
       before { create_base_config }

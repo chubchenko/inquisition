@@ -2,8 +2,16 @@
 $LOAD_PATH << File.expand_path('../lib', __dir__)
 require 'inquisition'
 
+ERRORS = [
+      Inquisition::Errors::BaseConfigAbsenseError,
+      Inquisition::Errors::NoConfigFileError,
+      Inquisition::Errors::InvalidRubyVersionError,
+      Inquisition::Errors::AdditionalSoftwareAbsenceError,
+      Inquisition::Errors::NoGemError
+     ]
+
 begin
   Inquisition::CLI.start(ARGV)
-rescue Inquisition::Errors::BaseConfigAbsenseError => e
+rescue *ERRORS => e
   puts e.message
 end

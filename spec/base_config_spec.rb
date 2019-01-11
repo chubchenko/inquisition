@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Inquisition::BaseConfig, type: :unit do
   subject { Inquisition::BaseConfig }
-  before { stub_const("Inquisition::BaseConfig::TARGET_DIRECTORY", temp_folder) }
+  before { stub_const('Inquisition::BaseConfig::TARGET_DIRECTORY', temp_folder) }
   after { remove_base_config }
 
   describe '#initialize_config' do

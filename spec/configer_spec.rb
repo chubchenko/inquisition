@@ -18,7 +18,7 @@ RSpec.describe Inquisition::Configer, type: :unit do
           allow(Inquisition::BaseConfig).to receive(:config_enabled?).with(:linters, :backend).and_return(true)
         end
 
-        it_behaves_like 'call callable objects', Inquisition::Auditors::Backend::Configer => 'backend configer'
+        it_behaves_like 'call callable objects', Inquisition::Auditors::Backend::Installer => 'backend configer'
       end
 
       context 'when frontend configers are enabled' do
@@ -26,7 +26,7 @@ RSpec.describe Inquisition::Configer, type: :unit do
           allow(Inquisition::BaseConfig).to receive(:config_enabled?).with(:linters, :frontend).and_return(true)
         end
 
-        it_behaves_like 'call callable objects', Inquisition::Auditors::Frontend::Configer => 'frontend configer'
+        it_behaves_like 'call callable objects', Inquisition::Auditors::Frontend::Installer => 'frontend configer'
       end
 
       context 'when common configers are enabled' do
@@ -34,7 +34,7 @@ RSpec.describe Inquisition::Configer, type: :unit do
           allow(Inquisition::BaseConfig).to receive(:config_enabled?).with(:linters, :common).and_return(true)
         end
 
-        it_behaves_like 'call callable objects', Inquisition::Auditors::Common::Configer => 'common configer'
+        it_behaves_like 'call callable objects', Inquisition::Auditors::Common::Installer => 'common configer'
       end
     end
 

@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe Inquisition::Core::Configer, type: :unit do
-  subject { Inquisition::Core::Configer.new(some: 'param') }
+RSpec.describe Inquisition::Core::Checker, type: :unit do
+  subject { Inquisition::Core::Checker.new(some: 'param') }
 
   describe '.new' do
 
@@ -13,8 +13,8 @@ RSpec.describe Inquisition::Core::Configer, type: :unit do
   end
 
   describe '.call' do
-    it 'call .setup method' do
-      expect(subject).to receive(:setup)
+    it 'call .check method' do
+      expect(subject).to receive(:check)
       subject.call
     end
   end

@@ -1,5 +1,5 @@
 LineLength:
-  Max: 100
+  Max: 120
 AllCops:
   Include:
     - '**/Rakefile'
@@ -8,4 +8,4 @@ AllCops:
     - 'spec/support/**/*'
     - 'spec/spec_helper.rb'
 Documentation:
-    Enabled: false
+  Enabled: false
