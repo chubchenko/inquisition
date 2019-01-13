@@ -1,14 +1,14 @@
 module Inquisition
   module Auditors
     module Backend
-      module Fasterer
+      module RubyLint
         class Installer < Auditors::Installer
           class << self
             private
 
-            def configers
+            def checkers
               [
-                Core::Configers::CopyFileConfiger.new(file: '.fasterer.yml')
+                Core::Checkers::RubyVersionChecker.new(from_version: '1.9.0')
               ]
             end
           end

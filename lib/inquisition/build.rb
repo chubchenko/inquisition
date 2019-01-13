@@ -1,5 +1,5 @@
 module Inquisition
-  class Installer
+  class Build
     class << self
       def call
         if BaseConfig.config_exist?

@@ -9,7 +9,7 @@ module Inquisition
         end
 
         def config_file_exist?
-          File.exist?(File.join(target_directory, @args[:file]))
+          File.exist?(File.join(destination, @args[:file]))
         end
 
         def config_path
@@ -17,7 +17,7 @@ module Inquisition
         end
 
         def copy_config_file
-          FileUtils.cp config_path, target_directory, preserve: true, verbose: false
+          FileUtils.cp config_path, destination, preserve: true, verbose: false
         end
       end
     end

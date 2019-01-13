@@ -1,8 +1,8 @@
 module Inquisition
   class CLI < Thor
     desc 'install', I18n.t('messages.creates_config_files')
-    def install(*_args)
-      Inquisition::Installer.call
+    def build(*_args)
+      Inquisition::Build.call
     end
 
     desc 'setup', I18n.t('messages.setups_all_conf_linters')

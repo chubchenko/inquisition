@@ -1,9 +1,9 @@
 module Inquisition
   module Auditors
-    module Backend
-      class Configer
+    module Frontend
+      class Installer
         def self.call
-          Fasterer::Installer.call
+          Outputer.front_configs_setuped
         end
       end
     end

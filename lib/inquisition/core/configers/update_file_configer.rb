@@ -5,7 +5,7 @@ module Inquisition
         private
 
         def setup
-          Core::Checkers::ExistFileChecker.call(@args[:file])
+          Core::Checkers::ExistFileChecker.new(file: @args[:file], destination: @args[:destination]).call
           append_to_config_file unless already_contains?
         end
 
@@ -32,7 +32,7 @@ module Inquisition
         end
 
         def config_file
-          @config_file ||= File.join(target_directory, @args[:file])
+          @config_file ||= File.join(destination, @args[:file])
         end
       end
     end

@@ -1,0 +1,3 @@
+# undercover
+
+require 'undercover'
