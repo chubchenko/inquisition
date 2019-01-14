@@ -11,7 +11,7 @@ RSpec.describe Inquisition::CLI, type: :unit do
   end
 
   describe '#install' do
-    let(:output) { capture { subject.install } }
+    let(:output) { capture { subject.build } }
 
     context 'when config file is present' do
       before { create_base_config }
