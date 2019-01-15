@@ -13,11 +13,11 @@ module Inquisition
 
       def run_cli(command)
         begin
-          stdout, stderr, status = Open3.capture3(command)
+          stdout = Open3.capture3(command).first
         rescue Errno::ENOENT
-          Outputer.additional_software_not_found(command)
+          stdout = ''
         end
-        { stdout: stdout || '', stderr: stderr, status: status }
+        stdout
       end
 
       def target_directory

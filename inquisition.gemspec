@@ -53,4 +53,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'simplecov'            # https://github.com/colszowka/simplecov
   spec.add_dependency 'thor'
   spec.add_dependency 'traceroute'           # https://github.com/amatsuda/traceroute
+  spec.add_dependency 'tty-command'
+  spec.add_dependency 'rspec-command'
 end
