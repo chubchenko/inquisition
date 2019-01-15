@@ -6,9 +6,9 @@ module Inquisition
           class << self
             private
 
-            def checkers
+            def configers
               [
-                Core::Checkers::AdditionalSoftwareChecker.new(command: 'yamllint -v')
+                Core::Configers::CopyFileConfiger.new(file: 'i18n-tasks.yml', destination: 'config')
               ]
             end
           end

@@ -11,7 +11,8 @@ module Inquisition
         end
 
         def software_missing?
-          run_cli(@args[:command])[:stdout].downcase.include? NOT_FOUND_TEXT
+          stdout = run_cli(@args[:command])
+          stdout.empty? || stdout.downcase.include?(NOT_FOUND_TEXT)
         end
       end
     end

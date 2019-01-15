@@ -10,7 +10,7 @@ require 'inquisition/errors/invalid_ruby_version_error'
 require 'inquisition/errors/additional_software_absence_error'
 
 require 'inquisition/authorization'
-require 'inquisition/build'
+require 'inquisition/builder'
 require 'inquisition/configer'
 require 'inquisition/base_config'
 
@@ -40,7 +40,6 @@ require 'inquisition/auditors/backend/rubocop_rspec/installer'
 require 'inquisition/auditors/backend/ruby_lint/installer'
 require 'inquisition/auditors/backend/simplecov/installer'
 require 'inquisition/auditors/backend/slim_lint/installer'
-require 'inquisition/auditors/backend/undercover/installer'
 require 'inquisition/auditors/backend/yamllint/installer'
 
 require 'inquisition/auditors/frontend/installer'

@@ -8,7 +8,15 @@ module Inquisition
 
             def checkers
               [
-                Core::Checkers::AdditionalSoftwareChecker.new(command: 'yamllint -v')
+                Core::Checkers::GemChecker.new(name: 'rspec-rails')
+              ]
+            end
+
+            def configers
+              [
+                Core::Configers::UpdateFileConfiger.new(file: 'spec_helper.rb',
+                                                        template_path: __dir__,
+                                                        destination: 'spec')
               ]
             end
           end

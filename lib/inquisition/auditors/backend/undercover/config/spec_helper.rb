@@ -1,3 +1,0 @@
-# undercover
-
-require 'undercover'

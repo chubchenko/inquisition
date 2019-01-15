@@ -15,11 +15,7 @@ module Inquisition
         end
 
         def installers
-          {
-            Auditors::Backend::Installer => config_path(:backend),
-            Auditors::Frontend::Installer => config_path(:frontend),
-            Auditors::Common::Installer => config_path(:common)
-          }
+          {}
         end
 
         def config_path(*path)

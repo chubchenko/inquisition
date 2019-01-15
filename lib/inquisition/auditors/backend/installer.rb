@@ -18,7 +18,6 @@ module Inquisition
               RubyLint::Installer => config_path(:ruby_lint),
               Simplecov::Installer => config_path(:simplecov),
               SlimLint::Installer => config_path(:slim_lint),
-              Undercover::Installer => config_path(:undercover),
               Yamllint::Installer => config_path(:yamllint)
             }
           end
