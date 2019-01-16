@@ -14,6 +14,11 @@ module Inquisition
       def target_directory
         Dir.pwd
       end
+
+      def destination
+        destination = @args[:destination]
+        destination ? File.join(target_directory, destination) : target_directory
+      end
     end
   end
 end

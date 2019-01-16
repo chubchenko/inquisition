@@ -1,14 +1,14 @@
 module Inquisition
   module Auditors
     module Backend
-      module Fasterer
+      module Yamllint
         class Installer < Auditors::Installer
           class << self
             private
 
-            def configers
+            def checkers
               [
-                Core::Configers::CopyFileConfiger.new(file: '.fasterer.yml')
+                Core::Checkers::AdditionalSoftwareChecker.new(command: 'yamllint -v')
               ]
             end
           end

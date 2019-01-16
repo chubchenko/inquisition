@@ -8,7 +8,7 @@ ERRORS = [
       Inquisition::Errors::InvalidRubyVersionError,
       Inquisition::Errors::AdditionalSoftwareAbsenceError,
       Inquisition::Errors::NoGemError
-     ]
+    ].freeze
 
 begin
   Inquisition::CLI.start(ARGV)

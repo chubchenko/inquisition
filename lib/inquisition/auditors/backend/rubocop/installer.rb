@@ -1,14 +1,14 @@
 module Inquisition
   module Auditors
     module Backend
-      module Fasterer
+      module Rubocop
         class Installer < Auditors::Installer
           class << self
             private
 
             def configers
               [
-                Core::Configers::CopyFileConfiger.new(file: '.fasterer.yml')
+                Core::Configers::CopyFileConfiger.new(file: '.rubocop.yml')
               ]
             end
           end

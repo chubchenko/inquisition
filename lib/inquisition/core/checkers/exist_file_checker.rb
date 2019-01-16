@@ -9,7 +9,7 @@ module Inquisition
         end
 
         def file_exist?
-          File.exist?(File.join(target_directory, @args[:file]))
+          File.exist?(File.join(destination, @args[:file]))
         end
       end
     end
