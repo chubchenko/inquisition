@@ -10,6 +10,9 @@ UtilityFunction:
 UnusedPrivateMethod:
   enabled: false
 
+InstanceVariableAssumption:
+  enabled: false
+
 'spec/support/':
   ControlParameter:
     enabled: false

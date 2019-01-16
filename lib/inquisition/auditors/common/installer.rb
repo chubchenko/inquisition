@@ -1,7 +1,7 @@
 module Inquisition
   module Auditors
     module Common
-      class Configer
+      class Installer
         def self.call
           Outputer.common_configs_setuped
         end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Inquisition::Auditors::Common::Configer do
+RSpec.describe Inquisition::Auditors::Common::Installer do
   describe '#call' do
     subject { Inquisition::Auditors::Common::Configer.call }
 

@@ -3,19 +3,19 @@
 require 'spec_helper'
 
 RSpec.describe Inquisition::Core::Configer, type: :unit do
-  describe '#call' do
-    subject { Inquisition::Core::Configer.call }
-    let(:output) { capture { subject } }
+  subject { Inquisition::Core::Configer.new(some: 'param') }
 
-    it 'show config already exist' do
-      enable_output
-      allow(Inquisition::Core::Configer).to receive(:config_exists?).and_return(true)
-      allow(Inquisition::Core::Configer).to receive(:linter_name).and_return('linter')
-      allow(Inquisition::Core::Configer).to receive(:copy_config_file).and_return(true)
-      expect(output).to have_output_message(I18n.t('messages.config_already_exist', linter_name: 'linter'))
+  describe '.new' do
+
+    it 'set @args variable' do
+      expect(subject.instance_variable_get(:@args)).to eq({ some: 'param' })
     end
+  end
 
-    xit 'copy config file' do
+  describe '.call' do
+    it 'call .setup method' do
+      expect(subject).to receive(:setup)
+      subject.call
     end
   end
 end

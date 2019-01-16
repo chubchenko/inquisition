@@ -1,5 +1,3 @@
-LineLength:
-  Max: 100
 AllCops:
   Include:
     - '**/Rakefile'
@@ -9,3 +7,8 @@ AllCops:
     - 'spec/spec_helper.rb'
 Documentation:
   Enabled: false
+LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Exclude:
+    - lib/inquisition/auditors/backend/installer.rb

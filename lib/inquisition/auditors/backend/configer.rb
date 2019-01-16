@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       class Configer
         def self.call
-          Fasterer::Configer.call
+          Fasterer::Installer.call
         end
       end
     end

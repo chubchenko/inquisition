@@ -1,7 +1,7 @@
 module Inquisition
   module Auditors
     module Frontend
-      class Configer
+      class Installer
         def self.call
           Outputer.front_configs_setuped
         end
