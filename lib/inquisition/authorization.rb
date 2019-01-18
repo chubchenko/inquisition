@@ -4,6 +4,10 @@ module Inquisition
       check_base_config_exists
     end
 
+    def authenticate_runner
+      check_base_config_exists
+    end
+
     private
 
     def check_base_config_exists

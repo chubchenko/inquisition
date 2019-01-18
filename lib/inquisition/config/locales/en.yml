@@ -8,6 +8,7 @@ en:
     setups_all_conf_linters: "Setups all configs for linters"
     done: "...Done!"
     config_already_exist: "Config for %{linter_name} already exists"
+    run_all_linters: "Running all linters"
   errors:
     config_absense_error: "Run inquisition install first"
     no_gem_error: "Gem %{name} not found"

@@ -1,0 +1,32 @@
+module Inquisition
+  module Auditors
+    module Backend
+      class Runner < Core::BaseRunner
+        class << self
+          private
+
+          def runners
+            {
+              # Bullet::Runner => config_path(:bullet),
+              # Fasterer::Runner => config_path(:fasterer),
+              # HamlLint::Runner => config_path(:haml_lint),
+              # I18nTasks::Runner => config_path(:i18n_tasks),
+              # LolDba::Runner => config_path(:lol_dba),
+              # RailsErd::Runner => config_path(:rails_erd),
+              Rubocop::Runner => config_path(:rubocop)
+              # RubocopRspec::Runner => config_path(:rubocop_rspec),
+              # RubyLint::Runner => config_path(:ruby_lint),
+              # Simplecov::Runner => config_path(:simplecov),
+              # SlimLint::Runner => config_path(:slim_lint),
+              # Yamllint::Runner => config_path(:yamllint)
+            }
+          end
+
+          def config_path(*path)
+            [:linters, :backend, *path]
+          end
+        end
+      end
+    end
+  end
+end

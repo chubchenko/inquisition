@@ -26,6 +26,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'simplecov-lcov'
+  spec.add_development_dependency 'undercover'
+  spec.add_development_dependency 'rubycritic'
 
   # common
   spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print
@@ -60,11 +62,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop-rspec'
   spec.add_dependency 'rubrowser'
   spec.add_dependency 'ruby-lint'
-  spec.add_dependency 'rubycritic'
   spec.add_dependency 'sandi_meter'
   spec.add_dependency 'simplecov'
   spec.add_dependency 'slim_lint'
   spec.add_dependency 'traceroute'
-  spec.add_dependency 'undercover'
   spec.add_dependency 'yamllint'
 end
