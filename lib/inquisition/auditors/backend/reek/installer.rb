@@ -1,14 +1,14 @@
 module Inquisition
   module Auditors
     module Backend
-      module LolDba
+      module Reek
         class Installer < Auditors::Installer
           class << self
             private
 
-            def checkers
+            def configers
               [
-                Core::Checkers::RubyVersionChecker.new(from_version: '2.1.1')
+                Core::Configers::CopyFileConfiger.new(file: '.reek.yml')
               ]
             end
           end

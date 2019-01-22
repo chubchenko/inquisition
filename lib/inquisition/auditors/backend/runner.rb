@@ -8,7 +8,10 @@ module Inquisition
           def runners
             {
               # Bullet::Runner => config_path(:bullet),
-              # Fasterer::Runner => config_path(:fasterer),
+              Fasterer::Runner => config_path(:fasterer),
+              Reek::Runner => config_path(:reek),
+              Dawnscanner::Runner => config_path(:dawnscanner),
+              BundlerAudit::Runner => config_path(:bundler_audit),
               # HamlLint::Runner => config_path(:haml_lint),
               # I18nTasks::Runner => config_path(:i18n_tasks),
               # LolDba::Runner => config_path(:lol_dba),

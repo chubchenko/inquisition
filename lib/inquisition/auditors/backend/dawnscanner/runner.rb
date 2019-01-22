@@ -1,12 +1,12 @@
 module Inquisition
   module Auditors
     module Backend
-      module Rubocop
+      module Dawnscanner
         class Runner < Auditors::Runner
           private
 
           def command
-            'rubocop --format json'
+            'dawn --json .'
           end
         end
       end
