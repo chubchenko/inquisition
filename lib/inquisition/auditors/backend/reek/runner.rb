@@ -1,12 +1,12 @@
 module Inquisition
   module Auditors
     module Backend
-      module Rubocop
+      module Reek
         class Runner < Auditors::Runner
           private
 
           def command
-            'rubocop --format json'
+            'reek . --format json'
           end
         end
       end

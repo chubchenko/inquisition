@@ -14,15 +14,23 @@ module Inquisition
       end
 
       def run_auditor
-        @result = run_cli(command)
+        @auditor_report_result = run_cli(command)
       end
 
       def format_output
-        @formatted_output = formatter.new(@result, @spended_time).call
+        @formatted_output = formatter.new(unparsed_data: @auditor_report_result, spended_time: @spended_time).call
       end
 
       def build_data_preparer
-        # @preparer = DataPeparer.new(@formatted_output)
+        # @preparer = DataPreparer.new(@formatted_output)
+      end
+
+      def formatter
+        Kernel.const_get(auditor_namespase)::Formatter
+      end
+
+      def auditor_namespase
+        self.class.name.split('::').tap(&:pop).join('::')
       end
 
       def run_cli(command)

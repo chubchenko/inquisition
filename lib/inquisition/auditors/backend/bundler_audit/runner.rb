@@ -1,12 +1,12 @@
 module Inquisition
   module Auditors
     module Backend
-      module Rubocop
+      module BundlerAudit
         class Runner < Auditors::Runner
           private
 
           def command
-            'rubocop --format json'
+            'bundle audit'
           end
         end
       end

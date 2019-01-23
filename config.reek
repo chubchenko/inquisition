@@ -13,6 +13,12 @@ UnusedPrivateMethod:
 InstanceVariableAssumption:
   enabled: false
 
+FeatureEnvy:
+  enabled: false
+
+TooManyMethods:
+  enabled: false
+
 'spec/support/':
   ControlParameter:
     enabled: false

@@ -1,12 +1,12 @@
 module Inquisition
   module Auditors
     module Backend
-      module Rubocop
+      module Fasterer
         class Runner < Auditors::Runner
           private
 
           def command
-            'rubocop --format json'
+            'fasterer'
           end
         end
       end

@@ -3,41 +3,49 @@ module Inquisition
     module Backend
       module Rubocop
         class Formatter < Core::BaseFormatter
+          REPORT_KEYS = {
+            linterable_name: 'path',
+            message: 'message',
+            type: 'severity',
+            line: %w[location line],
+            total_files_count: %w[summary inspected_file_count],
+            error_count: %w[summary offense_count],
+            list_of_errors: 'offenses',
+            list_of_files: 'files'
+          }.freeze
+
           private
 
-          def add_errors_key
-            @result_hash[:errors] = build_errors
-          end
-
-          def add_errors_count_key
-            @result_hash[:error_count] = data['summary']['offense_count']
-          end
-
-          def add_total_files_key
-            @result_hash[:total_files] = data['summary']['inspected_file_count']
-          end
-
           def build_errors
-            file_with_errors.map(&method(:build_error)).flatten
+            @build_errors ||= file_with_errors.map(&method(:build_error)).flatten
+          end
+
+          def build_error_count
+            raw_errors.dig(*REPORT_KEYS[:error_count])
+          end
+
+          def build_total_files_count
+            raw_errors.dig(*REPORT_KEYS[:total_files_count])
           end
 
           def build_error(file)
-            file['offenses'].map do |offense|
+            file[REPORT_KEYS[:list_of_errors]].map do |offense|
               {
-                file: file['path'],
-                type: offense['severity'],
-                message: offense['message'],
-                line: offense['location']['line']
+                linterable_name: file[REPORT_KEYS[:linterable_name]],
+                linterable_type: linterable_type_default,
+                message: offense[REPORT_KEYS[:message]],
+                type: offense[REPORT_KEYS[:type]],
+                line: offense.dig(*REPORT_KEYS[:line])
               }
             end
           end
 
-          def data
-            @data ||= JSON.parse(@unparsed_data)
+          def file_with_errors
+            raw_errors[REPORT_KEYS[:list_of_files]].select { |file| file[REPORT_KEYS[:list_of_errors]].any? }
           end
 
-          def file_with_errors
-            @file_with_errors ||= data['files'].select { |file| file['offenses'].any? }
+          def raw_errors
+            @raw_errors ||= JSON.parse(@unparsed_data)
           end
         end
       end
