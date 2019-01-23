@@ -13,6 +13,8 @@
         :Enabled: true
       :reek:
         :Enabled: true
+      :dawnscanner:
+        :Enabled: true
       :rubocop:
         :Enabled: true
       :bullet:

@@ -9,5 +9,10 @@ module Inquisition
     def setup(*_args)
       Inquisition::Configer.call
     end
+
+    desc 'analyze', I18n.t('messages.run_all_linters')
+    def analyze(*_args)
+      Inquisition::Runner.call
+    end
   end
 end
