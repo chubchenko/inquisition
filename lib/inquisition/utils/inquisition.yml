@@ -17,6 +17,8 @@
         :Enabled: true
       :rubocop:
         :Enabled: true
+      :ruby_lint:
+        :Enabled: true
       :bullet:
         :Enabled: true
       :fasterer:
@@ -37,9 +39,11 @@
         :Enabled: true
       :simplecov:
         :Enabled: true
+      :yamllint:
+        :Enabled: true
     :frontend:
       :Enabled: true
-      :i18n-tasks:
+      :i18n_tasks:
         :Enabled: true
       :haml_lint:
         :Enabled: true

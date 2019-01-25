@@ -1,6 +1,6 @@
 module Inquisition
   module Auditors
-    module Backend
+    module Frontend
       module I18nTasks
         class Installer < Auditors::Installer
           class << self

@@ -11,7 +11,6 @@ module Inquisition
               Fasterer::Installer => config_path(:fasterer),
               Reek::Installer => config_path(:reek),
               HamlLint::Installer => config_path(:haml_lint),
-              I18nTasks::Installer => config_path(:i18n_tasks),
               LolDba::Installer => config_path(:lol_dba),
               RailsErd::Installer => config_path(:rails_erd),
               Rubocop::Installer => config_path(:rubocop),
