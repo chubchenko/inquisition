@@ -4,7 +4,7 @@ module Inquisition
       class << self
         def call
           run_checkers
-          run_configers
+          run_configurers
         end
 
         private
@@ -13,15 +13,15 @@ module Inquisition
           checkers.each(&:call)
         end
 
-        def run_configers
-          configers.each(&:call)
+        def run_configurers
+          configurers.each(&:call)
         end
 
         def checkers
           []
         end
 
-        def configers
+        def configurers
           []
         end
       end

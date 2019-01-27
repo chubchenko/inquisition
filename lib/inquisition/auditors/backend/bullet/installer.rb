@@ -12,11 +12,11 @@ module Inquisition
               ]
             end
 
-            def configers
+            def configurers
               [
-                Core::Configers::UpdateFileConfiger.new(file: 'development.rb',
-                                                        destination: 'config/environments',
-                                                        template_path: __dir__)
+                Core::Configurers::UpdateFileConfigure.new(file: 'development.rb',
+                                                           destination: 'config/environments',
+                                                           template_path: __dir__)
               ]
             end
           end

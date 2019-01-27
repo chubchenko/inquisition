@@ -15,8 +15,8 @@ module Inquisition
           def build_errors
             @build_errors ||= raw_errors[REPORT_KEYS[:list_of_errors]].map do |vulnerability|
               {
-                linterable_name: linterable_name_default,
-                linterable_type: linterable_type_gem,
+                lintable_name: lintable_name_default,
+                lintable_type: lintable_type_gem,
                 message: vulnerability[REPORT_KEYS[:message]],
                 type: vulnerability[REPORT_KEYS[:type]],
                 line: line_default

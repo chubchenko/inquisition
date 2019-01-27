@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe Inquisition::Core::Configers::UpdateFileConfiger do
-  subject { Inquisition::Core::Configers::UpdateFileConfiger.new(**args) }
+RSpec.describe Inquisition::Core::Configurers::UpdateFileConfigure do
+  subject { Inquisition::Core::Configurers::UpdateFileConfigure.new(**args) }
   let(:args) { { file: 'config.txt', destination: 'spec/tmp' } }
 
   let(:spec_path) { File.join(Dir.pwd, 'spec') }

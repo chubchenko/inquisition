@@ -1,13 +1,9 @@
 module Inquisition
   module Auditors
-    module Frontend
-      module I18nTasks
+    module Backend
+      module ActiveRecordDoctor
         class Formatter < Core::BaseFormatter
-          REPORT_KEYS = {
-            lintable_name: 'filename',
-            message: 'message',
-            line: 'line_number'
-          }.freeze
+          REPORT_KEYS = {}.freeze
 
           private
 

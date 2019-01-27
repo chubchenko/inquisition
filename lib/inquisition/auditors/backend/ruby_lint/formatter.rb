@@ -4,7 +4,7 @@ module Inquisition
       module RubyLint
         class Formatter < Core::BaseFormatter
           REPORT_KEYS = {
-            linterable_name: 'file',
+            lintable_name: 'file',
             message: 'message',
             line: 'line',
             type: 'level'
@@ -18,8 +18,8 @@ module Inquisition
 
           def build_error(error)
             {
-              linterable_name: error[REPORT_KEYS[:linterable_name]],
-              linterable_type: linterable_type_default,
+              lintable_name: error[REPORT_KEYS[:lintable_name]],
+              lintable_type: lintable_type_default,
               message: error[REPORT_KEYS[:message]],
               type: error[REPORT_KEYS[:type]],
               line: error[REPORT_KEYS[:line]]
