@@ -16,7 +16,16 @@ module Inquisition
               # RubyLint::Runner => config_path(:ruby_lint),
               # Yamllint::Runner => config_path(:yamllint),
               # LolDba::Runner => config_path(:lol_dba),
-              ActiveRecordDoctor::Runner => config_path(:active_record_doctor)
+
+              # ActiveRecordDoctor::Runners::ExtraneousIndexesRunner => config_path(:active_record_doctor)
+              # ActiveRecordDoctor::Runners::MissingForeignKeysRunner => config_path(:active_record_doctor)
+
+              # ActiveRecordDoctor::Runners::MissingNonNullConstraintRunner => config_path(:active_record_doctor)
+              # ActiveRecordDoctor::Runners::MissingPresenceValidationRunner => config_path(:active_record_doctor)
+              # ActiveRecordDoctor::Runners::MissingUniqueIndexesRunner => config_path(:active_record_doctor)
+              # ActiveRecordDoctor::Runners::UndefinedTableReferencesRunner => config_path(:active_record_doctor)
+              # ActiveRecordDoctor::Runners::UnindexedDeletedAtRunner => config_path(:active_record_doctor)
+              ActiveRecordDoctor::Runners::UnindexedForeignKeysRunner => config_path(:active_record_doctor)
 
               # Bullet::Runner => config_path(:bullet),
               # HamlLint::Runner => config_path(:haml_lint),

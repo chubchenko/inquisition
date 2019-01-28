@@ -22,6 +22,7 @@ module Inquisition
               {
                 table: text_only(error[:table]),
                 column: column,
+                message: message_default,
                 type: text_only(error[:type])
               }
             end
@@ -29,10 +30,6 @@ module Inquisition
 
           def prepare_columns(columns)
             columns.map(&method(:text_only))
-          end
-
-          def text_only(chars)
-            chars.gsub(TEXT_REGEXP_FORMAT, '')
           end
 
           def raw_errors

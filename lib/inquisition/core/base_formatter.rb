@@ -13,6 +13,9 @@ module Inquisition
             file: 'file',
             gem: 'gem'
           },
+          message: {
+            default: 'none'
+          },
           line: {
             default: 0
           },
@@ -72,6 +75,10 @@ module Inquisition
         build_errors.size
       end
 
+      def text_only(chars)
+        chars.gsub(TEXT_REGEXP_FORMAT, '')
+      end
+
       def lintable_name_default
         RESULT_HASH[:errors][:lintable_name][:default]
       end
@@ -86,6 +93,10 @@ module Inquisition
 
       def lintable_type_file
         RESULT_HASH[:errors][:lintable_type][:default]
+      end
+
+      def message_default
+        RESULT_HASH[:errors][:message][:default]
       end
 
       def line_default
