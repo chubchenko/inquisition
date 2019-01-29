@@ -11,6 +11,7 @@
 /tmp/*
 .history
 /inquisition.yml
+.rake_tasks~
 
 # rspec failure tracking
 .rspec_status

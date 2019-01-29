@@ -64,7 +64,7 @@ module Inquisition
       end
 
       def build_total_files_count
-        build_errors.map { |error| error[:file] }.uniq.count
+        build_errors.map { |error| error[:linterable_name] }.uniq.count
       end
 
       def build_error_count

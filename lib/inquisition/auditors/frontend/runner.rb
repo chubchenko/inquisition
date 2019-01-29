@@ -1,18 +1,18 @@
 module Inquisition
   module Auditors
     module Frontend
-      class Installer < Core::BaseInstaller
+      class Runner < Core::BaseRunner
         class << self
           private
 
-          def installers
+          def runners
             {
-              I18nTasks::Installer => config_path(:i18n_tasks)
+              I18nTasks::Runner => config_path(:i18n_tasks)
             }
           end
 
           def config_path(*path)
-            [:linters, :backend, *path]
+            [:linters, :frontend, *path]
           end
         end
       end
