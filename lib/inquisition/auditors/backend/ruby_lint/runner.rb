@@ -2,7 +2,7 @@ module Inquisition
   module Auditors
     module Backend
       module RubyLint
-        class Runner < Auditors::Runner
+        class Runner < Core::Runners::SingleRunner
           private
 
           def command

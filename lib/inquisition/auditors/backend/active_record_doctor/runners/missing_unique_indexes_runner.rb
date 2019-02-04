@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       module ActiveRecordDoctor
         module Runners
-          class MissingUniqueIndexesRunner < Auditors::Runner
+          class MissingUniqueIndexesRunner < Core::Runners::SingleRunner
             private
 
             def command

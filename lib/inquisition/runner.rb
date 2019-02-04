@@ -1,5 +1,5 @@
 module Inquisition
-  class Runner < Core::MultipleRunner
+  class Runner < Core::Runners::MultipleRunner
     include Inquisition::Authorization
 
     def call
