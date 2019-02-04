@@ -1,6 +1,6 @@
 module Inquisition
-  module Auditors
-    class Runner
+  module Core
+    class SingleRunner < BaseRunner
       def call
         track_time { run_auditor }
         format_output

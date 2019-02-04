@@ -18,6 +18,8 @@ require 'inquisition/core/configer'
 require 'inquisition/core/base_formatter'
 require 'inquisition/core/base_installer'
 require 'inquisition/core/base_runner'
+require 'inquisition/core/single_runner'
+require 'inquisition/core/multiple_runner'
 require 'inquisition/core/configers/copy_file_configer'
 require 'inquisition/core/configers/update_file_configer'
 

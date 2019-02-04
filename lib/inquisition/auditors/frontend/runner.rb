@@ -1,7 +1,7 @@
 module Inquisition
   module Auditors
     module Frontend
-      class Runner < Core::BaseRunner
+      class Runner < Core::MultipleRunner
         class << self
           private
 
