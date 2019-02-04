@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       module ActiveRecordDoctor
         module Runners
-          class UnindexedDeletedAtRunner < Auditors::Runner
+          class UnindexedDeletedAtRunner < Core::Runners::SingleRunner
             private
 
             def command

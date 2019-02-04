@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 RSpec.describe Inquisition::Configure, type: :unit do
-
   describe '#call' do
     subject { Inquisition::Configure.call }
 

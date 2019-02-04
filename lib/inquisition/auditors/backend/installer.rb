@@ -1,7 +1,7 @@
 module Inquisition
   module Auditors
     module Backend
-      class Installer < Core::BaseInstaller
+      class Installer < Core::Installers::MultipleInstaller
         class << self
           private
 
@@ -23,8 +23,8 @@ module Inquisition
             }
           end
 
-          def config_path(*path)
-            [:linters, :backend, *path]
+          def path
+            [:backend]
           end
         end
       end

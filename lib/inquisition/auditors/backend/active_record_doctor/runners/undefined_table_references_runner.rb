@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       module ActiveRecordDoctor
         module Runners
-          class UndefinedTableReferencesRunner < Auditors::Runner
+          class UndefinedTableReferencesRunner < Core::Runners::SingleRunner
             private
 
             def command

@@ -1,7 +1,7 @@
 module Inquisition
   module Auditors
     module Frontend
-      class Runner < Core::MultipleRunner
+      class Runner < Core::Runners::MultipleRunner
         class << self
           private
 
@@ -11,8 +11,8 @@ module Inquisition
             }
           end
 
-          def config_path(*path)
-            [:linters, :frontend, *path]
+          def path
+            [:frontend]
           end
         end
       end

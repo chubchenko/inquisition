@@ -2,7 +2,7 @@ module Inquisition
   module Auditors
     module Backend
       module Simplecov
-        class Installer < Auditors::Installer
+        class Installer < Core::Installers::SingleInstaller
           class << self
             private
 

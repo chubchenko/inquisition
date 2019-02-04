@@ -12,3 +12,4 @@ LineLength:
 Metrics/MethodLength:
   Exclude:
     - lib/inquisition/auditors/backend/installer.rb
+    - lib/inquisition/auditors/backend/runner.rb
