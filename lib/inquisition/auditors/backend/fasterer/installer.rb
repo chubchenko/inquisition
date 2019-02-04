@@ -6,9 +6,9 @@ module Inquisition
           class << self
             private
 
-            def configers
+            def configurers
               [
-                Core::Configers::CopyFileConfiger.new(file: '.fasterer.yml')
+                Core::Configurers::CopyFileConfigure.new(file: '.fasterer.yml')
               ]
             end
           end

@@ -12,11 +12,11 @@ module Inquisition
               ]
             end
 
-            def configers
+            def configurers
               [
-                Core::Configers::UpdateFileConfiger.new(file: 'spec_helper.rb',
-                                                        template_path: __dir__,
-                                                        destination: 'spec')
+                Core::Configurers::UpdateFileConfigure.new(file: 'spec_helper.rb',
+                                                           template_path: __dir__,
+                                                           destination: 'spec')
               ]
             end
           end

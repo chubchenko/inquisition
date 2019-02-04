@@ -1,5 +1,5 @@
 module Inquisition
-  class Configer
+  class Configure
     extend Inquisition::Authorization
 
     class << self

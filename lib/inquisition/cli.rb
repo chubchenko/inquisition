@@ -7,7 +7,7 @@ module Inquisition
 
     desc 'setup', I18n.t('messages.setups_all_conf_linters')
     def setup(*_args)
-      Inquisition::Configer.call
+      Inquisition::Configure.call
     end
 
     desc 'analyze', I18n.t('messages.run_all_linters')

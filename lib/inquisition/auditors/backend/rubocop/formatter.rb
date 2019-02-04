@@ -4,7 +4,7 @@ module Inquisition
       module Rubocop
         class Formatter < Core::BaseFormatter
           REPORT_KEYS = {
-            linterable_name: 'path',
+            lintable_name: 'path',
             message: 'message',
             type: 'severity',
             line: %w[location line],
@@ -31,8 +31,8 @@ module Inquisition
           def build_error(file)
             file[REPORT_KEYS[:list_of_errors]].map do |offense|
               {
-                linterable_name: file[REPORT_KEYS[:linterable_name]],
-                linterable_type: linterable_type_default,
+                lintable_name: file[REPORT_KEYS[:lintable_name]],
+                lintable_type: lintable_type_default,
                 message: offense[REPORT_KEYS[:message]],
                 type: offense[REPORT_KEYS[:type]],
                 line: offense.dig(*REPORT_KEYS[:line])

@@ -16,8 +16,8 @@ module Inquisition
           def build_error(error)
             error.map do |file, message|
               {
-                linterable_name: file,
-                linterable_type: linterable_type_default,
+                lintable_name: file,
+                lintable_type: lintable_type_default,
                 message: message,
                 type: type_default,
                 line: line_default
