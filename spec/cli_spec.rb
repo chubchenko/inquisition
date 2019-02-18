@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require './lib/inquisition/cli'
 
 RSpec.describe Inquisition::CLI, type: :unit do
   subject { Inquisition::CLI.new }
