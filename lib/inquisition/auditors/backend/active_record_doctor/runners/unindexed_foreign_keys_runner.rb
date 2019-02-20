@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       module ActiveRecordDoctor
         module Runners
-          class UnindexedForeignKeysRunner < Auditors::Runner
+          class UnindexedForeignKeysRunner < Core::Runners::SingleRunner
             private
 
             def command

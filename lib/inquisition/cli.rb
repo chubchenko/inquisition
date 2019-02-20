@@ -12,7 +12,7 @@ module Inquisition
 
     desc 'analyze', I18n.t('messages.run_all_linters')
     def analyze(*_args)
-      Inquisition::Runner.call
+      Inquisition::Runner.new.call
     end
   end
 end

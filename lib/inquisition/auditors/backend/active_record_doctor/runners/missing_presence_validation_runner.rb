@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       module ActiveRecordDoctor
         module Runners
-          class MissingPresenceValidationRunner < Auditors::Runner
+          class MissingPresenceValidationRunner < Core::Runners::SingleRunner
             private
 
             def command

@@ -2,7 +2,7 @@ module Inquisition
   module Auditors
     module Backend
       module Fasterer
-        class Runner < Auditors::Runner
+        class Runner < Core::Runners::SingleRunner
           private
 
           def command

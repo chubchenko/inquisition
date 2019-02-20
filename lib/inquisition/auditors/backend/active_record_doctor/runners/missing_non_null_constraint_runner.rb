@@ -3,7 +3,7 @@ module Inquisition
     module Backend
       module ActiveRecordDoctor
         module Runners
-          class MissingNonNullConstraintRunner < Auditors::Runner
+          class MissingNonNullConstraintRunner < Core::Runners::SingleRunner
             private
 
             def command
