@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubycritic'
   spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'undercover'
-  spec.add_development_dependency 'rubycritic'
 
   # common
   spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print
@@ -41,6 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pry-rescue'           # https://github.com/ConradIrwin/pry-rescue
   spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
   spec.add_dependency 'thor'
+  spec.add_dependency 'zeitwerk'
 
   # backend
   spec.add_dependency 'active_record_doctor'

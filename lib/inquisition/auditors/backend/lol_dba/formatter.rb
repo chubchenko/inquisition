@@ -37,11 +37,7 @@ module Inquisition
           end
 
           def column_with_errors
-            @column_with_errors ||= if raw_errors.any?
-                                      raw_errors.last.split("\n").map(&method(:prepare_errors))
-                                    else
-                                      []
-                                    end
+            @column_with_errors ||= raw_errors.any? ? raw_errors.last.split("\n").map(&method(:prepare_errors)) : []
           end
 
           def prepare_errors(error)
