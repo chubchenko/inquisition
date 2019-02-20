@@ -6,9 +6,9 @@ module Inquisition
           class << self
             private
 
-            def configers
+            def configurers
               [
-                Core::Configers::CopyFileConfiger.new(file: 'i18n-tasks.yml', destination: 'config')
+                Core::Configurers::CopyFileConfigure.new(file: 'i18n-tasks.yml', destination: 'config')
               ]
             end
           end

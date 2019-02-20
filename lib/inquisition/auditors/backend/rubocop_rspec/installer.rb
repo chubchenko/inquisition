@@ -12,9 +12,9 @@ module Inquisition
               ]
             end
 
-            def configers
+            def configurers
               [
-                Core::Configers::CopyFileConfiger.new(file: '.rubocop.yml')
+                Core::Configurers::CopyFileConfigure.new(file: '.rubocop.yml')
               ]
             end
           end

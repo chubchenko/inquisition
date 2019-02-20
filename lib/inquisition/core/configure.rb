@@ -1,6 +1,6 @@
 module Inquisition
   module Core
-    class Configer
+    class Configure
       def initialize(args = {})
         @args = args
       end

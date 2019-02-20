@@ -4,9 +4,9 @@ require 'spec_helper'
 
 RSpec.describe Inquisition::Auditors::Frontend::Installer do
   describe '#call' do
-    subject { Inquisition::Auditors::Frontend::Configer.call }
+    subject { Inquisition::Auditors::Frontend::Configure.call }
 
-    xit 'run frontend configer' do
+    xit 'run frontend configure' do
     end
   end
 end

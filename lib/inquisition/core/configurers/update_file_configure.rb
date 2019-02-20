@@ -1,7 +1,7 @@
 module Inquisition
   module Core
-    module Configers
-      class UpdateFileConfiger < Inquisition::Core::Configer
+    module Configurers
+      class UpdateFileConfigure < Inquisition::Core::Configure
         private
 
         def setup

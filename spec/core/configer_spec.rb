@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-RSpec.describe Inquisition::Core::Configer, type: :unit do
-  subject { Inquisition::Core::Configer.new(some: 'param') }
+RSpec.describe Inquisition::Core::Configure, type: :unit do
+  subject { Inquisition::Core::Configure.new(some: 'param') }
 
   describe '.new' do
 
