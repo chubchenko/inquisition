@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require 'inquisition/config/railtie' if defined?(Rails)
-require 'inquisition/config/vendor_autoload'
-require 'inquisition/config/autoload'
-require 'inquisition/version'
+require 'inquisition/config/initializer'
+Zeitwerk::Loader.for_gem.setup
 
 module Inquisition
 end
