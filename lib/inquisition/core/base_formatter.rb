@@ -2,15 +2,19 @@ module Inquisition
   module Core
     class BaseFormatter
       JSON_REGEXP_FORMAT = /{.+}/.freeze
+      TEXT_REGEXP_FORMAT = /\W+/.freeze
       RESULT_HASH = {
         errors: {
-          linterable_name: {
+          lintable_name: {
             default: 'default'
           },
-          linterable_type: {
+          lintable_type: {
             default: 'file',
             file: 'file',
             gem: 'gem'
+          },
+          message: {
+            default: 'none'
           },
           line: {
             default: 0
@@ -64,27 +68,35 @@ module Inquisition
       end
 
       def build_total_files_count
-        build_errors.map { |error| error[:linterable_name] }.uniq.count
+        build_errors.map { |error| error[:lintable_name] }.uniq.count
       end
 
       def build_error_count
         build_errors.size
       end
 
-      def linterable_name_default
-        RESULT_HASH[:errors][:linterable_name][:default]
+      def text_only(chars)
+        chars.gsub(TEXT_REGEXP_FORMAT, '')
       end
 
-      def linterable_type_default
-        RESULT_HASH[:errors][:linterable_type][:default]
+      def lintable_name_default
+        RESULT_HASH[:errors][:lintable_name][:default]
       end
 
-      def linterable_type_gem
-        RESULT_HASH[:errors][:linterable_type][:default]
+      def lintable_type_default
+        RESULT_HASH[:errors][:lintable_type][:default]
       end
 
-      def linterable_type_file
-        RESULT_HASH[:errors][:linterable_type][:default]
+      def lintable_type_gem
+        RESULT_HASH[:errors][:lintable_type][:default]
+      end
+
+      def lintable_type_file
+        RESULT_HASH[:errors][:lintable_type][:default]
+      end
+
+      def message_default
+        RESULT_HASH[:errors][:message][:default]
       end
 
       def line_default

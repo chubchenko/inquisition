@@ -4,7 +4,7 @@ module Inquisition
       module BundlerAudit
         class Formatter < Core::BaseFormatter
           REPORT_KEYS = {
-            linterable_name: 'Name',
+            lintable_name: 'Name',
             message: 'Title',
             type: 'Criticality'
           }.freeze
@@ -14,8 +14,8 @@ module Inquisition
           def build_errors
             @build_errors ||= raw_errors.map do |vulnerability|
               {
-                linterable_name: vulnerability[REPORT_KEYS[:linterable_name]],
-                linterable_type: linterable_type_default,
+                lintable_name: vulnerability[REPORT_KEYS[:lintable_name]],
+                lintable_type: lintable_type_default,
                 message: vulnerability[REPORT_KEYS[:message]],
                 type: vulnerability[type],
                 line: line_default

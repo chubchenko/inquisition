@@ -4,7 +4,7 @@ module Inquisition
       module Reek
         class Formatter < Core::BaseFormatter
           REPORT_KEYS = {
-            linterable_name: 'source',
+            lintable_name: 'source',
             message: 'message',
             type: 'smell_type',
             list_of_errors: 'lines'
@@ -19,8 +19,8 @@ module Inquisition
           def build_error(error)
             error[REPORT_KEYS[:list_of_errors]].map do |line|
               {
-                linterable_name: error[REPORT_KEYS[:linterable_name]],
-                linterable_type: linterable_type_default,
+                lintable_name: error[REPORT_KEYS[:lintable_name]],
+                lintable_type: lintable_type_default,
                 message: error[REPORT_KEYS[:message]],
                 type: error[REPORT_KEYS[:type]],
                 line: line

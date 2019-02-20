@@ -1,7 +1,7 @@
 module Inquisition
   module Core
-    module Configers
-      class CopyFileConfiger < Inquisition::Core::Configer
+    module Configurers
+      class CopyFileConfigure < Inquisition::Core::Configure
         private
 
         def setup
@@ -17,6 +17,7 @@ module Inquisition
         end
 
         def copy_config_file
+          FileUtils.mkdir_p destination
           FileUtils.cp config_path, destination, preserve: true, verbose: false
         end
       end

@@ -6,9 +6,9 @@ module Inquisition
           class << self
             private
 
-            def configers
+            def configurers
               [
-                Core::Configers::CopyFileConfiger.new(file: 'rails_best_practices.yml')
+                Core::Configurers::CopyFileConfigure.new(file: 'rails_best_practices.yml')
               ]
             end
           end
