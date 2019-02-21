@@ -2,7 +2,7 @@ module Inquisition
   module Auditors
     module Frontend
       module I18nTasks
-        class Installer < Auditors::Installer
+        class Installer < Core::Installers::SingleInstaller
           class << self
             private
 

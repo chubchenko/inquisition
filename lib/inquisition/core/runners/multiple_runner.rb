@@ -18,8 +18,12 @@ module Inquisition
           {}
         end
 
-        def config_path(*path)
-          [:linters, *path]
+        def config_path(*keys)
+          [:linters, *path, *keys]
+        end
+
+        def path
+          []
         end
       end
     end

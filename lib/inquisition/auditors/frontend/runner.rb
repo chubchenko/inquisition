@@ -11,8 +11,8 @@ module Inquisition
             }
           end
 
-          def config_path(*path)
-            [:linters, :frontend, *path]
+          def path
+            [:frontend]
           end
         end
       end
