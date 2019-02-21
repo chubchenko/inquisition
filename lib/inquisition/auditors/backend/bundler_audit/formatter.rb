@@ -17,7 +17,7 @@ module Inquisition
                 lintable_name: vulnerability[REPORT_KEYS[:lintable_name]],
                 lintable_type: lintable_type_default,
                 message: vulnerability[REPORT_KEYS[:message]],
-                type: vulnerability[type],
+                type: vulnerability[REPORT_KEYS[:type]],
                 line: line_default
               }
             end

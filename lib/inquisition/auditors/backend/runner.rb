@@ -15,7 +15,8 @@ module Inquisition
             RubyLint::Runner => config_path(:ruby_lint),
             Yamllint::Runner => config_path(:yamllint),
             LolDba::Runner => config_path(:lol_dba),
-            ActiveRecordDoctor::Runner => config_path(:active_record_doctor)
+            ActiveRecordDoctor::Runner => config_path(:active_record_doctor),
+            Brakeman::Runner => config_path(:brakeman)
             # Bullet::Runner => config_path(:bullet),
             # HamlLint::Runner => config_path(:haml_lint),
             # RailsErd::Runner => config_path(:rails_erd),
