@@ -5,7 +5,6 @@ module Inquisition
         def call
           track_time { run_auditor }
           format_output
-          build_data_preparer
         end
 
         private
@@ -19,19 +18,11 @@ module Inquisition
         end
 
         def format_output
-          @formatted_output = formatter.new(unparsed_data: @auditor_report_result, spended_time: @spended_time).call
-        end
-
-        def build_data_preparer
-          # @preparer = DataPreparer.new(@formatted_output)
+          formatter.new(unparsed_data: @auditor_report_result, spended_time: @spended_time).call
         end
 
         def formatter
-          Kernel.const_get(auditor_namespase)::Formatter
-        end
-
-        def auditor_namespase
-          self.class.name.split('::').tap(&:pop).join('::')
+          Kernel.const_get(self.class.auditor_namespase)::Formatter
         end
 
         def run_cli(command)

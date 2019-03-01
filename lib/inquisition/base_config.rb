@@ -17,6 +17,10 @@ module Inquisition
         configs.dig(*args) == true
       end
 
+      def auditors
+        configs[:inquisition][:linters]
+      end
+
       private
 
       def configs

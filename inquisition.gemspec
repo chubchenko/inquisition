@@ -42,6 +42,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
   spec.add_dependency 'thor'
   spec.add_dependency 'zeitwerk'
+  spec.add_dependency 'tilt'
+  spec.add_dependency 'launchy'
 
   # backend
   spec.add_dependency 'active_record_doctor'

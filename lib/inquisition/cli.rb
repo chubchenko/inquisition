@@ -11,8 +11,11 @@ module Inquisition
     end
 
     desc 'analyze', I18n.t('messages.run_all_linters')
+    class_option 'format', aliases: '-f', type: :string, enum: %w[html json], default: 'html'
     def analyze(*_args)
-      Inquisition::Runner.new.call
+      formatters = Inquisition::Runner.new.call
+      Inquisition::Outputer.call(options, formatters: formatters)
+      # Core::Outputers::HtmlOutputer.new(formatters).call
     end
   end
 end
