@@ -428,6 +428,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord
   bundler
   inquisition!
   rake

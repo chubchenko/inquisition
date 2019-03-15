@@ -78,18 +78,28 @@
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-user
-                Code errors
-              .count= total_code_errors
+                Rails version
+              .count= rails_version
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-user
-                Database errors
-              .count= total_database_errors
+                Quantity of gems
+              .count= quantity_of_gems
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-user
-                Included linters
-              .count= included_linters
+                Database adapter
+              .count= database_adapter
+            .col-md-2.col-sm-4.col-xs-6.tile_stats_count
+              %span.count_top
+                %i.fa.fa-user
+                Git
+              .count= git_existence
+            .col-md-2.col-sm-4.col-xs-6.tile_stats_count
+              %span.count_top
+                %i.fa.fa-user
+                Javascript Runtime Version
+              .count= js_runtime_version
           / /top tiles
           .row
             .col-md-12.col-sm-12.col-xs-12
