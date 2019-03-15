@@ -38,7 +38,7 @@ PreCommit:
   TrailingWhitespace:
     enabled: true
     exclude:
-      - 'db/structure.sql' # Ignore trailing whitespace in generated files
+      - 'lib/inquisition/generators/**/*'
 
   RailsBestPractices:
     enabled: true
