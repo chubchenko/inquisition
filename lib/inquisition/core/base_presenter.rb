@@ -1,15 +1,12 @@
 module Inquisition
   module Core
     class BasePresenter
-      attr_reader :presenter
-
-      def initialize
-        @presenter = {}
+      def initialize(data = nil)
+        @data = data
       end
 
       def call
         build_presenter
-        @presenter
       end
 
       def build_presenter

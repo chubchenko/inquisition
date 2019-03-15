@@ -21,7 +21,17 @@ module Inquisition
         configs[:inquisition][:linters]
       end
 
+      def included_linters
+        auditors.values.map(&method(:included_only))
+      end
+
       private
+
+      def included_only(linters)
+        linters.select do |_linter, status|
+          status.is_a?(Hash) && status.values.first
+        end
+      end
 
       def configs
         @configs ||= YAML.load_file(File.join(TARGET_DIRECTORY, CONFIG_FILE_NAME))

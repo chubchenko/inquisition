@@ -2,18 +2,31 @@ module Inquisition
   module Core
     module Presenters
       class MenuItemsPresenter < BasePresenter
+        DATABASE_SUMMARY_PAGE = 'database_summary.html'.freeze
+
         private
 
         def build_presenter
           build_item_tree('Backend') if include_path?(:backend)
           build_item_tree('Frontend') if include_path?(:frontend)
           build_item_tree('Common') if include_path?(:common)
+          build_additional_items
+          @items
+        end
+
+        def build_additional_items
+          build_database_summary_page if include_path?(:backend)
+        end
+
+        def build_database_summary_page
+          @items['backend'][:child_items] << build_item('database summary', DATABASE_SUMMARY_PAGE)
         end
 
         def build_item_tree(name)
           item_name = name.downcase
-          @presenter[item_name] = build_item(name)
-          @presenter[item_name][:child_items] = build_nested_level(name).compact
+          @items ||= {}
+          @items[item_name] = build_item(name)
+          @items[item_name][:child_items] = build_nested_level(name).compact
         end
 
         def build_nested_level(name)
@@ -22,8 +35,8 @@ module Inquisition
           end
         end
 
-        def build_item(name)
-          Core::Presenters::MenuItemPresenter.new(name).call
+        def build_item(name, link = '#need_change')
+          Core::Presenters::MenuItemPresenter.new(name: name, link: link).call
         end
 
         def include_path?(path)
