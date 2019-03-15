@@ -3,14 +3,21 @@ module Inquisition
     module Runners
       class MultipleRunner < BaseRunner
         def call
-          run_runners
+          convert_to_hash(run_runners)
         end
 
         private
 
         def run_runners
-          runners.each do |runner, path|
-            runner.new.call if BaseConfig.config_enabled?(*path)
+          runners.map do |runner, path|
+            { "#{runner.auditor_name}": runner.new.call } if BaseConfig.config_enabled?(*path)
+          end
+        end
+
+        def convert_to_hash(array)
+          array.each_with_object({}) do |auditor, obj|
+            value = auditor.values.first
+            obj[auditor.keys.first] = value.is_a?(Array) ? convert_to_hash(value) : value
           end
         end
 

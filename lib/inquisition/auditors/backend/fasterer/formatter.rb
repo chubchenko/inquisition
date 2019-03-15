@@ -33,11 +33,14 @@ module Inquisition
           end
 
           def prepare_error_lines(message)
+            return [0] if message.empty?
+
             message.split(REPORT_KEYS[:error_split_text]).last.split(',').map(&:to_i)
           end
 
           def file_with_errors
             @file_with_errors ||= raw_errors.reject(&:empty?).tap(&:pop)
+            @file_with_errors << '' if @file_with_errors.count.odd?
           end
 
           def raw_errors

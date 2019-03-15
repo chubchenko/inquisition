@@ -45,7 +45,7 @@ references:
   run_coverage: &run_coverage
     run:
       name: Coverage
-      command: bundle exec undercover -c develop
+      command: bundle exec undercover
 
 version: 2
 

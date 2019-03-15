@@ -3,12 +3,12 @@ module Inquisition
     class << self
       def call
         if BaseConfig.config_exist?
-          Outputer.base_config_exist
+          MessageNotifier.base_config_exist
         else
           BaseConfig.initialize_config
-          Outputer.setuping_inquisition
+          MessageNotifier.setuping_inquisition
         end
-        Outputer.done
+        MessageNotifier.done
       end
     end
   end

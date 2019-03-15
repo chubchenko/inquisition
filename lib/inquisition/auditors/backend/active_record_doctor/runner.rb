@@ -7,14 +7,14 @@ module Inquisition
 
           def runners
             {
-              Runners::ExtraneousIndexesRunner => config_path,
-              Runners::MissingForeignKeysRunner => config_path,
-              Runners::MissingNonNullConstraintRunner => config_path,
-              Runners::MissingPresenceValidationRunner => config_path,
-              Runners::MissingUniqueIndexesRunner => config_path,
-              Runners::UndefinedTableReferencesRunner => config_path,
-              Runners::UnindexedDeletedAtRunner => config_path,
-              Runners::UnindexedForeignKeysRunner => config_path
+              ExtraneousIndexes::Runner => config_path,
+              MissingForeignKeys::Runner => config_path,
+              MissingNonNullConstraint::Runner => config_path,
+              MissingPresenceValidation::Runner => config_path,
+              MissingUniqueIndexes::Runner => config_path,
+              UndefinedTableReferences::Runner => config_path,
+              UnindexedDeletedAt::Runner => config_path,
+              UnindexedForeignKeys::Runner => config_path
             }
           end
 
