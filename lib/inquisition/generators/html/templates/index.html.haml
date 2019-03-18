@@ -130,7 +130,7 @@
                 .x_title
                   %h2
                     Included linters
-                  %ul.nav.navbar-right.panel_toolbox
+                  %ul.nav.navbar-right
                     %li
                       %a.collapse-link
                         %i.fa.fa-chevron-up
@@ -142,6 +142,24 @@
                         %li
                           %p
                             %input.flat{:type => "checkbox", checked: true, disabled: true}/
+                            = linter_name
+            .col-md-6.col-sm-6.col-xs-12
+              .x_panel
+                .x_title
+                  %h2
+                    Disabled linters
+                  %ul.nav.navbar-right
+                    %li
+                      %a.collapse-link
+                        %i.fa.fa-chevron-up
+                  .clearfix
+                .x_content
+                  %div
+                    %ul.to_do
+                      - disabled_linters.each do |linter_name|
+                        %li
+                          %p
+                            %input.flat{:type => "checkbox", checked: false, disabled: true}/
                             = linter_name
           .row
             .col-md-4.col-sm-4.col-xs-12

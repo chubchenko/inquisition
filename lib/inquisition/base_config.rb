@@ -25,11 +25,21 @@ module Inquisition
         auditors.values.map(&method(:included_only))
       end
 
+      def disabled_linters
+        auditors.values.map(&method(:disabled_only))
+      end
+
       private
 
       def included_only(linters)
         linters.select do |_linter, status|
           status.is_a?(Hash) && status.values.first
+        end
+      end
+
+      def disabled_only(linters)
+        linters.select do |_linter, status|
+          status.is_a?(Hash) && status.values.first.blank?
         end
       end
 

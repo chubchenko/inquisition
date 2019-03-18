@@ -40,12 +40,16 @@ module Inquisition
             ExecJS.runtime.name
           end
 
+          def files_summary_table
+            FilesSummaryPresenter.new.call
+          end
+
           def included_linters
             BaseConfig.included_linters.map(&:keys).flatten
           end
 
-          def files_summary_table
-            FilesSummaryPresenter.new.call
+          def disabled_linters
+            BaseConfig.disabled_linters.map(&:keys).flatten
           end
         end
       end
