@@ -1,14 +1,18 @@
 require 'rails'
+require 'execjs'
 
 module Inquisition
   module Core
     module Presenters
       module Pages
         class IndexPagePresenter < PagePresenter
-          attr_reader :database_presenter
+          GIT_FOLDER = '.git'.freeze
+
+          attr_reader :database_presenter, :rails_about_presenter
 
           def initialize(auditors_tree)
             @database_presenter = Core::Presenters::DatabaseLintersPresenter.new(auditors_tree)
+            @rails_about_presenter = Core::Presenters::RailsAboutPresenter.new
             super
           end
 
@@ -24,12 +28,16 @@ module Inquisition
             File.foreach(File.join(Dir.pwd, 'Gemfile')).grep(/gem /).count
           end
 
-          def total_code_errors
-            'soon'
+          def database_adapter
+            rails_about_presenter.database_adapter
           end
 
-          def total_database_errors
-            @database_presenter.total_errors
+          def git_existence
+            File.exist?(File.join(Dir.pwd, GIT_FOLDER)) ? 'exist' : 'not found'
+          end
+
+          def js_runtime_version
+            ExecJS.runtime.name
           end
 
           def included_linters

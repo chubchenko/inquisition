@@ -35,6 +35,8 @@ module Inquisition
             end
 
             def prepare_columns(error)
+              return [] unless error
+
               error.split(REPORT_KEYS[:split_index]).last
                    .split(REPORT_KEYS[:split_multiple_index]).map(&method(:text_only))
             end

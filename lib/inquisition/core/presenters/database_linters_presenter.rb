@@ -57,7 +57,7 @@ module Inquisition
         private
 
         def database_auditors
-          @database_auditors ||= @data.dig(:backend).&slice(*DATABASE_LINTERS).tap do |obj|
+          @database_auditors ||= @data.dig(:backend).slice(*DATABASE_LINTERS).tap do |obj|
             obj.merge!(obj.delete(:active_record_doctor))
           end
         end
