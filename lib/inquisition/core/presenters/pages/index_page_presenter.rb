@@ -11,6 +11,7 @@ module Inquisition
           attr_reader :database_presenter, :rails_about_presenter
 
           def initialize(auditors_tree)
+            @auditors_tree = auditors_tree
             @database_presenter = DatabaseLintersPresenter.new(auditors_tree)
             @rails_about_presenter = RailsAboutPresenter.new
             super
@@ -29,7 +30,7 @@ module Inquisition
           end
 
           def database_adapter
-            rails_about_presenter.database_adapter
+            rails_about_presenter.database_adapter.capitalize
           end
 
           def git_existence
@@ -54,6 +55,10 @@ module Inquisition
 
           def list_with_routes
             RoutesPresenter.new.call
+          end
+
+          def errors_count_chart
+            ErrorsCountPresenter.new(@auditors_tree).call
           end
         end
       end

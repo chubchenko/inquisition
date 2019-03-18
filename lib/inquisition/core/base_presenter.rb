@@ -1,6 +1,8 @@
 module Inquisition
   module Core
     class BasePresenter
+      CIRCLE_CHART_COLORS = %i[blue green purple aero red].freeze
+
       def initialize(data = nil)
         @data = data
       end

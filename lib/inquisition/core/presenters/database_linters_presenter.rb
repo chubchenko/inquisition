@@ -4,7 +4,6 @@ module Inquisition
       class DatabaseLintersPresenter < BasePresenter
         DATABASE_SCHEMA_FILE = 'db/schema.rb'.freeze
         NESTED_LINTERS = [:active_record_doctor].freeze
-        CIRCLE_CHART_COLORS = %i[blue green purple aero red].freeze
         DATABASE_LINTERS = %i[
           active_record_doctor
           lol_dba
