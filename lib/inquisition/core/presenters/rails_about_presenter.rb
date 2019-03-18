@@ -26,15 +26,6 @@ module Inquisition
         def raw_data
           @raw_data ||= run_cli(COMMAND)
         end
-
-        def run_cli(command)
-          begin
-            stdout = Open3.capture3(command).first
-          rescue Errno::ENOENT
-            stdout = ''
-          end
-          stdout
-        end
       end
     end
   end
