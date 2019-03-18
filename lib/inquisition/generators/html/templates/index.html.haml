@@ -125,6 +125,25 @@
                           %td= summary[:statistics][:methods]
           %br/
           .row
+            .col-md-6.col-sm-6.col-xs-12
+              .x_panel
+                .x_title
+                  %h2
+                    Included linters
+                  %ul.nav.navbar-right.panel_toolbox
+                    %li
+                      %a.collapse-link
+                        %i.fa.fa-chevron-up
+                  .clearfix
+                .x_content
+                  %div
+                    %ul.to_do
+                      - included_linters.each do |linter_name|
+                        %li
+                          %p
+                            %input.flat{:type => "checkbox", checked: true, disabled: true}/
+                            = linter_name
+          .row
             .col-md-4.col-sm-4.col-xs-12
               .x_panel.tile.fixed_height_320
                 .x_title

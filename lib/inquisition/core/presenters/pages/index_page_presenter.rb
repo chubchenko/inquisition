@@ -41,7 +41,7 @@ module Inquisition
           end
 
           def included_linters
-            BaseConfig.included_linters.map(&:count).sum
+            BaseConfig.included_linters.map(&:keys).flatten
           end
 
           def files_summary_table
