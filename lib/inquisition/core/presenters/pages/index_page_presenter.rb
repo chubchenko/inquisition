@@ -11,8 +11,8 @@ module Inquisition
           attr_reader :database_presenter, :rails_about_presenter
 
           def initialize(auditors_tree)
-            @database_presenter = Core::Presenters::DatabaseLintersPresenter.new(auditors_tree)
-            @rails_about_presenter = Core::Presenters::RailsAboutPresenter.new
+            @database_presenter = DatabaseLintersPresenter.new(auditors_tree)
+            @rails_about_presenter = RailsAboutPresenter.new
             super
           end
 
@@ -40,12 +40,20 @@ module Inquisition
             ExecJS.runtime.name
           end
 
+          def files_summary_table
+            FilesSummaryPresenter.new.call
+          end
+
           def included_linters
             BaseConfig.included_linters.map(&:keys).flatten
           end
 
-          def files_summary_table
-            FilesSummaryPresenter.new.call
+          def disabled_linters
+            BaseConfig.disabled_linters.map(&:keys).flatten
+          end
+
+          def list_with_routes
+            RoutesPresenter.new.call
           end
         end
       end
