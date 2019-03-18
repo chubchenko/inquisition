@@ -125,6 +125,26 @@
                           %td= summary[:statistics][:methods]
           %br/
           .row
+            .col-md-12.col-sm-12.col-xs-12
+              .x_panel.tile
+                .x_title
+                  %h2 Routes list
+                  .clearfix
+                .x_content
+                  %table.countries_list
+                    %tbody
+                      %th Prefix
+                      %th Verb
+                      %th URI
+                      %th Pattern
+                      - list_with_routes.each do |route|
+                        %tr
+                          %td= route[:prefix]
+                          %td= route[:verb]
+                          %td= route[:uri]
+                          %td= route[:pattern]
+          %br/
+          .row
             .col-md-6.col-sm-6.col-xs-12
               .x_panel
                 .x_title
@@ -166,6 +186,7 @@
               .x_panel.tile.fixed_height_320
                 .x_title
                   %h2 App Versions
+                  = list_with_routes
                   %ul.nav.navbar-right.panel_toolbox
                     %li
                       %a.collapse-link
