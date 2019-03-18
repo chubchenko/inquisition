@@ -101,48 +101,28 @@
                 Javascript Runtime Version
               .count= js_runtime_version
           / /top tiles
+          %br/
           .row
             .col-md-12.col-sm-12.col-xs-12
-              .dashboard_graph
-                .row.x_title
-                  .col-md-6
-                    %h3
-                      Network Activities
-                      %small Graph title sub-title
-                  .col-md-6
-                    #reportrange.pull-right{:style => "background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"}
-                      %i.glyphicon.glyphicon-calendar.fa.fa-calendar
-                      %span December 30, 2014 - January 28, 2015
-                      %b.caret
-                .col-md-9.col-sm-9.col-xs-12
-                  #chart_plot_01.demo-placeholder
-                .col-md-3.col-sm-3.col-xs-12.bg-white
-                  .x_title
-                    %h2 Top Campaign Performance
-                    .clearfix
-                  .col-md-12.col-sm-12.col-xs-6
-                    %div
-                      %p Facebook Campaign
-                      %div
-                        .progress.progress_sm{:style => "width: 76%;"}
-                          .progress-bar.bg-green{"data-transitiongoal" => "80", :role => "progressbar"}
-                    %div
-                      %p Twitter Campaign
-                      %div
-                        .progress.progress_sm{:style => "width: 76%;"}
-                          .progress-bar.bg-green{"data-transitiongoal" => "60", :role => "progressbar"}
-                  .col-md-12.col-sm-12.col-xs-6
-                    %div
-                      %p Conventional Media
-                      %div
-                        .progress.progress_sm{:style => "width: 76%;"}
-                          .progress-bar.bg-green{"data-transitiongoal" => "40", :role => "progressbar"}
-                    %div
-                      %p Bill boards
-                      %div
-                        .progress.progress_sm{:style => "width: 76%;"}
-                          .progress-bar.bg-green{"data-transitiongoal" => "50", :role => "progressbar"}
-                .clearfix
+              .x_panel.tile
+                .x_title
+                  %h2 Files summary
+                  .clearfix
+                .x_content
+                  %table.countries_list
+                    %tbody
+                      %th Name
+                      %th Lines
+                      %th LOC
+                      %th Classes
+                      %th Methods
+                      - files_summary_table.each do |summary|
+                        %tr
+                          %td= summary[:type]
+                          %td= summary[:statistics][:lines]
+                          %td= summary[:statistics][:code_lines]
+                          %td= summary[:statistics][:classes]
+                          %td= summary[:statistics][:methods]
           %br/
           .row
             .col-md-4.col-sm-4.col-xs-12

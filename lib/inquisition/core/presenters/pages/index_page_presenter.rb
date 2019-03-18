@@ -43,6 +43,10 @@ module Inquisition
           def included_linters
             BaseConfig.included_linters.map(&:count).sum
           end
+
+          def files_summary_table
+            FilesSummaryPresenter.new.call
+          end
         end
       end
     end

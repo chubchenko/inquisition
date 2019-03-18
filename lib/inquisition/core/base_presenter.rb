@@ -9,6 +9,15 @@ module Inquisition
         build_presenter
       end
 
+      def run_cli(command)
+        begin
+          stdout = Open3.capture3(command).first
+        rescue Errno::ENOENT
+          stdout = ''
+        end
+        stdout
+      end
+
       def build_presenter
         raise NotImplementedError
       end
