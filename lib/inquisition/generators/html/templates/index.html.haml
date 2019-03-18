@@ -125,6 +125,39 @@
                           %td= summary[:statistics][:methods]
           %br/
           .row
+            .col-md-4.col-sm-4.col-xs-12
+              .x_panel.tile.fixed_height_320.overflow_hidden
+                .x_title
+                  %h2 Errors chart
+                  %ul.nav.navbar-right
+                    %li
+                      %a.collapse-link
+                        %i.fa.fa-chevron-up
+                  .clearfix
+                .x_content
+                  %table{:style => "width:100%"}
+                    %tr
+                      %th{:style => "width:37%;"}
+                        %p Top 5
+                      %th
+                        .col-lg-7.col-md-7.col-sm-7.col-xs-7
+                          %p Type
+                        .col-lg-5.col-md-5.col-sm-5.col-xs-5
+                          %p Total errors
+                    %tr
+                      %td
+                        %canvas#errorsCount{:height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
+                      %td
+                        %table.tile_info
+                          -errors_count_chart.each do |error|
+                            %tr
+                              %td
+                                %p
+                                  %i.fa.fa-square{class: "#{error[:chart_color]}"}>
+                                  = error[:error_name]
+                              %td= error[:error_count]
+          %br
+          .row
             .col-md-12.col-sm-12.col-xs-12
               .x_panel.tile
                 .x_title
@@ -186,7 +219,6 @@
               .x_panel.tile.fixed_height_320
                 .x_title
                   %h2 App Versions
-                  = list_with_routes
                   %ul.nav.navbar-right.panel_toolbox
                     %li
                       %a.collapse-link
@@ -684,3 +716,47 @@
     %script{:src => "assets/js/moment/min/moment.min.js"}
     %script{:src => "assets/js/bootstrap-daterangepicker/daterangepicker.js"}
     %script{:src => "assets/js/custom.min.js"}
+
+    :javascript
+      function init_chart_doughnut(){
+        if( typeof (Chart) === 'undefined'){ return; }
+        if ($('#errorsCount').length){
+          var chart_doughnut_settings = {
+            type: 'doughnut',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+              labels: #{errors_count_chart.map{|error| error[:error_name]}},
+              datasets: [
+                {
+                  data: #{errors_count_chart.map{|error| error[:error_count]}},
+                  backgroundColor: [
+                    "#3498DB",
+                    "#BDC3C7",
+                    "#9B59B6",
+                    "#E74C3C",
+                    "#26B99A"
+                  ],
+                  hoverBackgroundColor: [
+                    "#49A9EA",
+                    "#CFD4D8",
+                    "#B370CF",
+                    "#E95E4F",
+                    "#36CAAB"
+                  ]
+                }
+              ]
+            },
+            options: {
+              scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+              }
+            }
+          }
+          var chart_element = $('#errorsCount');
+          var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+        }
+      }
