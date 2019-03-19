@@ -13,3 +13,6 @@ Metrics/MethodLength:
   Exclude:
     - lib/inquisition/auditors/backend/installer.rb
     - lib/inquisition/auditors/backend/runner.rb
+Metrics/ClassLength:
+  Exclude:
+    - lib/inquisition/core/base_formatter.rb

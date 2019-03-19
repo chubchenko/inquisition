@@ -33,8 +33,8 @@ module Inquisition
             rails_about_presenter.database_adapter.capitalize
           end
 
-          def git_existence
-            File.exist?(File.join(Dir.pwd, GIT_FOLDER)) ? 'exist' : 'not found'
+          def git_existence?
+            File.exist?(File.join(Dir.pwd, GIT_FOLDER))
           end
 
           def js_runtime_version
@@ -59,6 +59,10 @@ module Inquisition
 
           def errors_count_chart
             ErrorsCountPresenter.new(@auditors_tree).call
+          end
+
+          def issues_pipeline
+            IssuesPipelinePresenter.new(@auditors_tree).call
           end
         end
       end

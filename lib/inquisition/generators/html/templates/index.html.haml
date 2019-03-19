@@ -72,32 +72,33 @@
           .row.tile_count
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
-                %i.fa.fa-user
+                %i.fa.fa-diamond
                 Ruby version
               .count= ruby_version
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
-                %i.fa.fa-user
+                %i.fa.fa-cog
                 Rails version
               .count= rails_version
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
-                %i.fa.fa-user
+                %i.fa.fa-table
                 Quantity of gems
               .count= quantity_of_gems
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
-                %i.fa.fa-user
+                %i.fa.fa-database
                 Database adapter
               .count= database_adapter
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
-                %i.fa.fa-user
+                %i.fa.fa-git-square
                 Git
-              .count= git_existence
+              .count
+                %i.fa{ class: "#{git_existence? ? 'fa-check-circle' : 'fa-times-circle'}", style: "font-size: 55px;" }
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
-                %i.fa.fa-user
+                %i.fa.fa-cog
                 Javascript Runtime Version
               .count= js_runtime_version
           / /top tiles
@@ -178,6 +179,36 @@
                           %td= route[:pattern]
           %br/
           .row
+            .col-md-4.col-sm-4.col-xs-12
+              .x_panel
+                .x_title
+                  %h2
+                    Issues & solutions
+                    %small= "#{issues_pipeline[:total]} issues has solutions"
+                  %ul.nav.navbar-right
+                    %li
+                      %a.collapse-link
+                        %i.fa.fa-chevron-up
+                  .clearfix
+                .x_content
+                  .dashboard-widget-content
+                    %ul.list-unstyled.timeline.widget
+                      - issues_pipeline[:issues].each do |issue|
+                        %li
+                          .block
+                            .block_content
+                              %h2.title
+                                %a{ href: "#{issue[:link]}" }= issue[:title]
+                              .byline
+                                %span according
+                                to
+                                %a{ href: "#{issue[:auditor_link]}" }= issue[:auditor_name]
+                              %p.excerpt
+                                = issue[:message]
+                                %a{ href: "#{issue[:link]}" }Read more
+                    %small#show_more_issues{ onClick: 'show_more_issues()' } Show more
+          %br
+          .row
             .col-md-6.col-sm-6.col-xs-12
               .x_panel
                 .x_title
@@ -194,7 +225,7 @@
                       - included_linters.each do |linter_name|
                         %li
                           %p
-                            %input.flat{:type => "checkbox", checked: true, disabled: true}/
+                            .icheckbox_flat-green.checked{:style => "position: relative;"}
                             = linter_name
             .col-md-6.col-sm-6.col-xs-12
               .x_panel
@@ -208,12 +239,16 @@
                   .clearfix
                 .x_content
                   %div
-                    %ul.to_do
-                      - disabled_linters.each do |linter_name|
-                        %li
-                          %p
-                            %input.flat{:type => "checkbox", checked: false, disabled: true}/
-                            = linter_name
+                    - if disabled_linters.any?
+                      %ul.to_do
+                        - disabled_linters.each do |linter_name|
+                          %li
+                            %p
+                              %input.flat{:type => "checkbox", checked: false, disabled: true}/
+                              = linter_name
+                    - else
+                      %h2
+                        No disabled linters!
           .row
             .col-md-4.col-sm-4.col-xs-12
               .x_panel.tile.fixed_height_320
@@ -747,16 +782,16 @@
               ]
             },
             options: {
-              scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-              }
+              legend: false,
+              responsive: false,
             }
           }
           var chart_element = $('#errorsCount');
           var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
         }
+      }
+
+      function show_more_issues(){
+        var item = $('#show_more_issues')
+        console.log(item)
       }
