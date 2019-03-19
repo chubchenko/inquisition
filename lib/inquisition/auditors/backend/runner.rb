@@ -7,7 +7,7 @@ module Inquisition
         def runners
           {
             # Fasterer::Runner => config_path(:fasterer),
-            Reek::Runner => config_path(:reek)
+            Reek::Runner => config_path(:reek),
             # Dawnscanner::Runner => config_path(:dawnscanner),
             # BundlerAudit::Runner => config_path(:bundler_audit),
             # RailsBestPractices::Runner => config_path(:rails_best_practices),
@@ -16,7 +16,7 @@ module Inquisition
             # Yamllint::Runner => config_path(:yamllint),
             # LolDba::Runner => config_path(:lol_dba),
             # ActiveRecordDoctor::Runner => config_path(:active_record_doctor),
-            # Brakeman::Runner => config_path(:brakeman)
+            Brakeman::Runner => config_path(:brakeman)
             # Bullet::Runner => config_path(:bullet),
             # HamlLint::Runner => config_path(:haml_lint),
             # RailsErd::Runner => config_path(:rails_erd),

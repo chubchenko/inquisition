@@ -64,6 +64,10 @@ module Inquisition
           def issues_pipeline
             IssuesPipelinePresenter.new(@auditors_tree).call
           end
+
+          def hottest_issues
+            HottestIssuesPresenter.new(@auditors_tree).call
+          end
         end
       end
     end

@@ -1,9 +1,9 @@
 module Inquisition
   module Core
     module Presenters
-      class IssuesPipelinePresenter < BasePresenter
-        ISSUES_PIPELINE_AUDITORS = [
-          %i[backend reek]
+      class HottestIssuesPresenter < BasePresenter
+        HOTTEST_ISSUES_AUDITORS = [
+          %i[backend brakeman]
         ].freeze
 
         private
@@ -16,11 +16,11 @@ module Inquisition
         end
 
         def issues_info
-          @issues_info ||= ISSUES_PIPELINE_AUDITORS.map(&method(:build_issues_info)).flatten
+          @issues_info ||= HOTTEST_ISSUES_AUDITORS.map(&method(:build_issues_info)).flatten
         end
 
         def build_issues_info(auditor_path)
-          @data.dig(*auditor_path, :special_info, :issues)
+          @data.dig(*auditor_path, :special_info, :hottest_issues)
         end
       end
     end
