@@ -4,7 +4,7 @@ module Inquisition
       class HtmlOutputer < Core::BaseOutputer
         ROOT_PATH = Dir.pwd
         REPORT_FOLDER_NAME = 'tmp/inquisition'.freeze
-        INDEX_PAGE = 'index.html'.freeze
+        INDEX_PAGE = 'database_summary.html'.freeze
         ASSETS_PATH = [
           'lib/inquisition/generators/html/assets',
           'lib/inquisition/generators/html/images'

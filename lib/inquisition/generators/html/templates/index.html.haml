@@ -200,21 +200,24 @@
                   .clearfix
                 .x_content
                   .dashboard-widget-content
-                    %ul.list-unstyled.timeline.widget
-                      - issues_pipeline[:issues].first(5).each do |issue|
-                        %li
-                          .block
-                            .block_content
-                              %h2.title
-                                %a{ href: "#{issue[:link]}" }= issue[:title]
-                              .byline
-                                %span according
-                                to
-                                %a{ href: "#{issue[:auditor_link]}" }= issue[:auditor_name]
-                              %p.excerpt
-                                = issue[:message]
-                                %a{ href: "#{issue[:link]}" }Read more
-                    %a{ href: 'issues-and-solutions.html' } See more...
+                    - if issues_pipeline[:issues].any?
+                      %ul.list-unstyled.timeline.widget
+                        - issues_pipeline[:issues].first(5).each do |issue|
+                          %li
+                            .block
+                              .block_content
+                                %h2.title
+                                  %a{ href: "#{issue[:link]}" }= issue[:title]
+                                .byline
+                                  %span according
+                                  to
+                                  %a{ href: "#{issue[:auditor_link]}" }= issue[:auditor_name]
+                                %p.excerpt
+                                  = issue[:message]
+                                  %a{ href: "#{issue[:link]}" }Read more
+                      %a{ href: 'issues-and-solutions.html' } See more...
+                    - else
+                      %p There are any issues with solutions
             .col-md-4.col-sm-4.col-xs-12
               .x_panel
                 .x_title
@@ -228,26 +231,29 @@
                   .clearfix
                 .x_content
                   .dashboard-widget-content
-                    %ul.list-unstyled.timeline.widget
-                      - hottest_issues[:issues].first(5).each do |issue|
-                        %li
-                          .block
-                            .block_content
-                              %h2.title
-                                %a{ href: "#{issue[:link]}" }= issue[:title]
-                              .byline
-                                %span according to
-                                %a{ href: "#{issue[:auditor_link]}" }= issue[:auditor_name]
-                                %span Confidence:
-                                %a{ href: "#{issue[:confidence_link]}" }= issue[:confidence]
-                                %span In group:
-                                %span{ style: "color: #73879C; font-weight: bold" }= issue[:group]
-                              %p.excerpt
-                                = issue[:message]
-                              %p.excerpt
-                                = issue[:file]
-                                %a{ href: "#{issue[:link]}" }Read more
-                    %a{ href: 'hottest-issues.html' } See more...
+                    - if hottest_issues[:issues].any?
+                      %ul.list-unstyled.timeline.widget
+                        - hottest_issues[:issues].first(5).each do |issue|
+                          %li
+                            .block
+                              .block_content
+                                %h2.title
+                                  %a{ href: "#{issue[:link]}" }= issue[:title]
+                                .byline
+                                  %span according to
+                                  %a{ href: "#{issue[:auditor_link]}" }= issue[:auditor_name]
+                                  %span Confidence:
+                                  %a{ href: "#{issue[:confidence_link]}" }= issue[:confidence]
+                                  %span In group:
+                                  %span{ style: "color: #73879C; font-weight: bold" }= issue[:group]
+                                %p.excerpt
+                                  = issue[:message]
+                                %p.excerpt
+                                  = issue[:file]
+                                  %a{ href: "#{issue[:link]}" }Read more
+                      %a{ href: 'hottest-issues.html' } See more...
+                    - else
+                      %p There are any hottest issues
           %br
           .row
             .col-md-6.col-sm-6.col-xs-12
