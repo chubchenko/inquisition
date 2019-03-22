@@ -1,3 +1,5 @@
+require 'launchy'
+
 module Inquisition
   module Core
     module Outputers
