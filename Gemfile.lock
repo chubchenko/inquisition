@@ -203,6 +203,9 @@ GEM
     interception (0.5)
     jaro_winkler (1.5.2)
     json (2.2.0)
+    json_matchers (0.10.0)
+      json_schema
+    json_schema (0.20.4)
     justify (1.0.2)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -428,9 +431,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
   bundler
   inquisition!
+  json_matchers
   rake
   reek
   rspec
