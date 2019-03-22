@@ -3,12 +3,16 @@ module Inquisition
     module Backend
       module Reek
         class Formatter < Core::BaseFormatter
+          include Helpers::NamespaceHelper
+
           REPORT_KEYS = {
             lintable_name: 'source',
             message: 'message',
             type: 'smell_type',
-            list_of_errors: 'lines'
+            list_of_errors: 'lines',
+            link: 'documentation_link'
           }.freeze
+          AUDITOR_LINK = 'https://github.com/troessner/reek'.freeze
 
           private
 
@@ -26,6 +30,28 @@ module Inquisition
                 line: line
               }
             end
+          end
+
+          def build_special_info
+            {
+              issues: build_issues
+            }
+          end
+
+          def build_issues
+            raw_errors.map do |info|
+              {
+                title: info[REPORT_KEYS[:type]],
+                auditor_name: auditor_name.capitalize,
+                auditor_link: AUDITOR_LINK,
+                message: build_message(info),
+                link: info[REPORT_KEYS[:link]]
+              }
+            end
+          end
+
+          def build_message(info)
+            info[REPORT_KEYS[:message]].capitalize + '.'
           end
 
           def raw_errors

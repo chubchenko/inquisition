@@ -12,6 +12,7 @@ module FormatterHelpModule
       errors: nil,
       error_count: nil,
       total_files: nil,
+      special_info: nil,
       spended_time: spended_time
     }
   end

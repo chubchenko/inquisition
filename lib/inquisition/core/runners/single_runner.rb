@@ -22,7 +22,7 @@ module Inquisition
         end
 
         def formatter
-          Kernel.const_get(self.class.auditor_namespase)::Formatter
+          Kernel.const_get(auditor_namespase)::Formatter
         end
 
         def run_cli(command)

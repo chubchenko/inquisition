@@ -46,6 +46,7 @@ module Inquisition
 
       def prepare_result_hash
         add_errors_key
+        add_special_info_key
         add_errors_count_key
         add_total_files_key
         add_spended_time_key
@@ -53,6 +54,10 @@ module Inquisition
 
       def add_errors_key
         @result_hash[:errors] = build_errors
+      end
+
+      def add_special_info_key
+        @result_hash[:special_info] = build_special_info
       end
 
       def add_errors_count_key
@@ -65,6 +70,10 @@ module Inquisition
 
       def add_spended_time_key
         @result_hash[:spended_time] = @spended_time
+      end
+
+      def build_special_info
+        nil
       end
 
       def build_total_files_count
