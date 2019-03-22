@@ -10,6 +10,7 @@ Documentation:
 LineLength:
   Max: 120
 Metrics/MethodLength:
+  Max: 15
   Exclude:
     - lib/inquisition/auditors/backend/installer.rb
     - lib/inquisition/auditors/backend/runner.rb

@@ -24,3 +24,5 @@ TooManyMethods:
     enabled: false
   NilCheck:
     enabled: false
+  UnusedParameters:
+    enabled: false

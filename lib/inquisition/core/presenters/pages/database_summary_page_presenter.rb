@@ -3,28 +3,20 @@ module Inquisition
     module Presenters
       module Pages
         class DatabaseSummaryPagePresenter < PagePresenter
-          attr_reader :presenter
+          def_delegators :@database_presenter, :tables_count, :total_errors, :top_types_of_errors
+          def_delegators :@database_presenter, :included_linters_count, :repeated_indexes_percentage
+          def_delegators :@database_presenter, :missing_foreign_keys_percentage, :top_tables_with_errors
+          def_delegators :@database_presenter, :incompatibility_structure_with_models_percentage
+          def_delegators :@database_presenter, :unindexed_foreign_keys_percentage
+          def_delegators :@migration_presenter, :total_migrations, :schema_version
+          def_delegators :@rails_about_presenter, :database_adapter
 
           def initialize(auditors_tree)
-            @presenter = Core::Presenters::DatabaseLintersPresenter.new(auditors_tree)
+            @database_presenter = Core::Presenters::DatabaseLintersPresenter.new(auditors_tree)
+            @migration_presenter = Core::Presenters::MigrationPresenter.new
+            @rails_about_presenter = Core::Presenters::RailsAboutPresenter.new
             super
           end
-
-          # def database_tables_count
-          # @database_presenter.tables_count
-          # end
-
-          # def database_errors_count
-          # @database_presenter.total_errors
-          # end
-
-          # def included_linters_count
-          # @database_presenter.included_linters_count
-          # end
-
-          # def repeated_indexes_percentage
-          # @database_presenter.repeated_indexes_percentage
-          # end
         end
       end
     end

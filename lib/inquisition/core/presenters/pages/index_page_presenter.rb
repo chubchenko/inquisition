@@ -9,6 +9,7 @@ module Inquisition
           GIT_FOLDER = '.git'.freeze
 
           attr_reader :database_presenter, :rails_about_presenter
+          def_delegators :@rails_about_presenter, :database_adapter
 
           def initialize(auditors_tree)
             @auditors_tree = auditors_tree
@@ -27,10 +28,6 @@ module Inquisition
 
           def quantity_of_gems
             File.foreach(File.join(Dir.pwd, 'Gemfile')).grep(/gem /).count
-          end
-
-          def database_adapter
-            rails_about_presenter.database_adapter.capitalize
           end
 
           def git_existence?
@@ -63,6 +60,10 @@ module Inquisition
 
           def issues_pipeline
             IssuesPipelinePresenter.new(@auditors_tree).call
+          end
+
+          def hottest_issues
+            HottestIssuesPresenter.new(@auditors_tree).call
           end
         end
       end
