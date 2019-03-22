@@ -135,7 +135,7 @@
                         %span= error[:table_name]
                       .w_center.w_55
                         .progress
-                          .progress-bar.bg-green{"aria-valuemax" => "#{error[:total_errors]}", "aria-valuemin" => "0", "aria-valuenow" => "#{error[:error_count]}", :role => "progressbar", :style => "width: #{error[:error_count]}%;"}
+                          .progress-bar.bg-green{"aria-valuemin" => "0", :role => "progressbar", :style => "width: #{error[:total_errors_percent]}%;"}
                       .w_right.w_20
                         %span= error[:error_count]
                       .clearfix

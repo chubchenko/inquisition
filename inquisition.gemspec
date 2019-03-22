@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'json_matchers'
   spec.add_development_dependency 'rubycritic'
   spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'undercover'
