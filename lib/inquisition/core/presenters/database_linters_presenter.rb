@@ -31,14 +31,14 @@ module Inquisition
 
         def top_tables_with_errors(number)
           database_auditors.values.map { |value| value[:errors] }.flatten
-                           .group_by { |error| error[:table] }.map(&method(:build_top_hash))
-                           .sort_by { |table| table[:errors_count] }.first(number)
+                           .group_by { |error| error[:table] }.map(&method(:tables_with_errors_hash))
+                           .sort_by { |table| table[:errors_count] }.reverse.first(number)
         end
 
         def top_types_of_errors(_number)
           database_auditors.values.map { |value| value[:errors] }.flatten.group_by { |error| error[:type] }
                            .map { |name, value| { name => value.count } }.sort_by(&:values)
-                           .each_with_index.map(&method(:build_percent_hash))
+                           .each_with_index.map(&method(:build_types_of_error_hash))
         end
 
         def total_errors
@@ -61,7 +61,7 @@ module Inquisition
           end
         end
 
-        def build_percent_hash(error, index)
+        def build_types_of_error_hash(error, index)
           {
             error_name: error.keys.first,
             tables_count: error.values.first,
@@ -69,12 +69,17 @@ module Inquisition
           }
         end
 
-        def build_top_hash(table_name, errors)
+        def tables_with_errors_hash(table_name, errors)
+          error_count = errors.count
           {
             table_name: table_name,
-            error_count: errors.count,
-            total_errors: total_errors
+            error_count: error_count,
+            total_errors_percent: error_percent(error_count)
           }
+        end
+
+        def error_percent(error_count)
+          100 * error_count.to_i / total_errors.to_i
         end
       end
     end

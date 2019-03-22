@@ -6,7 +6,7 @@ module Inquisition
       end
 
       def call
-        NotImplementedError
+        raise NotImplementedError
       end
     end
   end

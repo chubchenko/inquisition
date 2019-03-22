@@ -1,5 +1,4 @@
 require 'tilt/haml'
-require 'launchy'
 
 module Inquisition
   module Core

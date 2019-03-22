@@ -6,7 +6,7 @@ module Inquisition
         COMMAND = 'rake about'.freeze
 
         def database_adapter
-          prepared_data[INFO_DATABASE_ADAPTER]
+          prepared_data.dig(INFO_DATABASE_ADAPTER).to_s.capitalize
         end
 
         private

@@ -75,17 +75,32 @@
               %span.count_top
                 %i.fa.fa-user
                 Tables
-              .count= presenter.tables_count
+              .count= tables_count
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-user
                 Errors
-              .count= presenter.total_errors
+              .count= total_errors
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-user
                 Included linters
-              .count= presenter.included_linters_count
+              .count= included_linters_count
+            .col-md-2.col-sm-4.col-xs-6.tile_stats_count
+              %span.count_top
+                %i.fa.fa-user
+                Migrations count
+              .count= total_migrations
+            .col-md-2.col-sm-4.col-xs-6.tile_stats_count
+              %span.count_top
+                %i.fa.fa-user
+                Database adapter
+              .count= database_adapter
+            .col-md-2.col-sm-4.col-xs-6.tile_stats_count
+              %span.count_top
+                %i.fa.fa-user
+                Schema version
+              .count= schema_version
           %br/
           .row
             .col-md-12.col-sm-12.col-xs-12
@@ -96,16 +111,16 @@
                 .x_content.row
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Tables with repeated indexes
-                    #repeated-indexes-percent.custom-circles{"data-percent" => "#{presenter.repeated_indexes_percentage}"}
+                    #repeated-indexes-percent.custom-circles{"data-percent" => "#{repeated_indexes_percentage}"}
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Tables with missing foreign keys
-                    #missing-foreign-keys-percent.custom-circles{"data-percent" => "#{presenter.missing_foreign_keys_percentage}"}
+                    #missing-foreign-keys-percent.custom-circles{"data-percent" => "#{missing_foreign_keys_percentage}"}
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Incompatibility tables structure with models
-                    #incompatibility-structure-percent.custom-circles{"data-percent" => "#{presenter.incompatibility_structure_with_models_percentage}"}
+                    #incompatibility-structure-percent.custom-circles{"data-percent" => "#{incompatibility_structure_with_models_percentage}"}
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Unindexed foreign keys
-                    #unindexed-foreign-keys-percent.custom-circles{"data-percent" => "#{presenter.unindexed_foreign_keys_percentage}"}
+                    #unindexed-foreign-keys-percent.custom-circles{"data-percent" => "#{unindexed_foreign_keys_percentage}"}
           .row
             .col-md-6.col-sm-6.col-xs-12
               .x_panel.tile.fixed_height_320
@@ -114,13 +129,13 @@
                   .clearfix
                 .x_content
                   %h4 Tables summary
-                  - presenter.top_tables_with_errors(5).each do |error|
+                  - top_tables_with_errors(5).each do |error|
                     .widget_summary
                       .w_left.w_25
                         %span= error[:table_name]
                       .w_center.w_55
                         .progress
-                          .progress-bar.bg-green{"aria-valuemax" => "#{error[:total_errors]}", "aria-valuemin" => "0", "aria-valuenow" => "#{error[:error_count]}", :role => "progressbar", :style => "width: #{error[:error_count]}%;"}
+                          .progress-bar.bg-green{"aria-valuemin" => "0", :role => "progressbar", :style => "width: #{error[:total_errors_percent]}%;"}
                       .w_right.w_20
                         %span= error[:error_count]
                       .clearfix
@@ -144,7 +159,7 @@
                         %canvas#most_populars_errors{:height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
                       %td
                         %table.tile_info
-                          - presenter.top_types_of_errors(5).each do |error|
+                          - top_types_of_errors(5).each do |error|
                             %tr
                               %td
                                 %p
@@ -525,10 +540,10 @@
             type: 'doughnut',
             tooltipFillColor: "rgba(51, 51, 51, 0.55)",
             data: {
-              labels: #{presenter.top_types_of_errors(5).map{|x| x[:error_name]}},
+              labels: #{top_types_of_errors(5).map{|x| x[:error_name]}},
               datasets: [
                 {
-                  data: #{presenter.top_types_of_errors(5).map{|x| x[:tables_count]}},
+                  data: #{top_types_of_errors(5).map{|x| x[:tables_count]}},
                   backgroundColor: [
                     "#BDC3C7",
                     "#9B59B6",

@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 Dir[File.join(Dir.pwd, 'spec', 'support','**', '*.rb')].each {|f| require f}
+$LOAD_PATH <<  File.join(Dir.pwd, 'spec', 'fixtures')
 
 require 'bundler/setup'
 require 'inquisition'
 require 'simplecov'
 require 'simplecov-lcov'
 require 'undercover'
+require 'json_matchers/rspec'
+
+JsonMatchers.schema_root = 'spec/support/schemas'
 
 RSpec.configure do |config|
   config.include CLIHelpModule
