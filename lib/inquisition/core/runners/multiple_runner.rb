@@ -15,7 +15,7 @@ module Inquisition
         end
 
         def convert_to_hash(array)
-          array.each_with_object({}) do |auditor, obj|
+          array.compact.each_with_object({}) do |auditor, obj|
             value = auditor.values.first
             obj[auditor.keys.first] = value.is_a?(Array) ? convert_to_hash(value) : value
           end

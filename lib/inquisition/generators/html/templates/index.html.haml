@@ -14,7 +14,7 @@
     %link{:href => "assets/css/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css", :rel => "stylesheet"}/
     %link{:href => "assets/css/jqvmap/dist/jqvmap.min.css", :rel => "stylesheet"}/
     %link{:href => "assets/css/bootstrap-daterangepicker/daterangepicker.css", :rel => "stylesheet"}/
-    %link{:href => "assets/css/custom.min.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/custom.css", :rel => "stylesheet"}/
   %body.nav-md
     .container.body
       .main_container
@@ -29,39 +29,35 @@
               .profile_pic
                 %img.img-circle.profile_img{:alt => "...", :src => "images/img.jpg"}/
             %br/
-            #sidebar-menu.main_menu_side.hidden-print.main_menu
-              .menu_section
-                %h3 Reports
+            .main_menu
+              %nav#sidebar
+                .sidebar-header
+                  %h3 Reports
                 %ul.nav.side-menu
-                  - menu_items.each do |item_name, properties|
+                  - menu_items.each do |item|
                     %li
-                      %a
-                        %i.fa.fa-desktop>
-                        = item_name
-                        %span.fa.fa-chevron-down
-                      - if(properties[:child_items] && properties[:child_items].any?)
-                        %ul.nav.child_menu
-                          - properties[:child_items].each do |child_item|
+                      - if item[:child_items] && item[:child_items].any?
+                        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{item[:class]}"}
+                          = item[:name]
+                          %span.fa.fa-chevron-down
+                        %ul.collapse.nav.side-menu{ id: item[:class] }
+                          - item[:child_items].each do |child_item|
                             %li
-                              %a{:href => "#{child_item[:link]}"}
-                                = child_item[:item_name]
-            / /sidebar menu
-            / /menu footer buttons
-            .sidebar-footer.hidden-small
-              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Settings"}
-                %span.glyphicon.glyphicon-cog{"aria-hidden" => "true"}
-              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => "FullScreen"}
-                %span.glyphicon.glyphicon-fullscreen{"aria-hidden" => "true"}
-              %a{"data-placement" => "top", "data-toggle" => "tooltip", :title => "Lock"}
-                %span.glyphicon.glyphicon-eye-close{"aria-hidden" => "true"}
-              %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "login.html", :title => "Logout"}
-                %span.glyphicon.glyphicon-off{"aria-hidden" => "true"}
+                              - if child_item[:child_items] && child_item[:child_items].any?
+                                %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{child_item[:class]}"}
+                                  = child_item[:name]
+                                  %span.fa.fa-chevron-down
+                                %ul.collapse.nav.side-menu{ id: child_item[:class] }
+                                  - child_item[:child_items].each do |nested_item|
+                                    %li
+                                      %a{:href => "#{nested_item[:link]}"}= nested_item[:name]
+                              - else
+                                %a{:href => "#{child_item[:link]}"}= child_item[:name]
+                      - else
+                        %a{:href => "#{item[:link]}"}= item[:name]
         .top_nav
           .nav_menu
             %nav
-              .nav.toggle
-                %a#menu_toggle
-                  %i.fa.fa-bars
               %ul.nav.navbar-nav.navbar-right
                 %li
                   %a.user-profile{:class => "aria-expanded=", :false => "", :href => "javascript:;"}
@@ -83,7 +79,7 @@
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-table
-                Quantity of gems
+                Quantity of gems used
               .count= quantity_of_gems
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
@@ -154,19 +150,22 @@
                         %canvas#errorsCount{:height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
                       %td
                         %table.tile_info
-                          -errors_count_chart.each do |error|
+                          - errors_count_chart.each do |error|
                             %tr
                               %td
                                 %p
                                   %i.fa.fa-square{class: "#{error[:chart_color]}"}>
                                   = error[:error_name]
+                                  issues
                               %td= error[:error_count]
           %br
           .row
             .col-md-12.col-sm-12.col-xs-12
               .x_panel.tile
                 .x_title
-                  %h2 Routes list
+                  %h2
+                    Routes list
+                    %small There are #{list_with_routes.count} routes
                   %ul.nav.navbar-right
                     %li
                       %a.collapse-link
@@ -260,42 +259,28 @@
               .x_panel
                 .x_title
                   %h2
-                    Included linters
+                    Used auditors
                   %ul.nav.navbar-right
                     %li
                       %a.collapse-link
                         %i.fa.fa-chevron-up
                   .clearfix
                 .x_content
-                  %div
-                    %ul.to_do
-                      - included_linters.each do |linter_name|
-                        %li
-                          %p
-                            .icheckbox_flat-green.checked{:style => "position: relative;"}
-                            = linter_name
-            .col-md-6.col-sm-6.col-xs-12
-              .x_panel
-                .x_title
-                  %h2
-                    Disabled linters
-                  %ul.nav.navbar-right
-                    %li
-                      %a.collapse-link
-                        %i.fa.fa-chevron-up
-                  .clearfix
-                .x_content
-                  %div
-                    - if disabled_linters.any?
-                      %ul.to_do
-                        - disabled_linters.each do |linter_name|
-                          %li
-                            %p
-                              %input.flat{:type => "checkbox", checked: false, disabled: true}/
-                              = linter_name
-                    - else
-                      %h2
-                        No disabled linters!
+                  %ul.to_do
+                    - used_auditors.each do |group, auditors|
+                      %li
+                        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{group}"}
+                          = group.to_s.humanize
+                          %span.fa.fa-chevron-down
+                        %ul.collapse{ id: "#{group}" }
+                          - auditors.each do |auditor|
+                            %li
+                              %p
+                                - if auditor[:enabled]
+                                  .icheckbox_flat-green.checked{:style => "position: relative;"}
+                                - else
+                                  %input.flat{:type => "checkbox", checked: false, disabled: true}/
+                                = auditor[:auditor_name]
         / /page content
         / footer content
         %footer

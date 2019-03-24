@@ -17,3 +17,4 @@ Metrics/MethodLength:
 Metrics/ClassLength:
   Exclude:
     - lib/inquisition/core/base_formatter.rb
+    - lib/inquisition/core/presenters/menu_items_presenter.rb

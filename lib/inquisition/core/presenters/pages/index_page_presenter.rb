@@ -42,12 +42,8 @@ module Inquisition
             FilesSummaryPresenter.new.call
           end
 
-          def included_linters
-            BaseConfig.included_linters.map(&:keys).flatten
-          end
-
-          def disabled_linters
-            BaseConfig.disabled_linters.map(&:keys).flatten
+          def used_auditors
+            IncludedAuditorsPresenter.new.all_auditors
           end
 
           def list_with_routes

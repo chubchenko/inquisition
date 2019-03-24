@@ -32,7 +32,7 @@ module Inquisition
         def top_tables_with_errors(number)
           database_auditors.values.map { |value| value[:errors] }.flatten
                            .group_by { |error| error[:table] }.map(&method(:tables_with_errors_hash))
-                           .sort_by { |table| table[:errors_count] }.reverse.first(number)
+                           .sort_by { |table| table[:errors_count] }.first(number)
         end
 
         def top_types_of_errors(_number)
@@ -42,7 +42,7 @@ module Inquisition
         end
 
         def total_errors
-          @total_errors ||= database_auditors.values.map { |auditor| auditor.dig(:total_files) }.compact.sum
+          @total_errors ||= database_auditors.values.map { |auditor| auditor.dig(:error_count) }.compact.sum
         end
 
         def tables_count

@@ -9,7 +9,11 @@ module Inquisition
         end
 
         def schema_version
-          migrations.map(&method(:migration_to_time)).max.to_s
+          time = migrations.map(&method(:migration_to_time)).max.in_time_zone('Kyiv')
+          {
+            date: time.strftime('%d-%m-%Y'),
+            time: time.strftime('%H:%m:%S')
+          }
         end
 
         def migration_to_time(migration)

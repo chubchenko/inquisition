@@ -4,7 +4,7 @@ module Inquisition
       class ErrorsCountPresenter < BasePresenter
         ERRORS_TYPE = [
           {
-            type: 'code smells',
+            type: 'Code Smells',
             auditors: [
               %i[backend fasterer],
               %i[backend reek],
@@ -16,14 +16,14 @@ module Inquisition
             ]
           },
           {
-            type: 'security',
+            type: 'Security',
             auditors: [
               %i[backend bundler_audit],
               %i[backend brakeman]
             ]
           },
           {
-            type: 'database',
+            type: 'Database',
             auditors: [
               %i[backend lol_dba],
               %i[backend active_record_doctor extraneous_indexes],

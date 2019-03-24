@@ -3,36 +3,147 @@ module Inquisition
     module Presenters
       class MenuItemsPresenter < BasePresenter
         DATABASE_SUMMARY_PAGE = 'database_summary.html'.freeze
+        MENU_ITEMS = [
+          {
+            name: 'Backend',
+            child_items: [
+              {
+                name: 'Database auditiors',
+                child_items: [
+                  {
+                    name: 'Summary',
+                    link: 'database_summary.html'
+                  },
+                  {
+                    name: 'Lol dba',
+                    link: '#'
+                  },
+                  {
+                    name: 'Active record doctor',
+                    link: '#'
+                  }
+                ]
+              },
+              {
+                name: 'Code Smells',
+                child_items: [
+                  {
+                    name: 'Summary',
+                    link: '#'
+                  },
+                  {
+                    name: 'Rails best practices',
+                    link: '#'
+                  },
+                  {
+                    name: 'Reek',
+                    link: '#'
+                  },
+                  {
+                    name: 'Rubocop',
+                    link: '#'
+                  },
+                  {
+                    name: 'Ruby lint',
+                    link: '#'
+                  },
+                  {
+                    name: 'Yamllint',
+                    link: '#'
+                  },
+                  {
+                    name: 'Rubocop-rspec',
+                    link: '#'
+                  }
+                ]
+              },
+              {
+                name: 'Perfomance',
+                child_items: [
+                  {
+                    name: 'Fasterer',
+                    link: '#'
+                  },
+                  {
+                    name: 'Bullet',
+                    link: '#'
+                  }
+                ]
+              },
+              {
+                name: 'Security',
+                child_items: [
+                  {
+                    name: 'Bundler Audit',
+                    link: '#'
+                  },
+                  {
+                    name: 'Brakeman',
+                    link: '#'
+                  },
+                  {
+                    name: 'Dawnscanner',
+                    link: '#'
+                  }
+                ]
+              },
+              {
+                name: 'Routes',
+                child_items: [
+                  {
+                    name: 'Traceroute',
+                    link: '#'
+                  }
+                ]
+              },
+              {
+                name: 'Diagrams',
+                child_items: [
+                  {
+                    name: 'Railsroady',
+                    link: '#'
+                  },
+                  {
+                    name: 'Erd',
+                    link: '#'
+                  }
+                ]
+              },
+              {
+                name: 'Specs & coverage',
+                child_items: [
+                  {
+                    name: 'Rspec',
+                    link: '#'
+                  },
+                  {
+                    name: 'Simplecov',
+                    link: '#'
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: 'Frontend',
+            link: '#'
+          }
+        ].freeze
 
         private
 
         def build_presenter
-          build_item_tree('Backend') if include_path?(:backend)
-          build_item_tree('Frontend') if include_path?(:frontend)
-          build_item_tree('Common') if include_path?(:common)
-          build_additional_items
-          @items
+          @items = MENU_ITEMS.map(&method(:build_menu))
         end
 
-        def build_additional_items
-          build_database_summary_page if include_path?(:backend)
+        def build_menu(menu)
+          item = build_item(menu[:name], menu[:link])
+          item[:child_items] = build_child_menu(menu[:child_items])
+          item
         end
 
-        def build_database_summary_page
-          @items['backend'][:child_items] << build_item('database summary', DATABASE_SUMMARY_PAGE)
-        end
-
-        def build_item_tree(name)
-          item_name = name.downcase
-          @items ||= {}
-          @items[item_name] = build_item(name)
-          @items[item_name][:child_items] = build_nested_level(name).compact
-        end
-
-        def build_nested_level(name)
-          BaseConfig.auditors[name.downcase.to_sym].map do |auditor, status|
-            build_item(auditor.to_s) if status.is_a?(Hash) && status[:Enabled]
-          end
+        def build_child_menu(child_menu)
+          child_menu.map(&method(:build_menu)) if child_menu && child_menu.any?
         end
 
         def build_item(name, link = '#need_change')

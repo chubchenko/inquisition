@@ -13,7 +13,7 @@ module Inquisition
 
         def build_presenter
           splited_data.map do |route_summary|
-            prefix, verb, uri, pattern = route_summary
+            prefix, verb, uri, pattern = prepare_route(route_summary)
             {
               prefix: prefix,
               verb: verb,
@@ -21,6 +21,12 @@ module Inquisition
               pattern: pattern
             }
           end
+        end
+
+        def prepare_route(route)
+          return route if route.size >= 4
+
+          route.prepend('-')
         end
 
         def splited_data

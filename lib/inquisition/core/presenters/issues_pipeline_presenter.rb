@@ -20,7 +20,7 @@ module Inquisition
         end
 
         def build_issues_info(auditor_path)
-          @data.dig(*auditor_path, :special_info, :issues)
+          @data.dig(*auditor_path, :special_info, :issues) || []
         end
       end
     end
