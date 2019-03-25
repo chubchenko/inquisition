@@ -50,6 +50,10 @@ module Inquisition
             RoutesPresenter.new.call
           end
 
+          def route_methods_chart
+            RouteMethodsChartPresenter.new.call
+          end
+
           def errors_count_chart
             ErrorsCountPresenter.new(@auditors_tree).call
           end
