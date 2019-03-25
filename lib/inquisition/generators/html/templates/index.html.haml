@@ -24,10 +24,6 @@
               %a.site_title{:href => "index.html"}
                 %i.fa.fa-paw
                 %span Code Auditor!
-            .clearfix
-            .profile.clearfix
-              .profile_pic
-                %img.img-circle.profile_img{:alt => "...", :src => "images/img.jpg"}/
             %br/
             .main_menu
               %nav#sidebar
@@ -233,7 +229,7 @@
                   .dashboard-widget-content
                     - if issues_pipeline[:issues].any?
                       %ul.list-unstyled.timeline.widget
-                        - issues_pipeline[:issues].first(5).each do |issue|
+                        - issues_pipeline[:issues].first(7).each do |issue|
                           %li
                             .block
                               .block_content
@@ -246,7 +242,7 @@
                                 %p.excerpt
                                   = issue[:message]
                                   %a{ href: "#{issue[:link]}" }Read more
-                      %a{ href: 'issues-and-solutions.html' } See more...
+                      %a{ href: 'issues_and_solutions.html' } See more...
                     - else
                       %p There are any issues with solutions
             .col-md-4.col-sm-4.col-xs-12
@@ -282,7 +278,7 @@
                                 %p.excerpt
                                   = issue[:file]
                                   %a{ href: "#{issue[:link]}" }Read more
-                      %a{ href: 'hottest-issues.html' } See more...
+                      %a{ href: 'hottest_issues.html' } See more...
                     - else
                       %p There are any hottest issues
           %br
