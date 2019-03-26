@@ -24,10 +24,6 @@
               %a.site_title{:href => "index.html"}
                 %i.fa.fa-paw
                 %span Code Auditor!
-            .clearfix
-            .profile.clearfix
-              .profile_pic
-                %img.img-circle.profile_img{:alt => "...", :src => "images/img.jpg"}/
             %br/
             .main_menu
               %nav#sidebar
@@ -158,6 +154,38 @@
                                   = error[:error_name]
                                   issues
                               %td= error[:error_count]
+            .col-md-4.col-sm-4.col-xs-12
+              .x_panel.tile.fixed_height_320.overflow_hidden
+                .x_title
+                  %h2 Used routes
+                  %ul.nav.navbar-right
+                    %li
+                      %a.collapse-link
+                        %i.fa.fa-chevron-up
+                  .clearfix
+                .x_content
+                  %table{:style => "width:100%"}
+                    %tr
+                      %th{:style => "width:37%;"}
+                        %p Top 5
+                      %th
+                        .col-lg-7.col-md-7.col-sm-7.col-xs-7
+                          %p Type
+                        .col-lg-5.col-md-5.col-sm-5.col-xs-5
+                          %p Total errors
+                    %tr
+                      %td
+                        %canvas#routesCount{:height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
+                      %td
+                        %table.tile_info
+                          - route_methods_chart.each do |method|
+                            %tr
+                              %td
+                                %p
+                                  %i.fa.fa-square{class: "#{method[:chart_color]}"}>
+                                  = method[:name]
+                                  routes
+                              %td= method[:count]
           %br
           .row
             .col-md-12.col-sm-12.col-xs-12
@@ -201,7 +229,7 @@
                   .dashboard-widget-content
                     - if issues_pipeline[:issues].any?
                       %ul.list-unstyled.timeline.widget
-                        - issues_pipeline[:issues].first(5).each do |issue|
+                        - issues_pipeline[:issues].first(7).each do |issue|
                           %li
                             .block
                               .block_content
@@ -214,7 +242,7 @@
                                 %p.excerpt
                                   = issue[:message]
                                   %a{ href: "#{issue[:link]}" }Read more
-                      %a{ href: 'issues-and-solutions.html' } See more...
+                      %a{ href: 'issues_and_solutions.html' } See more...
                     - else
                       %p There are any issues with solutions
             .col-md-4.col-sm-4.col-xs-12
@@ -250,7 +278,7 @@
                                 %p.excerpt
                                   = issue[:file]
                                   %a{ href: "#{issue[:link]}" }Read more
-                      %a{ href: 'hottest-issues.html' } See more...
+                      %a{ href: 'hottest_issues.html' } See more...
                     - else
                       %p There are any hottest issues
           %br
@@ -351,9 +379,39 @@
           var chart_element = $('#errorsCount');
           var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
         }
-      }
 
-      function show_more_issues(){
-        var item = $('#show_more_issues')
-        console.log(item)
+        if ($('#routesCount').length){
+          var chart_doughnut_settings = {
+            type: 'doughnut',
+            tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+            data: {
+              labels: #{route_methods_chart.map{|method| method[:name]}},
+              datasets: [
+                {
+                  data: #{route_methods_chart.map{|method| method[:count]}},
+                  backgroundColor: [
+                    "#3498DB",
+                    "#BDC3C7",
+                    "#9B59B6",
+                    "#E74C3C",
+                    "#26B99A"
+                  ],
+                  hoverBackgroundColor: [
+                    "#49A9EA",
+                    "#CFD4D8",
+                    "#B370CF",
+                    "#E95E4F",
+                    "#36CAAB"
+                  ]
+                }
+              ]
+            },
+            options: {
+              legend: false,
+              responsive: false,
+            }
+          }
+          var chart_element = $('#routesCount');
+          var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+        }
       }

@@ -23,7 +23,7 @@ RSpec.describe Inquisition::Core::Builders::BaseHtmlBuilder do
    let(:page_presenter) { FakePages::HtmlPagePresenter.new }
 
     it 'build page by template' do
-      expect(subject.call).to eq("<p>#{page_presenter.rendered_text}</p>\n")
+      expect(subject.call(:page)).to eq("<p>#{page_presenter.rendered_text}</p>\n")
     end
   end
 end

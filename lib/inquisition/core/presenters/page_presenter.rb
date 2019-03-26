@@ -2,8 +2,11 @@ module Inquisition
   module Core
     module Presenters
       class PagePresenter < BasePresenter
-        def initialize(auditors_tree)
+        attr_reader :page_name
+
+        def initialize(auditors_tree, page_name)
           @auditors_tree = auditors_tree
+          @page_name = page_name
         end
 
         def menu_items

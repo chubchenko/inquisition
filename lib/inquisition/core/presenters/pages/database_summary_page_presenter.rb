@@ -11,7 +11,7 @@ module Inquisition
           def_delegators :@migration_presenter, :total_migrations, :schema_version
           def_delegators :@rails_about_presenter, :database_adapter
 
-          def initialize(auditors_tree)
+          def initialize(auditors_tree, page_name)
             @database_presenter = Core::Presenters::DatabaseLintersPresenter.new(auditors_tree)
             @migration_presenter = Core::Presenters::MigrationPresenter.new
             @rails_about_presenter = Core::Presenters::RailsAboutPresenter.new
