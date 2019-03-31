@@ -34,12 +34,12 @@ module Inquisition
 
         def copy_assets
           ASSETS_PATH.each do |folder|
-            FileUtils.cp_r File.join(Inquisition.root, folder), @report_folder
+            FileUtils.cp_r File.join(Inquisition.root, folder), report_folder
           end
         end
 
         def build_pages
-          @builded_pages = Core::Builders::Html::PagesBuilder.new(@auditors_tree).call
+          @builded_pages = Core::Builders::Html::PagesBuilder.new.call
         end
 
         def save_pages

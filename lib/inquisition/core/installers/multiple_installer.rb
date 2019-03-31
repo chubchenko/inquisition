@@ -10,21 +10,13 @@ module Inquisition
           private
 
           def run_installers
-            installers.each do |installer, path|
-              installer.call if BaseConfig.config_enabled?(*path)
+            installers.each do |installer, auditor|
+              installer.call if BaseConfig.instance.auditor_enabled?(auditor)
             end
           end
 
           def installers
             {}
-          end
-
-          def config_path(*keys)
-            [:linters, *path, *keys]
-          end
-
-          def path
-            []
           end
         end
       end

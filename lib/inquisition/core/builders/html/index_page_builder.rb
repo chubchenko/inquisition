@@ -4,7 +4,7 @@ module Inquisition
       module Html
         class IndexPageBuilder < Core::Builders::BaseHtmlBuilder
           TEMPLATE_PATH = 'lib/inquisition/generators/html/templates/index.html.haml'.freeze
-          PAGE_PRESENTER = Core::Presenters::Pages::IndexPagePresenter
+          PAGE_PRESENTER = Core::Presenters::Pages::Html::IndexPagePresenter
         end
       end
     end

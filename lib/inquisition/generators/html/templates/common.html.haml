@@ -83,18 +83,21 @@
                         %i.fa.fa-chevron-up
                   .clearfix
                 .x_content
-                  %table.countries_list
-                    %tbody
-                      %th Name
-                      %th Line
-                      %th Type
-                      %th Message
-                      - auditor_data.each do |data|
-                        %tr
-                          %td= data[:lintable_name]
-                          %td= data[:line]
-                          %td= data[:type]
-                          %td= data[:message]
+                  - if total_errors && total_errors > 0
+                    %table.countries_list
+                      %tbody
+                        %th Name
+                        %th Line
+                        %th Type
+                        %th Message
+                        - data[:errors].each do |data|
+                          %tr
+                            %td= data[:lintable_name]
+                            %td= data[:line]
+                            %td= data[:type]
+                            %td= data[:message]
+                  - else
+                    %p There are no errors.
         %footer
           .pull-right
             Gentelella - Bootstrap Admin Template by

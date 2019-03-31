@@ -91,7 +91,7 @@
                       %th Message
                       %th Group
                       %th Auditor
-                      - issues[:issues].each do |issue|
+                      - issues.each do |issue|
                         %tr
                           %td= issue[:title]
                           %td= issue[:file]

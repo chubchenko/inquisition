@@ -10,6 +10,9 @@ UtilityFunction:
 UnusedPrivateMethod:
   enabled: false
 
+ControlParameter:
+  enabled: false
+
 InstanceVariableAssumption:
   enabled: false
 
@@ -18,6 +21,14 @@ FeatureEnvy:
 
 TooManyMethods:
   enabled: false
+
+TooManyConstants:
+  exclude:
+    - 'Inquisition::BaseConfig'
+
+TooManyStatements:
+  exclude:
+    - 'Inquisition::Core::Presenters::Elements::Html::Static::LineChart::TopTablesWithErrorsLineChartPresenter#add_items'
 
 'spec/support/':
   ControlParameter:

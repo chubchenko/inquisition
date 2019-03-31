@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Inquisition::Core::Builders::BaseHtmlBuilder do
   include AuditorsHelpModule
 
-  subject{ Inquisition::Core::Builders::BaseHtmlBuilder.new(auditors_tree) }
+  subject{ Inquisition::Core::Builders::BaseHtmlBuilder.new }
 
   describe 'constants' do
     it 'have BASE_ENGINE constant' do
@@ -14,7 +14,6 @@ RSpec.describe Inquisition::Core::Builders::BaseHtmlBuilder do
   end
 
   describe '#call' do
-
     before do
       allow(subject).to receive(:template) { FakePages::HtmlPageBuilder::TEMPLATE_PATH }
       allow(subject).to receive(:presenter) { page_presenter }

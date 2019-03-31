@@ -1,17 +1,34 @@
-require 'forwardable'
-
 module Inquisition
   module Core
     class BasePresenter
-      extend Forwardable
+      include Helpers::AuditorsHelper
+      attr_reader :data
 
-      CIRCLE_CHART_COLORS = %i[blue gray purple red neagara].freeze
+      DEFAULT_GROUP_NAME = :other
+      CUSTOM_AUDITOR_GROUP = {
+        database: %i[lol_dba active_record_doctor],
+        code_smells: %i[rails_best_practices reek rubocop ruby_lint yamllint rubocop_rspec],
+        performance: %i[bullet fasterer],
+        performances: %i[bullet fasterer],
+        security: %i[bundler_audit brakeman dawnscanner],
+        routes: %i[traceroute],
+        diagrams: %i[railroady erd],
+        specs_and_coverage: %i[rspec simplecov]
+      }.freeze
+      SORT_ORDER_BY_GROUPS = [
+        :database,
+        :code_smells,
+        :performance,
+        :performances,
+        :security,
+        :routes,
+        :diagrams,
+        :specs_and_coverage,
+        DEFAULT_GROUP_NAME
+      ].freeze
 
-      def initialize(data = nil)
+      def call(data = nil)
         @data = data
-      end
-
-      def call
         build_presenter
       end
 

@@ -4,8 +4,10 @@ module Inquisition
   module Core
     module Builders
       class BaseHtmlBuilder < Core::BaseBuilder
-        BASE_ENGINE = Tilt::HamlTemplate
+        include Helpers::AuditorsHelper
         attr_reader :page_name
+
+        BASE_ENGINE = Tilt::HamlTemplate
 
         def call(page_name)
           @page_name = page_name
@@ -23,7 +25,7 @@ module Inquisition
         end
 
         def presenter
-          child_class::PAGE_PRESENTER.new(@auditors_tree, page_name)
+          child_class::PAGE_PRESENTER.new(page_name)
         end
 
         def child_class

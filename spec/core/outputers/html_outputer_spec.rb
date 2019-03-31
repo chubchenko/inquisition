@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Inquisition::Core::Outputers::HtmlOutputer do
   include AuditorsHelpModule
 
-  subject{ Inquisition::Core::Outputers::HtmlOutputer.new(auditors_tree) }
+  subject{ Inquisition::Core::Outputers::HtmlOutputer.new }
 
   describe 'constants' do
     %i[ROOT_PATH REPORT_FOLDER_NAME INDEX_PAGE ASSETS_PATH].each do |constant_name|

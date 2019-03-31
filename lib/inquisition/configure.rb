@@ -12,9 +12,9 @@ module Inquisition
 
       def installers
         {
-          Auditors::Backend::Installer => config_path(:backend),
-          Auditors::Frontend::Installer => config_path(:frontend),
-          Auditors::Common::Installer => config_path(:common)
+          Auditors::Backend::Installer => :backend,
+          Auditors::Frontend::Installer => :frontend,
+          Auditors::Common::Installer => :common
         }
       end
     end

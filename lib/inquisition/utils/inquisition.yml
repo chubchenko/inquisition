@@ -2,7 +2,9 @@
 # Feel free to change configurations
 
 :inquisition:
+  :Enabled: true
   :linters:
+    :Enabled: true
     :backend:
       :Enabled: true
       :bundler_audit:
@@ -33,6 +35,22 @@
         :Enabled: true
       :active_record_doctor:
         :Enabled: true
+        :extraneous_indexes:
+          :Enabled: true
+        :missing_foreign_keys:
+          :Enabled: true
+        :missing_non_null_constraint:
+          :Enabled: true
+        :missing_presence_validation:
+          :Enabled: true
+        :missing_unique_indexes:
+          :Enabled: true
+        :undefined_table_references:
+          :Enabled: true
+        :unindexed_deleted_at:
+          :Enabled: true
+        :unindexed_foreign_key:
+          :Enabled: true
       :rspec:
         :Enabled: true
       :rspec_rubocop:
@@ -47,9 +65,9 @@
         :Enabled: true
       :haml_lint:
         :Enabled: true
-      :slim-lint:
+      :slim_lint:
         :Enabled: true
-      :erb-lint:
+      :erb_lint:
         :Enabled: true
       :scss_lint:
         :Enabled: true
@@ -57,7 +75,7 @@
         :Enabled: true
       :eslint:
         :Enabled: true
-      :yarn check:
+      :yarn_check:
         :Enabled: true
-      :npm audit:
+      :npm_audit:
         :Enabled: true

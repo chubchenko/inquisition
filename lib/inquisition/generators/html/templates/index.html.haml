@@ -108,18 +108,15 @@
                 .x_content
                   %table.countries_list
                     %tbody
-                      %th Name
-                      %th Lines
-                      %th LOC
-                      %th Classes
-                      %th Methods
-                      - files_summary_table.each do |summary|
+                      - files_summary_table[:headers].each do |header|
+                        %th= header
+                      - files_summary_table[:body].each do |body|
                         %tr
-                          %td= summary[:type]
-                          %td= summary[:statistics][:lines]
-                          %td= summary[:statistics][:code_lines]
-                          %td= summary[:statistics][:classes]
-                          %td= summary[:statistics][:methods]
+                          %td= body[:type]
+                          %td= body[:lines]
+                          %td= body[:code_lines]
+                          %td= body[:classes]
+                          %td= body[:methods]
           %br/
           .row
             .col-md-4.col-sm-4.col-xs-12
@@ -150,10 +147,10 @@
                             %tr
                               %td
                                 %p
-                                  %i.fa.fa-square{class: "#{error[:chart_color]}"}>
-                                  = error[:error_name]
+                                  %i.fa.fa-square{class: "#{error[:color]}"}>
+                                  = error[:name]
                                   issues
-                              %td= error[:error_count]
+                              %td= error[:total]
             .col-md-4.col-sm-4.col-xs-12
               .x_panel.tile.fixed_height_320.overflow_hidden
                 .x_title
@@ -182,10 +179,10 @@
                             %tr
                               %td
                                 %p
-                                  %i.fa.fa-square{class: "#{method[:chart_color]}"}>
+                                  %i.fa.fa-square{class: "#{method[:color]}"}>
                                   = method[:name]
                                   routes
-                              %td= method[:count]
+                              %td= method[:total]
           %br
           .row
             .col-md-12.col-sm-12.col-xs-12
@@ -193,7 +190,7 @@
                 .x_title
                   %h2
                     Routes list
-                    %small There are #{list_with_routes.count} routes
+                    %small There are #{table_with_routes[:body].count} routes
                   %ul.nav.navbar-right
                     %li
                       %a.collapse-link
@@ -202,16 +199,14 @@
                 .x_content
                   %table.countries_list
                     %tbody
-                      %th Prefix
-                      %th Verb
-                      %th URI
-                      %th Pattern
-                      - list_with_routes.each do |route|
+                      - table_with_routes[:headers].each do |header|
+                        %th= header
+                      - table_with_routes[:body].each do |body|
                         %tr
-                          %td= route[:prefix]
-                          %td= route[:verb]
-                          %td= route[:uri]
-                          %td= route[:pattern]
+                          %td= body[:prefix]
+                          %td= body[:verb]
+                          %td= body[:uri]
+                          %td= body[:pattern]
           %br/
           .row
             .col-md-4.col-sm-4.col-xs-12
@@ -219,7 +214,7 @@
                 .x_title
                   %h2
                     Issues & solutions
-                    %small= "#{issues_pipeline[:total]} issues has solutions"
+                    %small= "#{issues_with_solutions_pipeline[:total]} issues has solutions"
                   %ul.nav.navbar-right
                     %li
                       %a.collapse-link
@@ -227,9 +222,9 @@
                   .clearfix
                 .x_content
                   .dashboard-widget-content
-                    - if issues_pipeline[:issues].any?
+                    - if issues_with_solutions_pipeline[:total] > 0
                       %ul.list-unstyled.timeline.widget
-                        - issues_pipeline[:issues].first(7).each do |issue|
+                        - issues_with_solutions_pipeline[:issues].first(7).each do |issue|
                           %li
                             .block
                               .block_content
@@ -258,7 +253,7 @@
                   .clearfix
                 .x_content
                   .dashboard-widget-content
-                    - if hottest_issues[:issues].any?
+                    - if hottest_issues[:total] > 0
                       %ul.list-unstyled.timeline.widget
                         - hottest_issues[:issues].first(5).each do |issue|
                           %li
@@ -295,20 +290,20 @@
                   .clearfix
                 .x_content
                   %ul.to_do
-                    - used_auditors.each do |group, auditors|
+                    - auditors_list.each do |list|
                       %li
-                        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{group}"}
-                          = group.to_s.humanize
+                        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{list[:group_name]}"}
+                          = list[:group_name].to_s.humanize
                           %span.fa.fa-chevron-down
-                        %ul.collapse{ id: "#{group}" }
-                          - auditors.each do |auditor|
+                        %ul.collapse{ id: "#{list[:group_name]}" }
+                          - list[:items].each do |item|
                             %li
                               %p
-                                - if auditor[:enabled]
+                                - if item[:enabled]
                                   .icheckbox_flat-green.checked{:style => "position: relative;"}
                                 - else
                                   %input.flat{:type => "checkbox", checked: false, disabled: true}/
-                                = auditor[:auditor_name]
+                                = item[:auditor_name]
         / /page content
         / footer content
         %footer
@@ -341,7 +336,6 @@
     %script{:src => "assets/js/moment/min/moment.min.js"}
     %script{:src => "assets/js/bootstrap-daterangepicker/daterangepicker.js"}
     %script{:src => "assets/js/custom.min.js"}
-
     :javascript
       function init_chart_doughnut(){
         if( typeof (Chart) === 'undefined'){ return; }
@@ -350,10 +344,10 @@
             type: 'doughnut',
             tooltipFillColor: "rgba(51, 51, 51, 0.55)",
             data: {
-              labels: #{errors_count_chart.map{|error| error[:error_name]}},
+              labels: #{errors_count_chart.map{|error| error[:name]}},
               datasets: [
                 {
-                  data: #{errors_count_chart.map{|error| error[:error_count]}},
+                  data: #{errors_count_chart.map{|error| error[:total]}},
                   backgroundColor: [
                     "#3498DB",
                     "#BDC3C7",
@@ -388,7 +382,7 @@
               labels: #{route_methods_chart.map{|method| method[:name]}},
               datasets: [
                 {
-                  data: #{route_methods_chart.map{|method| method[:count]}},
+                  data: #{route_methods_chart.map{|method| method[:total]}},
                   backgroundColor: [
                     "#3498DB",
                     "#BDC3C7",

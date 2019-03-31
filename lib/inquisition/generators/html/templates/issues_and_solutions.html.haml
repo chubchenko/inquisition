@@ -89,7 +89,7 @@
                       %th Issue Type
                       %th Message
                       %th Auditor
-                      - issues[:issues].each do |issue|
+                      - issues.each do |issue|
                         %tr
                           %td
                             %a{ href: issue[:link] }= issue[:title]

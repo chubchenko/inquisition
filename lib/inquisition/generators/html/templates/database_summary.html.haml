@@ -83,8 +83,8 @@
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-check-square
-                Included linters
-              .count= included_linters_count
+                Included auditors
+              .count= included_auditors_count
             .col-md-2.col-sm-4.col-xs-6.tile_stats_count
               %span.count_top
                 %i.fa.fa-cog
@@ -113,7 +113,7 @@
                 .x_content.row
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Tables with repeated indexes
-                    #repeated-indexes-percent.custom-circles{"data-percent" => "#{repeated_indexes_percentage}"}
+                    #repeated-indexes-percent.custom-circles{"data-percent" => "#{repeated_indexes_percentage[:percent]}"}
                     %small Ratio between numbers of tables with repeated indexes and total tables
                     %br
                     %small
@@ -129,7 +129,7 @@
                       total tables
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Tables with missing foreign keys
-                    #missing-foreign-keys-percent.custom-circles{"data-percent" => "#{missing_foreign_keys_percentage}"}
+                    #missing-foreign-keys-percent.custom-circles{"data-percent" => "#{missing_foreign_keys_percentage[:percent]}"}
                     %small Ratio between numbers of tables with missing foreign keys and total tables
                     %br
                     %small
@@ -145,7 +145,7 @@
                       total tables
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Incompatibility tables structure with models
-                    #incompatibility-structure-percent.custom-circles{"data-percent" => "#{incompatibility_structure_with_models_percentage}"}
+                    #incompatibility-structure-percent.custom-circles{"data-percent" => "#{incompatibility_structure_with_models_percentage[:percent]}"}
                     %small Ratio between numbers of tables with incompatibility tables structure with models and total tables
                     %br
                     %small
@@ -161,7 +161,7 @@
                       total tables
                   .col-md-3.col-sm-3.col-xs-12{ style: "text-align:center" }
                     %h4 Unindexed foreign keys
-                    #unindexed-foreign-keys-percent.custom-circles{"data-percent" => "#{unindexed_foreign_keys_percentage}"}
+                    #unindexed-foreign-keys-percent.custom-circles{"data-percent" => "#{unindexed_foreign_keys_percentage[:percent]}"}
                     %small Ratio between unindexed foreign keys with models and total tables
                     %br
                     %small
@@ -186,12 +186,12 @@
                   - top_tables_with_errors(5).each do |error|
                     .widget_summary
                       .w_left.w_25
-                        %span= error[:table_name]
+                        %span= error[:title]
                       .w_center.w_55
                         .progress
-                          .progress-bar.bg-green{"aria-valuemin" => "0", :role => "progressbar", :style => "width: #{error[:total_errors_percent]}%;"}
+                          .progress-bar.bg-green{"aria-valuemin" => "0", :role => "progressbar", :style => "width: #{error[:percent]}%;"}
                       .w_right.w_20
-                        %span= error[:error_count]
+                        %span= error[:number]
                       .clearfix
             .col-md-6.col-sm-6.col-xs-12
               .x_panel.tile.fixed_height_320.overflow_hidden
@@ -217,9 +217,9 @@
                             %tr
                               %td
                                 %p
-                                  %i.fa.fa-square{class: "#{error[:chart_color]}"}>
-                                  = error[:error_name]
-                              %td= error[:tables_count]
+                                  %i.fa.fa-square{class: "#{error[:color]}"}>
+                                  = error[:name]
+                              %td= error[:total]
         / /page content
         / footer content
         %footer
@@ -252,7 +252,6 @@
     %script{:src => "assets/js/moment/min/moment.min.js"}
     %script{:src => "assets/js/bootstrap-daterangepicker/daterangepicker.js"}
     %script{:src => "assets/js/custom.min.js"}
-
     %script{:src => "assets/js/percircle.js"}
 
     :javascript
@@ -268,10 +267,10 @@
             type: 'doughnut',
             tooltipFillColor: "rgba(51, 51, 51, 0.55)",
             data: {
-              labels: #{top_types_of_errors(5).map{|x| x[:error_name]}},
+              labels: #{top_types_of_errors(5).map{|error| error[:name]}},
               datasets: [
                 {
-                  data: #{top_types_of_errors(5).map{|x| x[:tables_count]}},
+                  data: #{top_types_of_errors(5).map{|error| error[:total]}},
                   backgroundColor: [
                     "#3498DB",
                     "#BDC3C7",

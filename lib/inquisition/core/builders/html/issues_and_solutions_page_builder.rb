@@ -4,7 +4,7 @@ module Inquisition
       module Html
         class IssuesAndSolutionsPageBuilder < Core::Builders::BaseHtmlBuilder
           TEMPLATE_PATH = 'lib/inquisition/generators/html/templates/issues_and_solutions.html.haml'.freeze
-          PAGE_PRESENTER = Core::Presenters::Pages::IssuesAndSolutionsPagePresenter
+          PAGE_PRESENTER = Core::Presenters::Pages::Html::IssuesAndSolutionsPagePresenter
         end
       end
     end

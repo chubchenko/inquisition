@@ -11,12 +11,12 @@ RSpec.describe Inquisition::Core::Installers::MultipleInstaller, type: :unit do
       subject.call
     end
 
-    context 'base config is enabled' do
+    context 'when base config is enabled' do
       let(:installer) { double('installer') }
 
       before do
         allow(subject).to receive(:installers) { [installer] }
-        allow(Inquisition::BaseConfig).to receive(:config_enabled?) { true }
+        allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?) { true }
       end
 
       it 'call installer' do
@@ -25,7 +25,7 @@ RSpec.describe Inquisition::Core::Installers::MultipleInstaller, type: :unit do
       end
     end
 
-    context 'base config is disabled' do
+    context 'when base config is disabled' do
       let(:installer) { double('installer') }
 
       before do

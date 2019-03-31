@@ -7,12 +7,8 @@ module Inquisition
 
           def installers
             {
-              I18nTasks::Installer => config_path(:i18n_tasks)
+              I18nTasks::Installer => :i18n_tasks
             }
-          end
-
-          def path
-            [:frontend]
           end
         end
       end

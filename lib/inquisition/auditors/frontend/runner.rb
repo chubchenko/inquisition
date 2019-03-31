@@ -7,12 +7,8 @@ module Inquisition
 
           def runners
             {
-              I18nTasks::Runner => config_path(:i18n_tasks)
+              I18nTasks::Runner => :i18n_tasks
             }
-          end
-
-          def path
-            [:frontend]
           end
         end
       end
