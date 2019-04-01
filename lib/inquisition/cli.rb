@@ -13,7 +13,7 @@ module Inquisition
     desc 'analyze', I18n.t('messages.run_all_linters')
     class_option 'format', aliases: '-f', type: :string, enum: Outputer::OUTPUTERS_FORMAT.keys, default: 'html'
     def analyze(*_args)
-      Core::AuditorsData.instance.add_data = Runner.new.call
+      Core::AuditorsData.instance.add_data(Runner.new.call)
       Outputer.call(options)
     end
   end

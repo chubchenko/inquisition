@@ -14,9 +14,9 @@ module Inquisition
             # Rubocop::Runner => :rubocop,
             # RubyLint::Runner => :ruby_lint,
             # Yamllint::Runner => :yamllint,
-            LolDba::Runner => :lol_dba,
-            ActiveRecordDoctor::Runner => :active_record_doctor
-            # Brakeman::Runner => :brakeman
+            # LolDba::Runner => :lol_dba,
+            # ActiveRecordDoctor::Runner => :active_record_doctor
+            Brakeman::Runner => :brakeman
             # Bullet::Runner => config_path(:bullet),
             # HamlLint::Runner => config_path(:haml_lint),
             # RailsErd::Runner => config_path(:rails_erd),

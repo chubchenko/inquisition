@@ -1,0 +1,53 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %link{:href => "images/favicon.ico", :rel => "icon", :type => "image/ico"}/
+    %title Code Auditor!
+    %link{:href => "assets/css/bootstrap/dist/css/bootstrap.min.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/font-awesome/css/font-awesome.min.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/nprogress/nprogress.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/iCheck/skins/flat/green.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/jqvmap/dist/jqvmap.min.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/bootstrap-daterangepicker/daterangepicker.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/percircle.css", :rel => "stylesheet"}/
+    %link{:href => "assets/css/custom.css", :rel => "stylesheet"}/
+  %body.nav-md
+    .container.body
+      .main_container
+        = yield
+        %footer
+          .pull-right
+            Gentelella - Bootstrap Admin Template by
+            %a{:href => "https://colorlib.com"} Colorlib
+          .clearfix
+    %script{:src => "assets/js/jquery/dist/jquery.min.js"}
+    %script{:src => "assets/js/bootstrap/dist/js/bootstrap.min.js"}
+    %script{:src => "assets/js/fastclick/lib/fastclick.js"}
+    %script{:src => "assets/js/nprogress/nprogress.js"}
+    %script{:src => "assets/js/Chart.js/dist/Chart.min.js"}
+    %script{:src => "assets/js/gauge.js/dist/gauge.min.js"}
+    %script{:src => "assets/js/bootstrap-progressbar/bootstrap-progressbar.min.js"}
+    %script{:src => "assets/js/iCheck/icheck.min.js"}
+    %script{:src => "assets/js/skycons/skycons.js"}
+    %script{:src => "assets/js/Flot/jquery.flot.js"}
+    %script{:src => "assets/js/Flot/jquery.flot.pie.js"}
+    %script{:src => "assets/js/Flot/jquery.flot.time.js"}
+    %script{:src => "assets/js/Flot/jquery.flot.stack.js"}
+    %script{:src => "assets/js/Flot/jquery.flot.resize.js"}
+    %script{:src => "assets/js/flot.orderbars/js/jquery.flot.orderBars.js"}
+    %script{:src => "assets/js/flot-spline/js/jquery.flot.spline.min.js"}
+    %script{:src => "assets/js/flot.curvedlines/curvedLines.js"}
+    %script{:src => "assets/js/DateJS/build/date.js"}
+    %script{:src => "assets/js/jqvmap/dist/jquery.vmap.js"}
+    %script{:src => "assets/js/jqvmap/dist/maps/jquery.vmap.world.js"}
+    %script{:src => "assets/js/jqvmap/examples/js/jquery.vmap.sampledata.js"}
+    %script{:src => "assets/js/moment/min/moment.min.js"}
+    %script{:src => "assets/js/bootstrap-daterangepicker/daterangepicker.js"}
+    %script{:src => "assets/js/percircle.js"}
+    %script{:src => "assets/js/custom.min.js"}
+    = additional_javascript

@@ -1,5 +1,3 @@
-require 'tilt/haml'
-
 module Inquisition
   module Core
     module Builders
@@ -7,7 +5,7 @@ module Inquisition
         include Helpers::AuditorsHelper
         attr_reader :page_name
 
-        BASE_ENGINE = Tilt::HamlTemplate
+        PAGE_LAYOUT = 'layouts/page_layout.html.haml'.freeze
 
         def call(page_name)
           @page_name = page_name
@@ -17,11 +15,21 @@ module Inquisition
         private
 
         def build_page
-          BASE_ENGINE.new(template).render(presenter)
+          render_with_layout do
+            Outputers::HtmlOutputer::BASE_ENGINE.new(template).render(presenter)
+          end
+        end
+
+        def render_with_layout
+          Outputers::HtmlOutputer::BASE_ENGINE.new(layout).render(presenter) { yield if block_given? }
         end
 
         def template
-          File.join(Inquisition.root, child_class::TEMPLATE_PATH)
+          File.join(Inquisition.root, Outputers::HtmlOutputer::TEMPLATE_PATH, child_class::TEMPLATE)
+        end
+
+        def layout
+          File.join(Inquisition.root, Outputers::HtmlOutputer::TEMPLATE_PATH, PAGE_LAYOUT)
         end
 
         def presenter
