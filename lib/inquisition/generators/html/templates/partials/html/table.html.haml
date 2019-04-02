@@ -1,0 +1,8 @@
+%table.countries_list
+  %tbody
+    - params[:table][:headers].each do |header|
+      %th= header
+    - params[:table][:body].each do |body|
+      %tr
+        - body.keys.each do |key|
+          %td= body[key]

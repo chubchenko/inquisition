@@ -1,15 +1,15 @@
 :javascript
   function init_chart_doughnut(){
     if( typeof (Chart) === 'undefined'){ return; }
-    if ($('#errorsCount').length){
+    if ($('##{params[:presenter].errors_count_chart[:element_id]}').length){
       var chart_doughnut_settings = {
         type: 'doughnut',
         tooltipFillColor: "rgba(51, 51, 51, 0.55)",
         data: {
-          labels: #{params[:presenter].errors_count_chart.map{|error| error[:name]}},
+          labels: #{params[:presenter].errors_count_chart[:body].map{|error| error[:name]}},
           datasets: [
             {
-              data: #{params[:presenter].errors_count_chart.map{|error| error[:total]}},
+              data: #{params[:presenter].errors_count_chart[:body].map{|error| error[:total]}},
               backgroundColor: [
                 "#3498DB",
                 "#BDC3C7",
@@ -32,19 +32,19 @@
           responsive: false,
         }
       }
-      var chart_element = $('#errorsCount');
+      var chart_element = $('##{params[:presenter].errors_count_chart[:element_id]}');
       var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
     }
 
-    if ($('#routesCount').length){
+    if ($('##{params[:presenter].route_methods_chart[:element_id]}').length){
       var chart_doughnut_settings = {
         type: 'doughnut',
         tooltipFillColor: "rgba(51, 51, 51, 0.55)",
         data: {
-          labels: #{params[:presenter].route_methods_chart.map{|method| method[:name]}},
+          labels: #{params[:presenter].route_methods_chart[:body].map{|method| method[:name]}},
           datasets: [
             {
-              data: #{params[:presenter].route_methods_chart.map{|method| method[:total]}},
+              data: #{params[:presenter].route_methods_chart[:body].map{|method| method[:total]}},
               backgroundColor: [
                 "#3498DB",
                 "#BDC3C7",
@@ -67,7 +67,7 @@
           responsive: false,
         }
       }
-      var chart_element = $('#routesCount');
+      var chart_element = $('##{params[:presenter].route_methods_chart[:element_id]}');
       var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
     }
   }

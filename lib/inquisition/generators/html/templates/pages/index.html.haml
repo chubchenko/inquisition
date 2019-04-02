@@ -9,28 +9,7 @@
       %nav#sidebar
         .sidebar-header
           %h3 Reports
-        %ul.nav.side-menu
-          - menu_items.each do |item|
-            %li
-              - if item[:child_items] && item[:child_items].any?
-                %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{item[:class]}"}
-                  = item[:name]
-                  %span.fa.fa-chevron-down
-                %ul.collapse.nav.side-menu{ id: item[:class] }
-                  - item[:child_items].each do |child_item|
-                    %li
-                      - if child_item[:child_items] && child_item[:child_items].any?
-                        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{child_item[:class]}"}
-                          = child_item[:name]
-                          %span.fa.fa-chevron-down
-                        %ul.collapse.nav.side-menu{ id: child_item[:class] }
-                          - child_item[:child_items].each do |nested_item|
-                            %li
-                              %a{:href => "#{nested_item[:link]}"}= nested_item[:name]
-                      - else
-                        %a{:href => "#{child_item[:link]}"}= child_item[:name]
-              - else
-                %a{:href => "#{item[:link]}"}= item[:name]
+        = partial 'html/menu.html.haml', items: menu_items
 .top_nav
   .nav_menu
     %nav
@@ -86,83 +65,13 @@
                 %i.fa.fa-chevron-up
           .clearfix
         .x_content
-          %table.countries_list
-            %tbody
-              - files_summary_table[:headers].each do |header|
-                %th= header
-              - files_summary_table[:body].each do |body|
-                %tr
-                  %td= body[:type]
-                  %td= body[:lines]
-                  %td= body[:code_lines]
-                  %td= body[:classes]
-                  %td= body[:methods]
+          = partial 'html/table.html.haml', table: files_summary_table
   %br/
   .row
     .col-md-4.col-sm-4.col-xs-12
-      .x_panel.tile.fixed_height_320.overflow_hidden
-        .x_title
-          %h2 Errors chart
-          %ul.nav.navbar-right
-            %li
-              %a.collapse-link
-                %i.fa.fa-chevron-up
-          .clearfix
-        .x_content
-          %table{:style => "width:100%"}
-            %tr
-              %th{:style => "width:37%;"}
-                %p Top 5
-              %th
-                .col-lg-7.col-md-7.col-sm-7.col-xs-7
-                  %p Type
-                .col-lg-5.col-md-5.col-sm-5.col-xs-5
-                  %p Total errors
-            %tr
-              %td
-                %canvas#errorsCount{:height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
-              %td
-                %table.tile_info
-                  - errors_count_chart.each do |error|
-                    %tr
-                      %td
-                        %p
-                          %i.fa.fa-square{class: "#{error[:color]}"}>
-                          = error[:name]
-                          issues
-                      %td= error[:total]
+      = partial 'html/circle_chart.html.haml', chart: errors_count_chart
     .col-md-4.col-sm-4.col-xs-12
-      .x_panel.tile.fixed_height_320.overflow_hidden
-        .x_title
-          %h2 Used routes
-          %ul.nav.navbar-right
-            %li
-              %a.collapse-link
-                %i.fa.fa-chevron-up
-          .clearfix
-        .x_content
-          %table{:style => "width:100%"}
-            %tr
-              %th{:style => "width:37%;"}
-                %p Top 5
-              %th
-                .col-lg-7.col-md-7.col-sm-7.col-xs-7
-                  %p Type
-                .col-lg-5.col-md-5.col-sm-5.col-xs-5
-                  %p Total errors
-            %tr
-              %td
-                %canvas#routesCount{:height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
-              %td
-                %table.tile_info
-                  - route_methods_chart.each do |method|
-                    %tr
-                      %td
-                        %p
-                          %i.fa.fa-square{class: "#{method[:color]}"}>
-                          = method[:name]
-                          routes
-                      %td= method[:total]
+      = partial 'html/circle_chart.html.haml', chart: route_methods_chart
   %br
   .row
     .col-md-12.col-sm-12.col-xs-12

@@ -1,0 +1,30 @@
+.x_panel.tile.fixed_height_320.overflow_hidden
+  .x_title
+    %h2= params[:chart][:title]
+    %ul.nav.navbar-right
+      %li
+        %a.collapse-link
+          %i.fa.fa-chevron-up
+    .clearfix
+  .x_content
+    %table{:style => "width:100%"}
+      %tr
+        %th{:style => "width:37%;"}
+          %p= params[:chart][:chart_header]
+        %th
+          .col-lg-7.col-md-7.col-sm-7.col-xs-7
+            %p= params[:chart][:name_header]
+          .col-lg-5.col-md-5.col-sm-5.col-xs-5
+            %p= params[:chart][:total_header]
+      %tr
+        %td
+          %canvas{ id: "#{params[:chart][:element_id]}", :height => "140", :style => "margin: 15px 10px 10px 0", :width => "140"}
+        %td
+          %table.tile_info
+            - params[:chart][:body].each do |item|
+              %tr
+                %td
+                  %p
+                    %i.fa.fa-square{class: "#{item[:color]}"}>
+                    = item[:name]
+                %td= item[:total]

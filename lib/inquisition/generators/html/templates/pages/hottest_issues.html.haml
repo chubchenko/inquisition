@@ -13,28 +13,7 @@
       %nav#sidebar
         .sidebar-header
           %h3 Reports
-        %ul.nav.side-menu
-          - menu_items.each do |item|
-            %li
-              - if item[:child_items] && item[:child_items].any?
-                %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{item[:class]}"}
-                  = item[:name]
-                  %span.fa.fa-chevron-down
-                %ul.collapse.nav.side-menu{ id: item[:class] }
-                  - item[:child_items].each do |child_item|
-                    %li
-                      - if child_item[:child_items] && child_item[:child_items].any?
-                        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "##{child_item[:class]}"}
-                          = child_item[:name]
-                          %span.fa.fa-chevron-down
-                        %ul.collapse.nav.side-menu{ id: child_item[:class] }
-                          - child_item[:child_items].each do |nested_item|
-                            %li
-                              %a{:href => "#{nested_item[:link]}"}= nested_item[:name]
-                      - else
-                        %a{:href => "#{child_item[:link]}"}= child_item[:name]
-              - else
-                %a{:href => "#{item[:link]}"}= item[:name]
+        = partial 'html/menu.html.haml', items: menu_items
 .top_nav
   .nav_menu
     %nav

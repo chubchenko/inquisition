@@ -12,8 +12,8 @@ module Inquisition
               Data::Database::DatabaseTotalErrorsPresenter.instance.call
             end
 
-            def top_types_of_errors(number)
-              Elements::Html::Static::Chart::TypesOfDatabaseErrorsChartPresenter.instance.call.first(number)
+            def top_types_of_errors
+              Elements::Html::Static::Chart::TypesOfDatabaseErrorsChartPresenter.instance.call
             end
 
             def included_auditors_count

@@ -15,3 +15,22 @@ en:
     no_config_file: "File %{name} not found"
     invalid_ruby_version: "Invalid ruby version %{version}"
     absence_additional_software: "Additional software with command %{command} not found"
+  elements:
+    chart:
+      errors_count:
+        title: "Errors chart"
+        chart_header: "Top 5"
+        name_header: "Type"
+        total_header: "Total errors"
+        additional_name: " issues"
+      route_methods:
+        title: "Used routes"
+        chart_header: "Top 5"
+        name_header: "Type"
+        total_header: "Total errors"
+        additional_name: " routes"
+      types_errors:
+        title: "Most populate errors"
+        chart_header: "Top 5"
+        name_header: "Error"
+        total_header: "Tables"
