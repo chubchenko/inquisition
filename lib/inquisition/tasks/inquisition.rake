@@ -102,7 +102,14 @@ namespace :inquisition do
   task :install_simplecov do
     print 'Creating config for Simplecov... '
 
-    file = File.join(Dir.pwd, 'spec', 'spec_helper.rb')
+    
+    begin
+      file = File.join(Dir.pwd, 'spec', 'spec_helper.rb')
+    rescue Errno::ENOENT => e
+      system 'rspec --init'
+      file = File.join(Dir.pwd, 'spec', 'spec_helper.rb')
+    end
+    
     content = File.read(file)
 
     unless content =~ /simplecov/
