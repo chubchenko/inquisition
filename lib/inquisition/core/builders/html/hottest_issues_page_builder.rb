@@ -3,8 +3,8 @@ module Inquisition
     module Builders
       module Html
         class HottestIssuesPageBuilder < Core::Builders::BaseHtmlBuilder
-          TEMPLATE_PATH = 'lib/inquisition/generators/html/templates/hottest_issues.html.haml'.freeze
-          PAGE_PRESENTER = Core::Presenters::Pages::HottestIssuesPagePresenter
+          TEMPLATE = 'pages/hottest_issues.html.haml'.freeze
+          PAGE_PRESENTER = Core::Presenters::Pages::Html::HottestIssuesPagePresenter
         end
       end
     end

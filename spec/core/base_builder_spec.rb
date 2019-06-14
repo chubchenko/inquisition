@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Inquisition::Core::BaseBuilder, type: :unit do
   include AuditorsHelpModule
 
-  subject { Inquisition::Core::BaseBuilder.new(auditors_tree) }
+  subject { Inquisition::Core::BaseBuilder.new }
 
   describe '.call' do
     it 'raise NotImplementedError' do

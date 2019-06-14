@@ -8,13 +8,13 @@ RSpec.describe Inquisition::Configure, type: :unit do
 
     context 'when authenticate configure' do
       before do
-        allow(Inquisition::BaseConfig).to receive(:config_exist?).and_return(true)
-        allow(Inquisition::BaseConfig).to receive(:config_enabled?).and_return(false)
+        allow(Inquisition::BaseConfig.instance).to receive(:config_exist?).and_return(true)
+        allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?).and_return(false)
       end
 
       context 'when backend configurers are enabled' do
         before do
-          allow(Inquisition::BaseConfig).to receive(:config_enabled?).with(:linters, :backend).and_return(true)
+          allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?).with(:backend).and_return(true)
         end
 
         it_behaves_like 'call callable objects', Inquisition::Auditors::Backend::Installer => 'backend configure'
@@ -22,7 +22,7 @@ RSpec.describe Inquisition::Configure, type: :unit do
 
       context 'when frontend configurers are enabled' do
         before do
-          allow(Inquisition::BaseConfig).to receive(:config_enabled?).with(:linters, :frontend).and_return(true)
+          allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?).with(:frontend).and_return(true)
         end
 
         it_behaves_like 'call callable objects', Inquisition::Auditors::Frontend::Installer => 'frontend configure'
@@ -30,7 +30,7 @@ RSpec.describe Inquisition::Configure, type: :unit do
 
       context 'when common configurers are enabled' do
         before do
-          allow(Inquisition::BaseConfig).to receive(:config_enabled?).with(:linters, :common).and_return(true)
+          allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?).with(:common).and_return(true)
         end
 
         it_behaves_like 'call callable objects', Inquisition::Auditors::Common::Installer => 'common configure'
@@ -39,7 +39,7 @@ RSpec.describe Inquisition::Configure, type: :unit do
 
     context 'when configure was not authenticate' do
       before do
-        allow(Inquisition::BaseConfig).to receive(:config_exist?).and_return(false)
+        allow(Inquisition::BaseConfig.instance).to receive(:config_exist?).and_return(false)
       end
 
       it 'raise authenticate error' do

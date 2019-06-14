@@ -10,7 +10,7 @@ module Inquisition
 
         def run_runners
           runners.map do |runner, path|
-            { "#{runner.new.auditor_name}": runner.new.call } if BaseConfig.config_enabled?(*path)
+            { "#{runner.new.auditor_name}": runner.new.call } if BaseConfig.instance.auditor_enabled?(path)
           end
         end
 
@@ -23,14 +23,6 @@ module Inquisition
 
         def runners
           {}
-        end
-
-        def config_path(*keys)
-          [:linters, *path, *keys]
-        end
-
-        def path
-          []
         end
       end
     end

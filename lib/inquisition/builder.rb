@@ -2,10 +2,11 @@ module Inquisition
   class Builder
     class << self
       def call
-        if BaseConfig.config_exist?
+        base_config = BaseConfig.instance
+        if base_config.config_exist?
           MessageNotifier.base_config_exist
         else
-          BaseConfig.initialize_config
+          base_config.initialize_config
           MessageNotifier.setuping_inquisition
         end
         MessageNotifier.done

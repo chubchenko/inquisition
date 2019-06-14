@@ -5,10 +5,10 @@ require 'spec_helper'
 RSpec.describe Inquisition::Core::Outputers::HtmlOutputer do
   include AuditorsHelpModule
 
-  subject{ Inquisition::Core::Outputers::HtmlOutputer.new(auditors_tree) }
+  subject{ Inquisition::Core::Outputers::HtmlOutputer.new }
 
   describe 'constants' do
-    %i[ROOT_PATH REPORT_FOLDER_NAME INDEX_PAGE ASSETS_PATH].each do |constant_name|
+    %i[REPORT_FOLDER_NAME INDEX_PAGE ASSETS_PATH BASE_ENGINE].each do |constant_name|
       it "have #{constant_name} constant" do
         expect(subject.class).to be_const_defined(constant_name)
       end

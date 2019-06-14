@@ -7,19 +7,15 @@ module Inquisition
 
           def runners
             {
-              ExtraneousIndexes::Runner => config_path,
-              MissingForeignKeys::Runner => config_path,
-              MissingNonNullConstraint::Runner => config_path,
-              MissingPresenceValidation::Runner => config_path,
-              MissingUniqueIndexes::Runner => config_path,
-              UndefinedTableReferences::Runner => config_path,
-              UnindexedDeletedAt::Runner => config_path,
-              UnindexedForeignKeys::Runner => config_path
+              ExtraneousIndexes::Runner => :extraneous_indexes,
+              MissingForeignKeys::Runner => :missing_foreign_keys,
+              MissingNonNullConstraint::Runner => :missing_non_null_constraint,
+              MissingPresenceValidation::Runner => :missing_presence_validation,
+              MissingUniqueIndexes::Runner => :missing_unique_indexes,
+              UndefinedTableReferences::Runner => :undefined_table_references,
+              UnindexedDeletedAt::Runner => :unindexed_deleted_at,
+              UnindexedForeignKeys::Runner => :unindexed_foreign_key
             }
-          end
-
-          def config_path
-            %i[linters backend active_record_doctor]
           end
         end
       end

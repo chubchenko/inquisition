@@ -8,7 +8,7 @@ RSpec.describe Inquisition::Authorization do
   describe '#authenticate_installer' do
     context 'when config file is present' do
       before do
-        allow(Inquisition::BaseConfig).to receive(:config_exist?).and_return(true)
+        allow(Inquisition::BaseConfig.instance).to receive(:config_exist?).and_return(true)
       end
 
       it 'not raise error' do

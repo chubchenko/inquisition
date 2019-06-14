@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe Inquisition::BaseConfig, type: :unit do
-  subject { Inquisition::BaseConfig }
+  subject { Inquisition::BaseConfig.instance }
   before { stub_const('Inquisition::BaseConfig::TARGET_DIRECTORY', temp_folder) }
   after { remove_base_config }
 
@@ -34,14 +34,13 @@ RSpec.describe Inquisition::BaseConfig, type: :unit do
 
     context 'when config enabled' do
       it 'return true' do
-        expect(subject.config_enabled?(:linters, :backend)).to be_truthy
+        expect(subject.auditor_enabled?(:linters)).to be_truthy
       end
     end
 
     context 'when config not enabled or not exist' do
       it 'return false' do
-        expect(subject.config_enabled?(:linters, :bundler_audit)).to be_falsey
-        expect(subject.config_enabled?(:linters, :unknow_linter)).to be_falsey
+        expect(subject.auditor_enabled?(:unknow_linter)).to be_falsey
       end
     end
   end

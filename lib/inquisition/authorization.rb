@@ -11,7 +11,7 @@ module Inquisition
     private
 
     def check_base_config_exists
-      raise Errors::BaseConfigAbsenseError unless BaseConfig.config_exist?
+      raise Errors::BaseConfigAbsenseError unless BaseConfig.instance.config_exist?
     end
   end
 end
