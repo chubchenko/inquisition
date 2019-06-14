@@ -5,7 +5,7 @@ module Inquisition
     class BasePresenter
       extend Forwardable
 
-      CIRCLE_CHART_COLORS = %i[blue green purple aero red].freeze
+      CIRCLE_CHART_COLORS = %i[blue gray purple red neagara].freeze
 
       def initialize(data = nil)
         @data = data

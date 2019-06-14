@@ -11,8 +11,7 @@ module Inquisition
           attr_reader :database_presenter, :rails_about_presenter
           def_delegators :@rails_about_presenter, :database_adapter
 
-          def initialize(auditors_tree)
-            @auditors_tree = auditors_tree
+          def initialize(auditors_tree, page_name)
             @database_presenter = DatabaseLintersPresenter.new(auditors_tree)
             @rails_about_presenter = RailsAboutPresenter.new
             super
@@ -42,16 +41,16 @@ module Inquisition
             FilesSummaryPresenter.new.call
           end
 
-          def included_linters
-            BaseConfig.included_linters.map(&:keys).flatten
-          end
-
-          def disabled_linters
-            BaseConfig.disabled_linters.map(&:keys).flatten
+          def used_auditors
+            IncludedAuditorsPresenter.new.all_auditors
           end
 
           def list_with_routes
             RoutesPresenter.new.call
+          end
+
+          def route_methods_chart
+            RouteMethodsChartPresenter.new.call
           end
 
           def errors_count_chart

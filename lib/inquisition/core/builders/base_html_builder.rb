@@ -5,8 +5,10 @@ module Inquisition
     module Builders
       class BaseHtmlBuilder < Core::BaseBuilder
         BASE_ENGINE = Tilt::HamlTemplate
+        attr_reader :page_name
 
-        def call
+        def call(page_name)
+          @page_name = page_name
           build_page
         end
 
@@ -21,7 +23,7 @@ module Inquisition
         end
 
         def presenter
-          child_class::PAGE_PRESENTER.new(@auditors_tree)
+          child_class::PAGE_PRESENTER.new(@auditors_tree, page_name)
         end
 
         def child_class

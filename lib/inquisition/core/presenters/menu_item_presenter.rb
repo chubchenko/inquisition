@@ -5,9 +5,11 @@ module Inquisition
         private
 
         def build_presenter
+          name = @data[:name]
           {
-            'item_name': @data[:name],
-            'link': @data[:link]
+            name: name,
+            link: @data[:link],
+            class: name.split.map(&:downcase).join('_')
           }
         end
       end
