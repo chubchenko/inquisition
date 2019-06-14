@@ -1,0 +1,43 @@
+:javascript
+  $(function(){
+      $("#repeated-indexes-percent, #missing-foreign-keys-percent, #incompatibility-structure-percent, #unindexed-foreign-keys-percent").percircle();
+  });
+
+  function init_chart_doughnut(){
+
+    if( typeof (Chart) === 'undefined'){ return; }
+    if ($('#most_populars_errors').length){
+      var chart_doughnut_settings = {
+        type: 'doughnut',
+        tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+        data: {
+          labels: #{params[:presenter].top_types_of_errors(5).map{|error| error[:name]}},
+          datasets: [
+            {
+              data: #{params[:presenter].top_types_of_errors(5).map{|error| error[:total]}},
+              backgroundColor: [
+                "#3498DB",
+                "#BDC3C7",
+                "#9B59B6",
+                "#E74C3C",
+                "#26B99A"
+              ],
+              hoverBackgroundColor: [
+                "#49A9EA",
+                "#CFD4D8",
+                "#B370CF",
+                "#E95E4F",
+                "#36CAAB"
+              ]
+            }
+          ]
+        },
+        options: {
+        legend: false,
+        responsive: false
+        }
+      }
+      var chart_element = $('#most_populars_errors');
+      var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
+    }
+  }

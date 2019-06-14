@@ -1,16 +1,18 @@
 require 'launchy'
+require 'tilt/haml'
 
 module Inquisition
   module Core
     module Outputers
       class HtmlOutputer < Core::BaseOutputer
-        ROOT_PATH = Dir.pwd
         REPORT_FOLDER_NAME = 'tmp/inquisition'.freeze
         INDEX_PAGE = 'index.html'.freeze
         ASSETS_PATH = [
           'lib/inquisition/generators/html/assets',
           'lib/inquisition/generators/html/images'
         ].freeze
+        BASE_ENGINE = Tilt::HamlTemplate
+        TEMPLATE_PATH = 'lib/inquisition/generators/html/templates'.freeze
 
         attr_reader :report_folder, :builded_pages
 
@@ -29,7 +31,7 @@ module Inquisition
         end
 
         def create_folder
-          @report_folder = FileUtils.mkdir_p(File.join(ROOT_PATH, REPORT_FOLDER_NAME, Time.now.to_i.to_s)).first
+          @report_folder = FileUtils.mkdir_p(File.join(Dir.pwd, REPORT_FOLDER_NAME, Time.now.to_i.to_s)).first
         end
 
         def copy_assets
