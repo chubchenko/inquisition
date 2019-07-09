@@ -27,7 +27,7 @@ RSpec.describe Inquisition::Core::Outputers::HtmlOutputer do
       FileUtils.rm_rf(File.join(Dir.pwd, report_path))
     end
 
-    let(:report_path) { 'spec/tmp/inquisition' }
+    let(:report_path) { 'spec/inquisition/tmp/inquisition' }
     let(:time) { '11111111' }
 
     it 'create folder' do

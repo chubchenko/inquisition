@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Inquisition::Core::Checkers::ExistFileChecker, type: :unit do
   subject { Inquisition::Core::Checkers::ExistFileChecker.new(**args) }
-  let(:args) { { file: 'file.txt', destination: 'spec/fixtures' } }
+  let(:args) { { file: 'file.txt', destination: 'spec/inquisition/fixtures' } }
 
   describe '.call' do
     context 'when file not found' do
