@@ -1,17 +1,1 @@
 en:
-  messages:
-    using_existing_config: "Using existing config for inquisition..."
-    common_configs_setuped: "Common configs setuped"
-    front_configs_setuped: "Front configs setuped"
-    inquisition_setuping: "Inquisition setuping..."
-    creates_config_files: "Creates configuration file"
-    setups_all_conf_linters: "Setups all configs for linters"
-    done: "...Done!"
-    config_already_exist: "Config for %{linter_name} already exists"
-    run_all_linters: "Running all linters"
-  errors:
-    config_absense: "Run inquisition build first"
-    no_gem: "Gem %{name} not found"
-    no_config_file: "File %{name} not found"
-    invalid_ruby_version: "Invalid ruby version %{version}"
-    absence_additional_software: "Additional software with command %{command} not found"
