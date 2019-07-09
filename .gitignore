@@ -12,6 +12,7 @@
 /inquisition.yml
 /rails_best_practices_output.json
 .rake_tasks~
+.DS_Store
 
 # rspec failure tracking
 .rspec_status
