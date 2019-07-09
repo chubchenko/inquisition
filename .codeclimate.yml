@@ -13,15 +13,12 @@ engines:
     config:
       languages:
       - ruby
-      - javascript
   eslint:
     enabled: true
   fixme:
     enabled: true
   rubocop:
     enabled: true
-  similar-code:
-    enabled: false
 ratings:
   paths:
   - Gemfile.lock
