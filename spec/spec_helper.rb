@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 Dir[File.join(Dir.pwd, 'spec', 'support','**', '*.rb')].each {|f| require f}
 $LOAD_PATH <<  File.join(Dir.pwd, 'spec', 'fixtures')
 
