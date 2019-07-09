@@ -3,8 +3,8 @@
 require 'spec_helper'
 require './lib/inquisition/cli'
 
-RSpec.describe Inquisition::CLI, type: :unit do
-  subject { Inquisition::CLI.new }
+RSpec.describe Inquisition::Cli, type: :unit do
+  subject { Inquisition::Cli.new }
   after { remove_base_config }
 
   before do
@@ -18,7 +18,7 @@ RSpec.describe Inquisition::CLI, type: :unit do
       before { create_base_config }
 
       it 'show information message' do
-        expect(output).to have_output_message(I18n.t('messages.using_existing_config'))
+        expect(output).to have_output_message('Using existing config for inquisition...')
       end
 
       it { expect(File).to exist(base_config_file) }
@@ -28,7 +28,7 @@ RSpec.describe Inquisition::CLI, type: :unit do
       before { output }
 
       it 'show information message' do
-        expect(output).to have_output_message(I18n.t('messages.inquisition_setuping'))
+        expect(output).to have_output_message('Inquisition setuping...')
       end
 
       it { expect(File).to exist(base_config_file) }
@@ -50,7 +50,7 @@ RSpec.describe Inquisition::CLI, type: :unit do
     context 'configuration file is not present' do
       it 'show information message' do
         expect{ subject.setup }.to raise_error(Inquisition::Errors::BaseConfigAbsenseError,
-                                               I18n.t('errors.config_absense'))
+                                               'Run inquisition build first')
       end
     end
   end

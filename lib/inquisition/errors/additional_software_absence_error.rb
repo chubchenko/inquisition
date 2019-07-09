@@ -2,7 +2,7 @@ module Inquisition
   module Errors
     class AdditionalSoftwareAbsenceError < BaseError
       def initialize(command)
-        super(I18n.t('errors.absence_additional_software', command: command))
+        super("Additional software with command #{command} not found")
       end
     end
   end
