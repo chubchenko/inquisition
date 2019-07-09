@@ -4,6 +4,7 @@ defaults: &defaults
     - image: circleci/ruby:2.5.1-node
       environment:
         - RAILS_ENV: test
+        - CC_TEST_REPORTER_ID: test_reporter_id
   environment:
     CIRCLE_TEST_REPORTS: test_reports
     CIRCLE_ARTIFACTS: tmp/coverage
@@ -37,13 +38,6 @@ references:
         bundle exec overcommit -s
         SKIP=AuthorEmail,AuthorName bundle exec overcommit -r
 
-  setup_code_climate: &setup_code_climate
-    run:
-      name: Install Code Climate Test Reporter
-      command: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-
   run_tests: &run_tests
     run:
       name: Running tests
@@ -53,6 +47,19 @@ references:
     run:
       name: Coverage
       command: bundle exec undercover
+
+  setup_code_climate: &setup_code_climate
+    run:
+      name: Install Code Climate Test Reporter
+      command: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+  run_coverage_codeclimate: &run_coverage_codeclimate
+    run:
+      name: Sum-coverage
+      command: |
+        ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
+
 
 version: 2
 
