@@ -28,7 +28,7 @@ references:
   install_undercover_dependencies: &install_undercover_dependencies
     run:
       name: Installing dependency for undercover gem
-      command: sudo apt-get install cmake
+      command: sudo apt-get update && sudo apt-get install cmake
 
   run_overcommit: &run_overcommit
     run:
