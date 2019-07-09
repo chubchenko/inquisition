@@ -20,6 +20,8 @@ engines:
     enabled: true
   rubocop:
     enabled: true
+  similar-code:
+    enabled: false
 ratings:
   paths:
   - Gemfile.lock
