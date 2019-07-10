@@ -35,14 +35,13 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'benchmark-ips'        # https://github.com/evanphx/benchmark-ips
   spec.add_dependency 'colorize'             # https://github.com/fazibear/colorize
   spec.add_dependency 'hirb'                 # https://github.com/cldwalker/hirb
-  spec.add_dependency 'i18n'
   spec.add_dependency 'overcommit'           # https://github.com/brigade/overcommit
   spec.add_dependency 'pry-byebug'           # https://github.com/deivid-rodriguez/pry-byebug
   spec.add_dependency 'pry-rails'            # https://github.com/rweng/pry-rails
   spec.add_dependency 'pry-rescue'           # https://github.com/ConradIrwin/pry-rescue
   spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
   spec.add_dependency 'thor'
-  spec.add_dependency 'zeitwerk'
+  spec.add_dependency 'zeitwerk', '2.1.4'
   spec.add_dependency 'tilt'
   spec.add_dependency 'launchy'
 
