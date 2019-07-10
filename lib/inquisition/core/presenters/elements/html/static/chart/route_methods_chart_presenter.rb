@@ -19,7 +19,7 @@ module Inquisition
 
                 def build_chart_items
                   data.group_by { |route| route[:verb] }.transform_values(&:count).sort_by { |_verb, count| count }
-                      .reverse.each(&method(:build_chart_hash))
+                      .reverse_each(&method(:build_chart_hash))
                 end
 
                 def build_chart_hash(item)
