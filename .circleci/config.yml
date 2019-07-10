@@ -4,7 +4,7 @@ defaults: &defaults
     - image: circleci/ruby:2.5.1-node
       environment:
         - RAILS_ENV: test
-        - CC_TEST_REPORTER_ID: test_reporter_id
+        - CC_TEST_REPORTER_ID: CC_TEST_REPORTER_ID
   environment:
     CIRCLE_TEST_REPORTS: test_reports
     CIRCLE_ARTIFACTS: tmp/coverage
@@ -56,10 +56,9 @@ references:
         chmod +x ./cc-test-reporter
   run_coverage_codeclimate: &run_coverage_codeclimate
     run:
-      name: Sum-coverage
+      name: Code Climate Test Coverage
       command: |
-        ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
-
+        ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
 
 version: 2
 
@@ -85,10 +84,15 @@ jobs:
       - <<: *save_bundle_cache
       - <<: *run_tests
       - <<: *run_coverage
+      - <<: *setup_code_climate
+      - <<: *run_coverage_codeclimate
+
       - store_test_results:
           path: $CIRCLE_TEST_REPORTS
       - store_artifacts:
           path: $CIRCLE_ARTIFACTS
+      - store_artifacts:
+          path: coverage/codeclimate.json
 
 workflows:
   version: 2

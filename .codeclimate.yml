@@ -1,12 +1,17 @@
----
+version: "2"
 engines:
   duplication:
     enabled: true
     config:
       languages:
       - ruby
+plugins:
   rubocop:
-    emabled: true
+    enabled: true
+  Duplication:
+    enabled: true
+  Reek:
+    enabled: true
 ratings:
   paths:
   - Gemfile.lock
@@ -15,6 +20,3 @@ ratings:
   - "**.css"
   - "**.coffee"
   - "**.js"
-exclude_paths:
-- spec/**/*
-- vendor/**/*
