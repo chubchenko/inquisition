@@ -2,45 +2,45 @@ module Inquisition
   class MessageNotifier
     class << self
       def base_config_exist
-        puts_message('messages.using_existing_config')
+        output('Using existing config for inquisition...')
       end
 
       def setuping_inquisition
-        puts_message('messages.inquisition_setuping')
+        output('Inquisition setuping...')
       end
 
       def common_configs_setuped
-        puts_message('messages.common_configs_setuped')
+        output('Common configs setuped')
       end
 
       def front_configs_setuped
-        puts_message('messages.front_configs_setuped')
+        output('Front configs setuped')
       end
 
       def config_already_exist(linter_name)
-        puts_message('messages.config_already_exist', linter_name: linter_name)
+        output("Config for #{linter_name} already exists")
       end
 
       def done
-        puts_message('messages.done', color: :green)
+        output('...Done!', color: :green)
       end
 
       def creates_config_files
-        puts_message('messages.creates_config_files')
+        output('Creates configuration file')
       end
 
       def setups_all_conf_linters
-        puts_message('messages.setups_all_conf_linters')
+        output('Setups all configs for linters')
       end
 
       def additional_software_not_found(command)
-        puts_message('errors.absence_additional_software', command: command)
+        output("Additional software with command #{command} not found")
       end
 
       private
 
-      def puts_message(translate, color: :uncolorize, **args)
-        puts I18n.t(translate, args).colorize(color)
+      def output(message, color: :uncolorize)
+        puts message.colorize(color)
       end
     end
   end
