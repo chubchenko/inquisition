@@ -1,10 +1,11 @@
 version: "2"
-plugins:
+checks:
   duplication:
     enabled: true
-  config:
-    languages:
-    - ruby
+    config:
+      languages:
+      - ruby
+plugins:
   rubocop:
     enabled: true
   duplication:
