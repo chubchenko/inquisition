@@ -35,7 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'benchmark-ips'        # https://github.com/evanphx/benchmark-ips
   spec.add_dependency 'colorize'             # https://github.com/fazibear/colorize
   spec.add_dependency 'hirb'                 # https://github.com/cldwalker/hirb
-  spec.add_dependency 'i18n'
   spec.add_dependency 'overcommit'           # https://github.com/brigade/overcommit
   spec.add_dependency 'pry-byebug'           # https://github.com/deivid-rodriguez/pry-byebug
   spec.add_dependency 'pry-rails'            # https://github.com/rweng/pry-rails
