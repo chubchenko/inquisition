@@ -1,16 +1,13 @@
 version: "2"
-engines:
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - ruby
 plugins:
+  config:
+    languages:
+    - ruby
   rubocop:
     enabled: true
-  Duplication:
+  duplication:
     enabled: true
-  Reek:
+  reek:
     enabled: true
 ratings:
   paths:
