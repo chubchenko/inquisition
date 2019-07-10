@@ -19,3 +19,5 @@ ratings:
   - "**.rb"
   - "**.css"
   - "**.coffee"
+exclude_paths:
+- "lib/inquisition/generators/html/assets/js/**/*"
