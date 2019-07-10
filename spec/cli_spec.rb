@@ -3,8 +3,8 @@
 require 'spec_helper'
 require './lib/inquisition/cli'
 
-RSpec.describe Inquisition::Cli, type: :unit do
-  subject { Inquisition::Cli.new }
+RSpec.describe Inquisition::CLI, type: :unit do
+  subject { Inquisition::CLI.new }
   after { remove_base_config }
 
   before do

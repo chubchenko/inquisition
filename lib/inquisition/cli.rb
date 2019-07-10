@@ -1,5 +1,5 @@
 module Inquisition
-  class Cli < Thor
+  class CLI < Thor
     desc 'install', 'Creates configuration file'
     def build(*_args)
       Builder.call

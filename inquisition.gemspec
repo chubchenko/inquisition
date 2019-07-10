@@ -41,7 +41,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pry-rescue'           # https://github.com/ConradIrwin/pry-rescue
   spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
   spec.add_dependency 'thor'
-  spec.add_dependency 'zeitwerk'
+  spec.add_dependency 'zeitwerk', '2.1.4'
   spec.add_dependency 'tilt'
   spec.add_dependency 'launchy'
 
