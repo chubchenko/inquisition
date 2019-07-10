@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Auditors::Backend::Installer do
   describe '#call' do
     subject { Inquisition::Auditors::Backend::Installer.call }

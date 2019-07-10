@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Authorization do
   subject { Class.new { extend Inquisition::Authorization } }
 

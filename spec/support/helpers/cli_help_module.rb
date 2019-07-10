@@ -14,7 +14,7 @@ module CLIHelpModule
   end
 
   def temp_folder
-    File.join(Dir.pwd, 'spec', 'inquisition', 'tmp')
+    File.join(Dir.pwd, 'spec', 'tmp')
   end
 
   def base_config_template_file

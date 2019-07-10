@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Configure, type: :unit do
   subject { Inquisition::Core::Configure.new(some: 'param') }
 

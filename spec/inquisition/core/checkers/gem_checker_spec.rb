@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Checkers::GemChecker, type: :unit do
   subject { Inquisition::Core::Checkers::GemChecker.new(**args) }
   let(:args) { { name: 'rspec' } }

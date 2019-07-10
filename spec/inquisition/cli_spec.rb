@@ -1,4 +1,3 @@
-require 'spec_helper'
 require './lib/inquisition/cli'
 
 RSpec.describe Inquisition::CLI, type: :unit do

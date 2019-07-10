@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::BaseConfig, type: :unit do
   subject { Inquisition::BaseConfig.instance }
   before { stub_const('Inquisition::BaseConfig::TARGET_DIRECTORY', temp_folder) }

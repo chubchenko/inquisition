@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Checkers::AdditionalSoftwareChecker, type: :unit do
   subject { Inquisition::Core::Checkers::AdditionalSoftwareChecker.new(command: 'ruby -v') }
 

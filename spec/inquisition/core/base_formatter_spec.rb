@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::BaseFormatter, type: :unit do
   include FormatterHelpModule
 

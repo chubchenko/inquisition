@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Checkers::RubyVersionChecker, type: :unit do
   subject { Inquisition::Core::Checkers::RubyVersionChecker.new(**args) }
   let(:args) { { from_version: '1.9', to_version: '2.1' } }

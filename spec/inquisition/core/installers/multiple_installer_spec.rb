@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Installers::MultipleInstaller, type: :unit do
   subject { Inquisition::Core::Installers::MultipleInstaller }
 

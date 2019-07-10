@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Runners::MultipleRunner, type: :unit do
   subject { Inquisition::Core::Runners::MultipleRunner.new }
 

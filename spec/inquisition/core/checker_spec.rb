@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Checker, type: :unit do
   subject { Inquisition::Core::Checker.new(some: 'param') }
 

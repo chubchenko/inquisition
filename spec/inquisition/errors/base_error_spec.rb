@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Errors::BaseConfigAbsenseError do
   subject { Inquisition::Errors::BaseConfigAbsenseError.new }
 

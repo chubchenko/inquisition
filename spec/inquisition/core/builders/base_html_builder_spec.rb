@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 RSpec.describe Inquisition::Core::Builders::BaseHtmlBuilder do
   include AuditorsHelpModule
 

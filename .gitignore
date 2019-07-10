@@ -5,8 +5,8 @@
 /doc/
 /pkg/
 /spec/reports/
-/spec/inquisition/tmp/**
-!/spec/inquisition/tmp/.keep
+/spec/tmp/**
+!/spec/tmp/.keep
 /tmp/*
 .history
 /inquisition.yml
