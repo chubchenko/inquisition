@@ -1,5 +1,7 @@
 version: "2"
 plugins:
+  duplication:
+    enabled: true
   config:
     languages:
     - ruby
@@ -16,4 +18,3 @@ ratings:
   - "**.rb"
   - "**.css"
   - "**.coffee"
-  - "**.js"
