@@ -47,6 +47,18 @@ references:
       name: Coverage
       command: bundle exec undercover
 
+  setup_code_climate: &setup_code_climate
+    run:
+      name: Install Code Climate Test Reporter
+      command: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        chmod +x ./cc-test-reporter
+  run_coverage_codeclimate: &run_coverage_codeclimate
+    run:
+      name: Code Climate Test Coverage
+      command: |
+        ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+
 version: 2
 
 jobs:
@@ -71,10 +83,15 @@ jobs:
       - <<: *save_bundle_cache
       - <<: *run_tests
       - <<: *run_coverage
+      - <<: *setup_code_climate
+      - <<: *run_coverage_codeclimate
+
       - store_test_results:
           path: $CIRCLE_TEST_REPORTS
       - store_artifacts:
           path: $CIRCLE_ARTIFACTS
+      - store_artifacts:
+          path: coverage/codeclimate.json
 
 workflows:
   version: 2
