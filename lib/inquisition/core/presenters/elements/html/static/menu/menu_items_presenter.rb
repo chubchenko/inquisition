@@ -83,7 +83,8 @@ module Inquisition
                   return [] unless enabled_link?(name)
 
                   item = build_item(name, menu[:link])
-                  item[:child_items] = build_child_menu(menu[:child_items])
+                  child_menu = menu[:child_items]
+                  item[:child_items] = build_child_menu(child_menu) if child_menu
                   result << item
                 end
 
@@ -93,7 +94,7 @@ module Inquisition
                 end
 
                 def build_child_menu(child_menu)
-                  child_menu.inject([], &method(:build_menu)) if child_menu && child_menu.any?
+                  child_menu.inject([], &method(:build_menu))
                 end
 
                 def build_item(name, link)
