@@ -4,7 +4,6 @@ defaults: &defaults
     - image: circleci/ruby:2.5.1-node
       environment:
         - RAILS_ENV: test
-        - CC_TEST_REPORTER_ID: CC_TEST_REPORTER_ID
   environment:
     CIRCLE_TEST_REPORTS: test_reports
     CIRCLE_ARTIFACTS: tmp/coverage
