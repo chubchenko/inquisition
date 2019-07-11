@@ -49,7 +49,7 @@ RSpec.describe Inquisition::CLI, type: :unit do
 
     context 'configuration file is not present' do
       it 'show information message' do
-        expect{ subject.setup }.to raise_error(Inquisition::Errors::BaseConfigAbsenseError,
+        expect{ subject.setup }.to raise_error(Inquisition::Error::BaseConfigAbsenseError,
                                                'Run inquisition build first')
       end
     end

@@ -1,30 +1,32 @@
 module Inquisition
-  module Errors
-    class AdditionalSoftwareAbsenceError < StandardError
+  BaseError = Class.new(StandardError)
+
+  module Error
+    class AdditionalSoftwareAbsenceError < BaseError
       def initialize(command)
         super("Additional software with command #{command} not found")
       end
     end
 
-    class BaseConfigAbsenseError < StandardError
+    class BaseConfigAbsenseError < BaseError
       def initialize
         super('Run inquisition build first')
       end
     end
 
-    class InvalidRubyVersionError < StandardError
+    class InvalidRubyVersionError < BaseError
       def initialize(version)
         super("Invalid ruby version #{version}")
       end
     end
 
-    class NoConfigFileError < StandardError
+    class NoConfigFileError < BaseError
       def initialize(name)
         super("File #{name} not found")
       end
     end
 
-    class NoGemError < StandardError
+    class NoGemError < BaseError
       def initialize(name)
         super("Gem #{name} not found")
       end

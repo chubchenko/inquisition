@@ -13,7 +13,7 @@ RSpec.describe Inquisition::Core::Checkers::ExistFileChecker, type: :unit do
       end
 
       it 'raise NoConfigFileError' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::NoConfigFileError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::NoConfigFileError)
       end
     end
 

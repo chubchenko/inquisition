@@ -43,7 +43,7 @@ RSpec.describe Inquisition::Configure, type: :unit do
       end
 
       it 'raise authenticate error' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::BaseConfigAbsenseError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::BaseConfigAbsenseError)
       end
     end
   end
