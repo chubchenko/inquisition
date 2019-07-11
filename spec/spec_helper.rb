@@ -1,13 +1,8 @@
-# frozen_string_literal: true
-Dir[File.join(Dir.pwd, 'spec', 'support','**', '*.rb')].each {|f| require f}
-$LOAD_PATH <<  File.join(Dir.pwd, 'spec', 'fixtures')
-
-require 'bundler/setup'
-require 'inquisition'
 require 'simplecov'
-require 'simplecov-lcov'
-require 'undercover'
+require 'inquisition'
 require 'json_matchers/rspec'
+
+Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
 
 JsonMatchers.schema_root = 'spec/support/schemas'
 
@@ -31,11 +26,3 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
-
-SimpleCov::Formatter::LcovFormatter.config.report_with_single_file = true
-SimpleCov.formatter = SimpleCov::Formatter::LcovFormatter
-SimpleCov.start do
-  add_filter(/^\/spec\//) # For RSpec
-end
-
-SimpleCov.start
