@@ -1,6 +1,6 @@
 module Inquisition
   module Auditors
-    module Frontend
+    module Backend
       module I18nTasks
         class Installer < Core::Installers::SingleInstaller
           class << self
