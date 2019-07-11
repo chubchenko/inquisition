@@ -13,6 +13,7 @@ RSpec::Matchers.define :have_output_message do |expected, line|
 
   private
 
+  # :reek:NilCheck
   def output_line(output, line)
     output.lines[line || 0]&.chop&.gsub(/\e\[([;\d]+)?m/, '')
   end

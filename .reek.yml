@@ -30,9 +30,3 @@ detectors:
   TooManyStatements:
     exclude:
       - 'Inquisition::Core::Presenters::Elements::Html::Static::LineChart::TopTablesWithErrorsLineChartPresenter#add_items'
-      - 'Inquisition::Core::Presenters::Elements::Html::Static::Menu::MenuItemsPresenter#build_menu'
-
-directories:
-  'spec/support/':
-    NilCheck:
-      enabled: false

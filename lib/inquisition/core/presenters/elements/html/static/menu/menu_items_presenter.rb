@@ -83,8 +83,7 @@ module Inquisition
                   return [] unless enabled_link?(name)
 
                   item = build_item(name, menu[:link])
-                  child_menu = menu[:child_items]
-                  item[:child_items] = build_child_menu(child_menu) if child_menu
+                  item[:child_items] = build_child_menu(menu[:child_items])
                   result << item
                 end
 
@@ -93,8 +92,9 @@ module Inquisition
                   auditors_list.none?(name) || auditor_enabled?(name)
                 end
 
+                # :reek:NilCheck
                 def build_child_menu(child_menu)
-                  child_menu.inject([], &method(:build_menu))
+                  child_menu.inject([], &method(:build_menu)) if child_menu&.any?
                 end
 
                 def build_item(name, link)
