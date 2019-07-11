@@ -1,0 +1,13 @@
+version: "2"
+
+checks:
+  similar-code:
+    enabled: false
+  identical-code:
+    enabled: false
+
+plugins:
+  rubocop:
+    enabled: true
+  reek:
+    enabled: true
