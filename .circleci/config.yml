@@ -42,11 +42,6 @@ references:
       name: Running tests
       command: bundle exec rspec
 
-  run_coverage: &run_coverage
-    run:
-      name: Coverage
-      command: bundle exec undercover
-
   setup_code_climate: &setup_code_climate
     run:
       name: Install Code Climate Test Reporter
@@ -82,7 +77,6 @@ jobs:
       - <<: *bundle_install
       - <<: *save_bundle_cache
       - <<: *run_tests
-      - <<: *run_coverage
       - <<: *setup_code_climate
       - <<: *run_coverage_codeclimate
 
