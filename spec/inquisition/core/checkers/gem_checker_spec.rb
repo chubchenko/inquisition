@@ -7,7 +7,7 @@ RSpec.describe Inquisition::Core::Checkers::GemChecker, type: :unit do
       let(:args) { { name: 'some-unknown-gem' } }
 
       it 'raise NoGemError' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::NoGemError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::NoGemError)
       end
     end
 

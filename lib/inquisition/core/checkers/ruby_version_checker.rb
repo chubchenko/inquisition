@@ -5,7 +5,7 @@ module Inquisition
         private
 
         def check
-          raise Errors::InvalidRubyVersionError, @args[:from_version] unless valid?
+          raise Error::InvalidRubyVersionError, @args[:from_version] unless valid?
         end
 
         def valid?

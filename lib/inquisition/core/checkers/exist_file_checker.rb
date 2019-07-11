@@ -5,7 +5,7 @@ module Inquisition
         private
 
         def check
-          raise Errors::NoConfigFileError, @args[:file] unless file_exist?
+          raise Error::NoConfigFileError, @args[:file] unless file_exist?
         end
 
         def file_exist?

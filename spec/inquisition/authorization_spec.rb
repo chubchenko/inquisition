@@ -18,7 +18,7 @@ RSpec.describe Inquisition::Authorization do
       end
 
       it 'raise error' do
-        expect{ subject.authenticate_installer }.to raise_error(Inquisition::Errors::BaseConfigAbsenseError)
+        expect{ subject.authenticate_installer }.to raise_error(Inquisition::Error::BaseConfigAbsenseError)
       end
     end
   end
