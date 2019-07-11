@@ -8,7 +8,7 @@ RSpec.describe Inquisition::Core::Checkers::AdditionalSoftwareChecker, type: :un
       end
 
       it 'raise AdditionalSoftwareAbsenceError' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::AdditionalSoftwareAbsenceError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::AdditionalSoftwareAbsenceError)
       end
     end
 

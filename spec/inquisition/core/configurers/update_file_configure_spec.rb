@@ -15,7 +15,7 @@ RSpec.describe Inquisition::Core::Configurers::UpdateFileConfigure do
     context 'when config file not exist' do
 
       it 'railse error' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::NoConfigFileError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::NoConfigFileError)
       end
     end
 

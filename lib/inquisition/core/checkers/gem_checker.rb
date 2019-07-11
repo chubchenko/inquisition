@@ -6,7 +6,7 @@ module Inquisition
 
         def check
           name = @args[:name]
-          raise Errors::NoGemError, name unless Gem.loaded_specs.key?(name)
+          raise Error::NoGemError, name unless Gem.loaded_specs.key?(name)
         end
       end
     end

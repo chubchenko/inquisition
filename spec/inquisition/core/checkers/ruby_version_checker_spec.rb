@@ -7,7 +7,7 @@ RSpec.describe Inquisition::Core::Checkers::RubyVersionChecker, type: :unit do
       before { stub_const('RUBY_VERSION', '1.8') }
 
       it 'raise InvalidRubyVersionError' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::InvalidRubyVersionError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::InvalidRubyVersionError)
       end
     end
 
@@ -15,7 +15,7 @@ RSpec.describe Inquisition::Core::Checkers::RubyVersionChecker, type: :unit do
       before { stub_const('RUBY_VERSION', '2.5') }
 
       it 'raise InvalidRubyVersionError' do
-        expect{ subject.call }.to raise_error(Inquisition::Errors::InvalidRubyVersionError)
+        expect{ subject.call }.to raise_error(Inquisition::Error::InvalidRubyVersionError)
       end
     end
 

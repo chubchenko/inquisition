@@ -7,7 +7,7 @@ module Inquisition
         private
 
         def check
-          raise Errors::AdditionalSoftwareAbsenceError, @args[:command] if software_missing?
+          raise Error::AdditionalSoftwareAbsenceError, @args[:command] if software_missing?
         end
 
         def software_missing?
