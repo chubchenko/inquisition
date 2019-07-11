@@ -1,5 +1,3 @@
-require 'execjs'
-
 module Inquisition
   module Core
     module Presenters
@@ -9,7 +7,7 @@ module Inquisition
             private
 
             def build_presenter
-              @build_presenter ||= ExecJS.runtime.name
+              @build_presenter ||= 'ExecJS.runtime.name'
             end
           end
         end
