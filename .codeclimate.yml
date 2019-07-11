@@ -1,23 +1,13 @@
 version: "2"
+
 checks:
-  duplication:
-    enabled: true
-    config:
-      languages:
-      - ruby
+  similar-code:
+    enabled: false
+  identical-code:
+    enabled: false
+
 plugins:
   rubocop:
     enabled: true
-  duplication:
-    enabled: true
   reek:
     enabled: true
-ratings:
-  paths:
-  - Gemfile.lock
-  - "**.erb"
-  - "**.rb"
-  - "**.css"
-  - "**.coffee"
-exclude_paths:
-- "lib/inquisition/generators/html/assets/js/**/*"
