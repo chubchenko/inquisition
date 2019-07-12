@@ -22,10 +22,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'json_matchers'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'json_matchers'
   spec.add_development_dependency 'rubycritic'
   spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'undercover'
@@ -35,15 +35,15 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'benchmark-ips'        # https://github.com/evanphx/benchmark-ips
   spec.add_dependency 'colorize'             # https://github.com/fazibear/colorize
   spec.add_dependency 'hirb'                 # https://github.com/cldwalker/hirb
+  spec.add_dependency 'launchy'
   spec.add_dependency 'overcommit'           # https://github.com/brigade/overcommit
   spec.add_dependency 'pry-byebug'           # https://github.com/deivid-rodriguez/pry-byebug
   spec.add_dependency 'pry-rails'            # https://github.com/rweng/pry-rails
   spec.add_dependency 'pry-rescue'           # https://github.com/ConradIrwin/pry-rescue
   spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
   spec.add_dependency 'thor'
-  spec.add_dependency 'zeitwerk', '2.1.4'
   spec.add_dependency 'tilt'
-  spec.add_dependency 'launchy'
+  spec.add_dependency 'zeitwerk', '2.1.4'
 
   # backend
   spec.add_dependency 'active_record_doctor'
@@ -61,6 +61,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails_best_practices'
   spec.add_dependency 'reek', '4.8.2'
   spec.add_dependency 'rspec-rails'
+  spec.add_dependency 'rspec_junit_formatter', '~> 0.4.1'
   spec.add_dependency 'rubocop', '0.68.1'
   spec.add_dependency 'rubocop-rspec'
   spec.add_dependency 'rubrowser'
