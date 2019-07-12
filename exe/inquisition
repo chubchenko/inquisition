@@ -4,11 +4,11 @@ require 'inquisition'
 require 'inquisition/cli'
 
 CODE_INTERRUPT_EXCEPTIONS = [
-  Inquisition::Errors::BaseConfigAbsenseError,
-  Inquisition::Errors::NoConfigFileError,
-  Inquisition::Errors::InvalidRubyVersionError,
-  Inquisition::Errors::AdditionalSoftwareAbsenceError,
-  Inquisition::Errors::NoGemError
+  Inquisition::Error::BaseConfigAbsenseError,
+  Inquisition::Error::NoConfigFileError,
+  Inquisition::Error::InvalidRubyVersionError,
+  Inquisition::Error::AdditionalSoftwareAbsenceError,
+  Inquisition::Error::NoGemError
 ].freeze
 
 begin

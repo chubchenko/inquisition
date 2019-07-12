@@ -16,14 +16,6 @@ RSpec.describe Inquisition::Configure, type: :unit do
         it_behaves_like 'call callable objects', Inquisition::Auditors::Backend::Installer => 'backend configure'
       end
 
-      context 'when frontend configurers are enabled' do
-        before do
-          allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?).with(:frontend).and_return(true)
-        end
-
-        it_behaves_like 'call callable objects', Inquisition::Auditors::Frontend::Installer => 'frontend configure'
-      end
-
       context 'when common configurers are enabled' do
         before do
           allow(Inquisition::BaseConfig.instance).to receive(:auditor_enabled?).with(:common).and_return(true)
