@@ -7,6 +7,7 @@ module Inquisition
 
           def installers
             {
+              I18nTasks::Installer => :i18n_tasks,
               # Bullet::Installer => :bullet,
               Fasterer::Installer => :fasterer,
               Reek::Installer => :reek,

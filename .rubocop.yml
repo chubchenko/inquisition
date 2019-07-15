@@ -1,19 +1,27 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
 AllCops:
   Include:
     - '**/Rakefile'
     - 'lib/**/*.rb'
-  Exclude:
-    - 'spec/support/**/*'
-    - 'spec/spec_helper.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Documentation:
   Enabled: false
+
 LineLength:
   Max: 120
+
 Metrics/MethodLength:
   Max: 15
   Exclude:
     - lib/inquisition/auditors/backend/installer.rb
     - lib/inquisition/auditors/backend/runner.rb
+
 Metrics/ClassLength:
   Exclude:
     - lib/inquisition/core/base_formatter.rb

@@ -88,15 +88,45 @@ references:
   #       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
   #       chmod +x ./tmp/cc-test-reporter
 
+  # run_coverage_codeclimate: &run_coverage_codeclimate
+  #   - attach_workspace:
+  #       at: ~/project/tmp
+  #   - run:
+  #       name: Code Climate Test Coverage
+  #       command: |
+  #         ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+  #   - persist_to_workspace:
+  #       root: tmp
+  #       paths:
+  #         - codeclimate.*.json
+
+  # run_coverage_codeclimate: &run_coverage_codeclimate
+  #   - attach_workspace:
+  #       at: ~/project/tmp
+  #   - run: bundle install
+  #   - run:
+  #       name: Run specs
+  #       command: |
+  #         ./tmp/cc-test-reporter before-build
+  #         COVERAGE=true bundle exec rake spec
+  #         ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+  #   - persist_to_workspace:
+  #       root: tmp
+  #       paths:
+  #         - codeclimate.*.json
+
   run_coverage_codeclimate: &run_coverage_codeclimate
+    - attach_workspace:
+        at: ~/inquisition/tmp
     - run:
         name: Code Climate Test Coverage
         command: |
+          ./tmp/cc-test-reporter before-build
           ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-    # - persist_to_workspace:
-    #     root: tmp
-    #     paths:
-    #       - codeclimate.*.json
+    - persist_to_workspace:
+        root: tmp
+        paths:
+          - codeclimate.*.json
 
 
 jobs:
@@ -105,17 +135,17 @@ jobs:
     docker:
       - image: circleci/ruby:2.5.1-node
         environment:
-          - RAILS_ENV: test
+          RAILS_ENV: test
     steps:
       - checkout
       - <<: *repo_save_cache
       - <<: *install_cmake
       - <<: *bundle_install
-      - <<: *run_overcommit
+      # - <<: *run_overcommit
 
   cc-setup:
     docker:
-        - image: circleci/ruby
+      - image: circleci/ruby
     steps:
       - run:
           name: Download Code Climate test-reporter
@@ -128,27 +158,27 @@ jobs:
           paths:
             - cc-test-reporter
 
-  ruby-2.4:
-    docker:
-        - image: circleci/ruby:2.4
-    working_directory: ~/inquisition
-    steps:
-      - <<: *repo_restore_cache
-      - <<: *restore_bundle_cache_2_4
-      - <<: *install_cmake
-      - <<: *bundle_install
-      - <<: *save_bundle_cache_2_4
-      - <<: *run_tests
-      - store_test_results:
-          path: ~/rspec
-      # - <<: *setup_code_climate
-      - <<: *run_coverage_codeclimate
-      - store_artifacts:
-          path: coverage/codeclimate.json
+  # ruby-2.4:
+  #   docker:
+  #     - image: circleci/ruby:2.4
+  #   working_directory: ~/inquisition
+  #   steps:
+  #     - <<: *repo_restore_cache
+  #     - <<: *restore_bundle_cache_2_4
+  #     - <<: *install_cmake
+  #     - <<: *bundle_install
+  #     - <<: *save_bundle_cache_2_4
+  #     - <<: *run_tests
+  #     - store_test_results:
+  #         path: ~/rspec
+  #     # - <<: *setup_code_climate
+  #     - <<: *run_coverage_codeclimate
+  #     - store_artifacts:
+  #         path: coverage/codeclimate.json
 
   ruby-2.5:
     docker:
-        - image: circleci/ruby:2.5
+      - image: circleci/ruby:2.5
     working_directory: ~/inquisition
     steps:
       - <<: *repo_restore_cache
@@ -159,14 +189,26 @@ jobs:
       - <<: *run_tests
       - store_test_results:
           path: ~/rspec
-      # - <<: *setup_code_climate
-      - <<: *run_coverage_codeclimate
+      # - <<: *run_coverage_codeclimate
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./tmp/cc-test-reporter before-build
+            COVERAGE=true bundle exec rake spec
+            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+      - persist_to_workspace:
+          root: tmp
+          paths:
+          - codeclimate.*.json
       - store_artifacts:
           path: coverage/codeclimate.json
 
   ruby-2.6:
     docker:
-        - image: circleci/ruby:2.6
+      - image: circleci/ruby:2.6
     working_directory: ~/inquisition
     steps:
       - <<: *repo_restore_cache
@@ -177,14 +219,44 @@ jobs:
       - <<: *run_tests
       - store_test_results:
           path: ~/rspec
-      # - <<: *setup_code_climate
-      - <<: *run_coverage_codeclimate
+      # - <<: *run_coverage_codeclimate
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./tmp/cc-test-reporter before-build
+            COVERAGE=true bundle exec rake spec
+            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+      - persist_to_workspace:
+          root: tmp
+          paths:
+          - codeclimate.*.json
       - store_artifacts:
           path: coverage/codeclimate.json
 
+  # ruby-head:
+  #   docker:
+  #     - image: circleci/ruby:latest
+  #   working_directory: ~/inquisition
+  #   steps:
+  #     - <<: *repo_restore_cache
+  #     - <<: *restore_bundle_cache_head
+  #     - <<: *install_cmake
+  #     - <<: *bundle_install
+  #     - <<: *save_bundle_cache_head
+  #     - <<: *run_tests
+  #     - store_test_results:
+  #         path: ~/rspec
+  #     # - <<: *setup_code_climate
+  #     - <<: *run_coverage_codeclimate
+  #     - store_artifacts:
+  #         path: coverage/codeclimate.json
+
   ruby-head:
     docker:
-        - image: circleci/ruby:latest
+      - image: circleci/ruby:latest
     working_directory: ~/inquisition
     steps:
       - <<: *repo_restore_cache
@@ -195,16 +267,31 @@ jobs:
       - <<: *run_tests
       - store_test_results:
           path: ~/rspec
-      # - <<: *setup_code_climate
-      - <<: *run_coverage_codeclimate
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./tmp/cc-test-reporter before-build
+            COVERAGE=true bundle exec rake spec
+            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+      - persist_to_workspace:
+          root: tmp
+          paths:
+          - codeclimate.*.json
       - store_artifacts:
           path: coverage/codeclimate.json
 
   cc-upload:
     docker:
-        - image: circleci/ruby
+      - image: circleci/ruby
     working_directory: ~/inquisition
+    environment:
+      CC_TEST_REPORTER_ID: 83bc1e5240cc5e9d345a2f058908b137e2e0f48cfe1d67eac2b544cac129e852
     steps:
+      - attach_workspace:
+          at: ~/inquisition/tmp
       - run:
           name: Upload coverage results to Code Climate
           command: |
@@ -218,23 +305,23 @@ workflows:
     jobs:
       - check_out
       - cc-setup
-      # - "ruby-2.4":
+      # - ruby-2.4:
       #     requires:
       #       - check_out
-      # - ruby-2.5:
-      #     requires:
-      #       - check_out
-      #       - cc-setup
-      # - ruby-2.6:
-      #     requires:
-      #       - check_out
-      #       - cc-setup
+      - ruby-2.5:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.6:
+          requires:
+            - check_out
+            - cc-setup
       - ruby-head:
           requires:
             - check_out
             - cc-setup
       - cc-upload:
           requires:
-            # - ruby-2.5
-            # - ruby-2.6
+            - ruby-2.5
+            - ruby-2.6
             - ruby-head

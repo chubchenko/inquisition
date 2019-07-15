@@ -6,6 +6,7 @@ module Inquisition
 
         def runners
           {
+            I18nTasks::Runner => :i18n_tasks,
             # Fasterer::Runner => :fasterer,
             # Reek::Runner => :reek,
             # Dawnscanner::Runner => :dawnscanner,

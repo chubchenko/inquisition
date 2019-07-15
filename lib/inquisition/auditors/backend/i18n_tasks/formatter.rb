@@ -1,6 +1,6 @@
 module Inquisition
   module Auditors
-    module Frontend
+    module Backend
       module I18nTasks
         class Formatter < Core::BaseFormatter
           REPORT_KEYS = {
