@@ -92,8 +92,9 @@ module Inquisition
                   auditors_list.none?(name) || auditor_enabled?(name)
                 end
 
+                # :reek:NilCheck
                 def build_child_menu(child_menu)
-                  child_menu.inject([], &method(:build_menu)) if child_menu && child_menu.any?
+                  child_menu.inject([], &method(:build_menu)) if child_menu&.any?
                 end
 
                 def build_item(name, link)
