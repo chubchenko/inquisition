@@ -24,11 +24,11 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'thor', '~> 0.20.3'
 
   spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'reek', '~> 5.0'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'rubocop', '~> 0.72.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.4'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.33'
-  spec.add_development_dependency 'reek', '~> 5.0'
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'simplecov-lcov'
 end
