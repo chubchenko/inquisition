@@ -1,71 +1,266 @@
-defaults: &defaults
-  working_directory: ~/inquisition
-  docker:
-    - image: circleci/ruby:2.5.1-node
-      environment:
-        - RAILS_ENV: test
-  environment:
-    CIRCLE_TEST_REPORTS: test_reports
-    CIRCLE_ARTIFACTS: tmp/coverage
-
+version: 2
 references:
-  restore_bundle_cache: &restore_bundle_cache
+  restore_bundle_cache_2_4: &restore_bundle_cache_2_4
     restore_cache:
       keys:
-        - inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}
+        - inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-2.4
+
+  save_bundle_cache_2_4: &save_bundle_cache_2_4
+    save_cache:
+      key: inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-2.4
+      paths:
+        - vendor/bundle
+
+  restore_bundle_cache_2_5: &restore_bundle_cache_2_5
+    restore_cache:
+      keys:
+        - inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-2.5
+
+  save_bundle_cache_2_5: &save_bundle_cache_2_5
+    save_cache:
+      key: inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-2.5
+      paths:
+        - vendor/bundle
+
+  restore_bundle_cache_2_6: &restore_bundle_cache_2_6
+    restore_cache:
+      keys:
+        - inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-2.6
+
+  save_bundle_cache_2_6: &save_bundle_cache_2_6
+    save_cache:
+      key: inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-2.6
+      paths:
+        - vendor/bundle
+
+  restore_bundle_cache_head: &restore_bundle_cache_head
+    restore_cache:
+      keys:
+        - inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-head
+
+  save_bundle_cache_head: &save_bundle_cache_head
+    save_cache:
+      key: inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}-ruby-head
+      paths:
+        - vendor/bundle
+
+  repo_restore_cache: &repo_restore_cache
+    restore_cache:
+      keys:
+        - repo-{{ .Environment.CIRCLE_SHA1 }}
+
+  repo_save_cache: &repo_save_cache
+    save_cache:
+      key: repo-{{ .Environment.CIRCLE_SHA1 }}-{{ epoch }}
+      paths:
+        - ~/inquisition
 
   bundle_install: &bundle_install
     run:
       name: Installing gems
       command: bundle install --path vendor/bundle
 
-  save_bundle_cache: &save_bundle_cache
-    save_cache:
-      key: inquisition-{{ checksum "Gemfile" }}-{{ checksum "inquisition.gemspec" }}
-      paths:
-        - vendor/bundle
-
   run_tests: &run_tests
     run:
       name: Running tests
-      command: bundle exec rspec
-
-  setup_code_climate: &setup_code_climate
-    run:
-      name: Install Code Climate Test Reporter
       command: |
-        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        chmod +x ./cc-test-reporter
-  run_coverage_codeclimate: &run_coverage_codeclimate
-    run:
-      name: Code Climate Test Coverage
-      command: |
-        ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+        bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+        mkdir ~/rspec
+        bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
+      when: always
 
-version: 2
+  code_climate_test_coverage: &code_climate_test_coverage
+    run:
+      command: |
+        ./tmp/cc-test-reporter before-build
+        COVERAGE=true bundle exec rspec
+        ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+        ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+
+  save_to_workspace: &save_to_workspace
+    persist_to_workspace:
+      root: tmp
+      paths:
+      - codeclimate.*.json
+
 
 jobs:
-  tests:
-    <<: *defaults
+  check_out:
+    working_directory: ~/inquisition
+    docker:
+      - image: circleci/ruby:2.5.1-node
+        environment:
+          RAILS_ENV: test
     steps:
       - checkout
-      - run: mkdir -p $CIRCLE_TEST_REPORTS $CIRCLE_ARTIFACTS
-      - <<: *restore_bundle_cache
+      - <<: *repo_save_cache
       - <<: *bundle_install
-      - <<: *save_bundle_cache
-      - <<: *run_tests
-      - <<: *setup_code_climate
-      - <<: *run_coverage_codeclimate
 
+  cc-setup:
+    docker:
+      - image: circleci/ruby
+    steps:
+      - run:
+          name: Download Code Climate test-reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
+      - persist_to_workspace:
+          root: tmp
+          paths:
+            - cc-test-reporter
+
+  ruby-2.4:
+    docker:
+      - image: circleci/ruby:2.4
+    working_directory: ~/inquisition
+    steps:
+      - <<: *repo_restore_cache
+      - <<: *restore_bundle_cache_2_4
+      - <<: *bundle_install
+      - <<: *save_bundle_cache_2_4
+      - <<: *run_tests
       - store_test_results:
-          path: $CIRCLE_TEST_REPORTS
-      - store_artifacts:
-          path: $CIRCLE_ARTIFACTS
+          path: ~/rspec
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
       - store_artifacts:
           path: coverage/codeclimate.json
+
+  ruby-2.5:
+    docker:
+      - image: circleci/ruby:2.5
+    working_directory: ~/inquisition
+    steps:
+      - <<: *repo_restore_cache
+      - <<: *restore_bundle_cache_2_5
+      - <<: *bundle_install
+      - <<: *save_bundle_cache_2_5
+      - <<: *run_tests
+      - store_test_results:
+          path: ~/rspec
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
+      - store_artifacts:
+          path: coverage/codeclimate.json
+
+  ruby-2.6:
+    docker:
+      - image: circleci/ruby:2.6
+    working_directory: ~/inquisition
+    steps:
+      - <<: *repo_restore_cache
+      - <<: *restore_bundle_cache_2_6
+      - <<: *bundle_install
+      - <<: *save_bundle_cache_2_6
+      - <<: *run_tests
+      - store_test_results:
+          path: ~/rspec
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
+      - store_artifacts:
+          path: coverage/codeclimate.json
+
+  ruby-head:
+    docker:
+      - image: circleci/ruby:latest
+    working_directory: ~/inquisition
+    steps:
+      - <<: *repo_restore_cache
+      - <<: *restore_bundle_cache_head
+      - <<: *bundle_install
+      - <<: *save_bundle_cache_head
+      - <<: *run_tests
+      - store_test_results:
+          path: ~/rspec
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
+      - store_artifacts:
+          path: coverage/codeclimate.json
+
+  cc-upload:
+    docker:
+      - image: circleci/ruby
+    working_directory: ~/inquisition
+    environment:
+      CC_TEST_REPORTER_ID: 83bc1e5240cc5e9d345a2f058908b137e2e0f48cfe1d67eac2b544cac129e852
+    steps:
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json --parts 4 --output tmp/codeclimate.total.json
+            ./tmp/cc-test-reporter upload-coverage --input tmp/codeclimate.total.json
+
 
 workflows:
   version: 2
   build:
     jobs:
-      - tests
+      - check_out
+      - cc-setup
+      - ruby-2.4:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.5:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.6:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-head:
+          requires:
+            - check_out
+            - cc-setup
+      - cc-upload:
+          requires:
+            - ruby-2.4
+            - ruby-2.5
+            - ruby-2.6
+            - ruby-head
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 1 * * *"
+          filters:
+            branches:
+              only:
+                - develop
+    jobs:
+      - check_out
+      - cc-setup
+      - ruby-2.4:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.5:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.6:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-head:
+          requires:
+            - check_out
+            - cc-setup
+      - cc-upload:
+          requires:
+            - ruby-2.4
+            - ruby-2.5
+            - ruby-2.6
+            - ruby-head

@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'reek', '~> 5.0'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
   spec.add_development_dependency 'rubocop', '~> 0.72.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.4'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.33'
