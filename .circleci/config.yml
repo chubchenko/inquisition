@@ -141,7 +141,7 @@ commands:
           bundle exec rspec --format RspecJunitFormatter --out test_results/rspec.xml
       - cc-format-coverage:
           input-type: simplecov
-          output: ./tmp/codeclimate.$CIRCLE_NODE_INDEX.json
+          output: ./tmp/codeclimate.$CIRCLE_JOB.json
       - persist_to_workspace:
           root: tmp
           paths:
@@ -233,7 +233,7 @@ jobs:
       - attach_workspace:
           at: ~/inquisition/tmp
       - cc-sum-coverage:
-          input: tmp/codeclimate.*.*.json
+          input: tmp/codeclimate.*.json
           parts: 4
       - cc-upload-coverage
 
@@ -246,18 +246,21 @@ workflows:
       - ruby-2-4:
           requires:
             - checkout
+            - cc-setup-coverage
       - ruby-2-5:
           requires:
             - checkout
+            - cc-setup-coverage
       - ruby-2-6:
           requires:
             - checkout
+            - cc-setup-coverage
       - ruby-head:
           requires:
             - checkout
+            - cc-setup-coverage
       - cc-upload-coverage:
           requires:
-            - cc-setup-coverage
             - ruby-2-4
             - ruby-2-5
             - ruby-2-6
