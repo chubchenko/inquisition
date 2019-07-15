@@ -141,7 +141,7 @@ jobs:
       - <<: *repo_save_cache
       - <<: *install_cmake
       - <<: *bundle_install
-      # - <<: *run_overcommit
+      - <<: *run_overcommit
 
   cc-setup:
     docker:
@@ -158,23 +158,36 @@ jobs:
           paths:
             - cc-test-reporter
 
-  # ruby-2.4:
-  #   docker:
-  #     - image: circleci/ruby:2.4
-  #   working_directory: ~/inquisition
-  #   steps:
-  #     - <<: *repo_restore_cache
-  #     - <<: *restore_bundle_cache_2_4
-  #     - <<: *install_cmake
-  #     - <<: *bundle_install
-  #     - <<: *save_bundle_cache_2_4
-  #     - <<: *run_tests
-  #     - store_test_results:
-  #         path: ~/rspec
-  #     # - <<: *setup_code_climate
-  #     - <<: *run_coverage_codeclimate
-  #     - store_artifacts:
-  #         path: coverage/codeclimate.json
+  ruby-2.4:
+    docker:
+      - image: circleci/ruby:2.4
+    working_directory: ~/inquisition
+    steps:
+      - <<: *repo_restore_cache
+      - <<: *restore_bundle_cache_2_4
+      - <<: *install_cmake
+      - <<: *bundle_install
+      - <<: *save_bundle_cache_2_4
+      - <<: *run_tests
+      - store_test_results:
+          path: ~/rspec
+      # - <<: *setup_code_climate
+      # - <<: *run_coverage_codeclimate
+      - attach_workspace:
+          at: ~/inquisition/tmp
+      - run:
+          name: Code Climate Test Coverage
+          command: |
+            ./tmp/cc-test-reporter before-build
+            COVERAGE=true bundle exec rake spec
+            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+      - persist_to_workspace:
+          root: tmp
+          paths:
+          - codeclimate.*.json
+      - store_artifacts:
+          path: coverage/codeclimate.json
 
   ruby-2.5:
     docker:
@@ -295,7 +308,7 @@ jobs:
       - run:
           name: Upload coverage results to Code Climate
           command: |
-            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json --parts 3 --output tmp/codeclimate.total.json
+            ./tmp/cc-test-reporter sum-coverage tmp/codeclimate.*.json --parts 4 --output tmp/codeclimate.total.json
             ./tmp/cc-test-reporter upload-coverage --input tmp/codeclimate.total.json
 
 
@@ -305,9 +318,9 @@ workflows:
     jobs:
       - check_out
       - cc-setup
-      # - ruby-2.4:
-      #     requires:
-      #       - check_out
+      - ruby-2.4:
+          requires:
+            - check_out
       - ruby-2.5:
           requires:
             - check_out
@@ -322,6 +335,7 @@ workflows:
             - cc-setup
       - cc-upload:
           requires:
+            - ruby-2.4
             - ruby-2.5
             - ruby-2.6
             - ruby-head
