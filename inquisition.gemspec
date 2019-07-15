@@ -22,11 +22,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'json_matchers'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'reek'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'json_matchers'
-  spec.add_development_dependency 'rubycritic'
+  spec.add_development_dependency 'rubycritic', '~> 4.1'
   spec.add_development_dependency 'simplecov-lcov'
   spec.add_development_dependency 'undercover'
 
@@ -59,10 +59,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'railroady'
   spec.add_dependency 'rails-erd'
   spec.add_dependency 'rails_best_practices'
-  spec.add_dependency 'reek', '4.8.2'
+  spec.add_dependency 'reek', '~> 5.0'
   spec.add_dependency 'rspec-rails'
-  spec.add_dependency 'rubocop', '0.68.1'
-  spec.add_dependency 'rubocop-rspec'
+  spec.add_dependency 'rubocop', '~> 0.72.0'
+  spec.add_dependency 'rubocop-performance', '~> 1.4'
+  spec.add_dependency 'rubocop-rspec', '~> 1.33'
   spec.add_dependency 'rubrowser'
   spec.add_dependency 'ruby-lint'
   spec.add_dependency 'sandi_meter'

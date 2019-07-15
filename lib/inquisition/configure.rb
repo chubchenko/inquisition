@@ -13,7 +13,6 @@ module Inquisition
       def installers
         {
           Auditors::Backend::Installer => :backend,
-          Auditors::Frontend::Installer => :frontend,
           Auditors::Common::Installer => :common
         }
       end
