@@ -69,10 +69,20 @@ references:
         bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
       when: always
 
-  # install_cmake: &install_cmake
-  #   run:
-  #     name: Installing cmake
-  #     command: sudo apt-get update && sudo apt-get install cmake
+  code_climate_test_coverage: &code_climate_test_coverage
+    run:
+      command: |
+        ./tmp/cc-test-reporter before-build
+        COVERAGE=true bundle exec rspec
+        ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
+        ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
+
+  save_to_workspace: &save_to_workspace
+    persist_to_workspace:
+      root: tmp
+      paths:
+      - codeclimate.*.json
+
 
 jobs:
   check_out:
@@ -84,7 +94,6 @@ jobs:
     steps:
       - checkout
       - <<: *repo_save_cache
-      # - <<: *install_cmake
       - <<: *bundle_install
 
   cc-setup:
@@ -109,7 +118,6 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_2_4
-      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_2_4
       - <<: *run_tests
@@ -117,17 +125,8 @@ jobs:
           path: ~/rspec
       - attach_workspace:
           at: ~/inquisition/tmp
-      - run:
-          name: Code Climate Test Coverage
-          command: |
-            ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rspec
-            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
-            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-      - persist_to_workspace:
-          root: tmp
-          paths:
-          - codeclimate.*.json
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
       - store_artifacts:
           path: coverage/codeclimate.json
 
@@ -138,7 +137,6 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_2_5
-      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_2_5
       - <<: *run_tests
@@ -146,17 +144,8 @@ jobs:
           path: ~/rspec
       - attach_workspace:
           at: ~/inquisition/tmp
-      - run:
-          name: Code Climate Test Coverage
-          command: |
-            ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rspec
-            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
-            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-      - persist_to_workspace:
-          root: tmp
-          paths:
-          - codeclimate.*.json
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
       - store_artifacts:
           path: coverage/codeclimate.json
 
@@ -167,7 +156,6 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_2_6
-      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_2_6
       - <<: *run_tests
@@ -175,17 +163,8 @@ jobs:
           path: ~/rspec
       - attach_workspace:
           at: ~/inquisition/tmp
-      - run:
-          name: Code Climate Test Coverage
-          command: |
-            ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rspec
-            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
-            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-      - persist_to_workspace:
-          root: tmp
-          paths:
-          - codeclimate.*.json
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
       - store_artifacts:
           path: coverage/codeclimate.json
 
@@ -196,7 +175,6 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_head
-      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_head
       - <<: *run_tests
@@ -204,17 +182,8 @@ jobs:
           path: ~/rspec
       - attach_workspace:
           at: ~/inquisition/tmp
-      - run:
-          name: Code Climate Test Coverage
-          command: |
-            ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rspec
-            ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
-            ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-      - persist_to_workspace:
-          root: tmp
-          paths:
-          - codeclimate.*.json
+      - <<: *code_climate_test_coverage
+      - <<: *save_to_workspace
       - store_artifacts:
           path: coverage/codeclimate.json
 
