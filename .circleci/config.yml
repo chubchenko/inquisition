@@ -231,3 +231,36 @@ workflows:
             - ruby-2.5
             - ruby-2.6
             - ruby-head
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 1 * * *"
+          filters:
+            branches:
+              only:
+                - develop
+    jobs:
+      - check_out
+      - cc-setup
+      - ruby-2.4:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.5:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-2.6:
+          requires:
+            - check_out
+            - cc-setup
+      - ruby-head:
+          requires:
+            - check_out
+            - cc-setup
+      - cc-upload:
+          requires:
+            - ruby-2.4
+            - ruby-2.5
+            - ruby-2.6
+            - ruby-head
