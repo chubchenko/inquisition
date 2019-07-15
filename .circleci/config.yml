@@ -69,65 +69,10 @@ references:
         bundle exec rspec --format progress --format RspecJunitFormatter -o ~/rspec/rspec.xml
       when: always
 
-  install_cmake: &install_cmake
-    run:
-      name: Installing cmake
-      command: sudo apt-get update && sudo apt-get install cmake
-
-  run_overcommit: &run_overcommit
-    run:
-      name: Running overcommit
-      command: |
-        bundle exec overcommit -s
-        SKIP=AuthorEmail,AuthorName bundle exec overcommit -r
-
-  # setup_code_climate: &setup_code_climate
+  # install_cmake: &install_cmake
   #   run:
-  #     name: Install Code Climate Test Reporter
-  #     command: |
-  #       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
-  #       chmod +x ./tmp/cc-test-reporter
-
-  # run_coverage_codeclimate: &run_coverage_codeclimate
-  #   - attach_workspace:
-  #       at: ~/project/tmp
-  #   - run:
-  #       name: Code Climate Test Coverage
-  #       command: |
-  #         ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-  #   - persist_to_workspace:
-  #       root: tmp
-  #       paths:
-  #         - codeclimate.*.json
-
-  # run_coverage_codeclimate: &run_coverage_codeclimate
-  #   - attach_workspace:
-  #       at: ~/project/tmp
-  #   - run: bundle install
-  #   - run:
-  #       name: Run specs
-  #       command: |
-  #         ./tmp/cc-test-reporter before-build
-  #         COVERAGE=true bundle exec rake spec
-  #         ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
-  #   - persist_to_workspace:
-  #       root: tmp
-  #       paths:
-  #         - codeclimate.*.json
-
-  run_coverage_codeclimate: &run_coverage_codeclimate
-    - attach_workspace:
-        at: ~/inquisition/tmp
-    - run:
-        name: Code Climate Test Coverage
-        command: |
-          ./tmp/cc-test-reporter before-build
-          ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
-    - persist_to_workspace:
-        root: tmp
-        paths:
-          - codeclimate.*.json
-
+  #     name: Installing cmake
+  #     command: sudo apt-get update && sudo apt-get install cmake
 
 jobs:
   check_out:
@@ -139,9 +84,8 @@ jobs:
     steps:
       - checkout
       - <<: *repo_save_cache
-      - <<: *install_cmake
+      # - <<: *install_cmake
       - <<: *bundle_install
-      - <<: *run_overcommit
 
   cc-setup:
     docker:
@@ -165,21 +109,19 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_2_4
-      - <<: *install_cmake
+      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_2_4
       - <<: *run_tests
       - store_test_results:
           path: ~/rspec
-      # - <<: *setup_code_climate
-      # - <<: *run_coverage_codeclimate
       - attach_workspace:
           at: ~/inquisition/tmp
       - run:
           name: Code Climate Test Coverage
           command: |
             ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rake spec
+            COVERAGE=true bundle exec rspec
             ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
             ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
       - persist_to_workspace:
@@ -196,20 +138,19 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_2_5
-      - <<: *install_cmake
+      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_2_5
       - <<: *run_tests
       - store_test_results:
           path: ~/rspec
-      # - <<: *run_coverage_codeclimate
       - attach_workspace:
           at: ~/inquisition/tmp
       - run:
           name: Code Climate Test Coverage
           command: |
             ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rake spec
+            COVERAGE=true bundle exec rspec
             ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
             ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
       - persist_to_workspace:
@@ -226,20 +167,19 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_2_6
-      - <<: *install_cmake
+      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_2_6
       - <<: *run_tests
       - store_test_results:
           path: ~/rspec
-      # - <<: *run_coverage_codeclimate
       - attach_workspace:
           at: ~/inquisition/tmp
       - run:
           name: Code Climate Test Coverage
           command: |
             ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rake spec
+            COVERAGE=true bundle exec rspec
             ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
             ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
       - persist_to_workspace:
@@ -249,24 +189,6 @@ jobs:
       - store_artifacts:
           path: coverage/codeclimate.json
 
-  # ruby-head:
-  #   docker:
-  #     - image: circleci/ruby:latest
-  #   working_directory: ~/inquisition
-  #   steps:
-  #     - <<: *repo_restore_cache
-  #     - <<: *restore_bundle_cache_head
-  #     - <<: *install_cmake
-  #     - <<: *bundle_install
-  #     - <<: *save_bundle_cache_head
-  #     - <<: *run_tests
-  #     - store_test_results:
-  #         path: ~/rspec
-  #     # - <<: *setup_code_climate
-  #     - <<: *run_coverage_codeclimate
-  #     - store_artifacts:
-  #         path: coverage/codeclimate.json
-
   ruby-head:
     docker:
       - image: circleci/ruby:latest
@@ -274,7 +196,7 @@ jobs:
     steps:
       - <<: *repo_restore_cache
       - <<: *restore_bundle_cache_head
-      - <<: *install_cmake
+      # - <<: *install_cmake
       - <<: *bundle_install
       - <<: *save_bundle_cache_head
       - <<: *run_tests
@@ -286,7 +208,7 @@ jobs:
           name: Code Climate Test Coverage
           command: |
             ./tmp/cc-test-reporter before-build
-            COVERAGE=true bundle exec rake spec
+            COVERAGE=true bundle exec rspec
             ./tmp/cc-test-reporter format-coverage --output tmp/codeclimate.$CIRCLE_JOB.json
             ./tmp/cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.json"
       - persist_to_workspace:
@@ -321,6 +243,7 @@ workflows:
       - ruby-2.4:
           requires:
             - check_out
+            - cc-setup
       - ruby-2.5:
           requires:
             - check_out

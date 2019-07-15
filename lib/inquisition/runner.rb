@@ -1,19 +1,15 @@
 module Inquisition
-  class Runner < Core::Runners::MultipleRunner
-    include Inquisition::Authorization
-
-    def call
-      authenticate_runner
-      super
+  class Runner
+    def self.collection
+      @collection ||= []
     end
 
-    private
+    def self.inherited(descendant)
+      collection.push(descendant)
+    end
 
-    def runners
-      {
-        Auditors::Backend::Runner => :backend
-        # Auditors::Common::Runner => config_path(:common)
-      }
+    def self.call
+      new.()
     end
   end
 end
