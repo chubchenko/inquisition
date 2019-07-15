@@ -1,6 +1,6 @@
 require 'yaml'
 
-RSpec.describe Inquisition::Configuration, type: :unit do
+RSpec.describe Inquisition::Configuration do
   let(:config_file) { Inquisition::Configuration::CONFIG_FILE_NAME }
   let(:user_configure_file) { { 'plugins' => [], 'verbose' => true } }
   let(:default_hash) { Inquisition::Configuration::DEFAULT_HASH }

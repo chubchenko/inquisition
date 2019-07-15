@@ -3,16 +3,4 @@
 require 'inquisition'
 require 'inquisition/cli'
 
-CODE_INTERRUPT_EXCEPTIONS = [
-  Inquisition::Error::BaseConfigAbsenseError,
-  Inquisition::Error::NoConfigFileError,
-  Inquisition::Error::InvalidRubyVersionError,
-  Inquisition::Error::AdditionalSoftwareAbsenceError,
-  Inquisition::Error::NoGemError
-].freeze
-
-begin
-  Inquisition::CLI.start(ARGV)
-rescue *CODE_INTERRUPT_EXCEPTIONS => e
-  puts e.message
-end
+Inquisition::CLI.start
