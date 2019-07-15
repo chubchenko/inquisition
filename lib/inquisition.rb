@@ -1,8 +1,11 @@
-require 'inquisition/config/initializer'
-Zeitwerk::Loader.for_gem.setup
+require 'inquisition/collector'
+require 'inquisition/configuration'
+require 'inquisition/issue'
+require 'inquisition/runner'
+require 'inquisition/version'
+
+require 'inquisition/brakeman/runner'
+require 'inquisition/bundler/audit/runner'
 
 module Inquisition
-  def self.root
-    Gem::Specification.find_by_name('inquisition').gem_dir
-  end
 end

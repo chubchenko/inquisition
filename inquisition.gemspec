@@ -21,54 +21,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.add_runtime_dependency 'thor', '~> 0.20.3'
+
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'json_matchers'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'reek', '~> 5.0'
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubycritic', '~> 4.1'
+  spec.add_development_dependency 'rubocop', '~> 0.72.0'
+  spec.add_development_dependency 'rubocop-performance', '~> 1.4'
+  spec.add_development_dependency 'rubocop-rspec', '~> 1.33'
+  spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-lcov'
-  spec.add_development_dependency 'undercover'
-
-  # common
-  spec.add_dependency 'awesome_print'        # https://github.com/awesome-print/awesome_print
-  spec.add_dependency 'benchmark-ips'        # https://github.com/evanphx/benchmark-ips
-  spec.add_dependency 'colorize'             # https://github.com/fazibear/colorize
-  spec.add_dependency 'hirb'                 # https://github.com/cldwalker/hirb
-  spec.add_dependency 'overcommit'           # https://github.com/brigade/overcommit
-  spec.add_dependency 'pry-byebug'           # https://github.com/deivid-rodriguez/pry-byebug
-  spec.add_dependency 'pry-rails'            # https://github.com/rweng/pry-rails
-  spec.add_dependency 'pry-rescue'           # https://github.com/ConradIrwin/pry-rescue
-  spec.add_dependency 'pry-stack_explorer'   # https://github.com/pry/pry-stack_explorer
-  spec.add_dependency 'thor'
-  spec.add_dependency 'zeitwerk', '2.1.4'
-  spec.add_dependency 'tilt'
-  spec.add_dependency 'launchy'
-
-  # backend
-  spec.add_dependency 'active_record_doctor'
-  spec.add_dependency 'brakeman'
-  spec.add_dependency 'bullet'
-  spec.add_dependency 'bundler-audit'
-  spec.add_dependency 'dawnscanner'
-  spec.add_dependency 'erb_lint'
-  spec.add_dependency 'fasterer'
-  spec.add_dependency 'haml_lint'
-  spec.add_dependency 'i18n-tasks'
-  spec.add_dependency 'lol_dba'
-  spec.add_dependency 'railroady'
-  spec.add_dependency 'rails-erd'
-  spec.add_dependency 'rails_best_practices'
-  spec.add_dependency 'reek', '~> 5.0'
-  spec.add_dependency 'rspec-rails'
-  spec.add_dependency 'rubocop', '~> 0.72.0'
-  spec.add_dependency 'rubocop-performance', '~> 1.4'
-  spec.add_dependency 'rubocop-rspec', '~> 1.33'
-  spec.add_dependency 'rubrowser'
-  spec.add_dependency 'ruby-lint'
-  spec.add_dependency 'sandi_meter'
-  spec.add_dependency 'simplecov'
-  spec.add_dependency 'slim_lint'
-  spec.add_dependency 'traceroute'
-  spec.add_dependency 'yamllint'
 end
