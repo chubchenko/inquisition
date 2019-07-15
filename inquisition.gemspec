@@ -70,4 +70,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'slim_lint'
   spec.add_dependency 'traceroute'
   spec.add_dependency 'yamllint'
+  spec.add_dependency 'ffaker', '~> 2.11.0'
 end

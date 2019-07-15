@@ -1,3 +1,4 @@
+require  'ffaker'
 require 'simplecov'
 require 'inquisition'
 require 'json_matchers/rspec'
