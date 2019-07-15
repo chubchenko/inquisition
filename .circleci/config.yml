@@ -25,27 +25,10 @@ references:
       paths:
         - vendor/bundle
 
-  install_undercover_dependencies: &install_undercover_dependencies
-    run:
-      name: Installing dependency for undercover gem
-      command: sudo apt-get update && sudo apt-get install cmake
-
-  run_overcommit: &run_overcommit
-    run:
-      name: Running overcommit
-      command: |
-        bundle exec overcommit -s
-        SKIP=AuthorEmail,AuthorName bundle exec overcommit -r
-
   run_tests: &run_tests
     run:
       name: Running tests
       command: bundle exec rspec
-
-  run_coverage: &run_coverage
-    run:
-      name: Coverage
-      command: bundle exec undercover
 
   setup_code_climate: &setup_code_climate
     run:
@@ -62,27 +45,15 @@ references:
 version: 2
 
 jobs:
-  linters:
-    <<: *defaults
-    steps:
-      - checkout
-      - <<: *install_undercover_dependencies
-      - <<: *restore_bundle_cache
-      - <<: *bundle_install
-      - <<: *save_bundle_cache
-      - <<: *run_overcommit
-
   tests:
     <<: *defaults
     steps:
       - checkout
       - run: mkdir -p $CIRCLE_TEST_REPORTS $CIRCLE_ARTIFACTS
-      - <<: *install_undercover_dependencies
       - <<: *restore_bundle_cache
       - <<: *bundle_install
       - <<: *save_bundle_cache
       - <<: *run_tests
-      - <<: *run_coverage
       - <<: *setup_code_climate
       - <<: *run_coverage_codeclimate
 
@@ -97,5 +68,4 @@ workflows:
   version: 2
   build:
     jobs:
-      - linters
       - tests
