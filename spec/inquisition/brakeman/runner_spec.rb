@@ -5,14 +5,15 @@ require 'brakeman/checks/base_check'
 
 RSpec.describe Inquisition::Brakeman::Runner do
   let(:runner) { described_class.new }
-  let(:warning) { Brakeman::Warning.new(confidence: 0) }
-  let(:another_warning) { Brakeman::Warning.new(confidence: 1) }
-  let(:warnings) { [warning, another_warning] }
+  let(:high_confidence_warning) { Brakeman::Warning.new(confidence: 0) }
+  let(:medium_confidence_warning) { Brakeman::Warning.new(confidence: 1) }
+  let(:low_confidence_warning) { Brakeman::Warning.new(confidence: 2) }
+  let(:warnings_array) { [high_confidence_warning, medium_confidence_warning, low_confidence_warning] }
 
   describe '#call' do
     before do
-      allow(Brakeman).to receive_message_chain(:run, :run_checks, :warnings).and_return(warnings)
-      allow(warning.file).to receive(:relative)
+      allow(Brakeman).to receive_message_chain(:run, :run_checks, :warnings).and_return(warnings_array)
+      allow(high_confidence_warning.file).to receive(:relative)
     end
 
     it 'returns instance of array' do
@@ -20,16 +21,18 @@ RSpec.describe Inquisition::Brakeman::Runner do
     end
 
     it 'returns warnings-quantity-size array' do
-      expect(runner.call.count).to eq(warnings.size)
+      rand(99..999).times { warnings_array << low_confidence_warning }
+      expect(runner.call.count).to eq(warnings_array.size)
     end
 
     it 'consists of Issue instances' do
       expect(runner.call.first).to be_instance_of(Inquisition::Issue)
     end
 
-    it 'sets issue level' do
-      expect(runner.call.first.instance_variable_get(:@level)).to eq(Inquisition::Issue::ISSUE_LEVELS[:high])
-      expect(runner.call.last.instance_variable_get(:@level)).to eq(Inquisition::Issue::ISSUE_LEVELS[:medium])
+    it 'sets valid issue level' do
+      expect(runner.call[0].instance_variable_get(:@level)).to eq(Inquisition::Issue::ISSUE_LEVELS[:high])
+      expect(runner.call[1].instance_variable_get(:@level)).to eq(Inquisition::Issue::ISSUE_LEVELS[:medium])
+      expect(runner.call[2].instance_variable_get(:@level)).to eq(Inquisition::Issue::ISSUE_LEVELS[:low])
     end
   end
 end

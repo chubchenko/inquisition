@@ -18,7 +18,7 @@ module Inquisition
         case confidence
         when 0 then Issue::ISSUE_LEVELS[:high]
         when 1 then Issue::ISSUE_LEVELS[:medium]
-        when 2 then Issue::ISSUE_LEVELS[:low]
+        else Issue::ISSUE_LEVELS[:low]
         end
       end
     end
