@@ -12,7 +12,7 @@
 /inquisition.yml
 .rake_tasks~
 .DS_Store
-Gemfile.lock
+/Gemfile.lock
 
 # rspec failure tracking
 .rspec_status

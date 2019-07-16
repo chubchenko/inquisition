@@ -10,3 +10,9 @@ Metrics/LineLength:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/BlockLength:
+  Max: 35
+
+Rspec/ExampleLength:
+  Max: 6
