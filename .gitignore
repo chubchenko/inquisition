@@ -10,7 +10,6 @@
 /tmp/*
 .history
 /inquisition.yml
-/rails_best_practices_output.json
 .rake_tasks~
 .DS_Store
 Gemfile.lock

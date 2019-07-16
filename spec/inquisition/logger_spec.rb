@@ -5,7 +5,7 @@ RSpec.describe Inquisition::Logger, type: :unit do
     context 'when config verbose true' do
       before { allow_any_instance_of(Inquisition::Configuration).to receive(:verbose?).and_return(true) }
 
-      it  'true' do
+      it 'true' do
         expect { described_class.log(test_log) }.to output("#{test_log}\n").to_stdout_from_any_process
       end
     end
