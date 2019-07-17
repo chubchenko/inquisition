@@ -3,8 +3,10 @@ module Inquisition
     class UnindexedForeignKeysRunner < ::Inquisition::Runner
       include RunnerHelper
 
-      def call
-        perform(::ActiveRecordDoctor::Tasks::UnindexedForeignKeys)
+      private
+
+      def executor
+        ::ActiveRecordDoctor::Tasks::UnindexedForeignKeys
       end
 
       def warning_message

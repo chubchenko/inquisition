@@ -3,8 +3,10 @@ module Inquisition
     class MissingForeignKeysRunner < ::Inquisition::Runner
       include RunnerHelper
 
-      def call
-        perform(::ActiveRecordDoctor::Tasks::MissingForeignKeys)
+      private
+
+      def executor
+        ::ActiveRecordDoctor::Tasks::MissingForeignKeys
       end
 
       def warning_message

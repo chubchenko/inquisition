@@ -3,8 +3,10 @@ module Inquisition
     class ExtraneousIndexesRunner < ::Inquisition::Runner
       include RunnerHelper
 
-      def call
-        perform(::ActiveRecordDoctor::Tasks::ExtraneousIndexes)
+      private
+
+      def executor
+        ::ActiveRecordDoctor::Tasks::ExtraneousIndexes
       end
 
       def warning_message

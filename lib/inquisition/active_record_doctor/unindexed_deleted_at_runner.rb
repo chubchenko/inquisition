@@ -3,8 +3,10 @@ module Inquisition
     class UnindexedDeletedAtRunner < ::Inquisition::Runner
       include RunnerHelper
 
-      def call
-        perform(::ActiveRecordDoctor::Tasks::UnindexedDeletedAt)
+      private
+
+      def executor
+        ::ActiveRecordDoctor::Tasks::UnindexedDeletedAt
       end
 
       def warning_message
