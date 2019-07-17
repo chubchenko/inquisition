@@ -1,9 +1,11 @@
 module Inquisition
   class Issue
-    def initialize(level:, line:, runner:)
-      @level = level
+    def initialize(message:, severity:, path:, line:, analyzer:)
+      @message = message
+      @severity = severity
+      @path = path
       @line = line
-      @runner = runner
+      @analyzer = analyzer
     end
   end
 end
