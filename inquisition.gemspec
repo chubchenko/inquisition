@@ -23,7 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'thor', '~> 0.20.3'
 
-  spec.add_development_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'pry', '~> 0.12.2'
   spec.add_development_dependency 'reek', '~> 5.0'
