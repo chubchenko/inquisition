@@ -12,7 +12,20 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/BlockLength:
-  Max: 35
+  Exclude:
+    - 'spec/inquisition/bundler/audit/runner_spec.rb'
 
-Rspec/ExampleLength:
+RSpec/ExampleLength:
   Max: 6
+
+RSpec/MessageSpies:
+  Exclude:
+    - 'spec/inquisition/bundler/audit/runner_spec.rb'
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - 'spec/**/*.rb'
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/**/*.rb'

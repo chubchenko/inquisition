@@ -1,4 +1,3 @@
-require 'pry'
 require 'inquisition/collector'
 require 'inquisition/configuration'
 require 'inquisition/issue'

@@ -1,41 +1,50 @@
 RSpec.describe Inquisition::Bundler::Audit::Runner do
   describe '#call' do
-    context 'when update bundle success' do
-      before { allow(Bundler::Audit::Database).to receive(:update!).and_return(true) }
-
-      it 'update' do
-        expect { described_class.call }.to output(/Updated ruby-advisory-db/).to_stdout
-      end
-    end
-
-    context 'when update bundle failed' do
-      before { allow(Bundler::Audit::Database).to receive(:update!).and_return(false) }
-
-      it 'prints failure message' do
-        expect do
-          begin described_class.call
-          rescue SystemExit
-            StandardError
-          end
-        end.to output(/Failed updating ruby-advisory-db!/).to_stdout
-      end
-    end
+    subject(:runner_result) { described_class.call }
 
     context 'when check errors with bundler-audit scanner' do
-      let(:bundle) { 'unpatched_gems' }
-      let(:directory) { File.join('spec', 'fixtures', 'bundle', bundle) }
-      let(:scanner) { ::Bundler::Audit::Scanner.new(directory) }
-      let(:instance) { instance_double(Bundler::Audit::Scanner) }
+      let(:advisory_errors) do
+        instance_double(
+          Bundler::Audit::Advisory,
+          criticality: :low,
+          path: 'path',
+          title: 'error'
+        )
+      end
+      let(:scanner_instance) { Bundler::Audit::Scanner.new }
+      let(:error_instance) { instance_double(Bundler::Audit::Scanner::UnpatchedGem, advisory: advisory_errors) }
+      let(:lockfile) do
+        instance_double(
+          Bundler::LockfileParser,
+          specs: [OpenStruct.new(name: 'actionmailer', version: Gem::Version.new('1.1.5'))],
+          sources: []
+        )
+      end
 
-      it 'scanner.scan has errors' do
-        allow(Bundler::Audit::Scanner).to receive(:new).and_return(scanner)
-        expect(described_class.call).not_to be_empty
+      before do
+        scanner_instance.instance_variable_set(:@lockfile, lockfile)
+        allow(Bundler::Audit::Scanner::UnpatchedGem).to receive(:new).and_return(error_instance)
+        allow(Bundler::Audit::Scanner).to receive(:new).and_return(scanner_instance)
+        allow(Bundler::Audit::Database).to receive(:update!).and_return(true)
+      end
+
+      it 'scanner.scan return errors' do
+        expect(Inquisition::Issue).to receive(:new).with(
+          level: advisory_errors.criticality,
+          line: '',
+          runner: be_kind_of(described_class),
+          file: advisory_errors.path,
+          message: advisory_errors.title
+        ).and_call_original
+        expect(runner_result.first).to be_kind_of(Inquisition::Issue)
+        expect(runner_result.count).to eq(1)
       end
 
       it 'scanner.scan has not errors' do
-        allow(Bundler::Audit::Scanner).to receive(:new).and_return(instance)
-        allow(instance).to receive(:scan).and_return([])
-        expect(described_class.call).to eq([])
+        allow(Bundler::Audit::Database).to receive(:update!).and_return(true)
+        allow(Bundler::Audit::Scanner).to receive(:new).and_return(scanner_instance)
+        allow(scanner_instance).to receive(:scan).and_return([])
+        expect(described_class.call).to be_empty
       end
     end
   end
