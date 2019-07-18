@@ -1,6 +1,6 @@
 module Inquisition
   class Issue
-    ISSUE_LEVELS = {
+    LEVELS = {
       high: 'high',
       medium: 'medium',
       low: 'low'
