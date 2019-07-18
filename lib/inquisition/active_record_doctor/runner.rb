@@ -17,17 +17,16 @@ module Inquisition
         issues = []
         ::ActiveRecordDoctor::Tasks.all.each do |ard_module|
           ard_module.run.first.each do |table, column|
-            issues << Issue.new(level: Issue::LEVELS[:low],
-                                file: "table: #{table}",
-                                line: "column(s): #{column.join(', ')}",
-                                message: create_message(ard_module), runner: self)
+            issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
+                                message: create_message(ard_module, table, column))
           end
         end
         issues
       end
 
-      def create_message(ard_module)
-        ard_module.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
+      def create_message(ard_module, table, column)
+        issue_text = ard_module.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
+        "Table #{table} has #{issue_text} in column(s) #{column.join(', ')}"
       end
 
       def establish_connection
