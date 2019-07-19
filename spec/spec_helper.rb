@@ -1,4 +1,3 @@
-require 'ffaker'
 require 'simplecov'
 require 'inquisition'
 

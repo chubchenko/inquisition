@@ -24,7 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'thor', '~> 0.20.3'
 
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'ffaker', '~> 2.11.0'
   spec.add_development_dependency 'reek', '~> 5.0'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
