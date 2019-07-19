@@ -15,12 +15,20 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
   end
 
   before do
+    allow(ActiveRecord::Base).to receive(:establish_connection)
+    allow(YAML).to receive(:load).and_return({})
+    allow(IO).to receive(:read)
+    allow(Rails).to receive(:env)
     allow(ActiveRecordDoctor::Tasks::Base).to receive(:subclasses).and_return([ard_module])
     allow(ard_module).to receive(:run).and_return([warning, true])
-    allow(runner).to receive(:establish_connection)
   end
 
   describe '#call' do
+    it 'establish connection' do
+      runner.call
+      expect(ActiveRecord::Base).to have_received(:establish_connection)
+    end
+
     it 'returns issues array with specific message' do
       expect(runner.call.first.instance_variable_get(:@message)).to eq(message)
     end
