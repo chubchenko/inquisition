@@ -25,7 +25,6 @@ RSpec.describe Inquisition::Brakeman::Runner do
     before do
       tracker = instance_double(Brakeman::Tracker)
       allow(Brakeman).to receive(:run).and_return(tracker)
-      allow(tracker).to receive(:run_checks).and_return(tracker)
       allow(tracker).to receive(:warnings).and_return(warnings)
       allow(major_warning.file).to receive(:relative)
     end
