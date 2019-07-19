@@ -42,31 +42,33 @@ RSpec.describe Inquisition::Configuration do
 
   # TODO: what about singleton
 
-  describe '#to_h' do
-    context 'when the file is absent' do
-      it { is_expected.to be_empty }
-    end
+  subject(:configuration) { described_class.instance }
 
-    context 'when the file is present' do
-      it { is_expected.to include(verbose: false, pg: []) }
-    end
-  end
+  # describe '#to_h' do
+  #   context 'when the file is absent' do
+  #     it { is_expected.to be_empty }
+  #   end
+  #
+  #   context 'when the file is present' do
+  #     it { is_expected.to include(verbose: false, pg: []) }
+  #   end
+  # end
 
   describe '#verbose?' do
-    context 'when the file is absent' do
-      it { is_expected.not_to be_verbose }
-    end
-
-    context 'when the option is absent' do
-      it { is_expected.not_to be_verbose }
-    end
-
-    context 'when the option is eq f' do
-      it { is_expected.not_to be_verbose }
-    end
-
-    context 'when the option is eq t' do
-      it { is_expected.to be_verbose }
-    end
+    # context 'when the file is absent' do
+    #   it { is_expected.not_to be_verbose }
+    # end
+    #
+    # context 'when the option is absent' do
+    #   it { is_expected.not_to be_verbose }
+    # end
+    #
+    # context 'when the option is eq f' do
+    #   it { is_expected.not_to be_verbose }
+    # end
+    #
+    # context 'when the option is eq t' do
+    #   it { is_expected.to be_verbose }
+    # end
   end
 end

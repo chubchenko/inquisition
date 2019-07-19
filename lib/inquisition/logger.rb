@@ -1,4 +1,5 @@
+require 'logger'
+
 module Inquisition
-  class Logger
-  end
+  Logger = Class.new(Logger)
 end

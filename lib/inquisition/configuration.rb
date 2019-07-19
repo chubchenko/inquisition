@@ -19,7 +19,7 @@ module Inquisition
     end
 
     def verbose?
-      false
+      @options.fetch(:verbose) { false }
     end
   end
 end
