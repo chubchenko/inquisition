@@ -9,11 +9,8 @@ require 'active_record_doctor/tasks/unindexed_foreign_keys'
 module Inquisition
   module ActiveRecordDoctor
     class Runner < ::Inquisition::Runner
-      def initialize
-        establish_connection
-      end
-
       def call
+        establish_connection
         issues = []
         ::ActiveRecordDoctor::Tasks.all.each do |ard_module|
           ard_module.run.first.each do |table, column|
