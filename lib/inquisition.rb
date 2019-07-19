@@ -6,6 +6,7 @@ require 'inquisition/version'
 
 require 'inquisition/brakeman/runner'
 require 'inquisition/bundler/audit/runner'
+require 'inquisition/fasterer/runner'
 
 module Inquisition
 end
