@@ -7,6 +7,7 @@ require 'inquisition/logger'
 
 require 'inquisition/brakeman/runner'
 require 'inquisition/bundler/audit/runner'
+require 'inquisition/rails_best_practices/runner'
 
 module Inquisition
 end
