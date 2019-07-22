@@ -6,7 +6,7 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
   let(:warning) { { 'unindexed_table' => %w[unindexed_column_1 unindexed_column_1] } }
 
   let(:message) do
-    'Table unindexed_table has unindexed foreign keys in column(s) unindexed_column_1, unindexed_column_1'
+    'unindexed_table has unindexed foreign keys, details: unindexed_column_1, unindexed_column_1'
   end
 
   let(:issues) do
