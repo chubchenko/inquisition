@@ -1,8 +1,12 @@
 module Inquisition
   class Issue
-    LEVEL_LOW = :low
+    LEVELS = {
+      high: 'high',
+      medium: 'medium',
+      low: 'low'
+    }.freeze
 
-    def initialize(level:, line:, runner:, file:, message:)
+    def initialize(level:, file:, line:, runner:, message:)
       @level = level
       @line = line
       @runner = runner

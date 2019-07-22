@@ -10,19 +10,3 @@ Metrics/LineLength:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*.rb'
-
-RSpec/MessageSpies:
-  Exclude:
-    - 'spec/**/*.rb'
-
-RSpec/MultipleExpectations:
-  Exclude:
-    - 'spec/**/*.rb'
-
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/**/*.rb'

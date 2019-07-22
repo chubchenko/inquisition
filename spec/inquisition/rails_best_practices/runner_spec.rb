@@ -24,22 +24,29 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
         allow(instance_analyzer).to receive(:errors).and_return(errors_analyzer)
       end
 
-      it 'return errors' do
+      it 'return issue with current arguments' do
         expect(Inquisition::Issue).to receive(:new).with(
-          level: Inquisition::Issue::LEVEL_LOW,
+          level: Inquisition::Issue::LEVELS[:low],
           line: errors_analyzer.first.line_number,
           runner: be_kind_of(described_class),
           file: errors_analyzer.first.filename,
           message: errors_analyzer.first.message
         ).and_call_original
+        call_runner
+      end
+
+      it 'return issue' do
         expect(call_runner.first).to be_kind_of(Inquisition::Issue)
+      end
+
+      it 'return count issues' do
         expect(call_runner.count).to eq(1)
       end
     end
 
     context 'when call runner without errors' do
       it 'without errors' do
-        expect(call_runner).to be_empty
+        is_expected.to be_empty
       end
     end
   end

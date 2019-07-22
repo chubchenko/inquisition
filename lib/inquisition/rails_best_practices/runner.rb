@@ -3,13 +3,13 @@ require 'rails_best_practices'
 module Inquisition
   module RailsBestPractices
     class Runner < ::Inquisition::Runner
-      attr_reader :errors
+      attr_reader :issues
 
       def call
-        @errors = []
+        @issues = []
         analyzer = ::RailsBestPractices::Analyzer.new(nil, 'config' => 'rails_best_practices.yml')
         check_errors(analyzer)
-        errors
+        issues
       end
 
       def check_errors(analyzer)
@@ -18,12 +18,12 @@ module Inquisition
       end
 
       def define_errors(data_errors)
-        data_errors.each { |error| errors << create_issue(error) }
+        data_errors.each { |error| issues << create_issue(error) }
       end
 
       def create_issue(error)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVEL_LOW,
+          level: Inquisition::Issue::LEVELS[:low],
           line: error.line_number,
           runner: self,
           file: error.filename,
