@@ -7,8 +7,8 @@ require 'inquisition/logger'
 
 require 'inquisition/brakeman/runner'
 require 'inquisition/bundler/audit/runner'
+require 'inquisition/rubocop/rubocop_patched'
 require 'inquisition/rubocop/runner'
-require 'inquisition/rubocop/formatter'
 
 module Inquisition
 end
