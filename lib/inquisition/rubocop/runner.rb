@@ -1,4 +1,5 @@
 require 'rubocop'
+require 'pry'
 
 module Inquisition
   module RuboCop
@@ -15,7 +16,8 @@ module Inquisition
 
       def call
         @issues = []
-        offenses = Inquisition::RuboCop::RuboCopPatched.new({}, ::RuboCop::ConfigStore.new).run(['.'])
+        offenses = Inquisition::RuboCop::RuboCopPatcher.new({}, ::RuboCop::ConfigStore.new).run(['.'])
+        # binding.pry
         offenses.each { |offense| create_issue(offense) }
         @issues
       end
