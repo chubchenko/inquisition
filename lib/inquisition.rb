@@ -14,6 +14,7 @@ require 'inquisition/rubocop/runner'
 require 'inquisition/lol_dba/runner'
 require 'inquisition/fasterer/runner'
 require 'inquisition/rubycritic/runner'
+require 'inquisition/traceroute/runner'
 
 module Inquisition
 end
