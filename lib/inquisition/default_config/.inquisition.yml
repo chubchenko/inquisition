@@ -1,0 +1,6 @@
+
+plugins:
+  brakeman:
+    enabled: true
+
+verbose: false
