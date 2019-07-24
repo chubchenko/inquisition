@@ -2,7 +2,7 @@ require 'rubocop'
 
 module Inquisition
   module RuboCop
-    class RuboCopPatcher < ::RuboCop::Runner
+    class RuboCopModifiedRunner < ::RuboCop::Runner
       include ::RuboCop::PathUtil
       attr_reader :issues
 

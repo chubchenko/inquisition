@@ -15,7 +15,7 @@ module Inquisition
 
       def call
         @issues = []
-        offenses = Inquisition::RuboCop::RuboCopPatcher.new({}, ::RuboCop::ConfigStore.new).run(['.'])
+        offenses = Inquisition::RuboCop::RuboCopModifiedRunner.new({}, ::RuboCop::ConfigStore.new).run(['.'])
         offenses.each { |offense| create_issue(offense) }
         @issues
       end
