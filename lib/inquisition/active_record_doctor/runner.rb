@@ -21,10 +21,10 @@ module Inquisition
 
       def call
         issues = []
-        ::ActiveRecordDoctor::Tasks.all.each do |ard_module|
-          ard_module.run.first.each do |table, column|
+        ::ActiveRecordDoctor::Tasks.all.each do |ard_task|
+          ard_task.run.first.each do |table, column|
             issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
-                                message: create_message(ard_module, table, column))
+                                message: create_message(ard_task, table, column))
           end
         end
         issues
@@ -32,8 +32,8 @@ module Inquisition
 
       private
 
-      def create_message(ard_module, issue_object, details)
-        issue_text = ard_module.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
+      def create_message(ard_task, issue_object, details)
+        issue_text = ard_task.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
         "#{issue_object} has #{issue_text}, details: #{details ? details.join(', ') : 'n/a'}"
       end
 
