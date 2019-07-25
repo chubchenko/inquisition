@@ -11,5 +11,13 @@ module Inquisition
     def self.call
       new.()
     end
+
+    def initialize
+      @issues = []
+    end
+
+    def load_environment
+      require "#{Dir.pwd}/config/environment"
+    end
   end
 end
