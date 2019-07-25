@@ -11,5 +11,9 @@ module Inquisition
     def self.call
       new.()
     end
+
+    def self.self_key
+      (name.split('::') - %w[Inquisition Runner]).join('_').downcase
+    end
   end
 end

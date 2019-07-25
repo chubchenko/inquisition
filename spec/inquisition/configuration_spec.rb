@@ -1,11 +1,11 @@
 require 'yaml'
 
 RSpec.describe Inquisition::Configuration do
-  subject { described_class.instance }
+  subject(:configuration) { described_class.instance }
 
   let(:config_file) { Inquisition::Configuration::CONFIG_FILE_NAME }
   let(:user_configure_file) { { 'plugins' => [], 'verbose' => true } }
-  let(:default_hash) { Inquisition::Configuration::DEFAULT_HASH }
+  let(:default_hash) { { 'plugins' => { 'brakeman' => { 'enabled' => true } }, 'verbose' => false } }
 
   describe '#to_h' do
     context 'when config file exists' do
@@ -16,15 +16,15 @@ RSpec.describe Inquisition::Configuration do
       after { File.delete("./spec/fixtures/#{config_file}") }
 
       it 'file exist' do
-        allow(subject).to receive(:config_exist?).and_return(true)
-        allow(subject).to receive(:data_config).and_return(user_configure_file)
-        expect(subject.to_h).to eq(user_configure_file)
+        allow(configuration).to receive(:config_exist?).and_return(true)
+        allow(configuration).to receive(:data_config).and_return(user_configure_file)
+        expect(configuration.to_h).to eq(user_configure_file)
       end
     end
 
     context 'when config file not exists' do
       it 'file not exist' do
-        expect(subject.to_h).to eq(default_hash)
+        expect(configuration.to_h).to eq(default_hash)
       end
     end
   end
@@ -32,13 +32,13 @@ RSpec.describe Inquisition::Configuration do
   describe '#verbose?' do
     context 'when check verbose true or false' do
       it 'return false' do
-        allow(subject).to receive(:to_h).and_return(default_hash)
-        expect(subject.verbose?).to eq(false)
+        allow(configuration).to receive(:to_h).and_return(default_hash)
+        expect(configuration.verbose?).to eq(false)
       end
 
       it 'return true' do
-        allow(subject).to receive(:to_h).and_return(user_configure_file)
-        expect(subject.verbose?).to eq(true)
+        allow(configuration).to receive(:to_h).and_return(user_configure_file)
+        expect(configuration.verbose?).to eq(true)
       end
     end
   end
