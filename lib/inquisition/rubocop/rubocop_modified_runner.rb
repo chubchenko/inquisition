@@ -4,7 +4,6 @@ module Inquisition
   module RuboCop
     class RuboCopModifiedRunner < ::RuboCop::Runner
       include ::RuboCop::PathUtil
-      attr_reader :issues
 
       def initialize(options, config_store)
         super
