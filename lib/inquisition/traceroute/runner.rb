@@ -1,28 +1,30 @@
 require 'rails'
 require 'traceroute'
-require 'pry'
-
-# require 'rails/console/app'
-# require 'rails/console/helpers'
-# require 'rails/app_loader'
-require 'active_support/dependencies'
-# require 'active_support/inflector/methods'
 
 module Inquisition
   module Traceroute
     class Runner < ::Inquisition::Runner
-      # ::Bundler.require(*Rails.groups)
-      # include Rails::ConsoleMethods
-      # include ActiveSupport::Autoload
-
-      class Application < Rails::Application
+      def call
+        @issues = []
+        load_environment
         traceroute = ::Traceroute.new(Rails.application)
         traceroute.load_everything!
-        traceroute.unused_routes
-        traceroute.unreachable_action_methods
+        create_issue(traceroute.routed_actions - traceroute.defined_action_methods, 'unused route')
+        create_issue(traceroute.defined_action_methods - traceroute.routed_actions, 'unreachable action method')
+        @issues
       end
 
-      def call
+      private
+
+      def create_issue(problematic_routes, message)
+        problematic_routes.each do |route|
+          @issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
+                               message: "#{message}: #{route}")
+        end
+      end
+
+      def load_environment
+        require "#{Dir.pwd}/config/environment"
       end
     end
   end
