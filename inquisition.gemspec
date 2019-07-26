@@ -28,7 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'reek', '~> 5.0'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
-  spec.add_development_dependency 'rubocop', '~> 0.72.0'
   spec.add_development_dependency 'rubocop-performance', '~> 1.4'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.33'
   spec.add_development_dependency 'simplecov'
@@ -36,4 +35,5 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'active_record_doctor', '~> 1.6'
   spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
+  spec.add_dependency 'rubocop', '~> 0.72.0'
 end
