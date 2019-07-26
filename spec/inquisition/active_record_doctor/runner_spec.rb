@@ -9,14 +9,11 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
     'unindexed_table has unindexed foreign keys, details: unindexed_column_1, unindexed_column_1'
   end
 
-  before do
-    allow(runner).to receive(:load_environment)
-    allow(ActiveRecordDoctor::Tasks::Base).to receive(:subclasses).and_return([ard_task])
-    allow(ard_task).to receive(:run).and_return([warning, true])
-  end
-
   describe '#call' do
     it 'returns issues array with specific message' do
+      expect(runner).to receive(:load_environment).and_return(true)
+      expect(ActiveRecordDoctor::Tasks::Base).to receive(:subclasses).and_return([ard_task])
+      expect(ard_task).to receive(:run).and_return([warning, true])
       expect(runner.call.first.instance_variable_get(:@message)).to eq(message)
     end
   end
