@@ -14,10 +14,9 @@ module Inquisition
       ::RuboCop::ConfigLoader::DOTFILE = 'config/.rubocop.yml'.freeze
 
       def call
-        @issues = []
         offenses = Inquisition::RuboCop::RuboCopModifiedRunner.new({}, ::RuboCop::ConfigStore.new).run(['.'])
         offenses.each { |offense| create_issue(offense) }
-        @issues
+        issues
       end
 
       private
