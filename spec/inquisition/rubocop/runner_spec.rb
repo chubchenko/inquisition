@@ -29,8 +29,8 @@ RSpec.describe Inquisition::RuboCop::Runner do
   describe '#call' do
     before do
       rubocop = instance_double(RuboCop::Runner)
-      allow(rubocop).to receive(:run).and_return(offenses)
-      allow(Inquisition::RuboCop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
+      expect(rubocop).to receive(:run).and_return(offenses)
+      expect(Inquisition::RuboCop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
     end
 
     it 'returns array with issues' do
