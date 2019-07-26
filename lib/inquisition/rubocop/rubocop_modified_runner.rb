@@ -4,6 +4,7 @@ module Inquisition
   module RuboCop
     class RuboCopModifiedRunner < ::RuboCop::Runner
       include ::RuboCop::PathUtil
+      attr_reader :issues
 
       def initialize(options, config_store)
         super
@@ -25,7 +26,7 @@ module Inquisition
       def inspect_files(files)
         inspected_files = []
         each_inspected_file(files) { |file| inspected_files << file }
-        @issues
+        issues
       end
     end
   end
