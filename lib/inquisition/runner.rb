@@ -1,5 +1,7 @@
 module Inquisition
   class Runner
+    attr_reader :issues
+
     def self.collection
       @collection ||= []
     end
@@ -15,6 +17,8 @@ module Inquisition
     def initialize
       @issues = []
     end
+
+    private
 
     def load_environment
       require "#{Dir.pwd}/config/environment"
