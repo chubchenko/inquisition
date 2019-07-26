@@ -34,5 +34,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-lcov'
 
+  spec.add_dependency 'active_record_doctor', '~> 1.6'
   spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
 end
