@@ -8,10 +8,10 @@ RSpec.describe Inquisition::Issue do
   end
 
   let(:valid_attributes_with_different_level) do
-    { level: Inquisition::Issue::LEVELS[:high], file: 'file', line: 123, runner: 'runner_2', message: 'foo bar' }
+    { level: Inquisition::Issue::LEVELS[:high], file: 'file', line: 123, runner: 'runner', message: 'foo bar' }
   end
 
-  let(:invalid_attributes) { { level: 'foo', file: 'file', line: 123, runner: 'runner', message: 'foo bar' } }
+  let(:invalid_attributes) { { level: 'invalid', file: 'file', line: 123, runner: 'runner', message: 'foo bar' } }
 
   let(:valid_issue) { described_class.new(**valid_attributes) }
   let(:different_level_valid_issue) { described_class.new(**valid_attributes_with_different_level) }
