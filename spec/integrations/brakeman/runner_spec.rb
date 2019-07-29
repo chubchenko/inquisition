@@ -10,23 +10,15 @@ RSpec.describe Inquisition::Brakeman::Runner do
     end
 
     it 'return count issues' do
-      expect(described_class.call.count).to eq(2)
+      expect(described_class.call.count).to eq(1)
     end
 
     it 'return issue with arguments' do
       expect(Inquisition::Issue).to receive(:new).with(
         file: 'app/controllers/application_controller.rb',
         level: 'high',
-        line: 1,
-        message: '`protect_from_forgery` should be called in `ApplicationController`',
-        runner: be_kind_of(Inquisition::Brakeman::Runner)
-      )
-
-      expect(Inquisition::Issue).to receive(:new).with(
-        file: 'app/models/application_record.rb',
-        level: 'high',
-        line: 1,
-        message: 'Mass assignment is not restricted using `attr_accessible`',
+        line: 5,
+        message: 'User controlled method execution',
         runner: be_kind_of(Inquisition::Brakeman::Runner)
       )
       described_class.call
