@@ -38,4 +38,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop', '~> 0.72.0'
   spec.add_dependency 'bundler-audit', '~> 0.6.1'
   spec.add_dependency 'lol_dba', '~> 2.1.8'
+  spec.add_dependency 'fasterer', '~> 0.6.0'
 end
