@@ -13,5 +13,9 @@ module Inquisition
       @message = message
       @runner = runner
     end
+
+    def to_s
+      "#{@level} - #{@file} - #{@line} - #{@message} - #{@runner}"
+    end
   end
 end

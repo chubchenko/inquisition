@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec', '~> 1.33'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-lcov'
+  spec.add_development_dependency 'rails-dummy'
 
   spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
 end
