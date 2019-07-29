@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'active_record_doctor', '~> 1.6'
   spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
   spec.add_dependency 'rubocop', '~> 0.72.0'
+  spec.add_dependency 'bundler-audit', '~> 0.6.1'
 end
