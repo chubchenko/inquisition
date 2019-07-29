@@ -1,6 +1,8 @@
 require 'simplecov'
 require 'inquisition'
 
+ENV['RAILS_ENV'] ||= 'test'
+
 Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
 
 RSpec.configure do |config|
