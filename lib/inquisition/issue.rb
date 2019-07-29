@@ -9,6 +9,8 @@ module Inquisition
     }.freeze
 
     def initialize(level:, file:, line:, runner:, message:)
+      raise ArgumentError, 'Incorrect issue level' unless LEVELS.value?(level)
+
       @level = level
       @line = line
       @runner = runner
