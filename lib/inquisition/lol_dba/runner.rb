@@ -23,7 +23,7 @@ module Inquisition
 
       def create_issue(table, index)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVEL_LOW,
+          level: Inquisition::Issue::LEVELS[:low],
           line: nil,
           runner: self,
           file: nil,
