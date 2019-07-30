@@ -8,10 +8,10 @@ module Inquisition
 
     def initialize(level:, file:, line:, runner:, message:)
       @level = level
-      @file = file
       @line = line
-      @message = message
       @runner = runner
+      @file = file
+      @message = message
     end
 
     def to_s

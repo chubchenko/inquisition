@@ -36,8 +36,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'pg'
 
   spec.add_dependency 'active_record_doctor', '~> 1.6'
-  spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
-  spec.add_dependency 'rubocop', '~> 0.72.0'
   spec.add_dependency 'bundler-audit', '~> 0.6.1'
+  spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'
+  spec.add_dependency 'rails_best_practices', '~> 1.19.4'
+  spec.add_dependency 'rubocop', '~> 0.72.0'
   spec.add_dependency 'lol_dba', '~> 2.1.8'
+  spec.add_dependency 'fasterer', '~> 0.6.0'
+  spec.add_dependency 'rubycritic', '~> 4.1.0'
+  spec.add_dependency 'traceroute', '~> 0.8.0'
 end

@@ -1,6 +1,5 @@
 require 'bundler/audit/scanner'
 require 'bundler/audit/database'
-require 'pry'
 
 module Inquisition
   module Bundler
