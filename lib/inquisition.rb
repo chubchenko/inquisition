@@ -1,3 +1,4 @@
+require 'inquisition/plugin'
 require 'inquisition/collector'
 require 'inquisition/configuration'
 require 'inquisition/issue'
