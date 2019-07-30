@@ -5,7 +5,7 @@ module Inquisition
     attr_reader :issues
 
     def self.call
-      new.()
+      new.call
     end
 
     def initialize

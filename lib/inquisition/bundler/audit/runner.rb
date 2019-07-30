@@ -24,7 +24,7 @@ module Inquisition
 
         def create_error(error)
           Inquisition::Issue.new(
-            level: error.advisory.criticality || Inquisition::Issue::LOW_LEVEL,
+            level: error.advisory.criticality || Inquisition::Issue::LEVELS[:low],
             line: '',
             runner: self,
             file: error.advisory.path,
