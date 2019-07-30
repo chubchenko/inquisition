@@ -1,0 +1,7 @@
+detectors:
+  IrresponsibleModule:
+    enabled: false
+
+  UtilityFunction:
+    exclude:
+      - 'Inquisition::CLI#execute'

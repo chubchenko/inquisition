@@ -6,7 +6,7 @@ require 'inquisition/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'inquisition'
-  spec.version       = Inquisition::VERSION
+  spec.version       = Inquisition::Version
   spec.authors       = ['Dmitriy Grechukha']
   spec.email         = ['dmitriy.grechukha@gmail.com']
 

@@ -29,6 +29,10 @@ module Inquisition
                                message: "#{message}: #{route}")
         end
       end
+
+      def load_environment
+        require "#{Dir.pwd}/config/environment"
+      end
     end
   end
 end
