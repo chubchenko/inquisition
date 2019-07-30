@@ -1,3 +1,4 @@
+require 'pry'
 require 'lol_dba'
 
 module Inquisition

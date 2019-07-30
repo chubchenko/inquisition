@@ -20,7 +20,6 @@ module Inquisition
           ::Bundler::Audit::Scanner.new.scan do |error|
             issues << create_error(error)
           end
-          binding.pry
           issues
         end
 

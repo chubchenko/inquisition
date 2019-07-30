@@ -1,4 +1,3 @@
-ENV['RAILS_ENV'] = 'test'
 require_relative '../../dummy/config/environment'
 
 RSpec.describe Inquisition::Brakeman::Runner do
@@ -17,7 +16,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
       expect(Inquisition::Issue).to receive(:new).with(
         file: 'app/controllers/application_controller.rb',
         level: 'high',
-        line: 5,
+        line: 4,
         message: 'User controlled method execution',
         runner: be_kind_of(Inquisition::Brakeman::Runner)
       )
