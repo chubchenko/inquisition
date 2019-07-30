@@ -19,4 +19,5 @@ require 'inquisition/rubycritic/runner'
 require 'inquisition/traceroute/runner'
 
 module Inquisition
+  def self.logger; end
 end
