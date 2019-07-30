@@ -6,9 +6,8 @@ module Inquisition
 
     class Runner < ::Inquisition::Runner
       def call
-        issues = []
         ::Brakeman.run('.').warnings.each do |warning|
-          issues << Issue.new(level: LEVELS[warning.confidence], file: warning.file.relative,
+          @issues << Issue.new(level: LEVELS[warning.confidence], file: warning.file.relative,
                               line: warning.line, message: warning.message.to_s, runner: self)
         end
         issues
