@@ -2,9 +2,11 @@ require 'thor'
 
 module Inquisition
   class CLI < Thor
-    desc 'call', 'Run Inquisition'
-    def call
-      Collector.()
+    default_command :execute
+
+    desc 'execute', 'Run Inquisition'
+    def execute
+      Collector.new.call
     end
   end
 end
