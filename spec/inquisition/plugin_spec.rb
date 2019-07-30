@@ -15,11 +15,7 @@ RSpec.describe Inquisition::Plugin do
         Class.new(dummy)
       end
 
-      it do
-        expect do
-          descendant
-        end.to change(dummy.collection, :size).by(1)
-      end
+      it { expect { descendant }.to change(dummy.collection, :size).by(1) }
 
       it do
         Object.const_set('Descendant', descendant)

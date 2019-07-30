@@ -3,9 +3,7 @@ RSpec.describe Inquisition::Configuration do
 
   describe '#to_h' do
     context 'when the file is missing' do
-      before do
-        allow(File).to receive(:exist?).with('.inquisition.yml').and_return(false)
-      end
+      before { allow(File).to receive(:exist?).with('.inquisition.yml').and_return(false) }
 
       it { expect(configuration.to_h).to eq({}) }
     end
@@ -24,9 +22,7 @@ RSpec.describe Inquisition::Configuration do
 
   describe '#verbose?' do
     context 'when the file is missing' do
-      before do
-        allow(File).to receive(:exist?).with('.inquisition.yml').and_return(false)
-      end
+      before { allow(File).to receive(:exist?).with('.inquisition.yml').and_return(false) }
 
       it { is_expected.not_to be_verbose }
     end
