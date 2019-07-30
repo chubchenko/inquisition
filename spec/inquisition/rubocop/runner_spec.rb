@@ -23,7 +23,7 @@ RSpec.describe Inquisition::RuboCop::Runner do
   let(:medium_level_issue) { { level: Inquisition::Issue::LEVELS[:medium], file: file, message: message } }
   let(:high_level_issue) { { level: Inquisition::Issue::LEVELS[:high], file: file, message: message } }
 
-  let(:offenses) { [[file, [convention_offense]], [file, [warning_offense]], [file, [error_offense]]] }
+  let(:offenses) { [{ file => [convention_offense] }, { file => [warning_offense] }, { file => [error_offense] }] }
   let(:issues) { [low_level_issue, medium_level_issue, high_level_issue] }
   let(:rubocop) { instance_double(RuboCop::Runner) }
 

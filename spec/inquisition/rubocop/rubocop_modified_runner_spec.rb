@@ -12,7 +12,7 @@ RSpec.describe Inquisition::RuboCop::RuboCopModifiedRunner do
     let(:target_files) { [file] }
     let(:issues) { ['issue file', ['issue body']] }
     let(:offense) { instance_double(RuboCop::Cop::Offense) }
-    let(:offenses) { [[file, [offense]]] }
+    let(:offenses) { [{ file => [offense] }] }
 
     it 'returns offenses' do
       expect(runner).to receive(:find_target_files).and_return(target_files)

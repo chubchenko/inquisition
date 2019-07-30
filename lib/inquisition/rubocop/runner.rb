@@ -38,11 +38,12 @@ module Inquisition
         File.join(gem_root, 'config', '.rubocop.yml')
       end
 
-      def create_issue(offense)
-        offense_body = offense.last.first
-        @issues << Inquisition::Issue.new(level: LEVELS[offense_body.severity.name],
-                                          file: offense.first, message: offense_body.message,
-                                          runner: self, line: offense_body.line)
+      def create_issue(offenses)
+        offenses.values.flatten.each do |offense|
+          @issues << Inquisition::Issue.new(level: LEVELS[offense.severity.name],
+                                            file: offenses.keys[0], message: offense.message,
+                                            runner: self, line: offense.line)
+        end
       end
     end
   end
