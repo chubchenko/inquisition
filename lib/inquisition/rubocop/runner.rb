@@ -11,29 +11,31 @@ module Inquisition
         fatal: Inquisition::Issue::LEVELS[:high]
       }.freeze
 
-      # ::RuboCop::ConfigLoader::DOTFILE = 'config/.rubocop.yml'.freeze
+      USERS_CONFIG_FILE = '.rubocop.yml'.freeze
 
       def call
-        # if config in the app?
-        #   load config provided by app
-        # else
-        #   load default config
-
-        #   + rubocop-rails
-        #   + rubocop-performance
-        #   + rubocop-rspec
-        # end
-
-        offenses = RuboCopModifiedRunner.new(default_config_path, ::RuboCop::ConfigStore.new).run(['.'])
+        offenses = RuboCopModifiedRunner.new(options, config_store).run(['.'])
         offenses.each { |offense| create_issue(offense) }
         issues
       end
 
       private
 
-      def default_config_path
-        # {}
-        {:config=>"config/.rubocop.yml"}
+      def options
+        { config: choose_config }
+      end
+
+      def config_store
+        config_store = ::RuboCop::ConfigStore.new
+        config_store.options_config = options[:config]
+        config_store
+      end
+
+      def choose_config
+        return USERS_CONFIG_FILE if File.exist?(USERS_CONFIG_FILE)
+
+        gem_root = File.realpath(File.join(File.dirname(__FILE__), '..', '..'))
+        File.join(gem_root, 'config', '.rubocop.yml')
       end
 
       def create_issue(offense)
