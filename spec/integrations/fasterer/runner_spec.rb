@@ -8,7 +8,7 @@ RSpec.describe Inquisition::Fasterer::Runner do
       it 'return issue with current arguments' do
         expect(Inquisition::Issue).to receive(:new).with(
           level: Inquisition::Issue::LEVELS[:low],
-          line: 8,
+          line: 10,
           runner: be_kind_of(described_class),
           file: 'spec/dummy/app/controllers/application_controller.rb',
           message: 'Enumerable#sort is slower than Enumerable#sort_by'

@@ -1,5 +1,3 @@
-require_relative '../../dummy/config/environment'
-
 RSpec.describe Inquisition::Brakeman::Runner do
   describe '#call' do
     before { stub_const('Inquisition::Brakeman::Runner::APP_PATH', './spec/dummy') }
@@ -16,7 +14,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
       expect(Inquisition::Issue).to receive(:new).with(
         file: 'app/controllers/application_controller.rb',
         level: 'high',
-        line: 4,
+        line: 6,
         message: 'User controlled method execution',
         runner: be_kind_of(Inquisition::Brakeman::Runner)
       )

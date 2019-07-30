@@ -3,9 +3,8 @@ require 'rails_best_practices'
 module Inquisition
   module RailsBestPractices
     class Runner < ::Inquisition::Runner
-
       def call
-        analyzer = ::RailsBestPractices::Analyzer.new(nil, 'config' => 'rails_best_practices.yml')
+        analyzer = ::RailsBestPractices::Analyzer.new(APP_PATH, 'config' => 'rails_best_practices.yml')
         check_errors(analyzer)
         issues
       end

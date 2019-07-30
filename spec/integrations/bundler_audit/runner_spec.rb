@@ -2,10 +2,7 @@ require_relative '../../dummy/config/environment'
 
 RSpec.describe Inquisition::Bundler::Audit::Runner do
   describe '#call' do
-
-    before do
-      allow(Dir).to receive(:pwd).and_return(File.join(Dir.pwd, 'spec/dummy'))
-    end
+    before { allow(Dir).to receive(:pwd).and_return(File.join(Dir.pwd, 'spec/dummy')) }
 
     context 'when check errors with bundler-audit scanner' do
       it 'scanner.scan return errors' do

@@ -5,10 +5,12 @@ RSpec.describe Inquisition::LolDba::Runner do
 
       it 'return index errors' do
         expect(Inquisition::Issue).to receive(:new).with(
-          file: nil, level: 'low', line: nil,
+          file: nil,
+          level: 'low',
+          line: nil,
           message: 'You have not index in table `projects`, column `user_id`',
           runner: be_kind_of(described_class)
-        ).and_call_original
+        )
         described_class.call
       end
 

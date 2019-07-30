@@ -4,7 +4,6 @@ module Inquisition
   module Fasterer
     class Runner < ::Inquisition::Runner
       attr_reader :issues
-      APP_PATH = '.'.freeze
 
       def call
         @issues = []

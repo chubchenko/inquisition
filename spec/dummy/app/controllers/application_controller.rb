@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :test_fasterer, :test_injection_brakeman
+
   def test_injection_brakeman
     method = params[:method]
     @result = User.send(method.to_sym)

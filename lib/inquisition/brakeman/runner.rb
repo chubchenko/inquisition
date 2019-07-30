@@ -2,7 +2,6 @@ require 'brakeman'
 
 module Inquisition
   module Brakeman
-    APP_PATH = '.'.freeze
     LEVELS = Hash.new(Issue::LEVELS[:low]).update(0 => Issue::LEVELS[:high], 1 => Issue::LEVELS[:medium])
 
     class Runner < ::Inquisition::Runner

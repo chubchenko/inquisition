@@ -1,6 +1,7 @@
 module Inquisition
   class Runner
     attr_reader :issues
+    APP_PATH = '.'.freeze
 
     def self.collection
       @collection ||= []

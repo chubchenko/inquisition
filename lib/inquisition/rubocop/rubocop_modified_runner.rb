@@ -1,4 +1,5 @@
 require 'rubocop'
+require 'pry'
 
 module Inquisition
   module RuboCop
