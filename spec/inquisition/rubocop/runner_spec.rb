@@ -1,3 +1,8 @@
+
+
+
+require 'pry'
+
 RSpec.describe Inquisition::RuboCop::Runner do
   let(:runner) { described_class.new }
   let(:message) { 'Warn message' }
@@ -25,17 +30,45 @@ RSpec.describe Inquisition::RuboCop::Runner do
 
   let(:offenses) { [{ file => [convention_offense] }, { file => [warning_offense] }, { file => [error_offense] }] }
   let(:issues) { [low_level_issue, medium_level_issue, high_level_issue] }
-  let(:rubocop) { instance_double(RuboCop::Runner) }
+  let(:rubocop) { instance_double(Inquisition::RuboCop::RuboCopModifiedRunner) }
+
+  let(:user_config) { Inquisition::RuboCop::Runner::USERS_CONFIG_FILE }
+  let(:default_config) { 'inquisition/lib/config/.rubocop.yml' }
+
+  describe '#choose_config' do
+    context 'with users config file' do
+      before { allow(File).to receive(:exist?).with(user_config).and_return(true) }
+
+      it 'returns users config' do
+        expect(runner.send(:choose_config)).to eq(user_config)
+        expect(File).to have_received(:exist?).with(user_config)
+      end
+    end
+
+    context 'without users config file' do
+      before { allow(File).to receive(:exist?).with(user_config).and_return(false) }
+
+      it 'returns default config' do
+        expect(runner.send(:choose_config)).to include(default_config)
+        expect(File).to have_received(:exist?).with(user_config)
+      end
+    end
+  end
 
   describe '#call' do
+    before do
+      allow(Inquisition::RuboCop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
+      allow(rubocop).to receive(:run).and_return(offenses)
+    end
+
     it 'returns array with issues' do
-      expect(rubocop).to receive(:run).and_return(offenses)
-      expect(Inquisition::RuboCop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
       runner.call.each_with_index do |issue, index|
         expect(issue.instance_variable_get(:@level)).to eq(issues[index][:level])
         expect(issue.instance_variable_get(:@file)).to eq(issues[index][:file])
         expect(issue.instance_variable_get(:@message)).to eq(issues[index][:message])
       end
+      expect(Inquisition::RuboCop::RuboCopModifiedRunner).to have_received(:new)
+      expect(rubocop).to have_received(:run)
     end
   end
 end
