@@ -1,5 +1,7 @@
 module Inquisition
   class Runner
+    include Plugin
+
     attr_reader :issues
     APP_PATH = '.'.freeze
 
@@ -7,22 +9,12 @@ module Inquisition
       @collection ||= []
     end
 
-    def self.inherited(descendant)
-      collection.push(descendant)
-    end
-
     def self.call
-      new.()
+      new.call
     end
 
     def initialize
       @issues = []
-    end
-
-    private
-
-    def load_environment
-      require "#{Dir.pwd}/config/environment"
     end
   end
 end

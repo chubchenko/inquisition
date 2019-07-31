@@ -9,9 +9,9 @@ module Inquisition
       attr_reader :issues
 
       ANALYSERS = [
-        Analysers::Reek,
         Analysers::Flay,
-        Analysers::Flog
+        Analysers::Flog,
+        Analysers::Reek
       ].freeze
 
       def call
@@ -47,7 +47,7 @@ module Inquisition
       end
 
       def analysed_modules
-        @analysed_modules ||= ::RubyCritic::AnalysedModulesCollection.new(['.'])
+        @analysed_modules ||= ::RubyCritic::AnalysedModulesCollection.new([APP_PATH])
       end
     end
   end

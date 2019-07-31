@@ -1,16 +1,12 @@
 module Inquisition
   class Collector
-    def self.call
-      new.()
-    end
-
-    def initialize
-      @collection = Runner.collection
+    def initialize(collection: Runner.collection)
+      @collection = collection
     end
 
     def call
       @collection.each_with_object([]) do |runner, memo|
-        memo << runner.call
+        memo << runner.new.call
       end.flatten
     end
   end
