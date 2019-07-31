@@ -1,5 +1,5 @@
-require 'singleton'
 require 'yaml'
+require 'singleton'
 
 module Inquisition
   class Configuration
@@ -7,24 +7,22 @@ module Inquisition
 
     CONFIG_FILE_NAME = '.inquisition.yml'.freeze
     FOLDER_NAME_CONFIG = 'config'.freeze
-    ROOT_PATH = Dir.pwd
+
+    def initialize(path = '.inquisition.yml')
+      @options =
+        if File.exist?(path)
+          YAML.load_file(path)
+        else
+          data_default_config
+        end
+    end
 
     def to_h
-      config_exist? ? data_config.to_h : data_default_config
+      @options
     end
 
     def verbose?
-      to_h['verbose']
-    end
-
-    private
-
-    def config_exist?
-      Dir.glob(File.join(ROOT_PATH, CONFIG_FILE_NAME)).any?
-    end
-
-    def data_config
-      YAML.load_file(File.join(ROOT_PATH, CONFIG_FILE_NAME))
+      @options.fetch('verbose') { false }
     end
 
     def data_default_config

@@ -1,7 +1,5 @@
+require 'logger'
+
 module Inquisition
-  class Logger
-    def self.log(log)
-      $stdout.puts(log) if Configuration.instance.verbose?
-    end
-  end
+  Logger = Class.new(Logger)
 end

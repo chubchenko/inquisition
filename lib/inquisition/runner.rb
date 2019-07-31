@@ -1,5 +1,7 @@
 module Inquisition
   class Runner
+    include Plugin
+
     attr_reader :issues
 
     def initialize
@@ -10,22 +12,20 @@ module Inquisition
       @collection ||= []
     end
 
-    def self.inherited(descendant)
-      collection.push(descendant)
-    end
-
     def self.call
-      new.()
+      new.call
     end
 
     def self.self_key
       (name.split('::') - %w[Inquisition Runner]).join('_').downcase
     end
 
-    private
+    def self.enabled?
+      config.dig('plugins', self_key, 'enabled')
+    end
 
-    def load_environment
-      require "#{Dir.pwd}/config/environment"
+    def self.config
+      @config ||= Configuration.instance.to_h
     end
   end
 end
