@@ -1,53 +1,57 @@
 RSpec.describe Inquisition::Issue do
   let(:valid_attributes) do
-    { level: Inquisition::Issue::LEVELS[:low], file: 'file', line: 123, runner: 'runner', message: 'foo bar' }
+    { level: Inquisition::Issue::LEVELS[:low], runner: 'runner', file: nil, line: nil, message: nil }
   end
 
-  let(:valid_attributes_with_different_runner) do
-    { level: Inquisition::Issue::LEVELS[:low], file: 'file', line: 123, runner: 'runner_2', message: 'foo bar' }
+  let(:different_runner_attributes) do
+    { level: Inquisition::Issue::LEVELS[:low], runner: 'runner_2', file: nil, line: nil, message: nil }
   end
 
-  let(:valid_attributes_with_different_level) do
-    { level: Inquisition::Issue::LEVELS[:high], file: 'file', line: 123, runner: 'runner', message: 'foo bar' }
+  let(:different_level_attributes) do
+    { level: Inquisition::Issue::LEVELS[:high], file: nil, line: nil, runner: nil, message: nil }
   end
 
-  let(:invalid_attributes) { { level: 'invalid', file: 'file', line: 123, runner: 'runner', message: 'foo bar' } }
+  let(:unknown_level_attributes) { { level: 'unknown', file: nil, line: nil, runner: nil, message: nil } }
 
   let(:valid_issue) { described_class.new(**valid_attributes) }
-  let(:different_level_valid_issue) { described_class.new(**valid_attributes_with_different_level) }
-  let(:different_runner_valid_issue) { described_class.new(**valid_attributes_with_different_runner) }
+  let(:different_level_issue) { described_class.new(**different_level_attributes) }
+  let(:different_runner_issue) { described_class.new(**different_runner_attributes) }
 
-  describe '#initialize' do
-    it 'sets instance variables' do
-      expect(valid_issue.level).to eq(valid_attributes[:level])
-      expect(valid_issue.file).to eq(valid_attributes[:file])
-      expect(valid_issue.line).to eq(valid_attributes[:line])
-      expect(valid_issue.message).to eq(valid_attributes[:message])
-    end
-
-    it 'validates issue level' do
-      expect { described_class.new(**invalid_attributes) }.to raise_error(ArgumentError, 'Incorrect issue level')
+  context 'when the unknown level is passed' do
+    it do
+      expect { described_class.new(**unknown_level_attributes) }.to raise_error(ArgumentError, 'Incorrect issue level')
     end
   end
 
-  describe '#==' do
-    it 'compares issues ignoring issue-runner' do
-      expect(valid_issue == different_runner_valid_issue).to eq(true)
-      expect(valid_issue == different_level_valid_issue).to eq(false)
-    end
-  end
+  describe '#eql' do
+    subject { valid_issue == other }
 
-  describe '#eql?' do
-    it 'do the same operator == do' do
-      expect(valid_issue.eql?(different_runner_valid_issue)).to eq(true)
-      expect(valid_issue.eql?(different_level_valid_issue)).to eq(false)
+    context 'when a level, message, file and line match, and runner does not' do
+      let(:other) { different_runner_issue }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when at least one of the comparison attributes does not match' do
+      let(:other) { different_level_issue }
+
+      it { is_expected.to be_falsy }
     end
   end
 
   describe '#hash' do
-    it 'sets hash method by XOR comparable attributes of issue' do
-      expect(valid_issue.hash == different_runner_valid_issue.hash).to eq(true)
-      expect(valid_issue.hash == different_level_valid_issue.hash).to eq(false)
+    subject { valid_issue.hash == other.hash }
+
+    context 'when a level, message, file and line match, and runner does not' do
+      let(:other) { different_runner_issue }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when at least one of the comparison attributes does not match' do
+      let(:other) { different_level_issue }
+
+      it { is_expected.to be_falsy }
     end
   end
 end

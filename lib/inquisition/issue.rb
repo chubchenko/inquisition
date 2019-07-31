@@ -19,8 +19,7 @@ module Inquisition
     end
 
     def ==(other)
-      self.class == other.class &&
-        other.level == level &&
+      other.level == level &&
         other.file == file &&
         other.line == line &&
         other.message == message
