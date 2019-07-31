@@ -239,7 +239,7 @@ jobs:
 
 workflows:
   version: 2
-  default:
+  default: &default
     jobs:
       - checkout
       - cc-setup-coverage
@@ -265,3 +265,12 @@ workflows:
             - ruby-2-5
             - ruby-2-6
             - ruby-head
+  nightly:
+    triggers:
+      - schedule:
+          cron: 0 0 * * *
+          filters:
+            branches:
+              only:
+                - develop
+    <<: *default
