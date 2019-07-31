@@ -1,16 +1,19 @@
 require 'rails'
 require 'traceroute'
+require 'pry'
 
 module Inquisition
   module Traceroute
     class Runner < ::Inquisition::Runner
       def call
+        binding.pry
         load_environment
         @traceroute = ::Traceroute.new(Rails.application)
         @traceroute.load_everything!
         create_issue(unused_routes, 'unused route')
         create_issue(unreachable_action_methods, 'unreachable action method')
-        @issues
+        binding.pry
+        issues
       end
 
       private
@@ -25,7 +28,7 @@ module Inquisition
 
       def create_issue(problematic_routes, message)
         problematic_routes.each do |route|
-          @issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
+          issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
                                message: "#{message}: #{route}")
         end
       end
