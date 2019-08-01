@@ -2,10 +2,6 @@ module Inquisition
   class Runner
     include Plugin
 
-    def self.call
-      new.call
-    end
-
     def self.define_name
       (name.split('::') - %w[Inquisition Runner]).join('_').downcase
     end

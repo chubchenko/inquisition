@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::RailsBestPractices::Runner do
   describe '#call' do
-    subject(:call_runner) { described_class.call }
+    subject(:call_runner) { described_class.new.call }
 
     let(:instance_analyzer) { instance_double(RailsBestPractices::Analyzer, errors: []) }
     let(:errors_analyzer) do

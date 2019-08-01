@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Fasterer::Runner do
   describe '#call' do
-    subject(:runner_result) { described_class.call }
+    subject(:runner_result) { described_class.new.call }
 
     let(:test_file) { 'test_file_path' }
     let(:instance_file_traverser) { instance_double(Fasterer::FileTraverser) }

@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Rubycritic::Runner do
   describe '#call' do
-    subject(:result_runner) { described_class.call }
+    subject(:result_runner) { described_class.new.call }
 
     let(:analyse_module_without_errors) { [instance_double('RubyCritic::AnalysedModule', smells: [])] }
     let(:analyser_reek) { instance_double(Inquisition::Rubycritic::Analysers::Reek) }

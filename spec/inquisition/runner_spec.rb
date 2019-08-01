@@ -1,11 +1,4 @@
 RSpec.describe Inquisition::Runner do
-  describe '.call' do
-    it  do
-      expect(described_class).to receive_message_chain(:new, :call)
-      described_class.call
-    end
-  end
-
   describe '.define_name' do
     it 'return name runner' do
       allow(described_class).to receive(:name) { 'Inquisition::Brakeman::Runner' }

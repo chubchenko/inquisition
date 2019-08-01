@@ -16,14 +16,14 @@ RSpec.describe Inquisition::LolDba::Runner do
           message: 'You have not index in table `tasks`, column `project_id`',
           runner: be_kind_of(described_class)
         ).and_call_original
-        expect(described_class.call.count).to eq(1)
+        expect(described_class.new.call.count).to eq(1)
       end
     end
 
     context 'when call runner and it return not one error' do
       it 'without errors' do
         allow(LolDba::IndexFinder).to receive(:check_for_indexes).and_return({})
-        expect(described_class.call).to be_empty
+        expect(described_class.new.call).to be_empty
       end
     end
   end
