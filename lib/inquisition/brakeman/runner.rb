@@ -8,7 +8,7 @@ module Inquisition
       def call
         ::Brakeman.run('.').warnings.each do |warning|
           @issues << Issue.new(severity: LEVELS[warning.confidence], path: warning.file.relative,
-                              line: warning.line, message: warning.message.to_s, runner: self)
+                               line: warning.line, message: warning.message.to_s, runner: self)
         end
         @issues
       end
