@@ -30,6 +30,10 @@ module Inquisition
         issue_text = ard_task.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
         "#{issue_object} has #{issue_text}, details: #{details ? details.join(', ') : 'n/a'}"
       end
+
+      def load_environment
+        require "#{Dir.pwd}/config/environment"
+      end
     end
   end
 end
