@@ -24,27 +24,20 @@ RSpec.describe Inquisition::Collector do
       it { is_expected.to match_array(['a', 'b', 'c']) }
     end
 
-    context 'call enabled runner' do
-      subject(:collector) { described_class.new(collection: collection).call }
+    context 'when the runner is disabled' do
+      subject(:collector) { described_class.new(collection: [dummy]).call }
 
-      let(:first_runner) { Inquisition::Brakeman::Runner }
-      let(:second_runner) { Inquisition::Fasterer::Runner }
-      let(:collection) { [first_runner, second_runner] }
-      let(:config) do
-        {
-          'plugins' => {
-            'brakeman' => { 'enabled' => true },
-            'fasterer' => { 'enabled' => false }
-          }
-        }
+      let(:runner) { Inquisition::Fasterer::Runner }
+      let(:dummy) {
+        Class.new do
+          def self.enabled?
+            false
+          end
         end
+      }
 
       it 'return call runner' do
-        allow(first_runner).to receive(:config) { config }
-        allow(second_runner).to receive(:config) { config }
-
-        expect(first_runner).to receive_message_chain(:new, :call)
-        expect(second_runner).not_to receive(:new)
+        expect(runner).not_to receive(:new)
         collector
       end
     end

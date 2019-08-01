@@ -6,27 +6,15 @@ module Inquisition
     include Singleton
 
     CONFIG_FILE_NAME = '.inquisition.yml'.freeze
-    FOLDER_NAME_CONFIG = 'config'.freeze
 
-    def initialize(path = '.inquisition.yml')
-      @options =
-        if File.exist?(path)
-          YAML.load_file(path)
-        else
-          data_default_config
-        end
-    end
+    attr_reader :options
 
-    def to_h
-      @options
+    def initialize(path = CONFIG_FILE_NAME)
+      @options = YAML.load_file(path) if File.exist?(path)
     end
 
     def verbose?
-      @options.fetch('verbose') { false }
-    end
-
-    def data_default_config
-      YAML::load_file(File.join(File.dirname(File.expand_path(__FILE__)), FOLDER_NAME_CONFIG, CONFIG_FILE_NAME))
+      @options&.fetch('verbose') { false }
     end
   end
 end

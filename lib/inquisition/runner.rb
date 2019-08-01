@@ -4,28 +4,20 @@ module Inquisition
 
     attr_reader :issues
 
-    def initialize
-      @issues = []
-    end
-
-    def self.collection
-      @collection ||= []
-    end
-
     def self.call
       new.call
     end
 
-    def self.self_key
+    def self.define_name
       (name.split('::') - %w[Inquisition Runner]).join('_').downcase
     end
 
     def self.enabled?
-      config.dig('plugins', self_key, 'enabled')
+      Configuration.instance.options&.dig('plugins', define_name, 'enabled')
     end
 
-    def self.config
-      @config ||= Configuration.instance.to_h
+    def initialize
+      @issues = []
     end
   end
 end
