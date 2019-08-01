@@ -1,8 +1,3 @@
-
-
-
-require 'pry'
-
 RSpec.describe Inquisition::RuboCop::Runner do
   let(:runner) { described_class.new }
   let(:message) { 'Warn message' }

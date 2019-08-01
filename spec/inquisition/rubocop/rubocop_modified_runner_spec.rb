@@ -14,12 +14,19 @@ RSpec.describe Inquisition::RuboCop::RuboCopModifiedRunner do
     let(:offense) { instance_double(RuboCop::Cop::Offense) }
     let(:offenses) { [{ file => [offense] }] }
 
+    before do
+      allow(runner).to receive(:find_target_files).and_return(target_files)
+      allow(runner).to receive(:file_offenses).with(file).and_return([offense])
+      allow(offense).to receive(:disabled?).and_return([offense])
+      allow(runner).to receive(:file_started).with(file)
+    end
+
     it 'returns offenses' do
-      expect(runner).to receive(:find_target_files).and_return(target_files)
-      expect(runner).to receive(:file_offenses).with(file).and_return([offense])
-      expect(offense).to receive(:disabled?).and_return([offense])
-      expect(runner).to receive(:file_started).with(file)
       expect(runner.run(['.'])).to eq(offenses)
+      expect(runner).to have_received(:find_target_files)
+      expect(runner).to have_received(:file_offenses).with(file)
+      expect(offense).to have_received(:disabled?)
+      expect(runner).to have_received(:file_started).with(file)
     end
   end
 end
