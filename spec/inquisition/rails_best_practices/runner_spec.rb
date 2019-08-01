@@ -50,4 +50,6 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'rails_best_practices'
 end

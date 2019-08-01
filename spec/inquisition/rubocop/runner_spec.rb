@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::RuboCop::Runner do
+RSpec.describe Inquisition::Rubocop::Runner do
   let(:runner) { described_class.new }
   let(:message) { 'Warn message' }
   let(:file) { 'foo/bar.rb' }
@@ -30,7 +30,7 @@ RSpec.describe Inquisition::RuboCop::Runner do
   describe '#call' do
     it 'returns array with issues' do
       expect(rubocop).to receive(:run).and_return(offenses)
-      expect(Inquisition::RuboCop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
+      expect(Inquisition::Rubocop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
       runner.call.each_with_index do |issue, index|
         expect(issue.instance_variable_get(:@level)).to eq(issues[index][:level])
         expect(issue.instance_variable_get(:@file)).to eq(issues[index][:file])
@@ -38,4 +38,6 @@ RSpec.describe Inquisition::RuboCop::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'rubocop'
 end

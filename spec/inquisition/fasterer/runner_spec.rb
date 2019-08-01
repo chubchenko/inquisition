@@ -45,4 +45,6 @@ RSpec.describe Inquisition::Fasterer::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'fasterer'
 end

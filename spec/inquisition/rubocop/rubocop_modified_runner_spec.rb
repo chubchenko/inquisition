@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::RuboCop::RuboCopModifiedRunner do
+RSpec.describe Inquisition::Rubocop::RuboCopModifiedRunner do
   let(:runner) { described_class.new(nil, nil) }
 
   describe '#initialize' do

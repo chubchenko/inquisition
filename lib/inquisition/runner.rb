@@ -2,12 +2,14 @@ module Inquisition
   class Runner
     include Plugin
 
-    def self.define_name
-      (name.split('::') - %w[Inquisition Runner]).join('_').downcase
-    end
+    class << self
+      def badge
+        @badge ||= Badge.for(name)
+      end
 
-    def self.enabled?
-      Configuration.instance.options&.dig('plugins', define_name, 'enabled')
+      def enabled?
+        Configuration.instance.to_h.fetch('plugins', {}).fetch(badge.to_s, {}).fetch('enabled', false)
+      end
     end
 
     def initialize

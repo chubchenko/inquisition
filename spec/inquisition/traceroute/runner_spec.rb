@@ -27,4 +27,6 @@ RSpec.describe Inquisition::Traceroute::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'traceroute'
 end

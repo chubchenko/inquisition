@@ -27,4 +27,6 @@ RSpec.describe Inquisition::LolDba::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'lol_dba'
 end

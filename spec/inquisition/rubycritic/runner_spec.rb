@@ -49,4 +49,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'rubycritic'
 end

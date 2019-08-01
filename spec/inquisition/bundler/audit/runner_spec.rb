@@ -48,4 +48,6 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'bundler_audit'
 end
