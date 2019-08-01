@@ -27,19 +27,19 @@ RSpec.describe Inquisition::Collector do
     context 'when the runner is disabled' do
       subject(:collector) { described_class.new(collection: [dummy]).call }
 
-      let(:runner) { Inquisition::Fasterer::Runner }
-      let(:dummy) {
+      let(:dummy) do
         Class.new do
+          def call
+            ['a', ['b', 'c']]
+          end
+
           def self.enabled?
             false
           end
         end
-      }
-
-      it 'return call runner' do
-        expect(runner).not_to receive(:new)
-        collector
       end
+
+      it { is_expected.to be_empty }
     end
   end
 end

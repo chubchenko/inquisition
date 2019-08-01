@@ -6,8 +6,6 @@ require 'inquisition/rubycritic/analysers/flog'
 module Inquisition
   module Rubycritic
     class Runner < ::Inquisition::Runner
-      attr_reader :issues
-
       ANALYSERS = [
         Analysers::Reek,
         Analysers::Flay,
@@ -15,9 +13,8 @@ module Inquisition
       ].freeze
 
       def call
-        @issues = []
         run_analyzers
-        issues
+        @issues
       end
 
       private
@@ -32,7 +29,7 @@ module Inquisition
 
       def compose_issues(smells)
         smells.each do |smell|
-          smell.locations.each { |location| issues << create_issue(smell, location) }
+          smell.locations.each { |location| @issues << create_issue(smell, location) }
         end
       end
 

@@ -1,23 +1,22 @@
 RSpec.describe Inquisition::Configuration do
-  let(:config_file_path) { File.join(Dir.pwd, 'spec/fixtures/config/.inquisition.yml') }
-  let(:default_hash) { YAML::load_file(config_file_path) }
-
   subject(:configuration) { Class.new(described_class).instance }
 
-  describe '#initialize variable options' do
+  describe '#to_h' do
     context 'when the file is missing' do
       before { allow(File).to receive(:exist?).with('.inquisition.yml').and_return(false) }
 
-      it { expect(configuration.options).to eq(nil) }
+      it { expect(configuration.to_h).to eq({}) }
     end
 
     context 'when file is present' do
       before do
         allow(File).to receive(:exist?).with('.inquisition.yml').and_return(true)
-        allow(YAML).to receive(:load_file).and_return(default_hash)
+        allow(YAML).to receive(:load_file).and_return(
+          'plugins' => { 'reek' => { 'enabled' => true } }, 'verbose' => false
+        )
       end
 
-      it { expect(configuration.options).to eq('plugins' => { 'brakeman' => { 'enabled' => true } }, 'verbose' => false) }
+      it { expect(configuration.to_h).to eq('plugins' => { 'reek' => { 'enabled' => true } }, 'verbose' => false) }
     end
   end
 
