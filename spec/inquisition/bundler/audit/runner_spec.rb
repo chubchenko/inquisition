@@ -6,7 +6,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
       let(:advisory_errors) do
         instance_double(
           Bundler::Audit::Advisory,
-          criticality: :low,
+          criticality: 'low',
           path: 'path',
           title: 'error'
         )

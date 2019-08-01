@@ -1,6 +1,6 @@
 module Inquisition
   class Issue
-    attr_reader :level, :file, :line, :message
+    COMPARISON_ATTRIBUTES = %i[level file line message].freeze
 
     LEVELS = {
       high: 'high',
@@ -8,10 +8,10 @@ module Inquisition
       low: 'low'
     }.freeze
 
-    COMPARABLE_ATTRIBUTES = %i[level file line message].freeze
+    attr_reader :level, :file, :line, :message
 
-    def initialize(level:, file:, line:, runner:, message:)
-      raise ArgumentError, 'Incorrect issue level' unless LEVELS.value?(level)
+    def initialize(level:, file:, line:, message:, runner:)
+      raise ArgumentError, "Unknown level: #{level}" unless LEVELS.value?(level)
 
       @level = level
       @line = line
@@ -21,13 +21,17 @@ module Inquisition
     end
 
     def ==(other)
-      COMPARABLE_ATTRIBUTES.all? { |attribute| other.public_send(attribute) == public_send(attribute) }
+      COMPARISON_ATTRIBUTES.all? do |attribute|
+        send(attribute) == other.send(attribute)
+      end
     end
 
     alias eql? ==
 
     def hash
-      COMPARABLE_ATTRIBUTES.drop(1).reduce(level.hash) { |memo, attribute| memo ^ attribute.hash }
+      COMPARISON_ATTRIBUTES.reduce(0) do |hash, attribute|
+        hash ^ send(attribute).hash
+      end
     end
   end
 end
