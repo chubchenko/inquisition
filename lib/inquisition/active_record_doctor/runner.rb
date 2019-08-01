@@ -17,7 +17,7 @@ module Inquisition
         load_environment
         ::ActiveRecordDoctor::Tasks.all.each do |ard_task|
           ard_task.run.first.each do |table, column|
-            @issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
+            @issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
                                  message: create_message(ard_task, table, column))
           end
         end

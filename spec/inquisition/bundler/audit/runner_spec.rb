@@ -30,10 +30,10 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
 
       it 'scanner.scan return errors' do
         expect(Inquisition::Issue).to receive(:new).with(
-          level: advisory_errors.criticality,
+          severity: advisory_errors.criticality.to_sym,
           line: '',
           runner: be_kind_of(described_class),
-          file: advisory_errors.path,
+          path: advisory_errors.path,
           message: advisory_errors.title
         ).and_call_original
         expect(runner_result.first).to be_kind_of(Inquisition::Issue)

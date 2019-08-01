@@ -35,8 +35,8 @@ module Inquisition
 
       def create_issue(error, location_error)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVELS[:low],
-          file: location_error.pathname,
+          severity: :low,
+          path: location_error.pathname,
           line: location_error.line,
           runner: self,
           message: error.message

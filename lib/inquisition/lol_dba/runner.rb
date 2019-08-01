@@ -21,10 +21,10 @@ module Inquisition
 
       def create_issue(table, index)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVELS[:low],
+          severity: :low,
           line: nil,
           runner: self,
-          file: nil,
+          path: nil,
           message: "You have not index in table `#{table}`, column `#{index}`"
         )
       end
