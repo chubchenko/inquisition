@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Bundler::Audit::Runner do
   describe '#call' do
-    subject(:runner_result) { described_class.call }
+    subject(:runner_result) { described_class.new.call }
 
     context 'when check errors with bundler-audit scanner' do
       let(:advisory_errors) do
@@ -44,8 +44,10 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
         allow(Bundler::Audit::Database).to receive(:update!).and_return(true)
         allow(Bundler::Audit::Scanner).to receive(:new).and_return(scanner_instance)
         allow(scanner_instance).to receive(:scan).and_return([])
-        expect(described_class.call).to be_empty
+        expect(described_class.new.call).to be_empty
       end
     end
   end
+
+  include_examples 'enablable', 'bundler_audit'
 end

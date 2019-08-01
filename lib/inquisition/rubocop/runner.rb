@@ -1,7 +1,7 @@
 require 'rubocop'
 
 module Inquisition
-  module RuboCop
+  module Rubocop
     class Runner < ::Inquisition::Runner
       LEVELS = {
         refactor: :low,
@@ -14,9 +14,9 @@ module Inquisition
       ::RuboCop::ConfigLoader::DOTFILE = 'config/.rubocop.yml'.freeze
 
       def call
-        offenses = Inquisition::RuboCop::RuboCopModifiedRunner.new({}, ::RuboCop::ConfigStore.new).run(['.'])
+        offenses = Inquisition::Rubocop::RuboCopModifiedRunner.new({}, ::RuboCop::ConfigStore.new).run(['.'])
         offenses.each { |offense| create_issue(offense) }
-        issues
+        @issues
       end
 
       private

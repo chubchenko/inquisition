@@ -36,4 +36,6 @@ RSpec.describe Inquisition::Brakeman::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'brakeman'
 end

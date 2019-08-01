@@ -3,8 +3,6 @@ require 'lol_dba'
 module Inquisition
   module LolDba
     class Runner < ::Inquisition::Runner
-      attr_reader :errors
-
       def call
         load_environment
         @errors = ::LolDba::IndexFinder.check_for_indexes
@@ -14,7 +12,7 @@ module Inquisition
       private
 
       def compose_issues
-        errors.map { |table, index_arr| create_issue_with_every_index(table, index_arr) }.flatten
+        @errors.map { |table, index_arr| create_issue_with_every_index(table, index_arr) }.flatten
       end
 
       def create_issue_with_every_index(table, index_arr)
