@@ -8,6 +8,8 @@ module Inquisition
       low: 'low'
     }.freeze
 
+    COMPARABLE_ATTRIBUTES = %i[level file line message].freeze
+
     def initialize(level:, file:, line:, runner:, message:)
       raise ArgumentError, 'Incorrect issue level' unless LEVELS.value?(level)
 
@@ -19,16 +21,13 @@ module Inquisition
     end
 
     def ==(other)
-      other.level == level &&
-        other.file == file &&
-        other.line == line &&
-        other.message == message
+      COMPARABLE_ATTRIBUTES.all? { |attribute| other.public_send(attribute) == public_send(attribute) }
     end
 
     alias eql? ==
 
     def hash
-      level.hash ^ file.hash ^ line.hash ^ message.hash
+      COMPARABLE_ATTRIBUTES.drop(1).reduce(level.hash) { |memo, attribute| memo ^ attribute.hash }
     end
   end
 end
