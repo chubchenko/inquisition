@@ -1,17 +1,29 @@
 module Inquisition
   class Issue
-    LEVELS = {
-      high: 'high',
-      medium: 'medium',
-      low: 'low'
-    }.freeze
+    COMPARISON_ATTRIBUTES = %i[path line severity message].freeze
 
-    def initialize(level:, file:, line:, runner:, message:)
-      @level = level
+    attr_reader :path, :line, :severity, :message
+
+    def initialize(path:, line:, severity:, message:, runner:)
+      @path = path
       @line = line
       @runner = runner
-      @file = file
       @message = message
+      @severity = Severity.new(severity)
+    end
+
+    def ==(other)
+      COMPARISON_ATTRIBUTES.all? do |attribute|
+        send(attribute) == other.send(attribute)
+      end
+    end
+
+    alias eql? ==
+
+    def hash
+      COMPARISON_ATTRIBUTES.reduce(0) do |hash, attribute|
+        hash ^ send(attribute).hash
+      end
     end
   end
 end

@@ -31,8 +31,8 @@ RSpec.describe Inquisition::Rubycritic::Runner do
 
       it 'return issue with current arguments' do
         expect(Inquisition::Issue).to receive(:new).with(
-          level: Inquisition::Issue::LEVELS[:low],
-          file: smell_location.pathname,
+          severity: :low,
+          path: smell_location.pathname,
           line: smell_location.line,
           runner: be_kind_of(described_class),
           message: smell.message
