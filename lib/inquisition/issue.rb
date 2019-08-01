@@ -1,23 +1,15 @@
 module Inquisition
   class Issue
-    COMPARISON_ATTRIBUTES = %i[level file line message].freeze
+    COMPARISON_ATTRIBUTES = %i[path line severity message].freeze
 
-    LEVELS = {
-      high: 'high',
-      medium: 'medium',
-      low: 'low'
-    }.freeze
+    attr_reader :path, :line, :severity, :message
 
-    attr_reader :level, :file, :line, :message
-
-    def initialize(level:, file:, line:, message:, runner:)
-      raise ArgumentError, "Unknown level: #{level}" unless LEVELS.value?(level)
-
-      @level = level
+    def initialize(path:, line:, severity:, message:, runner:)
+      @path = path
       @line = line
       @runner = runner
-      @file = file
       @message = message
+      @severity = Severity.new(severity)
     end
 
     def ==(other)

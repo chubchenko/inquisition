@@ -26,10 +26,10 @@ module Inquisition
 
       def create_issue(error, file_error)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVELS[:low],
+          severity: :low,
           line: error.line_number,
           runner: self,
-          file: file_error,
+          path: file_error,
           message: error.explanation
         )
       end
