@@ -19,6 +19,8 @@ require 'inquisition/lol_dba/runner'
 require 'inquisition/fasterer/runner'
 require 'inquisition/rubycritic/runner'
 require 'inquisition/traceroute/runner'
+require 'inquisition/factory_bot/runner'
+require 'inquisition/factory_bot/factory_bot_modified_linter'
 
 module Inquisition
   def self.logger
