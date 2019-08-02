@@ -1,7 +1,7 @@
 module Inquisition
   class Collector
     def initialize(collection: Runner.collection)
-      @collection = collection
+      @collection = collection.select(&:enabled?)
     end
 
     def call

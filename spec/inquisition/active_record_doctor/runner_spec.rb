@@ -17,4 +17,6 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
       expect(runner.call.first.instance_variable_get(:@message)).to eq(message)
     end
   end
+
+  include_examples 'enablable', 'active_record_doctor'
 end

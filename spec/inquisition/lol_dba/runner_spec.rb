@@ -12,19 +12,21 @@ RSpec.describe Inquisition::LolDba::Runner do
       it 'return index errors' do
         allow(LolDba::IndexFinder).to receive(:check_for_indexes).and_return(index_error)
         expect(Inquisition::Issue).to receive(:new).with(
-          file: nil, level: 'low', line: nil,
+          path: nil, severity: :low, line: nil,
           message: 'You have not index in table `tasks`, column `project_id`',
           runner: be_kind_of(described_class)
         ).and_call_original
-        expect(described_class.call.count).to eq(1)
+        expect(described_class.new.call.count).to eq(1)
       end
     end
 
     context 'when call runner and it return not one error' do
       it 'without errors' do
         allow(LolDba::IndexFinder).to receive(:check_for_indexes).and_return({})
-        expect(described_class.call).to be_empty
+        expect(described_class.new.call).to be_empty
       end
     end
   end
+
+  include_examples 'enablable', 'lol_dba'
 end

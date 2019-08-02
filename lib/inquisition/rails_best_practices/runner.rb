@@ -6,7 +6,7 @@ module Inquisition
       def call
         analyzer = ::RailsBestPractices::Analyzer.new(nil, 'config' => 'rails_best_practices.yml')
         check_errors(analyzer)
-        issues
+        @issues
       end
 
       def check_errors(analyzer)
@@ -15,15 +15,15 @@ module Inquisition
       end
 
       def define_errors(data_errors)
-        data_errors.each { |error| issues << create_issue(error) }
+        data_errors.each { |error| @issues << create_issue(error) }
       end
 
       def create_issue(error)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVELS[:low],
+          severity: :low,
           line: error.line_number,
           runner: self,
-          file: error.filename,
+          path: error.filename,
           message: error.message
         )
       end

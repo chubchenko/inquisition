@@ -3,13 +3,10 @@ require 'fasterer/file_traverser'
 module Inquisition
   module Fasterer
     class Runner < ::Inquisition::Runner
-      attr_reader :issues
-
       def call
-        @issues = []
         fasterer = ::Fasterer::FileTraverser.new('.')
         fasterer.scannable_files.each { |file| scan_file(file) }
-        issues
+        @issues
       end
 
       private
@@ -21,15 +18,15 @@ module Inquisition
       end
 
       def define_errors(data)
-        data.errors.each { |error| issues << create_issue(error, data.file_path) }
+        data.errors.each { |error| @issues << create_issue(error, data.file_path) }
       end
 
       def create_issue(error, file_error)
         Inquisition::Issue.new(
-          level: Inquisition::Issue::LEVELS[:low],
+          severity: :low,
           line: error.line_number,
           runner: self,
-          file: file_error,
+          path: file_error,
           message: error.explanation
         )
       end
