@@ -4,15 +4,13 @@ require 'rails/all'
 
 ENV['RAILS_ENV'] ||= 'test'
 
-ENV['RAILS_ENV'] ||= 'test'
-
 Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
 
 ActiveRecord::Base.establish_connection(
   adapter: 'postgresql',
   database: 'test_dummy'
 )
-Dir.glob("spec/dummy/app/models/*.rb").sort.each { |file| require_dependency file }
+Dir.glob('spec/dummy/app/models/*.rb').sort.each { |file| require_dependency file }
 ActiveRecord::Schema.verbose = false
 load 'dummy/db/schema.rb'
 

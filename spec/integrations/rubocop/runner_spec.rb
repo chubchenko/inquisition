@@ -1,9 +1,17 @@
-RSpec.describe Inquisition::Fasterer::Runner do
+RSpec.describe Inquisition::RuboCop::Runner do
   describe '#call' do
-    context 'when runner return errors' do
-      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['fasterer'] }
+    context 'when dummy runner return issues' do
+      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rubocop'] }
 
-      before { stub_const('Inquisition::Fasterer::Runner::APP_PATH', './spec/dummy') }
+      before { stub_const('Inquisition::RuboCop::Runner::APP_PATH', './spec/dummy') }
+
+      it 'return issue' do
+        expect(described_class.call).to all(be_kind_of(Inquisition::Issue))
+      end
+
+      it 'return count issues' do
+        expect(described_class.call.count).to eq(3)
+      end
 
       it 'return issue with current arguments' do
         allow(Inquisition::Issue).to receive(:new)
@@ -17,14 +25,6 @@ RSpec.describe Inquisition::Fasterer::Runner do
             message: error['message']
           )
         end
-      end
-
-      it 'return type issues' do
-        expect(described_class.call).to all(be_kind_of(Inquisition::Issue))
-      end
-
-      it 'return count issues' do
-        expect(described_class.call.count).to eq(1)
       end
     end
   end

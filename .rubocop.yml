@@ -29,7 +29,3 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Exclude:
     - 'spec/**/*.rb'
-
-AllCops:
-  Exclude:
-    - 'spec/dummy'

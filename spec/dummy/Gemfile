@@ -3,19 +3,14 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.3'
 
-gem 'rails'
 gem 'actionview', '5.2.2'
 gem 'inquisition', path: '/var/www/inquisition'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-gem 'rspec-rails'
-# Use Puma as the app server
-gem 'puma', '~> 3.11'
 gem 'pry'
-
-# Reduces boot times through caching; required in config/boot.rb
-# gem 'bootsnap', '>= 1.1.0', require: false
-
+gem 'puma', '~> 3.11'
+gem 'rspec-rails'
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'

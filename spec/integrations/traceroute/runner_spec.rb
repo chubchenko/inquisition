@@ -1,6 +1,8 @@
 RSpec.describe Inquisition::Traceroute::Runner do
   describe '#call' do
     context 'when call runner in dummy' do
+      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['traceroute'] }
+
       before { allow(Dir).to receive(:pwd).and_return(File.join(Dir.pwd, 'spec/dummy')) }
 
       it 'return count issues' do
@@ -12,21 +14,17 @@ RSpec.describe Inquisition::Traceroute::Runner do
       end
 
       it 'return issues with current arguments' do
-        expect(Inquisition::Issue).to receive(:new).with(
-          file: nil,
-          level: 'low',
-          line: nil,
-          message: 'unreachable action method: application#test_injection_brakeman',
-          runner: be_kind_of(described_class)
-        )
-        expect(Inquisition::Issue).to receive(:new).with(
-          file: nil,
-          level: 'low',
-          line: nil,
-          message: 'unreachable action method: application#test_fasterer',
-          runner: be_kind_of(described_class)
-        )
+        allow(Inquisition::Issue).to receive(:new)
         described_class.call
+        errors.each do |error|
+          expect(Inquisition::Issue).to have_received(:new).with(
+            level: Inquisition::Issue::LEVELS[:low],
+            line: nil,
+            runner: be_kind_of(described_class),
+            file: nil,
+            message: error['message']
+          )
+        end
       end
     end
   end
