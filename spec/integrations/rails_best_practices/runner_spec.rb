@@ -1,15 +1,18 @@
 RSpec.describe Inquisition::RailsBestPractices::Runner do
   describe '#call' do
     context 'when call runner and it return errors' do
-      before { stub_const('Inquisition::RailsBestPractices::Runner::APP_PATH', './spec/dummy') }
+      before do
+        stub_const('Inquisition::RailsBestPractices::Runner::APP_PATH', './spec/dummy')
+        stub_const('Inquisition::RailsBestPractices::Runner::NAME_CONFIG', './spec/dummy/rails_best_practices.yml')
+      end
 
       it 'return issue with current arguments' do
         expect(Inquisition::Issue).to receive(:new).with(
           level: Inquisition::Issue::LEVELS[:low],
-          line: '2',
+          line: '6',
           runner: be_kind_of(described_class),
-          file: File.join(Dir.pwd, 'spec/dummy/db/schema.rb'),
-          message: 'always add db index (projects => [user_id])'
+          file: File.join(Dir.pwd, 'spec/dummy/config/initializers/backtrace_silencers.rb'),
+          message: 'line is longer than 111 characters (112 characters)'
         )
         described_class.call
       end

@@ -16,7 +16,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
         level: 'high',
         line: 6,
         message: 'User controlled method execution',
-        runner: be_kind_of(Inquisition::Brakeman::Runner)
+        runner: be_kind_of(described_class)
       )
       described_class.call
     end

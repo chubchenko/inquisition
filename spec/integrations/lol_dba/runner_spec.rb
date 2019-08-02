@@ -8,7 +8,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           file: nil,
           level: 'low',
           line: nil,
-          message: 'You have not index in table `projects`, column `user_id`',
+          message: "You have not index in table `active_storage_attachments`, column `[\"record_id\", \"record_type\"]`",
           runner: be_kind_of(described_class)
         )
         described_class.call

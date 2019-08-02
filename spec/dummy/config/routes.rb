@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
-  # root 'application#test_injection_brakeman'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :rails do
+    get 'properties', action: :properties, controller: 'info'
+    get 'index', action: :index, controller: 'info'
+    get 'routes', action: :routes, controller: 'info'
+    get 'index', action: :index, controller: 'mailers'
+    get 'preview', action: :preview, controller: 'mailers'
+    get 'welcome', action: :index, controller: 'welcome'
+  end
 end

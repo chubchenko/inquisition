@@ -1,18 +1,15 @@
 require 'rails'
 require 'traceroute'
-require 'pry'
 
 module Inquisition
   module Traceroute
     class Runner < ::Inquisition::Runner
       def call
-        binding.pry
         load_environment
         @traceroute = ::Traceroute.new(Rails.application)
         @traceroute.load_everything!
         create_issue(unused_routes, 'unused route')
         create_issue(unreachable_action_methods, 'unreachable action method')
-        binding.pry
         issues
       end
 
