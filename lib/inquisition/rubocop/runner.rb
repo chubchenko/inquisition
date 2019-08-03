@@ -1,20 +1,20 @@
 require 'rubocop'
 
 module Inquisition
-  module RuboCop
+  module Rubocop
     class Runner < ::Inquisition::Runner
       LEVELS = {
-        refactor: Inquisition::Issue::LEVELS[:low],
-        convention: Inquisition::Issue::LEVELS[:low],
-        warning: Inquisition::Issue::LEVELS[:medium],
-        error: Inquisition::Issue::LEVELS[:high],
-        fatal: Inquisition::Issue::LEVELS[:high]
+        refactor: :low,
+        convention: :low,
+        warning: :medium,
+        error: :high,
+        fatal: :high
       }.freeze
 
       ::RuboCop::ConfigLoader::DOTFILE = 'config/.rubocop.yml'.freeze
 
       def call
-        offenses = Inquisition::RuboCop::RuboCopModifiedRunner.new({}, ::RuboCop::ConfigStore.new).run([APP_PATH])
+        offenses = Inquisition::Rubocop::RuboCopModifiedRunner.new({}, ::RuboCop::ConfigStore.new).run([APP_PATH])
         offenses.each { |offense| create_issue(offense) }
         issues
       end
@@ -23,8 +23,8 @@ module Inquisition
 
       def create_issue(offense)
         offense_body = offense.last.first
-        @issues << Inquisition::Issue.new(level: LEVELS[offense_body.severity.name],
-                                          file: offense.first, message: offense_body.message,
+        @issues << Inquisition::Issue.new(severity: LEVELS[offense_body.severity.name],
+                                          path: offense.first, message: offense_body.message,
                                           runner: self, line: offense_body.line)
       end
     end

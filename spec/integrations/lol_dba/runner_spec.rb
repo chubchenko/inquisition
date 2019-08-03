@@ -1,5 +1,7 @@
 RSpec.describe Inquisition::LolDba::Runner do
   describe '#call' do
+    subject(:call_runner) { described_class.new.call }
+
     context 'when call runner with errors' do
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['lol_dba'] }
 
@@ -7,24 +9,24 @@ RSpec.describe Inquisition::LolDba::Runner do
 
       it 'return index errors' do
         allow(Inquisition::Issue).to receive(:new)
-        described_class.call
+        call_runner
         errors.each do |error|
           expect(Inquisition::Issue).to have_received(:new).with(
-            level: Inquisition::Issue::LEVELS[:low],
+            severity: :low,
             line: nil,
             runner: be_kind_of(described_class),
-            file: nil,
+            path: nil,
             message: error['message']
           )
         end
       end
 
       it 'return count errors' do
-        expect(described_class.call.count).to eq(1)
+        expect(call_runner.count).to eq(1)
       end
 
       it 'return issue' do
-        expect(described_class.call).to all(be_kind_of(Inquisition::Issue))
+        expect(call_runner).to all(be_kind_of(Inquisition::Issue))
       end
     end
   end

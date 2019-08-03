@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Bundler::Audit::Runner do
   describe '#call' do
-    subject(:runner_result) { described_class.call }
+    subject(:runner_result) { described_class.new.call }
 
     context 'when check errors with bundler-audit scanner' do
       let(:advisory_errors) do
@@ -30,10 +30,10 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
 
       it 'scanner.scan return errors' do
         expect(Inquisition::Issue).to receive(:new).with(
-          level: advisory_errors.criticality,
+          severity: advisory_errors.criticality.to_sym,
           line: '',
           runner: be_kind_of(described_class),
-          file: advisory_errors.path,
+          path: advisory_errors.path,
           message: advisory_errors.title
         ).and_call_original
         expect(runner_result.first).to be_kind_of(Inquisition::Issue)
@@ -44,8 +44,10 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
         allow(Bundler::Audit::Database).to receive(:update!).and_return(true)
         allow(Bundler::Audit::Scanner).to receive(:new).and_return(scanner_instance)
         allow(scanner_instance).to receive(:scan).and_return([])
-        expect(described_class.call).to be_empty
+        expect(described_class.new.call).to be_empty
       end
     end
   end
+
+  include_examples 'enablable', 'bundler_audit'
 end

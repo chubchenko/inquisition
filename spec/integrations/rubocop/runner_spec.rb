@@ -1,28 +1,30 @@
-RSpec.describe Inquisition::RuboCop::Runner do
+RSpec.describe Inquisition::Rubocop::Runner do
   describe '#call' do
+    subject(:call_runner) { described_class.new.call }
+
     context 'when dummy runner return issues' do
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rubocop'] }
 
-      before { stub_const('Inquisition::RuboCop::Runner::APP_PATH', './spec/dummy') }
+      before { stub_const('Inquisition::Rubocop::Runner::APP_PATH', './spec/dummy') }
 
       it 'return issue' do
-        expect(described_class.call).to all(be_kind_of(Inquisition::Issue))
+        expect(call_runner).to all(be_kind_of(Inquisition::Issue))
       end
 
       it 'return count issues' do
-        expect(described_class.call.count).to eq(3)
+        expect(call_runner.count).to eq(3)
       end
 
       it 'return issue with current arguments' do
         allow(Inquisition::Issue).to receive(:new)
-        described_class.call
+        call_runner
         errors.each do |error|
           expect(Inquisition::Issue).to have_received(:new).with(
-            level: Inquisition::Issue::LEVELS[:low],
-            line: error['line'],
+            severity: :low,
+            path: error['file'],
+            message: error['message'],
             runner: be_kind_of(described_class),
-            file: error['file'],
-            message: error['message']
+            line: error['line']
           )
         end
       end

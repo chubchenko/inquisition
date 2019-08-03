@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::RailsBestPractices::Runner do
   describe '#call' do
-    subject(:call_runner) { described_class.call }
+    subject(:call_runner) { described_class.new.call }
 
     let(:instance_analyzer) { instance_double(RailsBestPractices::Analyzer, errors: []) }
     let(:errors_analyzer) do
@@ -25,14 +25,15 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       end
 
       it 'return issue with current arguments' do
-        expect(Inquisition::Issue).to receive(:new).with(
-          level: Inquisition::Issue::LEVELS[:low],
+        allow(Inquisition::Issue).to receive(:new)
+        call_runner
+        expect(Inquisition::Issue).to have_received(:new).with(
+          severity: :low,
           line: errors_analyzer.first.line_number,
           runner: be_kind_of(described_class),
-          file: errors_analyzer.first.filename,
+          path: errors_analyzer.first.filename,
           message: errors_analyzer.first.message
-        ).and_call_original
-        call_runner
+        )
       end
 
       it 'return issue' do
@@ -50,4 +51,6 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'rails_best_practices'
 end

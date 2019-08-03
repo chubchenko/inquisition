@@ -9,12 +9,18 @@ default: &default
 
 development:
   <<: *default
-  database: dummy
+  host: <%= ENV.fetch('PGHOST') { 'localhost' } %>
+  username: <%= ENV.fetch('PGUSER') { 'postgres' } %>
+  database: <%= ENV.fetch('POSTGRES_DB') { 'dummy' } %>
 
 test:
   <<: *default
-  database: test_dummy
+  host: <%= ENV.fetch('PGHOST') { 'localhost' } %>
+  username: <%= ENV.fetch('PGUSER') { 'postgres' } %>
+  database: <%= ENV.fetch('POSTGRES_DB') { 'test_dummy' } %>
 
 production:
   <<: *default
-  database: prod_dummy
+  host: <%= ENV.fetch('PGHOST') { 'localhost' } %>
+  username: <%= ENV.fetch('PGUSER') { 'postgres' } %>
+  database: <%= ENV.fetch('POSTGRES_DB') { 'prod_dummy' } %>

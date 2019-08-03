@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Rubycritic::Runner do
   describe '#call' do
-    subject(:result_runner) { described_class.call }
+    subject(:result_runner) { described_class.new.call }
 
     let(:analyse_module_without_errors) { [instance_double('RubyCritic::AnalysedModule', smells: [])] }
     let(:analyser_reek) { instance_double(Inquisition::Rubycritic::Analysers::Reek) }
@@ -30,14 +30,15 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       end
 
       it 'return issue with current arguments' do
-        expect(Inquisition::Issue).to receive(:new).with(
-          level: Inquisition::Issue::LEVELS[:low],
-          file: smell_location.pathname,
+        allow(Inquisition::Issue).to receive(:new)
+        result_runner
+        expect(Inquisition::Issue).to have_received(:new).with(
+          severity: :low,
+          path: smell_location.pathname,
           line: smell_location.line,
           runner: be_kind_of(described_class),
           message: smell.message
-        ).and_call_original
-        result_runner
+        )
       end
     end
 
@@ -49,4 +50,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'rubycritic'
 end

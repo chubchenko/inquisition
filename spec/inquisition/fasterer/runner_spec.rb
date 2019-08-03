@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Fasterer::Runner do
   describe '#call' do
-    subject(:runner_result) { described_class.call }
+    subject(:runner_result) { described_class.new.call }
 
     let(:test_file) { 'test_file_path' }
     let(:instance_file_traverser) { instance_double(Fasterer::FileTraverser) }
@@ -21,11 +21,12 @@ RSpec.describe Inquisition::Fasterer::Runner do
       end
 
       it 'return issue with current arguments' do
-        expect(Inquisition::Issue).to receive(:new).with(
-          level: Inquisition::Issue::LEVELS[:low], line: offense.first.line_number, runner: be_kind_of(described_class),
-          file: instance_analyzer.file_path, message: offense.first.explanation
-        ).and_call_original
+        allow(Inquisition::Issue).to receive(:new)
         runner_result
+        expect(Inquisition::Issue).to have_received(:new).with(
+          severity: :low, line: offense.first.line_number, runner: be_kind_of(described_class),
+          path: instance_analyzer.file_path, message: offense.first.explanation
+        )
       end
 
       it 'return issue' do
@@ -45,4 +46,6 @@ RSpec.describe Inquisition::Fasterer::Runner do
       end
     end
   end
+
+  include_examples 'enablable', 'fasterer'
 end

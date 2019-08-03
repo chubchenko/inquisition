@@ -2,6 +2,8 @@ require_relative '../../dummy/config/environment'
 
 RSpec.describe Inquisition::Bundler::Audit::Runner do
   describe '#call' do
+    subject(:call_runner) { described_class.new.call }
+
     before { allow(Dir).to receive(:pwd).and_return(File.join(Dir.pwd, 'spec/dummy')) }
 
     context 'when runner return errors' do
@@ -9,24 +11,24 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
 
       it 'return issue with arguments' do
         allow(Inquisition::Issue).to receive(:new)
-        described_class.call
+        call_runner
         errors.each do |error|
           expect(Inquisition::Issue).to have_received(:new).with(
-            level: Inquisition::Issue::LEVELS[:low],
+            severity: :low,
             line: '',
             runner: be_kind_of(described_class),
-            file: Regexp.new(error['file']),
+            path: Regexp.new(error['file']),
             message: error['message']
           )
         end
       end
 
       it 'return type issues' do
-        expect(described_class.call).to all(be_kind_of(Inquisition::Issue))
+        expect(call_runner).to all(be_kind_of(Inquisition::Issue))
       end
 
       it 'return count issues' do
-        expect(described_class.call.count).to eq(3)
+        expect(call_runner.count).to eq(3)
       end
     end
   end

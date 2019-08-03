@@ -1,5 +1,7 @@
 RSpec.describe Inquisition::RailsBestPractices::Runner do
   describe '#call' do
+    subject(:call_runner) { described_class.new.call }
+
     context 'when call runner and it return errors' do
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rails_best_practices'] }
 
@@ -10,24 +12,24 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
 
       it 'return issue with current arguments' do
         allow(Inquisition::Issue).to receive(:new)
-        described_class.call
+        call_runner
         errors.each do |error|
           expect(Inquisition::Issue).to have_received(:new).with(
-            level: Inquisition::Issue::LEVELS[:low],
+            severity: :low,
             line: error['line'],
             runner: be_kind_of(described_class),
-            file: File.join(Dir.pwd, error['file']),
+            path: File.join(Dir.pwd, error['file']),
             message: error['message']
           )
         end
       end
 
       it 'return issue' do
-        expect(described_class.call).to all(be_kind_of(Inquisition::Issue))
+        expect(call_runner).to all(be_kind_of(Inquisition::Issue))
       end
 
       it 'return count issues' do
-        expect(described_class.call.count).to eq(1)
+        expect(call_runner.count).to eq(1)
       end
     end
   end

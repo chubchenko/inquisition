@@ -5,12 +5,14 @@ module Inquisition
     attr_reader :issues
     APP_PATH = '.'.freeze
 
-    def self.collection
-      @collection ||= []
-    end
+    class << self
+      def badge
+        @badge ||= Badge.for(name)
+      end
 
-    def self.call
-      new.call
+      def enabled?
+        Configuration.instance.to_h.fetch('plugins', {}).fetch(badge.to_s, {}).fetch('enabled', false)
+      end
     end
 
     def initialize

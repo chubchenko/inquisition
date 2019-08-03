@@ -66,7 +66,7 @@ bundler_audit:
   - file: 'ruby-advisory-db/gems/railties/CVE-2019-5420.yml'
     message: 'Possible Remote Code Execution Exploit in Rails Development Mode'
 brakeman:
-  - level: 'high'
+  - level: :high
     line: 6
     file: 'app/controllers/application_controller.rb'
     message: 'User controlled method execution'

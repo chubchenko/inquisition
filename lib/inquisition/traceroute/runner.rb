@@ -25,7 +25,7 @@ module Inquisition
 
       def create_issue(problematic_routes, message)
         problematic_routes.each do |route|
-          issues << Issue.new(level: Issue::LEVELS[:low], file: nil, line: nil, runner: self,
+          @issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
                                message: "#{message}: #{route}")
         end
       end

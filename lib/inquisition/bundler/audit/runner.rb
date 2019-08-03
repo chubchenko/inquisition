@@ -23,10 +23,10 @@ module Inquisition
 
         def create_error(error)
           Inquisition::Issue.new(
-            level: error.advisory.criticality || Inquisition::Issue::LEVELS[:low],
+            severity: error.advisory.criticality || :low,
             line: '',
             runner: self,
-            file: error.advisory.path,
+            path: error.advisory.path,
             message: error.advisory.title
           )
         end

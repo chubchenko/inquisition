@@ -2,7 +2,7 @@ require 'rubocop'
 require 'pry'
 
 module Inquisition
-  module RuboCop
+  module Rubocop
     class RuboCopModifiedRunner < ::RuboCop::Runner
       include ::RuboCop::PathUtil
       attr_reader :issues
