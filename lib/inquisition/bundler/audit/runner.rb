@@ -8,7 +8,7 @@ module Inquisition
         attr_reader :issues
 
         def call
-          ::Bundler::Audit::Database.update!
+          ::Bundler::Audit::Database.update!(quiet: true)
           check_errors
         end
 
