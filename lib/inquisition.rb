@@ -9,6 +9,7 @@ require 'inquisition/version'
 require 'inquisition/logger'
 
 require 'inquisition/active_record_doctor/runner'
+require 'inquisition/brakeman/vulnerability'
 require 'inquisition/brakeman/runner'
 require 'inquisition/bundler/audit/runner'
 require 'inquisition/fasterer/runner'
