@@ -5,7 +5,7 @@ RSpec.describe Inquisition::Configuration do
     context 'when the file is missing' do
       before { allow(File).to receive(:exist?).with('.inquisition.yml').and_return(false) }
 
-      it { expect(configuration.to_h).to eq({}) }
+      it { expect(configuration.to_h).to be_empty }
     end
 
     context 'when file is present' do

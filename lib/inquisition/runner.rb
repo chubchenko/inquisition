@@ -8,7 +8,7 @@ module Inquisition
       end
 
       def enabled?
-        Configuration.instance.to_h.fetch('plugins', {}).fetch(badge.to_s, {}).fetch('enabled', false)
+        Configuration.instance.to_h.dig('plugins', badge.to_s, 'enabled') || false
       end
     end
 

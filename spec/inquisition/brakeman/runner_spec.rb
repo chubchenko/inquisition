@@ -1,35 +1,33 @@
-require 'brakeman/scanner'
-
 RSpec.describe Inquisition::Brakeman::Runner do
-  let(:runner) { described_class.new }
-  let(:path) { 'foo/bar' }
-  let(:file) { instance_double(Brakeman::FilePath, relative: path) }
-  let(:major_warning) { instance_double(Brakeman::Warning, confidence: 0, line: nil, file: file, message: nil) }
-  let(:medium_warning) { instance_double(Brakeman::Warning, confidence: 1, line: nil, file: file, message: nil) }
-  let(:minor_warning) { instance_double(Brakeman::Warning, confidence: 2, line: nil, file: file, message: nil) }
-
-  let(:high_severity_issue) { { severity: :high, path: path, line: nil, message: nil, runner: nil } }
-  let(:medium_severity_issue) { { severity: :medium, path: path, line: nil, message: nil, runner: nil } }
-  let(:low_severity_issue) { { severity: :low, path: path, line: nil, message: nil, runner: nil } }
-
-  let(:warnings) { [major_warning, medium_warning, minor_warning] }
-  let(:issues) { [high_severity_issue, medium_severity_issue, low_severity_issue] }
+  include_examples 'enablable', 'brakeman'
 
   describe '#call' do
-    before do
-      tracker = instance_double(Brakeman::Tracker)
-      allow(Brakeman).to receive(:run).and_return(tracker)
-      allow(tracker).to receive(:warnings).and_return(warnings)
+    subject(:runner) { described_class.new }
+
+    let(:warning) { instance_double(Brakeman::Warning) }
+    let(:issue) { Inquisition::Issue.new(options.merge(runner: nil)) }
+    let(:vulnerability) { instance_double(Inquisition::Brakeman::Vulnerability, to_h: options) }
+    let(:options) do
+      {
+        path: 'app/controllers/users_controller.rb',
+        line: 42,
+        severity: Inquisition::Severity::HIGH,
+        message: 'Potentially dangerous key allowed for mass assignment'
+      }
     end
 
-    it 'returns array with issues' do
-      runner.call.each_with_index do |issue, index|
-        # TODO: will be fixed in the next PR
-        # expect(issue.instance_variable_get(:@severity)).to eq(issues[index][:severity])
-        expect(issue.instance_variable_get(:@path)).to eq(issues[index][:path])
-      end
+    before do
+      allow(Inquisition::Brakeman::Vulnerability).to receive(:new)
+        .with(warning)
+        .and_return(vulnerability)
+
+      allow(Brakeman).to receive(:run)
+        .with(app_path: '.')
+        .and_return(instance_double(Brakeman::Tracker, warnings: [warning]))
+    end
+
+    it 'returns a collection of issues' do
+      expect(runner.call).to contain_exactly(issue)
     end
   end
-
-  include_examples 'enablable', 'brakeman'
 end

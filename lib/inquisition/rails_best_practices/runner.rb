@@ -4,9 +4,13 @@ module Inquisition
   module RailsBestPractices
     class Runner < ::Inquisition::Runner
       def call
-        analyzer = ::RailsBestPractices::Analyzer.new(nil, 'config' => 'rails_best_practices.yml')
+        analyzer = ::RailsBestPractices::Analyzer.new(nil, options)
         check_errors(analyzer)
         @issues
+      end
+
+      def options
+        { 'config' => 'rails_best_practices.yml', 'silent' => true }
       end
 
       def check_errors(analyzer)
