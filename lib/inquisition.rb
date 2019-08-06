@@ -16,6 +16,7 @@ require 'inquisition/fasterer/runner'
 require 'inquisition/rails_best_practices/runner'
 require 'inquisition/rubocop/rubocop_modified_runner'
 require 'inquisition/rubocop/runner'
+require 'inquisition/rubocop/configuration'
 require 'inquisition/lol_dba/runner'
 require 'inquisition/fasterer/runner'
 require 'inquisition/rubycritic/runner'
@@ -30,5 +31,9 @@ module Inquisition
         Logger.new(File.open(File::NULL, 'w'))
       end
     end
+  end
+
+  def self.root
+    File.dirname __dir__
   end
 end

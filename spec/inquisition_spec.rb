@@ -32,4 +32,8 @@ RSpec.describe Inquisition do
       end
     end
   end
+
+  describe '.root' do
+    
+  end
 end
