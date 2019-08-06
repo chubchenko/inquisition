@@ -128,7 +128,12 @@ commands:
   bundle-install:
     description: Install gems with Bundler
     steps:
-      - run: bundle install
+      - run: bundle install --path vendor/bundle
+      - run:
+          name: Bundle install for dummy
+          command: |
+            cd spec/dummy
+            bundle install --path /home/circleci/inquisition/vendor/bundle
 
   bundle-save-cache:
     description: Save RubyGems to cache
@@ -150,12 +155,7 @@ commands:
           name: Set up DB-dummy
           command: |
             cd spec/dummy
-            bundle install
-            bundle exec rake db:create
-            bundle exec rake db:migrate
-            sudo rm -R vendor/
-            cd ../../
-            bundle install
+            bundle exec rake db:create db:migrate
       - attach_workspace:
           at: ~/inquisition/tmp
       - run: >
