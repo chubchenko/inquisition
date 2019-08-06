@@ -1,6 +1,10 @@
 module Inquisition
   class Severity
-    NAMES = %i[high medium low].freeze
+    LOW = :low
+    MEDIUM = :medium
+    HIGH = :high
+
+    NAMES = [LOW, MEDIUM, HIGH].freeze
 
     attr_reader :name
 
