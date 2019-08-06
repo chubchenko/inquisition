@@ -5,7 +5,6 @@ RSpec.describe Inquisition::LolDba::Runner do
 
     before do
       allow(described_class).to receive(:new).and_return(instance)
-      allow(instance).to receive(:load_environment).and_return(true)
     end
 
     context 'when call runner with errors' do
