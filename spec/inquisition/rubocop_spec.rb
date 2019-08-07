@@ -1,5 +1,5 @@
-RSpec.describe Inquisition::Rubocop::Configuration do
-  describe '.call' do
+RSpec.describe Inquisition::Rubocop do
+  describe '.configuration' do
     let(:config_store) { instance_double(RuboCop::ConfigStore) }
 
     before do
@@ -11,7 +11,7 @@ RSpec.describe Inquisition::Rubocop::Configuration do
       before { allow(File).to receive(:exist?).and_return(true) }
 
       it do
-        described_class.call
+        described_class.configuration
         expect(config_store).to have_received(:options_config=).with('.rubocop.yml')
       end
     end
@@ -20,7 +20,7 @@ RSpec.describe Inquisition::Rubocop::Configuration do
       before { allow(File).to receive(:exist?).and_return(false) }
 
       it do
-        described_class.call
+        described_class.configuration
         expect(config_store).to have_received(:options_config=).with(Inquisition.root + '/config/rubocop/config.yml')
       end
     end

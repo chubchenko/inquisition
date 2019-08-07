@@ -1,5 +1,3 @@
-require 'rubocop'
-
 module Inquisition
   module Rubocop
     class Runner < ::Inquisition::Runner
@@ -12,36 +10,22 @@ module Inquisition
       }.freeze
 
       def call
-        issues = RuboCopModifiedRunner.new({}, Configuration.call).run(['.'])
-        issues.map do |path, offense|
-          binding.pry
-          # issues_for(issue)
-        end
-        # offenses.each { |offense| issues_for(offense) }
-        # @issues
+        offenses = RuboCopModifiedRunner.new({}, ::Inquisition::Rubocop.configuration).run(['.'])
+        offenses.each { |offense| create_issues(offense) }
+        @issues
       end
 
       private
 
-      def issues_for(offenses1)
-        # offenses.values.flatten.each do |offense|
-        #   @issues << Inquisition::Issue.new(
-        #     severity: LEVELS[offense.severity.name],
-        #     path: offenses.keys[0],
-        #     message: offense.message,
-        #     runner: self,
-        #     line: offense.line)
-        # end
-        offenses1.each do |path, offenses|
-          offenses.each do |offense|
-            @issues << Issue.new(
-              severity: LEVELS[offense.severity.name],
-              path: path,
-              message: offense.message,
-              line: offense.line,
-              runner: self
-            )
-          end
+      def create_issues(offenses)
+        offenses.values.flatten.each do |offense|
+          @issues << Inquisition::Issue.new(
+            severity: LEVELS[offense.severity.name],
+            path: offenses.keys[0],
+            message: offense.message,
+            runner: self,
+            line: offense.line
+          )
         end
       end
     end
