@@ -13,7 +13,7 @@ executors:
         type: string
         default: latest
     docker:
-      - image: circleci/ruby:<< parameters.tag >>
+      - image: circleci/ruby:<< parameters.tag >>-node
     environment:
       - BUNDLE_JOBS: 4
       - BUNDLE_PATH: vendor/bundle
