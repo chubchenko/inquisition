@@ -34,6 +34,10 @@ RSpec.describe Inquisition do
   end
 
   describe '.root' do
-    
+    it 'returns the full path to the gem directory' do
+      expect(described_class.root).to eq(
+        Gem::Specification.find_by_name('inquisition').gem_dir
+      )
+    end
   end
 end
