@@ -1,5 +1,3 @@
-require 'rubocop'
-
 module Inquisition
   module Rubocop
     class RuboCopModifiedRunner < ::RuboCop::Runner
@@ -19,7 +17,7 @@ module Inquisition
       def process_file(file)
         file_started(file)
         offenses = file_offenses(file)
-        @issues << [smart_path(file), offenses] if offenses.any?
+        @issues << { smart_path(file) => offenses } if offenses.any?
         offenses
       end
 

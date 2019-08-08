@@ -10,6 +10,8 @@ module Inquisition
         @issues
       end
 
+      private
+
       def parse_data_errors(errors)
         errors.each do |type_error, error|
           error.keys.each { |key, node| @issues << create_issue(type_error, key, node) }
