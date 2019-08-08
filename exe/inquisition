@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'inquisition'
-require 'inquisition/cli'
+# require 'inquisition'
+# require 'inquisition/cli'
 
-Inquisition::CLI.start
+# Inquisition::CLI.start
