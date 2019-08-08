@@ -15,7 +15,6 @@ RSpec.describe Inquisition::FactoryBot::Runner do
     end
 
     before do
-      allow(runner).to receive(:load_environment).and_return(true)
       allow(FactoryBot).to receive(:factories).and_return([factory])
 
       allow(Inquisition::FactoryBot::FactoryBotModifiedLinter).to receive(:new).with(
