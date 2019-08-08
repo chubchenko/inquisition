@@ -1,10 +1,10 @@
 rubocop:
-  - line: 4
-    file: 'spec/dummy/bin/yarn'
-    message: 'Style/RedundantBegin: Redundant `begin` block detected.'
-  - line: 14
-    file: 'spec/dummy/db/schema.rb'
-    message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.'
+  - line: 3
+    file: 'spec/dummy/bin/setup'
+    message: 'Style/MixinUsage: `include` is used at the top level. Use inside `class` or `module`.'
+  - line: 3
+    file: 'spec/dummy/bin/update'
+    message: 'Style/MixinUsage: `include` is used at the top level. Use inside `class` or `module`.'
   - line: 2
     file: 'spec/dummy/db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
     message: 'Metrics/MethodLength: Method has too many lines. [14/10]'
@@ -49,9 +49,9 @@ traceroute:
   - message: 'unreachable action method: application#test_injection_brakeman'
   - message: 'unreachable action method: application#test_fasterer'
 rails_best_practices:
-  - line: '17'
-    file: 'spec/dummy/db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
-    message: 'line is longer than 100 characters (104 characters)'
+  - line: '6'
+    file: 'spec/dummy/config/initializers/backtrace_silencers.rb'
+    message: 'line is longer than 111 characters (112 characters)'
 lol_dba:
   - message: "You have not index in table `active_storage_attachments`, column `[\"record_id\", \"record_type\"]`"
 fasterer:

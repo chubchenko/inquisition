@@ -1,1 +1,1 @@
-LongLineCheck: { max_line_length: 100 }
+LongLineCheck: { max_line_length: 111 }

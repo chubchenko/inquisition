@@ -5,7 +5,6 @@ module Inquisition
   module Traceroute
     class Runner < ::Inquisition::Runner
       def call
-        load_environment
         @traceroute = ::Traceroute.new(Rails.application)
         @traceroute.load_everything!
         create_issue(unused_routes, 'unused route')
@@ -28,10 +27,6 @@ module Inquisition
           @issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
                                message: "#{message}: #{route}")
         end
-      end
-
-      def load_environment
-        require "#{Dir.pwd}/config/environment"
       end
     end
   end

@@ -1,5 +1,4 @@
 require 'rubocop'
-require 'pry'
 
 module Inquisition
   module Rubocop
@@ -20,7 +19,7 @@ module Inquisition
       def process_file(file)
         file_started(file)
         offenses = file_offenses(file)
-        @issues << [smart_path(file), offenses] if offenses.any?
+        @issues << { smart_path(file) => offenses } if offenses.any?
         offenses
       end
 

@@ -6,26 +6,16 @@ RSpec.describe Inquisition::Brakeman::Runner do
 
     before { stub_const('Inquisition::Brakeman::Runner::APP_PATH', './spec/dummy') }
 
-    it 'return issue type object' do
-      expect(call_runner).to all(be_kind_of(Inquisition::Issue))
-    end
-
-    it 'return count issues' do
-      expect(call_runner.count).to eq(1)
-    end
-
-    it 'return issue with arguments' do
-      allow(Inquisition::Issue).to receive(:new)
-      call_runner
-      errors.each do |error|
-        expect(Inquisition::Issue).to have_received(:new).with(
+    it 'returns ...' do
+      expect(call_runner).to contain_exactly(
+        Issue.new(
           severity: error['level'],
           path: error['file'],
           line: error['line'],
-          runner: be_kind_of(described_class),
-          message: error['message']
+          message: error['message'],
+          runner: nil
         )
-      end
+      )
     end
   end
 end

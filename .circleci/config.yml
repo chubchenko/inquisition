@@ -24,7 +24,7 @@ executors:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: test_dummy
 
-      - image: circleci/ruby:<< parameters.tag >>
+      - image: circleci/ruby:<< parameters.tag >>-node
     environment:
       - BUNDLE_JOBS: 4
       - BUNDLE_PATH: vendor/bundle

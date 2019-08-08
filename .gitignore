@@ -1,6 +1,7 @@
-/.bundle/
-/.yardoc
-/_yardoc/
+# Bundler state
+/.bundle
+
+# Various artifacts
 /coverage/
 /doc/
 /pkg/
@@ -13,9 +14,27 @@
 .rake_tasks~
 .DS_Store
 /Gemfile.lock
-
+log/*.log
 # rspec failure tracking
 .rspec_status
 
-# RubyMine config files
-/.idea
+# Dummy application
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/log/*.log
+spec/dummy/node_modules/
+spec/dummy/yarn-error.log
+spec/dummy/storage/
+spec/dummy/tmp/
+
+# Mac finder artifacts
+.DS_Store
+
+# RubyMine project files
+.idea
+
+/.yardoc
+/doc
+
+.ruby-gemset
+.ruby-version
