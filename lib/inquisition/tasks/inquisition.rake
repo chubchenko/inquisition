@@ -1,11 +1,4 @@
-namespace :inquisition do
-  desc 'Run Inquisition'
-  task :execute do
-    Inquisition::Collector.new.call
-  end
-
-  desc 'Print the version of the gem'
-  task :version do
-    puts Inquisition::Version
-  end
+desc 'Run Inquisition'
+task inquisition: :environment do
+  Inquisition::Collector.new.call
 end
