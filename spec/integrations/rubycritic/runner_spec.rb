@@ -5,7 +5,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
     context 'when runner returns errors' do
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rubycritic'] }
 
-      before { stub_const('Inquisition::Rubycritic::Runner::APP_PATH', './spec/dummy') }
+      before { allow(Rails).to receive(:root).and_return('./spec/dummy') }
 
       it 'return count issue' do
         expect(call_runner.count).to eq(12)

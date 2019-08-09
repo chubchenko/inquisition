@@ -30,8 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-lcov'
-  spec.add_development_dependency 'rails-dummy'
-  spec.add_development_dependency 'pg'
 
   spec.add_dependency 'active_record_doctor', '~> 1.6'
   spec.add_dependency 'brakeman', '~> 4.5', '>= 4.5.1'

@@ -9,7 +9,7 @@ module Inquisition
         @traceroute.load_everything!
         create_issue(unused_routes, 'unused route')
         create_issue(unreachable_action_methods, 'unreachable action method')
-        issues
+        @issues
       end
 
       private

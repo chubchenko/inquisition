@@ -25,9 +25,5 @@ module Inquisition
         hash ^ send(attribute).hash
       end
     end
-
-    def to_s
-      "#{@level} - #{@file} - #{@line} - #{@message} - #{@runner}"
-    end
   end
 end

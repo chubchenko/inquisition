@@ -7,14 +7,6 @@ RSpec.describe Inquisition::Traceroute::Runner do
 
       before { allow(Dir).to receive(:pwd).and_return(File.join(Dir.pwd, 'spec/dummy')) }
 
-      it 'return count issues' do
-        expect(call_runner.count).to eq(2)
-      end
-
-      it 'return type issues' do
-        expect(call_runner).to all(be_kind_of(Inquisition::Issue))
-      end
-
       it 'return issues with current arguments' do
         allow(Inquisition::Issue).to receive(:new)
         call_runner

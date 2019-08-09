@@ -12,6 +12,3 @@ plugins:
     channel: rubocop-0-71
   reek:
     enabled: true
-
-exclude_patterns:
-  - 'spec/dummy'

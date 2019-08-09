@@ -18,7 +18,7 @@ module Inquisition
                                  message: create_message(ard_task, table, column))
           end
         end
-        issues
+        @issues
       end
 
       private

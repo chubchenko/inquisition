@@ -13,17 +13,6 @@ executors:
         type: string
         default: latest
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
-        environment:
-          PG_HOST: 127.0.0.1
-          PG_USER: root
-          RAILS_ENV: test
-      - image: circleci/postgres:10-alpine
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test_dummy
-
       - image: circleci/ruby:<< parameters.tag >>-node
     environment:
       - BUNDLE_JOBS: 4

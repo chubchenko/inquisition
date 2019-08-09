@@ -1,15 +1,10 @@
 require 'brakeman'
-require 'brakeman/scanner'
 
 module Inquisition
   module Brakeman
     class Runner < ::Inquisition::Runner
       def call
-        ::Brakeman.run(
-          app_path: APP_PATH
-        ).warnings.map(
-          &method(:issue_for)
-        )
+        ::Brakeman.run(app_path: Rails.root).warnings.map(&method(:issue_for))
       end
 
       private

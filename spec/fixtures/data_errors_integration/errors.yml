@@ -48,6 +48,14 @@ rubycritic:
 traceroute:
   - message: 'unreachable action method: application#test_injection_brakeman'
   - message: 'unreachable action method: application#test_fasterer'
+  - message: 'unreachable action method: action_view/test_case/test#controller_path='
+  - message: 'unreachable action method: action_view/test_case/test#redirect_to_url'
+  - message: 'unreachable action method: action_view/test_case/test#assigns'
+  - message: 'unreachable action method: action_view/test_case/test#cookies'
+  - message: 'unreachable action method: action_view/test_case/test#fixture_file_upload'
+  - message: 'unreachable action method: action_view/test_case/test#params='
+  - message: 'unreachable action method: action_view/test_case/test#response'
+  - message: 'unreachable action method: action_view/test_case/test#request='
 rails_best_practices:
   - line: '6'
     file: 'spec/dummy/config/initializers/backtrace_silencers.rb'

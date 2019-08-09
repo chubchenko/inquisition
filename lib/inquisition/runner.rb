@@ -1,10 +1,7 @@
 module Inquisition
   class Runner
     include Plugin
-
-    attr_reader :issues
-    APP_PATH = '.'.freeze
-
+    
     class << self
       def badge
         @badge ||= Badge.for(name)

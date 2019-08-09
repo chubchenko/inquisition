@@ -3,16 +3,6 @@
 
 # Various artifacts
 /coverage/
-/doc/
-/pkg/
-/spec/reports/
-/spec/tmp/**
-!/spec/tmp/.keep
-/tmp/*
-.history
-/inquisition.yml
-.rake_tasks~
-.DS_Store
 /Gemfile.lock
 log/*.log
 # rspec failure tracking
@@ -26,6 +16,8 @@ spec/dummy/node_modules/
 spec/dummy/yarn-error.log
 spec/dummy/storage/
 spec/dummy/tmp/
+spec/dummy/coverage/
+spec/dummy/log/
 
 # Mac finder artifacts
 .DS_Store

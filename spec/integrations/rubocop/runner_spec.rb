@@ -5,15 +5,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
     context 'when dummy runner return issues' do
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rubocop'] }
 
-      before { stub_const('Inquisition::Rubocop::Runner::APP_PATH', './spec/dummy') }
-
-      it 'return issue' do
-        expect(call_runner).to all(be_kind_of(Inquisition::Issue))
-      end
-
-      it 'return count issues' do
-        expect(call_runner.count).to eq(3)
-      end
+      before { allow(Rails).to receive(:root).and_return('./spec/dummy') }
 
       it 'return issue with current arguments' do
         allow(Inquisition::Issue).to receive(:new)

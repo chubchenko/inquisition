@@ -14,7 +14,7 @@ module Inquisition
 
       def call
         run_analyzers
-        issues
+        @issues
       end
 
       private
@@ -44,7 +44,7 @@ module Inquisition
       end
 
       def analysed_modules
-        @analysed_modules ||= ::RubyCritic::AnalysedModulesCollection.new([APP_PATH])
+        @analysed_modules ||= ::RubyCritic::AnalysedModulesCollection.new([Rails.root])
       end
     end
   end

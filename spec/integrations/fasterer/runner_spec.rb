@@ -5,7 +5,7 @@ RSpec.describe Inquisition::Fasterer::Runner do
 
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['fasterer'] }
 
-      before { stub_const('Inquisition::Fasterer::Runner::APP_PATH', './spec/dummy') }
+      before { allow(Rails).to receive(:root).and_return('./spec/dummy') }
 
       it 'return issue with current arguments' do
         allow(Inquisition::Issue).to receive(:new)

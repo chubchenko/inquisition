@@ -4,9 +4,9 @@ module Inquisition
   module Fasterer
     class Runner < ::Inquisition::Runner
       def call
-        fasterer = ::Fasterer::FileTraverser.new(APP_PATH)
+        fasterer = ::Fasterer::FileTraverser.new(Rails.root)
         fasterer.scannable_files.each { |file| scan_file(file) }
-        issues
+        @issues
       end
 
       private

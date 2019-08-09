@@ -6,7 +6,6 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rails_best_practices'] }
 
       before do
-        stub_const('Inquisition::RailsBestPractices::Runner::APP_PATH', './spec/dummy')
         stub_const('Inquisition::RailsBestPractices::Runner::NAME_CONFIG', './spec/dummy/rails_best_practices.yml')
       end
 

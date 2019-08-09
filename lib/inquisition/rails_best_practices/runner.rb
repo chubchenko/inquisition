@@ -4,9 +4,9 @@ module Inquisition
   module RailsBestPractices
     class Runner < ::Inquisition::Runner
       def call
-        analyzer = ::RailsBestPractices::Analyzer.new(APP_PATH, 'silent' => true)
+        analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, 'silent' => true)
         check_errors(analyzer)
-        issues
+        @issues
       end
 
       def check_errors(analyzer)

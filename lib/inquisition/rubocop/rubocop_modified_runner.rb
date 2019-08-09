@@ -1,5 +1,3 @@
-require 'rubocop'
-
 module Inquisition
   module Rubocop
     class RuboCopModifiedRunner < ::RuboCop::Runner
