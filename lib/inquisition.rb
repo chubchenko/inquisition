@@ -7,6 +7,7 @@ require 'inquisition/severity'
 require 'inquisition/runner'
 require 'inquisition/version'
 require 'inquisition/logger'
+require 'inquisition/railtie'
 
 require 'inquisition/active_record_doctor/runner'
 require 'inquisition/brakeman/vulnerability'

@@ -4,7 +4,6 @@ module Inquisition
   module LolDba
     class Runner < ::Inquisition::Runner
       def call
-        load_environment
         @errors = ::LolDba::IndexFinder.check_for_indexes
         compose_issues
       end
@@ -27,10 +26,6 @@ module Inquisition
           path: nil,
           message: "You have not index in table `#{table}`, column `#{index}`"
         )
-      end
-
-      def load_environment
-        require "#{Dir.pwd}/config/environment"
       end
     end
   end

@@ -1,21 +1,30 @@
-/.bundle/
-/.yardoc
-/_yardoc/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
-/spec/tmp/**
-!/spec/tmp/.keep
-/tmp/*
-.history
-/inquisition.yml
-.rake_tasks~
-.DS_Store
-Gemfile.lock
+# Bundler state
+/.bundle
 
-# rspec failure tracking
+# Various artifacts
+/coverage/
+Gemfile.lock
+log/*.log
 .rspec_status
 
-# RubyMine config files
-/.idea
+# Dummy application
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/log/*.log
+spec/dummy/node_modules/
+spec/dummy/yarn-error.log
+spec/dummy/storage/
+spec/dummy/tmp/
+spec/dummy/db/schema.rb
+
+# Mac finder artifacts
+.DS_Store
+
+# RubyMine project files
+.idea
+
+/.yardoc
+/doc
+
+.ruby-gemset
+.ruby-version

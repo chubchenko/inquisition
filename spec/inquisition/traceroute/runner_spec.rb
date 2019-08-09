@@ -16,7 +16,6 @@ RSpec.describe Inquisition::Traceroute::Runner do
 
   describe '#call' do
     it 'returns array with issues' do
-      expect(runner).to receive(:load_environment).and_return(true)
       expect(Traceroute).to receive(:new).and_return(traceroute)
       expect(traceroute).to receive(:load_everything!)
       expect(runner).to receive(:unused_routes).and_return([unused_route])
