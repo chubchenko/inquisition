@@ -1,4 +1,5 @@
 require 'fasterer/file_traverser'
+require 'inquisition/fasterer/file_traverser'
 
 module Inquisition
   module Fasterer
@@ -26,6 +27,12 @@ module Inquisition
       def scan_file(path)
         analyzer = ::Fasterer::Analyzer.new(path)
         analyzer.scan
+        check_analyser_config_rules(analyzer)
+      end
+
+      def check_analyser_config_rules(analyzer)
+        return unless @fasterer.offenses_grouped_by_type(analyzer).any?
+
         define_errors(analyzer) if analyzer.errors.any?
       end
 

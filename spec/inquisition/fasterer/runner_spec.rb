@@ -18,7 +18,10 @@ RSpec.describe Inquisition::Fasterer::Runner do
     end
 
     context 'when call with errors' do
-      before { allow(instance_analyzer).to receive(:errors).and_return(offense) }
+      before do
+        allow(instance_analyzer).to receive(:errors).and_return(offense)
+        allow(instance_file_traverser).to receive(:offenses_grouped_by_type).and_return({ error: offense_collector })
+      end
 
       it 'returns a collection of issues' do
         expect(runner_result).to contain_exactly(Inquisition::Issue.new(
@@ -34,6 +37,10 @@ RSpec.describe Inquisition::Fasterer::Runner do
 
     context 'when call without errors' do
       let(:instance_analyzer) { instance_double(Fasterer::Analyzer, file_path: test_file, errors: []) }
+
+      before do
+        allow(instance_file_traverser).to receive(:offenses_grouped_by_type).and_return({})
+      end
 
       it { is_expected.to be_empty }
     end
