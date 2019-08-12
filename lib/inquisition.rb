@@ -38,3 +38,5 @@ module Inquisition
     File.dirname __dir__
   end
 end
+
+require 'inquisition/formatters/html_formatter'
