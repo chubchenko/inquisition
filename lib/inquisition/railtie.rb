@@ -1,4 +1,4 @@
 module Inquisition
-  class Railtie < ::Rails::Railtie
-  end
+  # class Railtie < ::Rails::Railtie
+  # end
 end

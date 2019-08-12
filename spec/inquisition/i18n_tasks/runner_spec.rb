@@ -2,46 +2,63 @@ RSpec.describe Inquisition::I18nTasks::Runner do
   describe '#call' do
     subject(:runner) { described_class.new }
 
-    let(:base_task_instance) { instance_double(I18n::Tasks::BaseTask) }
-    let(:missing_keys_error) { { 'test.key' => instance_data_for_error } }
-    let(:instance_data_for_error) do
-      instance_double('I18n::Tasks::Data::Tree::Node', value: 'test', data: { path: 'test_path' })
+    let(:base_task) { instance_double(I18n::Tasks::BaseTask) }
+    let(:missing_keys_error) { { 'test.key' => missing_error } }
+    let(:unused_keys_error) { { 'test.key' => unused_error } }
+    let(:missing_error) do
+      instance_double(I18n::Tasks::Data::Tree::Node, value: 'test', data: { type: :error, occurrences: [occurrences_inst]})
     end
+    let(:unused_error) do
+      instance_double(I18n::Tasks::Data::Tree::Node, value: 'test', data: { path: 'test' })
+    end
+    let(:occurrences_inst) { instance_double('Occurrence', line_num: 1, path: 'test') }
 
     before do
-      allow(I18n::Tasks::BaseTask).to receive(:new) { base_task_instance }
-      allow(base_task_instance).to receive(:unused_keys).and_return({})
+      allow(I18n::Tasks::BaseTask).to receive(:new) { base_task }
+      allow(base_task).to receive(:unused_keys).and_return({})
     end
 
-    context 'when return issues' do
+    context 'when return issues about missing translate' do
       before do
-        allow(base_task_instance).to receive(:missing_keys) { missing_keys_error }
+        allow(base_task).to receive(:missing_keys).and_return(missing_keys_error)
         allow(missing_keys_error).to receive(:keys).and_return(missing_keys_error)
       end
 
-      it 'return count issues' do
-        expect(runner.call.count).to eq(1)
+      it 'return issues with arguments' do
+        expect(runner.call).to match_array(
+          [
+            Inquisition::Issue.new(severity: :low,
+                                   path: 'test',
+                                   line: 1,
+                                   message: 'missing translate key: test.key, value: test',
+                                   runner: be_kind_of(described_class))
+          ]
+        )
       end
+    end
 
-      it 'return type issues' do
-        expect(runner.call).to all(be_kind_of(Inquisition::Issue))
+    context 'when return issues about unused' do
+      before do
+        allow(base_task).to receive(:missing_keys).and_return({})
+        allow(base_task).to receive(:unused_keys).and_return(unused_keys_error)
+        allow(unused_keys_error).to receive(:keys).and_return(unused_keys_error)
       end
 
       it 'return issues with arguments' do
-        allow(Inquisition::Issue).to receive(:new)
-        runner.call
-        expect(Inquisition::Issue).to have_received(:new).with(
-          severity: :low,
-          path: 'test_path',
-          line: nil,
-          message: 'missing translate key: test.key, value: test',
-          runner: be_kind_of(described_class)
+        expect(runner.call).to match_array(
+          [
+            Inquisition::Issue.new(severity: :low,
+                                   path: 'test',
+                                   line: nil,
+                                   message: 'unused key: test.key, value: test',
+                                   runner: be_kind_of(described_class))
+          ]
         )
       end
     end
 
     context 'when call do not return issues' do
-      before { allow(base_task_instance).to receive(:missing_keys).and_return({}) }
+      before { allow(base_task).to receive(:missing_keys).and_return({}) }
 
       it 'not return issues' do
         expect(runner.call).to be_empty
