@@ -1,4 +1,6 @@
-desc 'Run Inquisition'
-task inquisition: :environment do
-  Inquisition::Collector.new.call
+namespace :inquisition do
+  desc 'Run Inquisition'
+  task run: :environment do
+    Inquisition::Collector.new.call
+  end
 end
