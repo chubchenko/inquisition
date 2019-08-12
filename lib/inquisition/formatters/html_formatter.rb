@@ -1,11 +1,12 @@
 require 'fileutils'
-# require 'pathname'
+require 'inquisition/formatters/html/overview'
+require 'inquisition/formatters/html/issues_list'
 
 module Inquisition
   module Formatters
     class HtmlFormatter
       def initialize(collection)
-        @processed_data = collection
+        @collection = collection
       end
 
       def call
@@ -25,17 +26,19 @@ module Inquisition
       end
 
       def create_files
-        File.open(user_report_directory, 'w+') do |file|
-          file.write(create_erb.result(binding))
+        generators.each do |generator|
+          File.open(generator.file_path, 'w+') do |file|
+            file.write(generator.create_erb)
+          end
         end
       end
 
-      def create_erb
-        ERB.new(File.read("#{Inquisition.root}/lib/inquisition/formatters/templates/breakdowns.html.erb"))
+      def generators
+        [Html::Overview.new(@collection), Html::IssuesList.new(@collection)]
       end
 
       def assets_directory
-        "#{Inquisition.root}/lib/inquisition/formatters/assets"
+        "#{Inquisition.root}/lib/inquisition/formatters/html/assets"
       end
 
       def user_report_directory
