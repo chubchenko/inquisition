@@ -1,18 +1,22 @@
 RSpec.describe Inquisition::Collector do
+  subject(:result) { collector.call }
+
+  before { allow(collector).to receive(:print) }
+
   describe '#call' do
     context 'when there are no runners' do
-      subject(:collector) { described_class.new(collection: []).call }
+      let(:collector) { described_class.new(collection: []) }
 
       it { is_expected.to be_empty }
     end
 
     context 'when there is at least 1 runner' do
-      subject(:collector) { described_class.new(collection: [dummy]).call }
 
+      let(:collector) { described_class.new(collection: [dummy]) }
       let(:dummy) do
         Class.new do
           def call
-            ['a', ['b', 'c']]
+            ['a', %w[b c]]
           end
 
           def self.enabled?
@@ -21,16 +25,18 @@ RSpec.describe Inquisition::Collector do
         end
       end
 
-      it { is_expected.to match_array(['a', 'b', 'c']) }
+      it do
+        is_expected.to match_array(%w[a b c])
+      end
     end
 
     context 'when the runner is disabled' do
-      subject(:collector) { described_class.new(collection: [dummy]).call }
+      let(:collector) { described_class.new(collection: [dummy]) }
 
       let(:dummy) do
         Class.new do
           def call
-            ['a', ['b', 'c']]
+            ['a', %w[b c]]
           end
 
           def self.enabled?
