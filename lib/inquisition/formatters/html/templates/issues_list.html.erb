@@ -3,7 +3,9 @@
     <h3>Issues List</h3>
     <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
       <p> ISSUES: </p>
-      <%= @issues_list_collection %>
+      <% @collection.each do |issue| %>
+        <%= issue %>
+      <% end %>
     </div>
   </div>
 </div>

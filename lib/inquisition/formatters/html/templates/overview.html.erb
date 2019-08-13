@@ -3,7 +3,9 @@
     <h3>Overview</h3>
     <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
       <p> ISSUES: </p>
-      <%= @overview_collection %>
+      <% @collection.each do |issue| %>
+        <%= issue %>
+      <% end %>
     </div>
 
     <div class="col-xs-7 col-sm-7 col-md-6 col-lg-8">

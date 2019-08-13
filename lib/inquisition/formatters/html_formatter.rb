@@ -1,6 +1,7 @@
 require 'fileutils'
-require 'inquisition/formatters/html/overview'
-require 'inquisition/formatters/html/issues_list'
+require 'inquisition/formatters/html/html_builder'
+require 'inquisition/formatters/html/overview_builder'
+require 'inquisition/formatters/html/issues_list_builder'
 
 module Inquisition
   module Formatters
@@ -34,7 +35,7 @@ module Inquisition
       end
 
       def generators
-        [Html::Overview.new(@collection), Html::IssuesList.new(@collection)]
+        [Html::OverviewBuilder.new(@collection), Html::IssuesListBuilder.new(@collection)]
       end
 
       def assets_directory
