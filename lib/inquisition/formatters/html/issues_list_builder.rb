@@ -3,7 +3,7 @@ module Inquisition
     module Html
       class IssuesListBuilder < HtmlBuilder
         def file_name
-          'issues_list.html'
+          'issues_list'
         end
       end
     end

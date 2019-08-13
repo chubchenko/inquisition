@@ -8,11 +8,25 @@
     <div class="container-fluid">
       <div class="row">
         <h3>Overview</h3>
+
+        <h3>MAIN</h3>
         <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
-          <p> ISSUES: </p>
-          <% @collection.each do |issue| %>
-            <p><%= issue.message %></p>
-          <% end %>
+          <%= @main_field %>
+        </div>
+
+        <h3>BREAKS</h3>
+        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
+          <%= @breakdowns %>
+        </div>
+
+        <h3>COV</h3>
+        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
+          <%= @coverage %>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
+          <p>TEST ISSUE: </p>
+          <p><%= @collection.first.message %></p>
         </div>
 
         <div class="col-xs-7 col-sm-7 col-md-6 col-lg-8">

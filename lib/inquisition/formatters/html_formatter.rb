@@ -29,13 +29,16 @@ module Inquisition
       def create_files
         generators.each do |generator|
           File.open(generator.file_path, 'w+') do |file|
-            file.write(generator.create_erb)
+            file.write(generator.render)
           end
         end
       end
 
       def generators
-        [Html::OverviewBuilder.new(@collection), Html::IssuesListBuilder.new(@collection)]
+        [
+          Html::IssuesListBuilder.new(@collection),
+          Html::OverviewBuilder.new(@collection)
+        ]
       end
 
       def assets_directory
