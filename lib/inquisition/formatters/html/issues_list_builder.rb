@@ -3,7 +3,7 @@ module Inquisition
     module Html
       class IssuesListBuilder < HtmlBuilder
         def file_name
-          'issues_list.html.erb'
+          'issues_list.html'
         end
       end
     end

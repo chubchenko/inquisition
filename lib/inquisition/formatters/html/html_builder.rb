@@ -12,7 +12,7 @@ module Inquisition
         end
 
         def template_path
-          "#{Inquisition.root}/lib/inquisition/formatters/html/templates/#{file_name}"
+          "#{Inquisition.root}/lib/inquisition/formatters/html/templates/#{file_name}.erb"
         end
 
         def file_path

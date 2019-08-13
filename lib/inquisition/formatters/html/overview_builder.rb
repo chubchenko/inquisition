@@ -3,7 +3,7 @@ module Inquisition
     module Html
       class OverviewBuilder < HtmlBuilder
         def file_name
-          'overview.html.erb'
+          'overview.html'
         end
       end
     end
