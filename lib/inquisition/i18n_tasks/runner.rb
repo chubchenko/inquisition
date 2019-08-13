@@ -3,24 +3,26 @@ require 'i18n/tasks'
 module Inquisition
   module I18nTasks
     class Runner < ::Inquisition::Runner
+      attr_reader :base_task
+
       def call
-        base_task = ::I18n::Tasks::BaseTask.new
-        parse_data_errors([base_task.missing_keys, base_task.unused_keys])
-        @issues
+        @base_task = ::I18n::Tasks::BaseTask.new
+        parse_missing_keys
+        parse_unused_keys
+        @issues.flatten
       end
 
       private
 
-      def parse_data_errors(errors)
-        errors.each do |error|
-          error.keys.each { |key, node| define_node_files_for_issue(key, node) }
+      def parse_missing_keys
+        base_task.missing_keys.keys.each do |key, node|
+          files = node.data[:occurrences]
+          @issues << (files ? files.map { |file| create_issue(key, node, file) } : create_issue(key, node))
         end
-        @issues.flatten!
       end
 
-      def define_node_files_for_issue(key, node)
-        data_file = node.data[:occurrences]
-        @issues << (data_file ? data_file.map { |file| create_issue(key, node, file) } : create_issue(key, node))
+      def parse_unused_keys
+        base_task.unused_keys.keys.each { |key, node| @issues << create_issue(key, node) }
       end
 
       def create_issue(key, node, file = nil)
