@@ -3,8 +3,8 @@ require 'rails_best_practices'
 module Inquisition
   module RailsBestPractices
     class Runner < ::Inquisition::Runner
-      USER_CONFIG_PATH = 'rails_best_practices.yml'.freeze
-      CUSTOM_CONFIG_PATH = File.join(File.dirname(__FILE__), '../../../config/rails_best_practices/config.yml')
+      USER_CONFIG_PATH = 'config/rails_best_practices.yml'.freeze
+      INQUISITION_CONFIG_PATH = 'config/rails_best_practices/config.yml'.freeze
 
       def call
         analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, 'silent' => true)
@@ -15,11 +15,11 @@ module Inquisition
       private
 
       def options
-        { 'config' => choose_config_path, 'silent' => true }
+        { 'config' => config_path, 'silent' => true }
       end
 
-      def choose_config_path
-        File.exist?(USER_CONFIG_PATH) ? USER_CONFIG_PATH : CUSTOM_CONFIG_PATH
+      def config_path
+        File.exist?(USER_CONFIG_PATH) ? USER_CONFIG_PATH : File.join(Inquisition.root, INQUISITION_CONFIG_PATH)
       end
 
       def check_errors(analyzer)
