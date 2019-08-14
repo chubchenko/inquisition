@@ -40,4 +40,26 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       it { is_expected.to be_empty }
     end
   end
+
+  describe 'private method #config_path' do
+    context 'when user config exist' do
+      let(:path_to_user_config) { Inquisition::RailsBestPractices::Runner::USER_CONFIG_PATH }
+
+      it 'return user config path' do
+        allow(File).to receive(:exist?).and_return(true)
+        expect(described_class.new.send(:config_path)).to eq(path_to_user_config)
+      end
+    end
+
+    context 'when user config not exist' do
+      let(:path_to_config_inquisition) do
+        File.join(Inquisition.root, Inquisition::RailsBestPractices::Runner::INQUISITION_CONFIG_PATH)
+      end
+
+      it 'return inquisition config path' do
+        allow(File).to receive(:exist?).and_return(false)
+        expect(described_class.new.send(:config_path)).to eq(path_to_config_inquisition)
+      end
+    end
+  end
 end
