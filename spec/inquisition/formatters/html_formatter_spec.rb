@@ -3,20 +3,19 @@ RSpec.describe Inquisition::Formatters::HtmlFormatter do
     let(:issue) { instance_double(Inquisition::Issue) }
     let(:formatter) { described_class.new([issue]) }
 
-    let(:html_files_directory) { "#{Rails.root}/inquisition_report" }
+    let(:report_directory) { "#{Rails.root}/inquisition_report" }
     let(:issues_html) { 'issues_list.html' }
     let(:overview_html) { 'overview.html' }
     let(:assets_keep) { 'assets/.keep' }
+    let(:report_content) { [issues_html, overview_html, assets_keep] }
 
     before { allow(issue).to receive(:message) }
 
-    after { FileUtils.rm_r(html_files_directory) }
+    after { FileUtils.rm_r(report_directory) }
 
     it do
       formatter.call
-      expect(File).to exist("#{html_files_directory}/#{issues_html}")
-      expect(File).to exist("#{html_files_directory}/#{overview_html}")
-      expect(File).to exist("#{html_files_directory}/#{assets_keep}")
+      report_content.each { |file| expect(File).to exist("#{report_directory}/#{file}") }
     end
   end
 end

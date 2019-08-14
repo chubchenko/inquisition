@@ -15,7 +15,6 @@ RSpec.describe 'inquisition:run' do
 
     it do
       expect(collector).to have_received(:call).once
-      expect(Inquisition::Formatters::HtmlFormatter).to have_received(:new).with(collection)
       expect(formatter).to have_received(:call).once
     end
   end
