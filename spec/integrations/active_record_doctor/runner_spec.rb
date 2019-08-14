@@ -3,22 +3,20 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
     subject(:call_runner) { described_class.new.call }
 
     context 'when call runner in dummy' do
-      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['active_record_doctor'] }
-
-      before { allow(Dir).to receive(:pwd).and_return(File.join(Dir.pwd, 'spec/dummy')) }
+      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/active_record_doctor/errors.yml') }
 
       it 'return issues with current arguments' do
-        allow(Inquisition::Issue).to receive(:new)
-        call_runner
-        errors.each do |error|
-          expect(Inquisition::Issue).to have_received(:new).with(
-            severity: :low,
-            path: nil,
-            line: nil,
-            runner: be_kind_of(described_class),
-            message: error['message']
-          )
-        end
+        expect(call_runner).to match_array(
+          errors.map do |error|
+            Inquisition::Issue.new(
+              severity: :low,
+              path: nil,
+              line: nil,
+              runner: be_kind_of(described_class),
+              message: error['message']
+            )
+          end
+        )
       end
     end
   end

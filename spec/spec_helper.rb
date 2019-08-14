@@ -5,10 +5,10 @@ require 'simplecov'
 require File.expand_path('../dummy/config/environment', __FILE__)
 require 'rspec/rails'
 
-Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
-
 ActiveRecord::Schema.verbose = false
 load 'dummy/db/schema.rb'
+
+Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -1,0 +1,3 @@
+- line: 10
+  file: 'spec/dummy/app/controllers/application_controller.rb'
+  message: 'Enumerable#sort is slower than Enumerable#sort_by'

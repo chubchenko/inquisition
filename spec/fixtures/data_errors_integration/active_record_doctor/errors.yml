@@ -1,0 +1,4 @@
+- message: 'active_storage_attachments has missing foreign keys, details: blob_id'
+- message: 'active_storage_attachments has unindexed foreign keys, details: record_id'
+- message: 'ActiveStorage::Attachment has missing presence validation, details: name, record_type, record_id, blob_id'
+- message: 'ActiveStorage::Blob has missing presence validation, details: key, filename, byte_size, checksum'

@@ -1,0 +1,3 @@
+- line: '6'
+  file: 'spec/dummy/config/initializers/backtrace_silencers.rb'
+  message: 'line is longer than 111 characters (112 characters)'

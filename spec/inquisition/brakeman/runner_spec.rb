@@ -17,7 +17,6 @@ RSpec.describe Inquisition::Brakeman::Runner do
     end
 
     before do
-      allow(Rails).to receive(:root).and_return('.')
       allow(Inquisition::Brakeman::Vulnerability).to receive(:new)
         .with(warning)
         .and_return(vulnerability)

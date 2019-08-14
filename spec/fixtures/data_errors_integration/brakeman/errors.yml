@@ -1,0 +1,4 @@
+- level: :high
+  line: 6
+  file: 'app/controllers/application_controller.rb'
+  message: 'User controlled method execution'

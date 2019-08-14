@@ -5,7 +5,6 @@
 /coverage/
 /Gemfile.lock
 log/*.log
-# rspec failure tracking
 .rspec_status
 
 # Dummy application
@@ -16,8 +15,6 @@ spec/dummy/node_modules/
 spec/dummy/yarn-error.log
 spec/dummy/storage/
 spec/dummy/tmp/
-spec/dummy/coverage/
-spec/dummy/log/
 
 # Mac finder artifacts
 .DS_Store

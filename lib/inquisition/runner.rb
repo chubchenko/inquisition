@@ -1,7 +1,7 @@
 module Inquisition
   class Runner
     include Plugin
-    
+
     class << self
       def badge
         @badge ||= Badge.for(name)

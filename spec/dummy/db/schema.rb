@@ -10,21 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_190_801_142_754) do
-  create_table 'active_storage_attachments', force: :cascade do |t|
-    t.string 'name', null: false
-    t.string 'record_type', null: false
-    t.integer 'record_id', null: false
-    t.integer 'blob_id', null: false
-    t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
-    t.index %w[name blob_id], name: 'index_active_storage_attachments_uniqueness', unique: true
+ActiveRecord::Schema.define(version: 2019_08_01_142754) do
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table 'active_storage_blobs', force: :cascade do |t|
-    t.string 'key', null: false
-    t.string 'filename', null: false
-    t.bigint 'byte_size', null: false
-    t.string 'checksum', null: false
-    t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
+
 end

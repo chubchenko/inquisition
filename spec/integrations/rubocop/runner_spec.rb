@@ -3,22 +3,22 @@ RSpec.describe Inquisition::Rubocop::Runner do
     subject(:call_runner) { described_class.new.call }
 
     context 'when dummy runner return issues' do
-      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/errors.yml')['rubocop'] }
+      let(:errors) { YAML.load_file('./spec/fixtures/data_errors_integration/rubocop/errors.yml') }
 
       before { allow(Rails).to receive(:root).and_return('./spec/dummy') }
 
       it 'return issue with current arguments' do
-        allow(Inquisition::Issue).to receive(:new)
-        call_runner
-        errors.each do |error|
-          expect(Inquisition::Issue).to have_received(:new).with(
-            severity: :low,
-            path: error['file'],
-            message: error['message'],
-            runner: be_kind_of(described_class),
-            line: error['line']
-          )
-        end
+        expect(call_runner).to match_array(
+          errors.map do |error|
+            Inquisition::Issue.new(
+              severity: :low,
+              path: error['file'],
+              message: error['message'],
+              runner: be_kind_of(described_class),
+              line: error['line']
+            )
+          end
+        )
       end
     end
   end

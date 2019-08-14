@@ -1,0 +1,72 @@
+- line: 3
+  file: 'spec/dummy/bin/setup'
+  message: 'Style/MixinUsage: `include` is used at the top level. Use inside `class` or `module`.'
+- line: 3
+  file: 'spec/dummy/bin/update'
+  message: 'Style/MixinUsage: `include` is used at the top level. Use inside `class` or `module`.'
+- line: 13
+  file: 'spec/dummy/db/schema.rb'
+  message: 'Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.'
+- line: 14
+  file: 'spec/dummy/db/schema.rb'
+  message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.'
+- line: 15
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 16
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 17
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 18
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 19
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 20
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 20
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 21
+  file: 'spec/dummy/db/schema.rb'
+  message: 'Style/WordArray: Use `%w` or `%W` for an array of words.'
+- line: 21
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 21
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 21
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 24
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 25
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 26
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 27
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 28
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 29
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 29
+  file: 'spec/dummy/db/schema.rb'
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- line: 31
+  file: 'spec/dummy/db/schema.rb'
+  message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.'
+- line: 2
+  file: 'spec/dummy/db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
+  message: 'Metrics/MethodLength: Method has too many lines. [14/10]'
