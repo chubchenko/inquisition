@@ -4,11 +4,7 @@ module Inquisition
       module Overview
         class BreakdownsBuilder < HtmlBuilder
           def file_name
-            'breakdowns'
-          end
-
-          def erb_variable
-            '@breakdowns'
+            'breakdowns.html'
           end
         end
       end

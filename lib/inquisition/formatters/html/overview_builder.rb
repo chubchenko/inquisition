@@ -6,24 +6,20 @@ module Inquisition
   module Formatters
     module Html
       class OverviewBuilder < HtmlBuilder
-        def create_erb
-          overview = super
-          overview_components.each { |component| overview.result(binding { component }) }
-          overview
-        end
-
         def file_name
-          'overview'
+          'overview.html'
         end
 
-        private
+        def main_field
+          Overview::MainFieldBuilder.new(@collection)
+        end
 
-        def overview_components
-          [
-            Overview::MainFieldBuilder.new(@collection).create_erb.result(binding),
-            Overview::BreakdownsBuilder.new(@collection).create_erb.result(binding),
-            Overview::CoverageBuilder.new(@collection).create_erb.result(binding)
-          ]
+        def breakdowns
+          Overview::BreakdownsBuilder.new(@collection)
+        end
+
+        def coverage
+          Overview::CoverageBuilder.new(@collection)
         end
       end
     end

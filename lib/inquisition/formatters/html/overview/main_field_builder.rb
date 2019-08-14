@@ -4,11 +4,7 @@ module Inquisition
       module Overview
         class MainFieldBuilder < HtmlBuilder
           def file_name
-            'main_field'
-          end
-
-          def erb_variable
-            '@main_field'
+            'main_field.html'
           end
         end
       end
