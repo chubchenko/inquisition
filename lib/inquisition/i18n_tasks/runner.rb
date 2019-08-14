@@ -3,8 +3,6 @@ require 'i18n/tasks'
 module Inquisition
   module I18nTasks
     class Runner < ::Inquisition::Runner
-      attr_reader :base_task
-
       def call
         @base_task = ::I18n::Tasks::BaseTask.new
         parse_missing_keys
@@ -14,10 +12,16 @@ module Inquisition
 
       private
 
+      attr_reader :base_task
+
       def parse_missing_keys
         base_task.missing_keys.keys.each do |key, node|
           files = node.data[:occurrences]
-          @issues << (files ? files.map { |file| create_issue(key, node, file) } : create_issue(key, node))
+          @issues << if files
+                       files.map { |file| create_issue(key, node, file) }
+                     else
+                       create_issue(key, node)
+                     end
         end
       end
 
