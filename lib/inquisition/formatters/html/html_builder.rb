@@ -21,7 +21,7 @@ module Inquisition
         end
 
         def file_name
-          NotImplementedError
+          raise NotImplementedError
         end
       end
     end
