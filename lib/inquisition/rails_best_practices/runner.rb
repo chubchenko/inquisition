@@ -4,13 +4,9 @@ module Inquisition
   module RailsBestPractices
     class Runner < ::Inquisition::Runner
       def call
-        analyzer = ::RailsBestPractices::Analyzer.new(nil, options)
+        analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, 'silent' => true)
         check_errors(analyzer)
         @issues
-      end
-
-      def options
-        { 'config' => 'rails_best_practices.yml', 'silent' => true }
       end
 
       def check_errors(analyzer)
@@ -25,9 +21,9 @@ module Inquisition
       def create_issue(error)
         Inquisition::Issue.new(
           severity: :low,
-          line: error.line_number,
+          line: error.line_number.to_i,
           runner: self,
-          path: error.filename,
+          path: error.short_filename,
           message: error.message
         )
       end

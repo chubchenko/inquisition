@@ -1,0 +1,6 @@
+- severity: :low
+  message: 'Denial of Service Vulnerability in Action View'
+- severity: :low
+  message: 'File Content Disclosure in Action View'
+- severity: :low
+  message: 'Possible Remote Code Execution Exploit in Rails Development Mode'

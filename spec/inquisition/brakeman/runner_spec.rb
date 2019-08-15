@@ -22,7 +22,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
         .and_return(vulnerability)
 
       allow(Brakeman).to receive(:run)
-        .with(app_path: '.')
+        .with(app_path: Rails.root)
         .and_return(instance_double(Brakeman::Tracker, warnings: [warning]))
     end
 
