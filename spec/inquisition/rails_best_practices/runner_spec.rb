@@ -1,4 +1,6 @@
 RSpec.describe Inquisition::RailsBestPractices::Runner do
+  include_examples 'enablable', 'rails_best_practices'
+
   describe '#call' do
     subject(:call_runner) { described_class.new.call }
 
@@ -7,7 +9,7 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       [
         instance_double(
           'RailsBestPractices::Core::Error',
-          filename: 'test_file',
+          short_filename: 'test_file',
           line_number: '1',
           message: 'test_message'
         )
@@ -20,37 +22,22 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
     end
 
     context 'when call runner and it return errors' do
-      before do
-        allow(instance_analyzer).to receive(:errors).and_return(errors_analyzer)
-      end
+      before { allow(instance_analyzer).to receive(:errors).and_return(errors_analyzer) }
 
-      it 'return issue with current arguments' do
-        allow(Inquisition::Issue).to receive(:new)
-        call_runner
-        expect(Inquisition::Issue).to have_received(:new).with(
+      it 'returns a collection of issues' do
+
+        expect(call_runner).to contain_exactly(Inquisition::Issue.new(
           severity: :low,
-          line: errors_analyzer.first.line_number,
-          runner: be_kind_of(described_class),
-          path: errors_analyzer.first.filename,
-          message: errors_analyzer.first.message
+          line: 1,
+          runner: nil,
+          path: errors_analyzer.first.short_filename,
+          message: errors_analyzer.first.message)
         )
-      end
-
-      it 'return issue' do
-        expect(call_runner.first).to be_kind_of(Inquisition::Issue)
-      end
-
-      it 'return count issues' do
-        expect(call_runner.count).to eq(1)
       end
     end
 
     context 'when call runner without errors' do
-      it 'without errors' do
-        is_expected.to be_empty
-      end
+      it { is_expected.to be_empty }
     end
   end
-
-  include_examples 'enablable', 'rails_best_practices'
 end

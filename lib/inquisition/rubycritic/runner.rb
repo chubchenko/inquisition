@@ -36,7 +36,7 @@ module Inquisition
       def create_issue(error, location_error)
         Inquisition::Issue.new(
           severity: :low,
-          path: location_error.pathname,
+          path: location_error.pathname.relative_path_from(Rails.root).to_s,
           line: location_error.line,
           runner: self,
           message: error.message

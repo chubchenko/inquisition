@@ -21,9 +21,9 @@ module Inquisition
       def create_issue(error)
         Inquisition::Issue.new(
           severity: :low,
-          line: error.line_number,
+          line: error.line_number.to_i,
           runner: self,
-          path: error.filename,
+          path: error.short_filename,
           message: error.message
         )
       end

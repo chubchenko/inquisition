@@ -135,12 +135,7 @@ commands:
   rspec:
     description: Test with RSpec
     steps:
-      - run:
-          name: Set up DB-dummy
-          paths:
-            - spec/dummy
-          command: |
-            bundle exec rake db:create db:migrate
+      - run: bundle exec rake app:db:create app:db:migrate app:db:test:prepare
       - attach_workspace:
           at: ~/inquisition/tmp
       - run: >

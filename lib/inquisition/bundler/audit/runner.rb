@@ -13,7 +13,7 @@ module Inquisition
         private
 
         def check_errors
-          ::Bundler::Audit::Scanner.new.scan do |error|
+          ::Bundler::Audit::Scanner.new(Rails.root).scan do |error|
             @issues << create_error(error)
           end
           @issues
@@ -22,9 +22,9 @@ module Inquisition
         def create_error(error)
           Inquisition::Issue.new(
             severity: error.advisory.criticality || :low,
-            line: '',
+            line: nil,
             runner: self,
-            path: error.advisory.path,
+            path: nil,
             message: error.advisory.title
           )
         end

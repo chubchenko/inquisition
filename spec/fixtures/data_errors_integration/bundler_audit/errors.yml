@@ -1,6 +1,0 @@
-- file: 'ruby-advisory-db/gems/actionview/CVE-2019-5418.yml'
-  message: 'File Content Disclosure in Action View'
-- file: 'ruby-advisory-db/gems/actionview/CVE-2019-5419.yml'
-  message: 'Denial of Service Vulnerability in Action View'
-- file: 'ruby-advisory-db/gems/railties/CVE-2019-5420.yml'
-  message: 'Possible Remote Code Execution Exploit in Rails Development Mode'
