@@ -9,7 +9,11 @@ RSpec.describe Inquisition::Formatters::HtmlFormatter do
     let(:assets_keep) { 'assets/.keep' }
     let(:report_content) { [issues_html, overview_html, assets_keep] }
 
-    before { allow(issue).to receive(:message) }
+    before do
+      allow(issue).to receive(:message)
+      allow(issue).to receive(:path)
+      allow(issue).to receive(:line)
+    end
 
     after { FileUtils.rm_r(report_directory) }
 

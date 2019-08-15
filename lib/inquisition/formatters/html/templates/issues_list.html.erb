@@ -10,37 +10,41 @@
     <div class="container-fluid" style="padding: 20px;" >
 
 
-      
-      <div>
+      <div style="margin: 10px;">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Issues</a>
+            <a class="nav-link disabled" href="#">Overview</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Overview</a>
+            <a class="nav-link active" href="#">Issues</a>
           </li>
         </ul>
       </div>
 
-      <div class="row" style="padding: 20px;">
-        <div class="col-sm-9 border">
-          <p>lksjdfnvlskdjcdkasljfnvkjlhsfdgvnhsjrgfbvskhfdgbvksgfbvkfn</p>
-          <p>lksjdfnvlskdjcdkasljfnvkjlhsfdgvnhsjrgfbvskhfdgbvksgfbvkfn</p>
-          <p>lksjdfnvlskdjcdkasljfnvkjlhsfdgvnhsjrgfbvskhfdgbvksgfbvkfn</p>
+      <div class="row">
+        <div class="col-sm-8 border" style="padding: 20px; margin: 10px;">
+          <% @collection.each do |issue| %>
+            <div class="border" style="padding: 20px; margin: 10px;">
+              <p><%= issue.message %></p>
+              <% if issue.path %>
+                <p>Found in <%= issue.path %></p>
+                <% if issue.line %>
+                  <p>line: <%= issue.line %></p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
 
-
-        <div class="col-sm-3 border">
-          <p>lksjdfnvlskdjcdkasljfnvkjkfn</p>
-          <p>lksjdfnvlskdjcdkasljfnvkjkfn</p>
-          <p>lksjdfnvlskdjcdkasljfnvkjkfn</p>
+        <div class="col-sm-3 border text-center" style="padding: 20px; margin: 10px;">
+          <p>div for smth</p>
         </div>
       </div>
 
 
-
-
-
+    </div>
+    <div class="fixed-bottom container-fluid border text-center" style="background-color: black; color: white">
+      <p>© Ruby Garage</p>
     </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
