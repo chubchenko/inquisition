@@ -2,18 +2,10 @@ RSpec.describe Inquisition::Formatters::HtmlFormatter do
   describe '#call' do
     let(:issue) { instance_double(Inquisition::Issue) }
     let(:formatter) { described_class.new([issue]) }
-
     let(:report_directory) { "#{Rails.root}/inquisition_report" }
-    let(:issues_html) { 'issues_list.html' }
-    let(:overview_html) { 'overview.html' }
-    let(:assets_keep) { 'assets/.keep' }
-    let(:report_content) { [issues_html, overview_html, assets_keep] }
+    let(:report_content) { ['issues_list.html', 'overview.html', 'assets/.keep'] }
 
-    before do
-      allow(issue).to receive(:message)
-      allow(issue).to receive(:path)
-      allow(issue).to receive(:line)
-    end
+    before { allow(File).to receive(:read).and_return('') }
 
     after { FileUtils.rm_r(report_directory) }
 
