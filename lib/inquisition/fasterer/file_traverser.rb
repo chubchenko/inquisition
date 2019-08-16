@@ -14,6 +14,16 @@ module Inquisition
           ignored_speedups.include?(offense_name)
         end
       end
+
+      def all_files
+        if @path.directory?
+          Dir[File.join(@path, '**', '*.rb')].map do |ruby_file_path|
+            Pathname(ruby_file_path).to_s
+          end
+        else
+          [@path.to_s]
+        end
+      end
     end
   end
 end

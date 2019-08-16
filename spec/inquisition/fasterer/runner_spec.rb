@@ -5,13 +5,13 @@ RSpec.describe Inquisition::Fasterer::Runner do
     subject(:runner_result) { described_class.new.call }
 
     let(:test_file) { 'app/controllers/application_controller.rb' }
-    let(:instance_file_traverser) { instance_double(Fasterer::FileTraverser) }
+    let(:instance_file_traverser) { instance_double(Inquisition::Fasterer::FileTraverser) }
     let(:instance_analyzer) { instance_double(Fasterer::Analyzer, file_path: "#{Rails.root}/#{test_file}", errors: offense_collector) }
     let(:offense_collector) { instance_double('Fasterer::Analyzer::OffenseCollector', offenses: offense) }
     let(:offense) { [instance_double(Fasterer::Offense, explanation: 'error', line_number: 1)] }
 
     before do
-      allow(Fasterer::FileTraverser).to receive(:new).and_return(instance_file_traverser)
+      allow(Inquisition::Fasterer::FileTraverser).to receive(:new).and_return(instance_file_traverser)
       allow(instance_file_traverser).to receive(:scannable_files).and_return(["#{Rails.root}/#{test_file}"])
       allow(Fasterer::Analyzer).to receive(:new).and_return(instance_analyzer)
       allow(instance_analyzer).to receive(:scan).and_return(nil)
