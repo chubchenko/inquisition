@@ -1,23 +1,12 @@
 require 'fasterer/file_traverser'
+require 'inquisition/fasterer/file_traverser'
 
 module Inquisition
   module Fasterer
-    class FileTraverser < ::Fasterer::FileTraverser
-      def all_files
-        if @path.directory?
-          Dir[File.join(@path, '**', '*.rb')].map do |ruby_file_path|
-            Pathname(ruby_file_path).to_s
-          end
-        else
-          [@path.to_s]
-        end
-      end
-    end
-
     class Runner < ::Inquisition::Runner
       def call
-        fasterer = FileTraverser.new(Rails.root)
-        fasterer.scannable_files.each { |file| scan_file(file) }
+        @fasterer = FileTraverser.new(Rails.root)
+        @fasterer.scannable_files.each { |file| scan_file(file) }
         @issues
       end
 
@@ -26,6 +15,12 @@ module Inquisition
       def scan_file(path)
         analyzer = ::Fasterer::Analyzer.new(path)
         analyzer.scan
+        check_analyser_config_rules(analyzer)
+      end
+
+      def check_analyser_config_rules(analyzer)
+        return unless @fasterer.offenses_grouped_by_type(analyzer).any?
+
         define_errors(analyzer) if analyzer.errors.any?
       end
 
