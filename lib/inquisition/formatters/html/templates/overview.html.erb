@@ -23,6 +23,7 @@
 </head>
 
 <body id="page-top">
+  
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -74,8 +75,7 @@
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-        
-        
+          <!-- Topbar content -->
         </nav>
         <!-- End of Topbar -->
 
@@ -90,54 +90,13 @@
           <div class="row">
 
             <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Main Field</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <p>Main field's content</p>
-                </div>
-              </div>
-            </div>
+
+            <%= main_field.render %>
 
             <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Issues by category</h6>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-left small">
-                    <span class="mr-6">
-                      <p></p><i class="fas fa-circle text-danger"></i> Security</p>
-                    </span>
-                    <span class="mr-6">
-                      <p><i class="fas fa-circle text-success"></i> Style</p>
-                    </span>
-                    <span class="mr-6">
-                      <p><i class="fas fa-circle text-info"></i> Performance</p>
-                    </span>
-                    <span class="mr-6">
-                      <p><i class="fas fa-circle text-warning"></i> Compatibility</p>
-                    </span>
-                    <span class="mr-6">
-                      <p><i class="fas fa-circle text-primary"></i> Unused Code</p>
-                    </span>
-                    <span class="mr-6">
-                      <p><i class="fas fa-circle text-secondary"></i> Duplication</p>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+            <%= breakdowns.render %>
+
           </div>
 
         </div>
