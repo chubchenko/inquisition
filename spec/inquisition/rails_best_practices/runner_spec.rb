@@ -40,4 +40,37 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       it { is_expected.to be_empty }
     end
   end
+
+  describe 'private method #config_path' do
+    let(:analyzer) { instance_double(RailsBestPractices::Analyzer, errors: []) }
+
+    before do
+      allow(RailsBestPractices::Analyzer).to receive(:new).and_return(analyzer)
+      allow(analyzer).to receive(:analyze).and_return(true)
+    end
+
+    context 'when user config exist' do
+      before do
+        allow(File).to receive(:exist?).and_return(true)
+        described_class.new.call
+      end
+
+      it do
+        expect(::RailsBestPractices::Analyzer).to have_received(:new)
+          .with(Rails.root, 'silent' => true, 'config' => 'config/rails_best_practices.yml')
+      end
+    end
+
+    context 'when user config not exist' do
+      before do
+        allow(File).to receive(:exist?).and_return(false)
+        described_class.new.call
+      end
+
+      it do
+        expect(::RailsBestPractices::Analyzer).to have_received(:new)
+          .with(Rails.root, 'silent' => true, 'config' => File.join(Inquisition.root, 'config/rails_best_practices/config.yml'))
+      end
+    end
+  end
 end

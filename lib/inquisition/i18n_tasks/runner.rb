@@ -4,14 +4,10 @@ module Inquisition
   module I18nTasks
     class Runner < ::Inquisition::Runner
       def call
-        # require 'pry'
         @base_task = ::I18n::Tasks::BaseTask.new
-        # binding.pry
         parse_missing_keys
         parse_unused_keys
-        # binding.pry
-        binding.pry
-        p @issues.flatten
+        @issues.flatten
       end
 
       private
