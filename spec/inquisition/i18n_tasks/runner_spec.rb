@@ -53,8 +53,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
 
       before do
         allow(base_task).to receive(:missing_keys).and_return({})
-        allow(base_task).to receive(:unused_keys).and_return(unused_keys_error)
-        allow(unused_keys_error).to receive(:keys).and_return(unused_keys_error)
+        allow(base_task).to receive_message_chain(:unused_keys, :keys).and_return(unused_keys_error)
       end
 
       it 'returns issues' do
@@ -65,7 +64,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               path: 'test',
               line: nil,
               message: 'unused key: test.key, value: test',
-              runner: be_kind_of(described_class)
+              runner: runner
             )
           ]
         )

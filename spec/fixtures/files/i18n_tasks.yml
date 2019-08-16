@@ -1,0 +1,4 @@
+- path: '/var/www/inquisition/spec/dummy/app/controllers/application_controller.rb'
+  line: 11
+  severity: :low
+  message: 'missing translate key: test1, value: test1'
