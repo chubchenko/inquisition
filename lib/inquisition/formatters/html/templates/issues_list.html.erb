@@ -88,41 +88,29 @@
           <p class="mb-4">Some description</p>
 
           <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Issues Table</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>Message</th>
-                      <th>Location</th>
-                      <th>Line</th>
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Message</th>
-                      <th>Location</th>
-                      <th>Line</th>
-                    </tr>
-                  </tfoot>
-                  <% @collection.each do |issue| %>
-                    <tbody>
-                      <tr>
-                        <td><%= issue.message %></td>
-                        <td><%= issue.path %></td>
-                        <td><%= issue.line %></td>
-                      </tr>
-                    </tbody>
-                  <% end %>
-                </table>
+          <% @collection.each_with_index do |issue, index| %>
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"># <%= index + 1 %></h6>
+              </div>
+              <div class="card-body">
+                <p><%= issue.message %></p>
+                <% if issue.path %>
+                  <span class="small">
+                    <span>Found in </span>
+                    <span class="text-success"><%= issue.path %>, line <%= issue.line %></span>
+                    <span> by </span>
+                    <span class="text-success"><%= issue.runner.class.badge %></span>
+                  </span>
+                <% else %>
+                  <span class="small">
+                    <span>Found by </span>
+                    <span class="text-success"><%= issue.runner.class.badge %></span>
+                  </span>
+                <% end %>
               </div>
             </div>
-          </div>
-
+          <% end %>
         </div>
         <!-- /.container-fluid -->
 
