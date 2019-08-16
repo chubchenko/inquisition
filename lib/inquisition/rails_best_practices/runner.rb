@@ -7,7 +7,7 @@ module Inquisition
       INQUISITION_CONFIG_PATH = 'config/rails_best_practices/config.yml'.freeze
 
       def call
-        analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, 'silent' => true)
+        analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, options)
         check_errors(analyzer)
         @issues
       end

@@ -1,4 +1,8 @@
-- path: 'config/initializers/backtrace_silencers.rb'
-  line: 6
+- path: 'app/views/layouts/application.html.erb'
+  line: 13
   severity: :low
-  message: 'line is longer than 111 characters (112 characters)'
+  message: 'not use time_ago_in_words'
+- path: 'db/schema.rb'
+  line: 15
+  severity: :low
+  message: 'always add db index (active_storage_attachments => [record_id, record_type])'

@@ -42,23 +42,34 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
   end
 
   describe 'private method #config_path' do
-    context 'when user config exist' do
-      let(:path_to_user_config) { Inquisition::RailsBestPractices::Runner::USER_CONFIG_PATH }
+    let(:analyzer) { instance_double(RailsBestPractices::Analyzer, errors: []) }
 
-      it 'return user config path' do
+    before do
+      allow(RailsBestPractices::Analyzer).to receive(:new).and_return(analyzer)
+      allow(analyzer).to receive(:analyze).and_return(true)
+    end
+
+    context 'when user config exist' do
+      before do
         allow(File).to receive(:exist?).and_return(true)
-        expect(described_class.new.send(:config_path)).to eq(path_to_user_config)
+        described_class.new.call
+      end
+
+      it do
+        expect(::RailsBestPractices::Analyzer).to have_received(:new)
+          .with(Rails.root, 'silent' => true, 'config' => 'config/rails_best_practices.yml')
       end
     end
 
     context 'when user config not exist' do
-      let(:path_to_config_inquisition) do
-        File.join(Inquisition.root, Inquisition::RailsBestPractices::Runner::INQUISITION_CONFIG_PATH)
+      before do
+        allow(File).to receive(:exist?).and_return(false)
+        described_class.new.call
       end
 
-      it 'return inquisition config path' do
-        allow(File).to receive(:exist?).and_return(false)
-        expect(described_class.new.send(:config_path)).to eq(path_to_config_inquisition)
+      it do
+        expect(::RailsBestPractices::Analyzer).to have_received(:new)
+          .with(Rails.root, 'silent' => true, 'config' => File.join(Inquisition.root, 'config/rails_best_practices/config.yml'))
       end
     end
   end
