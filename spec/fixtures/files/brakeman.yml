@@ -1,0 +1,4 @@
+- path: 'app/controllers/application_controller.rb'
+  line: 6
+  severity: :high
+  message: 'User controlled method execution'

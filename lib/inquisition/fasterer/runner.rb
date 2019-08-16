@@ -2,9 +2,21 @@ require 'fasterer/file_traverser'
 
 module Inquisition
   module Fasterer
+    class FileTraverser < ::Fasterer::FileTraverser
+      def all_files
+        if @path.directory?
+          Dir[File.join(@path, '**', '*.rb')].map do |ruby_file_path|
+            Pathname(ruby_file_path).to_s
+          end
+        else
+          [@path.to_s]
+        end
+      end
+    end
+
     class Runner < ::Inquisition::Runner
       def call
-        fasterer = ::Fasterer::FileTraverser.new('.')
+        fasterer = FileTraverser.new(Rails.root)
         fasterer.scannable_files.each { |file| scan_file(file) }
         @issues
       end
@@ -18,7 +30,9 @@ module Inquisition
       end
 
       def define_errors(data)
-        data.errors.each { |error| @issues << create_issue(error, data.file_path) }
+        data.errors.each do |error|
+          @issues << create_issue(error, Pathname(data.file_path).relative_path_from(Rails.root).to_s)
+        end
       end
 
       def create_issue(error, file_error)

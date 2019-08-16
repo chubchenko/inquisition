@@ -3,7 +3,7 @@
 
 # Various artifacts
 /coverage/
-Gemfile.lock
+/Gemfile.lock
 log/*.log
 .rspec_status
 

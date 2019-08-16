@@ -1,0 +1,4 @@
+- path: 'config/initializers/backtrace_silencers.rb'
+  line: 6
+  severity: :low
+  message: 'line is longer than 111 characters (112 characters)'

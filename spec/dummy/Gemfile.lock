@@ -1,0 +1,98 @@
+# TODO: will be removed ...
+
+PATH
+  remote: ../..
+  specs:
+    inquisition (0.2.0)
+      active_record_doctor (~> 1.6)
+      brakeman (~> 4.5, >= 4.5.1)
+      bundler-audit (~> 0.6.1)
+      factory_bot (~> 5.0, >= 5.0.2)
+      fasterer (~> 0.6.0)
+      lol_dba (~> 2.1.8)
+      rails_best_practices (~> 1.19.4)
+      rubocop (~> 0.72.0)
+      rubocop-performance (~> 1.4)
+      rubocop-rails (~> 2.2, >= 2.2.1)
+      rubocop-rspec (~> 1.33)
+      rubycritic (~> 4.1.0)
+      thor (~> 0.20.3)
+      traceroute (~> 0.8.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    actionview (5.2.2)
+      activesupport (= 5.2.2)
+      builder (~> 3.1)
+      erubi (~> 1.4)
+      rails-dom-testing (~> 2.0)
+      rails-html-sanitizer (~> 1.0, >= 1.0.3)
+    activerecord (5.2.2)
+      activemodel (= 5.2.2)
+      activesupport (= 5.2.2)
+      arel (>= 9.0)
+    addressable (2.6.0)
+      public_suffix (>= 2.0.2, < 4.0)
+    arel (9.0.0)
+    ast (2.4.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
+    brakeman (4.6.1)
+    builder (3.2.3)
+    bundler-audit (0.6.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 0.18)
+    code_analyzer (0.4.8)
+      sexp_processor
+    codeclimate-engine-rb (0.4.1)
+      virtus (~> 1.0)
+    coderay (1.1.2)
+    json (2.2.0)
+    marcel (0.3.3)
+      mimemagic (~> 0.3.2)
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
+    rails_best_practices (1.19.4)
+      activesupport
+      code_analyzer (>= 0.4.8)
+      erubis
+      i18n
+      json
+      require_all (~> 2.0)
+      ruby-progressbar
+    railties (5.2.2)
+      actionpack (= 5.2.2)
+      activesupport (= 5.2.2)
+      method_source
+      rake (>= 0.8.7)
+      thor (>= 0.19.0, < 2.0)
+    rainbow (3.0.0)
+    rake (12.3.3)
+    rb-fsevent (0.10.3)
+    rb-inotify (0.10.0)
+      ffi (~> 1.0)
+    reek (5.4.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  actionview (= 5.2.2)
+  inquisition!
+  listen (>= 3.0.5, < 3.2)
+  pg
+  pry
+  puma (~> 3.11)
+  rails
+  rspec-rails
+  spring
+  spring-watcher-listen (~> 2.0.0)
+
+RUBY VERSION
+   ruby 2.6.3p62
+
+BUNDLED WITH
+   1.17.2

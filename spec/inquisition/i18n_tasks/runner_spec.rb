@@ -31,14 +31,14 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               path: 'test',
               line: 1,
               message: 'missing translate key: test.key, value: test',
-              runner: be_kind_of(described_class)
+              runner: runner
             ),
             Inquisition::Issue.new(
               severity: :low,
               path: 'test',
               line: nil,
               message: 'missing translate key: test.key2, value: test2',
-              runner: be_kind_of(described_class)
+              runner: runner
             )
           ]
         )
