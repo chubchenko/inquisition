@@ -45,4 +45,18 @@ RSpec.describe Inquisition::Configuration do
       it { is_expected.to be_verbose }
     end
   end
+
+  describe '#loader' do
+    it { expect(configuration.loader).to be_an_instance_of(Inquisition::Outputter::Loader) }
+  end
+
+  describe '#fanout' do
+    it { expect(configuration.fanout).to be_an_instance_of(Inquisition::Fanout) }
+
+    it 'does not immediately call outputter setup' do
+      expect do
+        configuration.fanout
+      end.not_to change(configuration.collection, :count)
+    end
+  end
 end

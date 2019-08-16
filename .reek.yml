@@ -2,6 +2,14 @@ detectors:
   IrresponsibleModule:
     enabled: false
 
-  UtilityFunction:
+  NestedIterators:
+    ignore_iterators:
+      - around
+
+  TooManyStatements:
     exclude:
-      - 'Inquisition::CLI#execute'
+      - 'Inquisition::Options#define_options'
+
+  Attribute:
+    exclude:
+      - 'Inquisition::Configuration#output'
