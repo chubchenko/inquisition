@@ -1,7 +1,6 @@
 module Inquisition
   module Rubocop
     class RuboCopModifiedRunner < ::RuboCop::Runner
-      include ::RuboCop::PathUtil
       attr_reader :issues
 
       def initialize(options, config_store)
@@ -17,7 +16,7 @@ module Inquisition
       def process_file(file)
         file_started(file)
         offenses = file_offenses(file)
-        @issues << { smart_path(file) => offenses } if offenses.any?
+        @issues << { ::RuboCop::PathUtil.relative_path(file, Rails.root.to_s) => offenses } if offenses.any?
         offenses
       end
 
