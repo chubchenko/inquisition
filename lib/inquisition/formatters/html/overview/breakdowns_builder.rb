@@ -2,7 +2,7 @@ module Inquisition
   module Formatters
     module Html
       module Overview
-        class BreakdownsBuilder < HtmlBuilder
+        class BreakdownsBuilder < Builder
           def initialize(collection)
             super
             sort_by_categories

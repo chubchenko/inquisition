@@ -1,7 +1,7 @@
 module Inquisition
   module Formatters
     module Html
-      class HtmlBuilder
+      class Builder
         def initialize(collection)
           @collection = collection
         end
@@ -11,7 +11,7 @@ module Inquisition
         end
 
         def file_path
-          "#{Rails.root}/inquisition_report/#{file_name}"
+          "#{Rails.root}/inquisition/#{file_name}"
         end
 
         private

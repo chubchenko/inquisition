@@ -2,7 +2,7 @@ module Inquisition
   module Formatters
     module Html
       module Overview
-        class CoverageBuilder < HtmlBuilder
+        class CoverageBuilder < Builder
           def file_name
             'coverage.html'
           end

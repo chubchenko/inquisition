@@ -1,5 +1,5 @@
 require 'fileutils'
-require 'inquisition/formatters/html/html_builder'
+require 'inquisition/formatters/html/builder'
 require 'inquisition/formatters/html/overview_builder'
 require 'inquisition/formatters/html/issues_list_builder'
 
@@ -46,7 +46,7 @@ module Inquisition
       end
 
       def user_report_directory
-        "#{Rails.root}/inquisition_report"
+        "#{Rails.root}/inquisition"
       end
     end
   end
