@@ -3,7 +3,7 @@ RSpec.describe Inquisition::Formatters::HtmlFormatter do
     let(:issue) { instance_double(Inquisition::Issue) }
     let(:formatter) { described_class.new([issue]) }
 
-    let(:report_directory) { "#{Rails.root}/inquisition_report" }
+    let(:report_directory) { "#{Rails.root}/inquisition" }
     let(:issues_html) { 'issues_list.html' }
     let(:overview_html) { 'overview.html' }
     let(:assets_keep) { 'assets/.keep' }
