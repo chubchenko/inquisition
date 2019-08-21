@@ -35,4 +35,4 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # To use a debugger
-gem 'byebug', group: [:development, :test]
+# gem 'byebug', group: [:development, :test]
