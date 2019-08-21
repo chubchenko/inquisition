@@ -3,25 +3,26 @@ RSpec.describe Inquisition::I18nTasks::Runner do
     subject(:runner) { described_class.new }
 
     let(:base_task) { instance_double(I18n::Tasks::BaseTask) }
+    let(:test_path) { "#{Rails.root}/test" }
 
     before do
       allow(I18n::Tasks::BaseTask).to receive(:new).and_return(base_task)
+      allow(base_task).to receive(:missing_keys).and_return({})
       allow(base_task).to receive(:unused_keys).and_return({})
+      allow(base_task).to receive(:config=)
     end
 
     context 'when there is missing translate' do
-      let(:missing_keys_error) { { 'test.key' => missing_error, 'test.key2' => missing_error_without_occurrence} }
+      let(:missing_keys_error) { { 'test.key' => missing_error, 'test.key2' => missing_error_without_occurrence } }
       let(:missing_error) do
-        instance_double(I18n::Tasks::Data::Tree::Node, value: 'test', data: { type: :error, occurrences: [occurrence]})
+        instance_double(I18n::Tasks::Data::Tree::Node, value: 'test', data: { type: :error, occurrences: [occurrence] })
       end
       let(:missing_error_without_occurrence) do
-        instance_double(I18n::Tasks::Data::Tree::Node, value: 'test2', data: { type: :error, path: 'test' })
+        instance_double(I18n::Tasks::Data::Tree::Node, value: 'test2', data: { type: :error, path: test_path })
       end
-      let(:occurrence) { instance_double(I18n::Tasks::Scanners::Results::Occurrence, line_num: 1, path: 'test') }
+      let(:occurrence) { instance_double(I18n::Tasks::Scanners::Results::Occurrence, line_num: 1, path: test_path) }
 
-      before do
-        allow(base_task).to receive_message_chain(:missing_keys, :keys).and_return(missing_keys_error)
-      end
+      before { allow(base_task).to receive_message_chain(:missing_keys, :keys).and_return(missing_keys_error) }
 
       it 'return issues' do
         expect(runner.call).to match_array(
@@ -30,14 +31,14 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               severity: :low,
               path: 'test',
               line: 1,
-              message: 'missing translate key: test.key, value: test',
+              message: 'missing key: test.key',
               runner: runner
             ),
             Inquisition::Issue.new(
               severity: :low,
               path: 'test',
               line: nil,
-              message: 'missing translate key: test.key2, value: test2',
+              message: 'missing key: test.key2',
               runner: runner
             )
           ]
@@ -48,13 +49,10 @@ RSpec.describe Inquisition::I18nTasks::Runner do
     context 'when there is unused translate' do
       let(:unused_keys_error) { { 'test.key' => unused_error } }
       let(:unused_error) do
-        instance_double(I18n::Tasks::Data::Tree::Node, value: 'test', data: { path: 'test' })
+        instance_double(I18n::Tasks::Data::Tree::Node, value: 'test', data: { path: test_path })
       end
 
-      before do
-        allow(base_task).to receive(:missing_keys).and_return({})
-        allow(base_task).to receive_message_chain(:unused_keys, :keys).and_return(unused_keys_error)
-      end
+      before { allow(base_task).to receive_message_chain(:unused_keys, :keys).and_return(unused_keys_error) }
 
       it 'returns issues' do
         expect(runner.call).to match_array(
@@ -72,11 +70,27 @@ RSpec.describe Inquisition::I18nTasks::Runner do
     end
 
     context 'when call do not return issues' do
-      before { allow(base_task).to receive(:missing_keys).and_return({}) }
-
       it 'not return issues' do
         expect(runner.call).to be_empty
       end
+    end
+
+    context 'when users config exists' do
+      before do
+        allow(File).to receive(:exist?).and_return(true)
+        runner.call
+      end
+
+      it { expect(base_task).not_to have_received(:config=) }
+    end
+
+    context 'when users config doesnt exist' do
+      before do
+        allow(File).to receive(:exist?).and_return(false)
+        runner.call
+      end
+
+      it { expect(base_task).to have_received(:config=) }
     end
   end
 end
