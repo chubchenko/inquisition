@@ -1,4 +1,7 @@
-- path: '/var/www/inquisition/spec/dummy/app/controllers/application_controller.rb'
+- path: 'app/controllers/application_controller.rb'
   line: 11
   severity: :low
-  message: 'missing translate key: test1, value: test1'
+  message: 'missing key: missing_locale'
+- path: config/locales/en.yml
+  severity: :low
+  message: 'unused key: hello, value: Hello World'
