@@ -6,8 +6,7 @@ RSpec.describe Inquisition::Formatters::HtmlFormatter do
     let(:report_directory) { "#{Rails.root}/inquisition" }
     let(:issues_html) { 'issues_list.html' }
     let(:overview_html) { 'overview.html' }
-    let(:assets_keep) { 'assets/.keep' }
-    let(:report_content) { [issues_html, overview_html, assets_keep] }
+    let(:report_content) { [issues_html, overview_html] }
 
     before { allow(issue).to receive(:message) }
 
