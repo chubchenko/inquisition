@@ -48,7 +48,7 @@ module Inquisition
       end
 
       def create_relative_path(path)
-        return path if Rails.env.development?
+        return path if Rails.env.development? # need for integration tests
 
         Pathname(path).relative_path_from(Rails.root).to_s
       end
