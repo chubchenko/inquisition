@@ -11,3 +11,11 @@ detectors:
 
   TooManyConstants:
     max_constants: 7
+
+  NestedIterators:
+    max_allowed_nesting: 2
+
+directories:
+  "inquisition/rubycritic/analysers":
+    InstanceVariableAssumption:
+      enabled: false

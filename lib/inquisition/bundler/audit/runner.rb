@@ -14,18 +14,18 @@ module Inquisition
 
         def check_errors
           ::Bundler::Audit::Scanner.new(Rails.root).scan do |error|
-            issues << create_error(error)
+            issues << create_error(error.advisory)
           end
           issues
         end
 
         def create_error(error)
           Inquisition::Issue.new(
-            severity: error.advisory.criticality || :low,
+            severity: error.criticality || :low,
             line: nil,
             runner: self,
             path: nil,
-            message: error.advisory.title
+            message: error.title
           )
         end
       end
