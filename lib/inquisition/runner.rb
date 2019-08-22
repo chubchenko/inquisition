@@ -15,5 +15,8 @@ module Inquisition
     def initialize
       @issues = []
     end
+
+    private
+    attr_reader :issues
   end
 end

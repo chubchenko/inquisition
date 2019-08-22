@@ -9,7 +9,7 @@ module Inquisition
       def call
         analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, options)
         check_errors(analyzer)
-        @issues
+        issues
       end
 
       private
@@ -28,7 +28,7 @@ module Inquisition
       end
 
       def define_errors(data_errors)
-        data_errors.each { |error| @issues << create_issue(error) }
+        data_errors.each { |error| issues << create_issue(error) }
       end
 
       def create_issue(error)

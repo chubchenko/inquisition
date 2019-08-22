@@ -7,7 +7,7 @@ module Inquisition
       def call
         @fasterer = FileTraverser.new(Rails.root)
         @fasterer.scannable_files.each { |file| scan_file(file) }
-        @issues
+        issues
       end
 
       private
@@ -26,7 +26,7 @@ module Inquisition
 
       def define_errors(data)
         data.errors.each do |error|
-          @issues << create_issue(error, Pathname(data.file_path).relative_path_from(Rails.root).to_s)
+          issues << create_issue(error, Pathname(data.file_path).relative_path_from(Rails.root).to_s)
         end
       end
 

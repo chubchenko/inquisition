@@ -1,6 +1,5 @@
 detectors:
-  IrresponsibleModule:
-    enabled: false
+
 
   UtilityFunction:
     exclude:

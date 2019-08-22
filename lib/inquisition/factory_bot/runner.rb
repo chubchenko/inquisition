@@ -6,13 +6,13 @@ module Inquisition
       def call
         errors = FactoryBotModifiedLinter.new(::FactoryBot.factories, traits: true).call
         errors.each { |error| create_issues(error) }
-        @issues
+        issues
       end
 
       private
 
       def create_issues(error)
-        @issues << Inquisition::Issue.new(severity: :low, path: error.location, runner: self,
+        issues << Inquisition::Issue.new(severity: :low, path: error.location, runner: self,
                                           message: error.message, line: nil)
       end
     end

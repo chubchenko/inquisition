@@ -14,9 +14,9 @@ module Inquisition
 
         def check_errors
           ::Bundler::Audit::Scanner.new(Rails.root).scan do |error|
-            @issues << create_error(error)
+            issues << create_error(error)
           end
-          @issues
+          issues
         end
 
         def create_error(error)

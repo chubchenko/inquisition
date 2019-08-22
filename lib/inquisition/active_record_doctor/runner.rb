@@ -14,11 +14,11 @@ module Inquisition
       def call
         ::ActiveRecordDoctor::Tasks.all.each do |ard_task|
           ard_task.run.first.each do |table, column|
-            @issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
+            issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
                                  message: create_message(ard_task, table, column))
           end
         end
-        @issues
+        issues
       end
 
       private

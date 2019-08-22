@@ -9,7 +9,7 @@ module Inquisition
         @traceroute.load_everything!
         create_issue(unused_routes, 'unused route')
         create_issue(unreachable_action_methods, 'unreachable action method')
-        @issues
+        issues
       end
 
       private
@@ -24,7 +24,7 @@ module Inquisition
 
       def create_issue(problematic_routes, message)
         problematic_routes.each do |route|
-          @issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
+          issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
                                message: "#{message}: #{route}")
         end
       end

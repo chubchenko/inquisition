@@ -12,14 +12,14 @@ module Inquisition
       def call
         offenses = RuboCopModifiedRunner.new({}, ::Inquisition::Rubocop.configuration).run([Rails.root.to_s])
         offenses.each { |offense| create_issues(offense) }
-        @issues
+        issues
       end
 
       private
 
       def create_issues(offenses)
         offenses.values.flatten.each do |offense|
-          @issues << Inquisition::Issue.new(
+          issues << Inquisition::Issue.new(
             severity: LEVELS[offense.severity.name],
             path: offenses.keys[0],
             message: offense.message,
