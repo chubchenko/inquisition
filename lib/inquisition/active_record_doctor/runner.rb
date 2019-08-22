@@ -15,7 +15,7 @@ module Inquisition
         ::ActiveRecordDoctor::Tasks.all.each do |ard_task|
           ard_task.run.first.each do |table, column|
             issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
-                                 message: create_message(ard_task, table, column))
+                                message: create_message(ard_task, table, column))
           end
         end
         issues

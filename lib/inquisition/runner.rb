@@ -17,6 +17,7 @@ module Inquisition
     end
 
     private
+
     attr_reader :issues
   end
 end

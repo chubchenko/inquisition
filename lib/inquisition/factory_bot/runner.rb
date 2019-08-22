@@ -13,7 +13,7 @@ module Inquisition
 
       def create_issues(error)
         issues << Inquisition::Issue.new(severity: :low, path: error.location, runner: self,
-                                          message: error.message, line: nil)
+                                         message: error.message, line: nil)
       end
     end
   end
