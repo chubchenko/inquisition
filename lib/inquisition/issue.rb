@@ -2,7 +2,7 @@ module Inquisition
   class Issue
     COMPARISON_ATTRIBUTES = %i[path line severity message].freeze
 
-    attr_reader :path, :line, :severity, :message
+    attr_reader :path, :line, :severity, :message, :runner
 
     def initialize(path:, line:, severity:, message:, runner:)
       @path = path

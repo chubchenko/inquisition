@@ -1,1 +1,39 @@
-<p> breakdowns </p>
+<div class="col-xl-4 col-lg-5">
+
+  <div class="card shadow mb-4">
+    <!-- Card Header - Dropdown -->
+    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+      <h6 class="m-0 font-weight-bold text-primary">Issues by category</h6>
+    </div>
+    <!-- Card Body -->
+
+    <div class="card-body">
+
+      <div class="chart-pie pt-4 pb-2">
+        <canvas id="myPieChart"></canvas>
+        <%= js_chart %>
+      </div>
+
+      <div class="mt-4 text-left small">
+        <span class="mr-6">
+          <p></p><i class="fas fa-circle text-danger"></i> Security - <%= @categorized_issues[:security].count %></p>
+        </span>
+        <span class="mr-6">
+          <p><i class="fas fa-circle text-success"></i> Style - <%= @categorized_issues[:style].count %></p>
+        </span>
+        <span class="mr-6">
+          <p><i class="fas fa-circle text-info"></i> Performance - <%= @categorized_issues[:performance].count %></p>
+        </span>
+        <span class="mr-6">
+          <p><i class="fas fa-circle text-warning"></i> Compatibility - <%= @categorized_issues[:compatibility].count %></p>
+        </span>
+        <span class="mr-6">
+          <p><i class="fas fa-circle text-primary"></i> Unused Code - <%= @categorized_issues[:unused_code].count %></p>
+        </span>
+        <span class="mr-6">
+          <p><i class="fas fa-circle text-secondary"></i> Duplication - <%= @categorized_issues[:duplication].count %></p>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

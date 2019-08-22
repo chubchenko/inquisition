@@ -11,13 +11,13 @@ module Inquisition
         end
 
         def file_path
-          "#{Rails.root}/inquisition/#{file_name}"
+          File.join(Rails.root, 'inquisition', file_name)
         end
 
         private
 
         def template_path
-          "#{Inquisition.root}/lib/inquisition/formatters/html/templates/#{file_name}.erb"
+          File.join(Inquisition.root, 'lib/inquisition/formatters/html/templates', "#{file_name}.erb")
         end
 
         def file_name

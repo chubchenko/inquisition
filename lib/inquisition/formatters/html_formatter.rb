@@ -19,11 +19,11 @@ module Inquisition
       private
 
       def create_directories
-        FileUtils.mkdir_p(user_report_directory)
+        FileUtils.mkdir_p(report_directory)
       end
 
       def copy_assets
-        FileUtils.cp_r(assets_directory, user_report_directory)
+        FileUtils.cp_r(assets_directory, report_directory)
       end
 
       def create_files
@@ -42,11 +42,11 @@ module Inquisition
       end
 
       def assets_directory
-        "#{Inquisition.root}/lib/inquisition/formatters/html/assets"
+        File.join(Inquisition.root, 'lib/inquisition/formatters/html/assets')
       end
 
-      def user_report_directory
-        "#{Rails.root}/inquisition"
+      def report_directory
+        File.join(Rails.root, 'inquisition')
       end
     end
   end

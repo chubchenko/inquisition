@@ -1,38 +1,139 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8"/>
-    <title>Overview Page</title>
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row">
-        <h3>Overview</h3>
+<html lang="en">
 
-        <h3>MAIN</h3>
-        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
-          <%= main_field.render %>
-        </div>
+<head>
 
-        <h3>BREAKS</h3>
-        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
-          <%= breakdowns.render %>
-        </div>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-        <h3>COV</h3>
-        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
-          <%= coverage.render %>
-        </div>
+  <title>Inquisition: overview</title>
 
-        <div class="col-xs-12 col-sm-4 col-md-6 col-lg-4">
-          <p>TEST ISSUE: </p>
-          <p><%= @collection.first.message %></p>
-        </div>
+  <!-- Custom fonts for this template-->
+  <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-        <div class="col-xs-7 col-sm-7 col-md-6 col-lg-8">
-          <p> Categories: </p>
-        </div>
+  <!-- Custom styles for this template-->
+  <link href="assets/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <div class="sidebar-brand d-flex align-items-center justify-content-center">
+        <div class="sidebar-brand-text mx-3">Inquisition</div>
       </div>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="overview.html">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Overview</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link" href="issues_list.html">
+          <i class="fas fa-fw fa-table"></i>
+          <span>Issues</span></a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+          <!-- Topbar content -->
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Overview</h1>
+          </div>
+
+          <div class="row">
+
+            <!-- Area Chart -->
+
+            <%= main_field.render %>
+
+            <!-- Pie Chart -->
+
+            <%= breakdowns.render %>
+
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Ruby Garage &copy;</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
+
     </div>
-  </body>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="assets/js/sb-admin-2.min.js"></script>
+  <script src="assets/vendor/chart.js/Chart.min.js"></script>
+  <script src="assets/js/chart-pie.js"></script>
+</body>
+
 </html>
