@@ -1,6 +1,6 @@
 module Inquisition
   class Issue
-    COMPARISON_ATTRIBUTES = %i[path line severity message].freeze
+    COMPARISON_ATTRIBUTES = %i[path line severity message category].freeze
 
     attr_reader :path, :line, :severity, :message, :category
 
