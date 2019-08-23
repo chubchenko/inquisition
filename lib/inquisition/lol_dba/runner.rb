@@ -22,6 +22,7 @@ module Inquisition
       def create_issue(table, index)
         Inquisition::Issue.new(
           severity: :low,
+          category: :perfomance,
           line: nil,
           runner: self,
           path: nil,
