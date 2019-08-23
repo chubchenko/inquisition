@@ -22,6 +22,7 @@ module Inquisition
         def create_error(error)
           Inquisition::Issue.new(
             severity: error.advisory.criticality || :low,
+            category: :security,
             line: nil,
             runner: self,
             path: nil,
