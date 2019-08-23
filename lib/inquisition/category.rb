@@ -23,5 +23,9 @@ module Inquisition
     end
 
     alias eql? ==
+
+    def hash
+      name.hash
+    end
   end
 end

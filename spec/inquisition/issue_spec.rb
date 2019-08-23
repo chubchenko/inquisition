@@ -13,7 +13,7 @@ RSpec.describe Inquisition::Issue do
       )
     end
 
-    context 'when a severity, message, path and line match' do
+    context 'when a severity, message, path, category and line match' do
       let(:other) do
         described_class.new(
           severity: issue.severity.name,
@@ -58,7 +58,7 @@ RSpec.describe Inquisition::Issue do
       )
     end
 
-    context 'when a severity, message, path and line match' do
+    context 'when a severity, message, path, category and line match' do
       let(:other) do
         described_class.new(
           severity: issue.severity.name,
