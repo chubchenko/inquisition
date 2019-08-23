@@ -2,15 +2,18 @@ module Inquisition
   class Issue
     COMPARISON_ATTRIBUTES = %i[path line severity message].freeze
 
-    attr_reader :path, :line, :severity, :message
+    attr_reader :path, :line, :severity, :message, :category
 
-    def initialize(path:, line:, severity:, message:, runner:)
+    # rubocop:disable Metrics/ParameterLists
+    def initialize(path:, line:, severity:, message:, runner:, category:)
       @path = path
       @line = line
       @runner = runner
       @message = message
       @severity = Severity.new(severity)
+      @category = Category.new(category)
     end
+    # rubocop:enable Metrics/ParameterLists
 
     def ==(other)
       COMPARISON_ATTRIBUTES.all? do |attribute|

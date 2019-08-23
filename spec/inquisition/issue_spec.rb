@@ -5,6 +5,7 @@ RSpec.describe Inquisition::Issue do
     let(:issue) do
       described_class.new(
         severity: :high,
+        category: :style,
         path: 'show.html.erb',
         line: '10',
         message: 'Unescaped parameter value',
@@ -15,7 +16,12 @@ RSpec.describe Inquisition::Issue do
     context 'when a severity, message, path and line match' do
       let(:other) do
         described_class.new(
-          severity: issue.severity.name, path: issue.path, line: issue.line, message: issue.message, runner: nil
+          severity: issue.severity.name,
+          category: issue.category.name,
+          path: issue.path,
+          line: issue.line,
+          message: issue.message,
+          runner: nil
         )
       end
 
@@ -26,6 +32,7 @@ RSpec.describe Inquisition::Issue do
       let(:other) do
         described_class.new(
           severity: :high,
+          category: :style,
           path: 'show.html.erb',
           line: '11',
           message: 'Unescaped parameter value',
@@ -43,6 +50,7 @@ RSpec.describe Inquisition::Issue do
     let(:issue) do
       described_class.new(
         severity: :high,
+        category: :style,
         path: '_slimmer.html.slim',
         line: '6',
         message: 'Unescaped parameter value',
@@ -53,7 +61,12 @@ RSpec.describe Inquisition::Issue do
     context 'when a severity, message, path and line match' do
       let(:other) do
         described_class.new(
-          severity: issue.severity.name, path: issue.path, line: issue.line, message: issue.message, runner: nil
+          severity: issue.severity.name,
+          category: issue.category.name,
+          path: issue.path,
+          line: issue.line,
+          message: issue.message,
+          runner: nil
         )
       end
 
@@ -64,6 +77,7 @@ RSpec.describe Inquisition::Issue do
       let(:other) do
         described_class.new(
           severity: :high,
+          category: :style,
           path: '_slimmer.html.slim',
           line: '7',
           message: 'Unescaped parameter value',
