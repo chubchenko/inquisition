@@ -14,7 +14,7 @@ module Inquisition
       private
 
       def issue_for(warning)
-        Issue.new(Vulnerability.new(warning).to_h.merge(runner: self))
+        Issue.new(Vulnerability.new(warning).to_h.merge(category: :security, runner: self))
       end
     end
   end

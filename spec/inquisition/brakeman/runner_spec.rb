@@ -5,7 +5,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
     subject(:runner) { described_class.new }
 
     let(:warning) { instance_double(Brakeman::Warning) }
-    let(:issue) { Inquisition::Issue.new(options.merge(runner: nil)) }
+    let(:issue) { Inquisition::Issue.new(options.merge(runner: nil, category: :security)) }
     let(:vulnerability) { instance_double(Inquisition::Brakeman::Vulnerability, to_h: options) }
     let(:options) do
       {
