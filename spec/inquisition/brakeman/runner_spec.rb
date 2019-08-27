@@ -5,10 +5,11 @@ RSpec.describe Inquisition::Brakeman::Runner do
     subject(:runner) { described_class.new }
 
     let(:warning) { instance_double(Brakeman::Warning) }
-    let(:issue) { Inquisition::Issue.new(options.merge(runner: nil, category: :security)) }
+    let(:issue) { Inquisition::Issue.new(options.merge(runner: nil)) }
     let(:vulnerability) { instance_double(Inquisition::Brakeman::Vulnerability, to_h: options) }
     let(:options) do
       {
+        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::HIGH,
