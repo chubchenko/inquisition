@@ -24,21 +24,13 @@ module Inquisition
 
       def check_errors(analyzer)
         analyzer.analyze
-        define_errors(analyzer.errors) if analyzer.errors.any?
+        create_issue(analyzer.errors) if analyzer.errors.any?
       end
 
-      def define_errors(data_errors)
-        data_errors.each { |error| @issues << create_issue(error) }
-      end
-
-      def create_issue(error)
-        Inquisition::Issue.new(
-          severity: :low,
-          line: error.line_number.to_i,
-          runner: self,
-          path: error.short_filename,
-          message: error.message
-        )
+      def create_issue(data_errors)
+        data_errors.each do |error|
+          @issues << Inquisition::Issue.new(Vulnerability.new(error).to_h.merge(runner: self))
+        end
       end
     end
   end
