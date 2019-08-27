@@ -1,4 +1,3 @@
-require 'active_record_doctor/tasks'
 require 'active_record_doctor/tasks/extraneous_indexes'
 require 'active_record_doctor/tasks/missing_foreign_keys'
 require 'active_record_doctor/tasks/unindexed_deleted_at'
@@ -11,21 +10,24 @@ require 'active_record_doctor/tasks/missing_non_null_constraint'
 module Inquisition
   module ActiveRecordDoctor
     class Runner < ::Inquisition::Runner
+      TASKS = {
+        ::ActiveRecordDoctor::Tasks::ExtraneousIndexes => :perfomance,
+        ::ActiveRecordDoctor::Tasks::MissingForeignKeys => :bug_risk,
+        ::ActiveRecordDoctor::Tasks::MissingNonNullConstraint => :bug_risk,
+        ::ActiveRecordDoctor::Tasks::MissingPresenceValidation => :bug_risk,
+        ::ActiveRecordDoctor::Tasks::MissingUniqueIndexes => :bug_risk,
+        ::ActiveRecordDoctor::Tasks::UndefinedTableReferences => :unused_code,
+        ::ActiveRecordDoctor::Tasks::UnindexedDeletedAt => :perfomance,
+        ::ActiveRecordDoctor::Tasks::UnindexedForeignKeys => :perfomance
+      }.freeze
+
       def call
-        ::ActiveRecordDoctor::Tasks.all.each do |ard_task|
+        TASKS.keys.each do |ard_task|
           ard_task.run.first.each do |table, column|
-            @issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
-                                 message: create_message(ard_task, table, column))
+            @issues << Issue.new(Vulnerability.new(ard_task, table, column).to_h.merge(runner: self))
           end
         end
         @issues
-      end
-
-      private
-
-      def create_message(ard_task, issue_object, details)
-        issue_text = ard_task.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
-        "#{issue_object} has #{issue_text}, details: #{details ? details.join(', ') : 'n/a'}"
       end
     end
   end

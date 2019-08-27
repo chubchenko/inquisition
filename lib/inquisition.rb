@@ -11,6 +11,7 @@ require 'inquisition/logger'
 require 'inquisition/railtie'
 
 require 'inquisition/active_record_doctor/runner'
+require 'inquisition/active_record_doctor/vulnerability'
 require 'inquisition/brakeman/vulnerability'
 require 'inquisition/brakeman/runner'
 require 'inquisition/bundler/audit/runner'
