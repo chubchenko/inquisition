@@ -1,5 +1,5 @@
 - path: 'app/controllers/application_controller.rb'
   line: 10
   severity: :low
-  category: :perfomance
+  category: :performance
   message: 'Enumerable#sort is slower than Enumerable#sort_by'

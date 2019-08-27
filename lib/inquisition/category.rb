@@ -2,13 +2,13 @@ module Inquisition
   class Category
     SECURITY = :security
     STYLE = :style
-    PERFOMANCE = :perfomance
+    PERFORMANCE = :performance
     COMPLEXITY = :complexity
     UNUSED_CODE = :unused_code
     DUPLICATION = :duplication
     BUG_RISK = :bug_risk
 
-    NAMES = [SECURITY, STYLE, PERFOMANCE, COMPLEXITY, UNUSED_CODE, DUPLICATION, BUG_RISK].freeze
+    NAMES = [SECURITY, STYLE, PERFORMANCE, COMPLEXITY, UNUSED_CODE, DUPLICATION, BUG_RISK].freeze
 
     attr_reader :name
 

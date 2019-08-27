@@ -1,3 +1,3 @@
 - severity: :low
-  category: :perfomance
+  category: :performance
   message: "You have not index in table `active_storage_attachments`, column `[\"record_id\", \"record_type\"]`"
