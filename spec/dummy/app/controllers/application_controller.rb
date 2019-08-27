@@ -8,6 +8,5 @@ class ApplicationController < ActionController::Base
 
   def test_fasterer
     User.sort(:name)
-    I18n.t('missing_locale')
   end
 end
