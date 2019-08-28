@@ -11,14 +11,14 @@ module Inquisition
   module ActiveRecordDoctor
     class Runner < ::Inquisition::Runner
       TASKS = {
-        ::ActiveRecordDoctor::Tasks::ExtraneousIndexes => :perfomance,
+        ::ActiveRecordDoctor::Tasks::ExtraneousIndexes => :performance,
         ::ActiveRecordDoctor::Tasks::MissingForeignKeys => :bug_risk,
         ::ActiveRecordDoctor::Tasks::MissingNonNullConstraint => :bug_risk,
         ::ActiveRecordDoctor::Tasks::MissingPresenceValidation => :bug_risk,
         ::ActiveRecordDoctor::Tasks::MissingUniqueIndexes => :bug_risk,
         ::ActiveRecordDoctor::Tasks::UndefinedTableReferences => :unused_code,
-        ::ActiveRecordDoctor::Tasks::UnindexedDeletedAt => :perfomance,
-        ::ActiveRecordDoctor::Tasks::UnindexedForeignKeys => :perfomance
+        ::ActiveRecordDoctor::Tasks::UnindexedDeletedAt => :performance,
+        ::ActiveRecordDoctor::Tasks::UnindexedForeignKeys => :performance
       }.freeze
 
       def call

@@ -11,5 +11,5 @@
   message: 'ActiveStorage::Blob has missing presence validation, details: key, filename, byte_size, checksum'
 
 - severity: :low
-  category: :perfomance
+  category: :performance
   message: 'active_storage_attachments has unindexed foreign keys, details: record_id'
