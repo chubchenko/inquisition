@@ -2,6 +2,7 @@ require 'rubocop'
 
 require_relative 'rubocop/rubocop_modified_runner'
 require_relative 'rubocop/runner'
+require_relative 'rubocop/vulnerability'
 
 module Inquisition
   module Rubocop
