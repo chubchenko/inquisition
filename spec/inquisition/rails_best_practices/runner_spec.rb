@@ -8,10 +8,11 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
     let(:errors_analyzer) do
       [
         instance_double(
-          'RailsBestPractices::Core::Error',
+          RailsBestPractices::Core::Error,
           short_filename: 'test_file',
           line_number: '1',
-          message: 'test_message'
+          message: 'test_message',
+          type: 'RailsBestPractices::Reviews::RemoveEmptyHelpersReview'
         )
       ]
     end
@@ -21,17 +22,19 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       allow(instance_analyzer).to receive(:analyze).and_return(true)
     end
 
-    context 'when call runner and it return errors' do
+    context 'when call runner and it returns errors' do
       before { allow(instance_analyzer).to receive(:errors).and_return(errors_analyzer) }
 
       it 'returns a collection of issues' do
-
-        expect(call_runner).to contain_exactly(Inquisition::Issue.new(
-          severity: :low,
-          line: 1,
-          runner: nil,
-          path: errors_analyzer.first.short_filename,
-          message: errors_analyzer.first.message)
+        expect(call_runner).to contain_exactly(
+          Inquisition::Issue.new(
+            severity: :low,
+            category: :unused_code,
+            line: 1,
+            runner: nil,
+            path: errors_analyzer.first.short_filename,
+            message: errors_analyzer.first.message
+          )
         )
       end
     end
@@ -49,7 +52,7 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       allow(analyzer).to receive(:analyze).and_return(true)
     end
 
-    context 'when user config exist' do
+    context 'when user config exists' do
       before do
         allow(File).to receive(:exist?).and_return(true)
         described_class.new.call
@@ -61,7 +64,7 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       end
     end
 
-    context 'when user config not exist' do
+    context 'when user config does not exist' do
       before do
         allow(File).to receive(:exist?).and_return(false)
         described_class.new.call
