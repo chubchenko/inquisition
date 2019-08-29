@@ -4,6 +4,7 @@ module Inquisition
   module FactoryBot
     class Runner < ::Inquisition::Runner
       def call
+        ::FactoryBot.find_definitions
         errors = FactoryBotModifiedLinter.new(::FactoryBot.factories, traits: true).call
         errors.each { |error| create_issues(error) }
         @issues
