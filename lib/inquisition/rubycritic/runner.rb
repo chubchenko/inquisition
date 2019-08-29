@@ -44,7 +44,7 @@ module Inquisition
       end
 
       def analysed_modules
-        @analysed_modules ||= ::RubyCritic::AnalysedModulesCollection.new([Rails.root])
+        ::RubyCritic::AnalysedModulesCollection.new([Rails.root])
       end
     end
   end
