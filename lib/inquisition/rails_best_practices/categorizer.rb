@@ -1,7 +1,7 @@
 module Inquisition
   module RailsBestPractices
-    class Vulnerability
-      ERROR_TYPES = {
+    class Categorizer
+      MATCH_TABLE = {
         complexity: [
           'RailsBestPractices::Reviews::AddModelVirtualAttributeReview',
           'RailsBestPractices::Reviews::DryBundlerInCapistranoReview',
@@ -58,28 +58,8 @@ module Inquisition
         duplication: ['RailsBestPractices::Reviews::UseBeforeFilterReview']
       }.freeze
 
-      def initialize(error)
-        @error = error
-      end
-
-      def to_h
-        {
-          category: find_category(error),
-          severity: :low,
-          message: error.message,
-          path: error.short_filename,
-          line: error.line_number.to_i
-        }
-      end
-
-      private
-
-      attr_reader :error
-
-      def find_category(error)
-        ERROR_TYPES.each do |category, error_types|
-          return category if error_types.include?(error.type)
-        end
+      def self.find_category(error_type)
+        MATCH_TABLE.detect { |_category, error_types| error_types.include?(error_type) }[0]
       end
     end
   end

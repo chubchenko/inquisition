@@ -29,7 +29,7 @@ module Inquisition
 
       def create_issue(data_errors)
         data_errors.each do |error|
-          @issues << Inquisition::Issue.new(Vulnerability.new(error).to_h.merge(runner: self))
+          @issues << Inquisition::Issue.new(Issue.new(error).to_h.merge(runner: self))
         end
       end
     end
