@@ -1,14 +1,6 @@
 module Inquisition
   module Rubocop
-    class Vulnerability
-      LEVELS = {
-        refactor: :low,
-        convention: :low,
-        warning: :medium,
-        error: :high,
-        fatal: :high
-      }.freeze
-
+    class Categorizer
       DETAILED_MATCH_TABLE = {
         'Bundler/DuplicatedGem' => :duplication,
         'Bundler/InsecureProtocolSource' => :security,
@@ -22,26 +14,7 @@ module Inquisition
         'Performance' => :performance
       }.freeze
 
-      def initialize(file, offense)
-        @file = file
-        @offense = offense
-      end
-
-      def to_h
-        {
-          severity: LEVELS[offense.severity.name],
-          category: find_category(offense.cop_name),
-          path: file,
-          message: offense.message,
-          line: offense.line
-        }
-      end
-
-      private
-
-      attr_reader :file, :offense
-
-      def find_category(cop_name)
+      def self.find_category(cop_name)
         return DETAILED_MATCH_TABLE[cop_name] if DETAILED_MATCH_TABLE.key?(cop_name)
         return MATCH_TABLE[cop_name.split('/')[0]] if MATCH_TABLE.key?(cop_name.split('/')[0])
 

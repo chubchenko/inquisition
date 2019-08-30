@@ -11,7 +11,7 @@ module Inquisition
 
       def create_issues(offenses)
         offenses.values.flatten.each do |offense|
-          @issues << Inquisition::Issue.new(Vulnerability.new(offenses.keys[0], offense).to_h.merge(runner: self))
+          @issues << Inquisition::Issue.new(Issue.new(offenses.keys[0], offense).to_h.merge(runner: self))
         end
       end
     end
