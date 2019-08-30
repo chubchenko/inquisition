@@ -28,6 +28,7 @@ require 'inquisition/factory_bot/factory_bot_modified_linter'
 require_relative 'inquisition/outputter'
 require_relative 'inquisition/options'
 require_relative 'inquisition/fanout'
+require_relative 'inquisition/executor'
 
 module Inquisition
   def self.logger

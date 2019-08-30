@@ -13,3 +13,7 @@ detectors:
   Attribute:
     exclude:
       - 'Inquisition::Configuration#output'
+
+  UtilityFunction:
+    exclude:
+      - 'Inquisition::Executor::Version#call'

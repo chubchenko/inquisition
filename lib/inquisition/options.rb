@@ -3,11 +3,16 @@ require 'optparse'
 module Inquisition
   class Options
     def self.parse(arguments)
-      new(arguments).parse
+      opt = new(arguments)
+      opt.parse
+      opt
     end
+
+    attr_reader :options
 
     def initialize(arguments)
       @arguments = arguments.dup
+      @options = {}
       @parser = OptionParser.new
     end
 
@@ -20,27 +25,20 @@ module Inquisition
     private
 
     def define_options
-      @parser.banner = 'Usage: rake inquisition:run [options]'
+      @parser.banner = 'Usage: bin/rails inquisition [options]'
 
-      @parser.on('-f', '--format FORMATTER') do |value|
+      @parser.on('-f', '--format FORMATTER', 'Choose a formatter',
+                 '  [p]rogress (default)',
+                 '  [h]tml') do |value|
         Configuration.instance.loader.add(value)
       end
 
-      # Utility options:
-
-      # @parser.on_tail('-l', '--list') do
-      #   # ...
-      #   exit
-      # end
-
-      @parser.on_tail('-v', '--version') do
-        puts Inquisition::Version
-        exit
+      @parser.on_tail('-v', '--version', 'Display the version.') do
+        @options[:executor] = Executor::Version.new
       end
 
-      @parser.on_tail('-h', '--help') do
-        puts @parser
-        exit
+      @parser.on_tail('-h', '--help', 'You are looking at it.') do
+        @options[:executor] = Executor::Help.new(@parser)
       end
     end
   end

@@ -1,11 +1,11 @@
 RSpec.describe Inquisition::Options do
   describe '.parse' do
-    let(:options) { instance_double(Inquisition::Options) }
+    let(:options) { instance_double(described_class) }
     let(:arguments) { ['-v'] }
 
     before do
       allow(options).to receive(:parse)
-      allow(Inquisition::Options).to receive(:new).and_return(options)
+      allow(described_class).to receive(:new).and_return(options)
       described_class.parse(arguments)
     end
 
@@ -21,6 +21,22 @@ RSpec.describe Inquisition::Options do
           described_class.parse([option, 'p'])
         end.to change(Inquisition::Configuration.instance.collection, :length).by(1)
       end
+    end
+  end
+
+  %w[-v --version].each do |option|
+    it 'sets the `:executor` option with the `Version` invocation' do
+      options = described_class.parse([option])
+
+      expect(options.options[:executor]).to be_instance_of(Inquisition::Executor::Version)
+    end
+  end
+
+  %w[-h --help].each do |option|
+    it 'sets the `:executor` option with the `Help` invocation' do
+      options = described_class.parse([option])
+
+      expect(options.options[:executor]).to be_instance_of(Inquisition::Executor::Help)
     end
   end
 end

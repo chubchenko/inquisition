@@ -2,17 +2,21 @@ module Inquisition
   class Collector
     class << self
       def invoke
-        issues = run(ARGV)
+        status = run(ARGV)
 
-        exit unless issues.empty?
+        exit(status) unless status.zero?
       end
 
       private
 
       def run(arguments)
-        Options.parse(arguments)
+        options = Options.parse(arguments).options
 
-        new.call
+        if options.key?(:executor)
+          options[:executor].call
+        else
+          new.call
+        end
       end
     end
 
@@ -21,11 +25,14 @@ module Inquisition
     end
 
     def call
-      Configuration.instance.fanout.around do |fanout|
-        @collection.each_with_object([]) do |runner, memo|
-          memo << runner.new.run(fanout)
-        end.flatten
-      end
+      success =
+        Configuration.instance.fanout.around do |fanout|
+          @collection.each_with_object([]) do |runner, memo|
+            memo << runner.new.run(fanout)
+          end.flatten.empty?
+        end
+
+      success ? 0 : 1
     end
   end
 end
