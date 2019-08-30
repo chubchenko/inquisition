@@ -4,7 +4,6 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'inquisition/version'
 
-# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name          = 'inquisition'
   spec.version       = Inquisition::Version
@@ -42,4 +41,3 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubycritic', '~> 4.1.0'
   spec.add_dependency 'traceroute', '~> 0.8.0'
 end
-# rubocop:enable Metrics/BlockLength

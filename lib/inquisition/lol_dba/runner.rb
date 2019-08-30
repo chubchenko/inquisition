@@ -4,7 +4,6 @@ module Inquisition
   module LolDba
     class Runner < ::Inquisition::Runner
       def call
-        @errors = ::LolDba::IndexFinder.check_for_indexes
         compose_issues
         issues
       end
@@ -12,7 +11,9 @@ module Inquisition
       private
 
       def compose_issues
-        @errors.map { |table, index_arr| create_issue_with_every_index(table, index_arr) }.flatten
+        ::LolDba::IndexFinder.check_for_indexes.map do |table, index_arr|
+          create_issue_with_every_index(table, index_arr)
+        end.flatten
       end
 
       def create_issue_with_every_index(table, index_arr)

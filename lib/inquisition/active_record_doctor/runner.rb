@@ -13,15 +13,19 @@ module Inquisition
     class Runner < ::Inquisition::Runner
       def call
         ::ActiveRecordDoctor::Tasks.all.each do |ard_task|
-          ard_task.run.first.each do |table, column|
-            issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
-                                message: create_message(ard_task, table, column))
-          end
+          run_task(ard_task)
         end
         issues
       end
 
       private
+
+      def run_task(task)
+        task.run.first.each do |table, column|
+          issues << Issue.new(severity: :low, path: nil, line: nil, runner: self,
+                              message: create_message(task, table, column))
+        end
+      end
 
       def create_message(ard_task, issue_object, details)
         issue_text = ard_task.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')

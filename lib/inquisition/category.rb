@@ -1,13 +1,6 @@
 module Inquisition
   class Category
-    SECURITY = :security
-    STYLE = :style
-    PERFOMANCE = :perfomance
-    COMPATIBILITY = :compatibility
-    UNUSED_CODE = :unused_code
-    DUPLICATION = :duplication
-
-    NAMES = [SECURITY, STYLE, PERFOMANCE, COMPATIBILITY, UNUSED_CODE, DUPLICATION].freeze
+    NAMES = %i[security style perfomance compatibility unused_code duplication].freeze
 
     attr_reader :name
 

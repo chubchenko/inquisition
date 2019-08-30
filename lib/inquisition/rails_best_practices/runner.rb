@@ -7,12 +7,14 @@ module Inquisition
       INQUISITION_CONFIG_PATH = 'config/rails_best_practices/config.yml'.freeze
 
       def call
-        analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, options)
-        check_errors(analyzer)
+        @analyzer = ::RailsBestPractices::Analyzer.new(Rails.root, options)
+        check_errors
         issues
       end
 
       private
+
+      attr_reader :analyzer
 
       def options
         { 'config' => config_path, 'silent' => true }
@@ -22,9 +24,13 @@ module Inquisition
         File.exist?(USER_CONFIG_PATH) ? USER_CONFIG_PATH : File.join(Inquisition.root, INQUISITION_CONFIG_PATH)
       end
 
-      def check_errors(analyzer)
+      def check_errors
         analyzer.analyze
-        define_errors(analyzer.errors) if analyzer.errors.any?
+        define_errors(errors) if errors.any?
+      end
+
+      def errors
+        analyzer.errors
       end
 
       def define_errors(data_errors)

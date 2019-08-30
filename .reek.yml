@@ -2,20 +2,11 @@ detectors:
   IrresponsibleModule:
     enabled: false
 
-  UtilityFunction:
-    exclude:
-      - 'Inquisition::CLI#execute'
-
-  TooManyInstanceVariables:
-    max_instance_variables: 6
-
-  TooManyConstants:
-    max_constants: 7
-
-  NestedIterators:
-    max_allowed_nesting: 2
-
 directories:
-  "inquisition/rubycritic/analysers":
-    InstanceVariableAssumption:
+  "spec/dummy":
+    TooManyStatements:
+      enabled: false
+    UtilityFunction:
+      enabled: false
+    FeatureEnvy:
       enabled: false
