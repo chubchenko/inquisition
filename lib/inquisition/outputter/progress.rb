@@ -7,15 +7,15 @@ module Inquisition
         @output = output
       end
 
-      def example_passed
+      def example_passed(_runner)
         output.print("\e[32m.\e[0m")
       end
 
-      def example_failed
+      def example_failed(_runner)
         output.print("\e[31mF\e[0m")
       end
 
-      def stop
+      def stop(_issues)
         output.puts
       end
 
