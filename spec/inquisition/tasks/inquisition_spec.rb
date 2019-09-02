@@ -1,14 +1,9 @@
-RSpec.describe 'inquisition:run' do
-  let(:collector) { instance_double(Inquisition::Collector) }
-
-  before do
-    allow(collector).to receive(:call)
-    allow(Inquisition::Collector).to receive(:new).and_return(collector)
-  end
+RSpec.describe 'inquisition' do
+  before { allow(Inquisition::Collector).to receive(:invoke) }
 
   include_context 'rake' do
     before { task.invoke }
 
-    it { expect(collector).to have_received(:call).once }
+    it { expect(Inquisition::Collector).to have_received(:invoke).once }
   end
 end

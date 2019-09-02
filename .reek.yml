@@ -2,6 +2,18 @@ detectors:
   IrresponsibleModule:
     enabled: false
 
+  NestedIterators:
+    ignore_iterators:
+      - around
+
+  TooManyStatements:
+    exclude:
+      - 'Inquisition::Options#define_options'
+
+  Attribute:
+    exclude:
+      - 'Inquisition::Configuration#output'
+
   UtilityFunction:
     exclude:
-      - 'Inquisition::CLI#execute'
+      - 'Inquisition::Executor::Version#call'

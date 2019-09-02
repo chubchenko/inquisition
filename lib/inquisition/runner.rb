@@ -15,5 +15,16 @@ module Inquisition
     def initialize
       @issues = []
     end
+
+    def run(fanout)
+      issues = call
+
+      if issues.empty?
+        fanout.example_passed(self)
+      else
+        fanout.example_failed(self)
+      end
+      issues
+    end
   end
 end
