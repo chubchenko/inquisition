@@ -5,7 +5,7 @@ module Inquisition
 
       def initialize(_output); end
 
-      def stop; end
+      def stop(_issues); end
     end
   end
 end

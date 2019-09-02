@@ -24,15 +24,17 @@ module Inquisition
         issues = yield self if block_given?
       ensure
         stop(issues || [])
+
+        return issues || []
       end
     end
 
-    def example_passed(*)
-      broadcast(:example_passed)
+    def example_passed(runner)
+      broadcast(:example_passed, runner)
     end
 
-    def example_failed(*)
-      broadcast(:example_failed)
+    def example_failed(runner)
+      broadcast(:example_failed, runner)
     end
 
     # @private
@@ -51,15 +53,15 @@ module Inquisition
       broadcast(:start)
     end
 
-    def stop(_issues)
-      broadcast(:stop)
+    def stop(issues)
+      broadcast(:stop, issues)
     end
 
-    def broadcast(event, _payload = NullPayload.new)
+    def broadcast(event, payload = NullPayload.new)
       ensure_default_ready
 
       listeners_for(event).each do |outputter|
-        outputter.__send__(event)
+        outputter.__send__(event, payload)
       end
     end
 
