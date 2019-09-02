@@ -18,10 +18,7 @@ RSpec.describe Inquisition::Executor::Help do
   let(:output) { instance_double(StringIO) }
   let(:options) { instance_double(OptionParser) }
 
-  before do
-    allow(output).to receive(:puts)
-
-  end
+  before { allow(output).to receive(:puts) }
 
   describe '#call' do
     it { expect(described_class.new(options).call(output)).to be_zero }

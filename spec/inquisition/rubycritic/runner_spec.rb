@@ -27,13 +27,15 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:analyse_module) { [instance_double('RubyCritic::AnalysedModule', smells: [smell])] }
 
       it 'returns a collection of issues' do
-        expect(result_runner).to contain_exactly(Inquisition::Issue.new(
-          severity: :low,
-          path: 'app/controllers/application_controller.rb',
-          line: smell_location.line,
-          runner: nil,
-          message: smell.message
-        ))
+        expect(result_runner).to contain_exactly(
+          Inquisition::Issue.new(
+            severity: :low,
+            path: 'app/controllers/application_controller.rb',
+            line: smell_location.line,
+            runner: nil,
+            message: smell.message
+          )
+        )
       end
     end
 

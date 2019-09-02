@@ -24,9 +24,9 @@ module Inquisition
         issues = yield self if block_given?
       ensure
         stop(issues || [])
-
-        return issues || []
       end
+
+      issues || []
     end
 
     def example_passed(runner)

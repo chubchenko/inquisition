@@ -1,12 +1,12 @@
 RSpec.describe Inquisition::Collector do
   describe '.invoke' do
-    let(:collector) { instance_double(Inquisition::Collector) }
+    let(:collector) { instance_double(described_class) }
     let(:options) { instance_double(Inquisition::Options, options: {}) }
     let(:call) { 0 }
 
     before do
       allow(collector).to receive(:call).and_return(call)
-      allow(Inquisition::Collector).to receive(:new).and_return(collector)
+      allow(described_class).to receive(:new).and_return(collector)
       allow(Inquisition::Options).to receive(:parse).and_return(options)
     end
 
@@ -72,7 +72,7 @@ RSpec.describe Inquisition::Collector do
       let(:dummy) do
         Class.new(Inquisition::Runner) do
           def call
-            ['a', ['b', 'c']]
+            ['a', %w[b c]]
           end
 
           def self.enabled?
@@ -90,7 +90,7 @@ RSpec.describe Inquisition::Collector do
       let(:dummy) do
         Class.new(Inquisition::Runner) do
           def call
-            ['a', ['b', 'c']]
+            ['a', %w[b c]]
           end
 
           def self.enabled?
