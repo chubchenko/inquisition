@@ -8,8 +8,9 @@ require 'rspec/rails'
 Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))
 
 RSpec.configure do |config|
-  # redirect console output for unit tests
-  # config.before(:all, type: :unit, &:silence_output)
+  config.before(:all) do
+    Inquisition::Configuration.instance.output = StringIO.new
+  end
 
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'

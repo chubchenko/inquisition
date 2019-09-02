@@ -1,0 +1,15 @@
+base_locale: en
+
+data:
+  read:
+  write:
+  external:
+  yaml:
+    write:
+      line_width: -1
+
+search:
+  exclude:
+    - app/assets/images
+    - app/assets/fonts
+    - app/assets/videos
