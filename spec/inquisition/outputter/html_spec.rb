@@ -1,6 +1,6 @@
 RSpec.describe Inquisition::Outputter::HTML do
   let(:formatter) { instance_double(Inquisition::Formatters::HtmlFormatter) }
-  let(:html) { described_class.new }
+  let(:html) { described_class.new('') }
 
   describe '#stop' do
     before do
