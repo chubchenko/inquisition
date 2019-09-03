@@ -3,13 +3,13 @@ RSpec.describe Inquisition::Fanout do
 
   let(:outputter) do
     Class.new do
-      def start; end
+      def start(_payload); end
 
-      def example_passed; end
+      def example_passed(_payload); end
 
-      def example_failed; end
+      def example_failed(_payload); end
 
-      def stop; end
+      def stop(_payload); end
     end.new
   end
 
@@ -21,9 +21,9 @@ RSpec.describe Inquisition::Fanout do
     it 'will send notice when a subscribed event is triggered' do
       allow(outputter).to receive(:example_passed)
 
-      fanout.example_passed
+      fanout.example_passed(Inquisition::NullPayload.new)
 
-      expect(outputter).to have_received(:example_passed)
+      expect(outputter).to have_received(:example_passed).with(instance_of(Inquisition::NullPayload))
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe Inquisition::Fanout do
 
       fanout.around
 
-      expect(outputter).to have_received(:start)
+      expect(outputter).to have_received(:start).with(instance_of(Inquisition::NullPayload))
     end
 
     it 'will send notice when a stop event is triggered' do
@@ -51,8 +51,11 @@ RSpec.describe Inquisition::Fanout do
 
       fanout.around
 
-      expect(outputter).to have_received(:stop)
+      expect(outputter).to have_received(:stop).with(instance_of(Array))
     end
+
+    it { expect(fanout.around {}).to be_empty }
+    it { expect(fanout.around { [1, 2, 3] }).to contain_exactly(1, 2, 3) }
   end
 
   describe '#example_passed' do
@@ -61,9 +64,9 @@ RSpec.describe Inquisition::Fanout do
     it 'will send notice when a example passed event is triggered' do
       allow(outputter).to receive(:example_passed)
 
-      fanout.example_passed
+      fanout.example_passed(Inquisition::NullPayload.new)
 
-      expect(outputter).to have_received(:example_passed)
+      expect(outputter).to have_received(:example_passed).with(instance_of(Inquisition::NullPayload))
     end
   end
 
@@ -73,9 +76,9 @@ RSpec.describe Inquisition::Fanout do
     it 'will send notice when a example failed event is triggered' do
       allow(outputter).to receive(:example_failed)
 
-      fanout.example_failed
+      fanout.example_failed(Inquisition::NullPayload.new)
 
-      expect(outputter).to have_received(:example_failed)
+      expect(outputter).to have_received(:example_failed).with(instance_of(Inquisition::NullPayload))
     end
   end
 end

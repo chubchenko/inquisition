@@ -20,18 +20,19 @@ RSpec.describe Inquisition::Fasterer::Runner do
     context 'when call with errors' do
       before do
         allow(instance_analyzer).to receive(:errors).and_return(offense)
-        allow(instance_file_traverser).to receive(:offenses_grouped_by_type).and_return({ error: offense_collector })
+        allow(instance_file_traverser).to receive(:offenses_grouped_by_type).and_return(error: offense_collector)
       end
 
       it 'returns a collection of issues' do
-        expect(runner_result).to contain_exactly(Inquisition::Issue.new(
-          severity: :low,
-          line: offense.first.line_number,
-          path: test_file,
-          message: offense.first.explanation,
-          runner: nil
+        expect(runner_result).to contain_exactly(
+          Inquisition::Issue.new(
+            severity: :low,
+            line: offense.first.line_number,
+            path: test_file,
+            message: offense.first.explanation,
+            runner: nil
+          )
         )
-      )
       end
     end
 

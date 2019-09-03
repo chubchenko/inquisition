@@ -11,12 +11,12 @@ RSpec.describe Inquisition::Rubycritic::Analysers::Reek do
         expect(described_class).to be < ::RubyCritic::Analyser::ReekSmells
       end
 
-      it 'should call each on analysed_modules' do
+      it 'calls each on analysed_modules' do
         expect(analysed_modules).to receive(:each)
         analyser.run
       end
 
-      it 'should call add_smells_to method one time' do
+      it 'calls add_smells_to method one time' do
         expect(analyser).to receive(:add_smells_to).with(analysed_modules.first)
         analyser.run
       end
