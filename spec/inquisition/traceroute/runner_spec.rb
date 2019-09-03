@@ -1,32 +1,65 @@
 RSpec.describe Inquisition::Traceroute::Runner do
-  let(:runner) { described_class.new }
-  let(:traceroute) { instance_double(Traceroute) }
-  let(:unused_route) { 'foo#bar' }
-  let(:unreachable_action) { 'bar#baz' }
-
-  let(:unused_route_issue) do
-    { severity: :low, message: "unused route: #{unused_route}" }
-  end
-
-  let(:unreachable_action_issue) do
-    { severity: :low, message: "unreachable action method: #{unreachable_action}" }
-  end
-
-  let(:issues) { [unused_route_issue, unreachable_action_issue] }
+  include_examples 'enablable', 'traceroute'
 
   describe '#call' do
-    it 'returns array with issues' do
-      expect(Traceroute).to receive(:new).and_return(traceroute)
-      expect(traceroute).to receive(:load_everything!)
-      expect(runner).to receive(:unused_routes).and_return([unused_route])
-      expect(runner).to receive(:unreachable_action_methods).and_return([unreachable_action])
-      runner.call.each_with_index do |issue, index|
-        # TODO: will be fixed in the next PR
-        # expect(issue.instance_variable_get(:@severity)).to eq(issues[index][:severity])
-        expect(issue.instance_variable_get(:@message)).to eq(issues[index][:message])
+    subject(:runner) { described_class.new }
+
+    let(:traceroute) { instance_double(Traceroute) }
+
+    before do
+      allow(traceroute).to receive(:load_everything!)
+      allow(Traceroute).to receive(:new).and_return(traceroute).with(Rails.application).and_return(traceroute)
+    end
+
+    context 'when there are no issues' do
+      before do
+        allow(traceroute).to receive(:routed_actions).and_return([])
+        allow(traceroute).to receive(:defined_action_methods).and_return([])
+      end
+
+      it { expect(runner.call).to be_empty }
+    end
+
+    context 'when there is one unused route' do
+      before do
+        allow(traceroute).to receive(:routed_actions).and_return(['users#index'])
+        allow(traceroute).to receive(:defined_action_methods).and_return([])
+      end
+
+      let(:issue) do
+        Inquisition::Issue.new(
+          path: nil,
+          line: nil,
+          severity: :low,
+          message: 'Unused route: users#index',
+          runner: runner
+        )
+      end
+
+      it 'returns a collection of issues' do
+        expect(runner.call).to contain_exactly(issue)
+      end
+    end
+
+    context 'when there is one unreachable action method' do
+      before do
+        allow(traceroute).to receive(:routed_actions).and_return([])
+        allow(traceroute).to receive(:defined_action_methods).and_return(['users#index2'])
+      end
+
+      let(:issue) do
+        Inquisition::Issue.new(
+          path: nil,
+          line: nil,
+          severity: :low,
+          message: 'Unreachable action method: users#index2',
+          runner: runner
+        )
+      end
+
+      it 'returns a collection of issues' do
+        expect(runner.call).to contain_exactly(issue)
       end
     end
   end
-
-  include_examples 'enablable', 'traceroute'
 end
