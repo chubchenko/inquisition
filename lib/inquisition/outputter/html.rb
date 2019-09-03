@@ -6,7 +6,7 @@ module Inquisition
       def initialize(_output); end
 
       def stop(issues)
-        Inquisition::Formatters::HtmlFormatter.new(issues.flatten).call
+        Inquisition::Formatters::HtmlFormatter.new(issues).call
       end
     end
   end
