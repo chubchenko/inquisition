@@ -21,7 +21,7 @@ module Inquisition
 
       def run_analyzers
         ANALYSERS.each do |analyser_class, issue_category|
-          result = analyser_class.new(analysed_modules).run
+          result = analyser_class.new(::RubyCritic::AnalysedModulesCollection.new([Rails.root])).run
           smells = result.map(&:smells).flatten
           compose_issues(smells, issue_category)
         end
@@ -42,10 +42,6 @@ module Inquisition
           runner: self,
           message: error.message
         )
-      end
-
-      def analysed_modules
-        @analysed_modules ||= ::RubyCritic::AnalysedModulesCollection.new([Rails.root])
       end
     end
   end
