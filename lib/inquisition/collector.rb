@@ -29,8 +29,8 @@ module Inquisition
         Configuration.instance.fanout.around do |fanout|
           @collection.each_with_object([]) do |runner, memo|
             memo << runner.new.run(fanout)
-          end.flatten.empty?
-        end
+          end.flatten
+        end.empty?
 
       success ? 0 : 1
     end

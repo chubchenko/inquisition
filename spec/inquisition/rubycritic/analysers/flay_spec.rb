@@ -17,12 +17,12 @@ RSpec.describe Inquisition::Rubycritic::Analysers::Flay do
         expect(described_class).to be < ::RubyCritic::Analyser::FlaySmells
       end
 
-      it 'should call hashes and each on analysed_modules' do
+      it 'calls hashes and each on analysed_modules' do
         expect(instance_flay).to receive_message_chain(:hashes, :each)
         analyser.run
       end
 
-      it 'should call one time analyze_modules method' do
+      it 'calls one time analyze_modules method' do
         expect(analyser).to receive(:analyze_modules)
         analyser.run
       end
