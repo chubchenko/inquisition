@@ -1,4 +1,6 @@
 Rails.application.routes.draw do # TODO: will be removed ...
+  resources :users, only: [:index]
+
   namespace :rails do
     get 'properties', action: :properties, controller: 'info'
     get 'index', action: :index, controller: 'info'
