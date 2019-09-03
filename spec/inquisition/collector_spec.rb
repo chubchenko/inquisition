@@ -72,7 +72,7 @@ RSpec.describe Inquisition::Collector do
       let(:dummy) do
         Class.new(Inquisition::Runner) do
           def call
-            ['a', %w[b c]]
+            [Inquisition::Issue.new(path: '', line: '', severity: :low, message: '', runner: Inquisition::Runner.new)]
           end
 
           def self.enabled?
@@ -90,7 +90,7 @@ RSpec.describe Inquisition::Collector do
       let(:dummy) do
         Class.new(Inquisition::Runner) do
           def call
-            ['a', %w[b c]]
+            [Inquisition::Issue.new(path: '', line: '', severity: :low, message: '', runner: Inquisition::Runner.new)]
           end
 
           def self.enabled?
