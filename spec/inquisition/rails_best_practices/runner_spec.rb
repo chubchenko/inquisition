@@ -25,13 +25,14 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
       before { allow(instance_analyzer).to receive(:errors).and_return(errors_analyzer) }
 
       it 'returns a collection of issues' do
-
-        expect(call_runner).to contain_exactly(Inquisition::Issue.new(
-          severity: :low,
-          line: 1,
-          runner: nil,
-          path: errors_analyzer.first.short_filename,
-          message: errors_analyzer.first.message)
+        expect(call_runner).to contain_exactly(
+          Inquisition::Issue.new(
+            severity: :low,
+            line: 1,
+            runner: nil,
+            path: errors_analyzer.first.short_filename,
+            message: errors_analyzer.first.message
+          )
         )
       end
     end

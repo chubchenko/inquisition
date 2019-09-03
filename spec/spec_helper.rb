@@ -2,7 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require 'simplecov'
 
-require File.expand_path('../dummy/config/environment', __FILE__)
+require File.expand_path('dummy/config/environment', __dir__)
 require 'rspec/rails'
 
 Dir.glob(File.expand_path('support/**/*.rb', __dir__), &method(:require))

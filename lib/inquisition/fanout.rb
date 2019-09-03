@@ -26,6 +26,8 @@ module Inquisition
         stop(issues || [])
         issues || []
       end
+
+      issues || []
     end
 
     def example_passed(runner)

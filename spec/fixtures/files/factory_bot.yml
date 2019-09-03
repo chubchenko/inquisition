@@ -1,0 +1,7 @@
+- path: :test_factory_1
+  severity: :low
+  message: '* test_factory_1 - uninitialized constant TestFactory1 (NameError)'
+
+- path: :test_factory_2
+  severity: :low
+  message: '* test_factory_2 - Trait not registered: "test_trait" (KeyError)'
