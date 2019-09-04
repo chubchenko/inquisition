@@ -1,6 +1,10 @@
+- severity: :medium
+  message: 'Insecure Source URI found: http://rubygems.org/'
 - severity: :low
-  message: 'Denial of Service Vulnerability in Action View'
+  message: 'Kafo default_values.yaml Insecure Permissions Local Information Disclosure'
 - severity: :low
-  message: 'File Content Disclosure in Action View'
-- severity: :low
-  message: 'Possible Remote Code Execution Exploit in Rails Development Mode'
+  message: 'Loofah XSS Vulnerability'
+- severity: :medium
+  message: 'XSS vulnerability in bootstrap'
+- severity: :high
+  message: 'smart_proxy_dynflow gem authentication bypass in Foreman remote execution feature'
