@@ -21,11 +21,6 @@ RSpec.describe Inquisition::Traceroute::Runner do
     end
 
     context 'when there is one unused route' do
-      before do
-        allow(traceroute).to receive(:routed_actions).and_return(['users#index'])
-        allow(traceroute).to receive(:defined_action_methods).and_return([])
-      end
-
       let(:issue) do
         Inquisition::Issue.new(
           path: nil,
@@ -36,17 +31,17 @@ RSpec.describe Inquisition::Traceroute::Runner do
         )
       end
 
+      before do
+        allow(traceroute).to receive(:routed_actions).and_return(['users#index'])
+        allow(traceroute).to receive(:defined_action_methods).and_return([])
+      end
+
       it 'returns a collection of issues' do
         expect(runner.call).to contain_exactly(issue)
       end
     end
 
     context 'when there is one unreachable action method' do
-      before do
-        allow(traceroute).to receive(:routed_actions).and_return([])
-        allow(traceroute).to receive(:defined_action_methods).and_return(['users#index2'])
-      end
-
       let(:issue) do
         Inquisition::Issue.new(
           path: nil,
@@ -55,6 +50,11 @@ RSpec.describe Inquisition::Traceroute::Runner do
           message: 'Unreachable action method: users#index2',
           runner: runner
         )
+      end
+
+      before do
+        allow(traceroute).to receive(:routed_actions).and_return([])
+        allow(traceroute).to receive(:defined_action_methods).and_return(['users#index2'])
       end
 
       it 'returns a collection of issues' do
