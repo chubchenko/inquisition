@@ -3,7 +3,7 @@ RSpec.shared_examples 'runner' do |fixture_name|
 
   describe '#call' do
     let(:data) { file_fixture(fixture_name).read }
-    let(:issue) do
+    let(:issues) do
       Psych.load(data).map do |item|
         Inquisition::Issue.new(
           path: item['path'],
@@ -16,7 +16,7 @@ RSpec.shared_examples 'runner' do |fixture_name|
     end
 
     it 'returns a collection of issues' do
-      expect(runner.call).to match_array(issue)
+      expect(runner.call).to match_array(issues)
     end
   end
 end
