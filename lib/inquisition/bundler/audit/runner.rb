@@ -5,29 +5,33 @@ module Inquisition
   module Bundler
     module Audit
       class Runner < ::Inquisition::Runner
-        def call
+        def initialize
+          super
+
           ::Bundler::Audit::Database.update!(quiet: true)
-          check_errors
+        end
+
+        def call
+          auditor.scan.map do |issue|
+            Issue.new(issue_for(issue))
+          end
         end
 
         private
 
-        def check_errors
-          ::Bundler::Audit::Scanner.new(Rails.root).scan do |error|
-            @issues << create_error(error)
-          end
-          @issues
+        def auditor
+          @auditor ||= ::Bundler::Audit::Scanner.new(Rails.root)
         end
 
-        def create_error(error)
-          Inquisition::Issue.new(
-            severity: error.advisory.criticality || :low,
-            category: :security,
-            line: nil,
-            runner: self,
-            path: nil,
-            message: error.advisory.title
-          )
+        def issue_for(issue)
+          case issue
+          when ::Bundler::Audit::Scanner::InsecureSource
+            InsecureSource.new(issue.source).to_h.merge(runner: self)
+          when ::Bundler::Audit::Scanner::UnpatchedGem
+            UnpatchedGem.new(issue.advisory).to_h.merge(runner: self)
+          else
+            raise ArgumentError, "Unknown type: #{issue.class}"
+          end
         end
       end
     end
