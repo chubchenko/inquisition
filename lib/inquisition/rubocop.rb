@@ -2,6 +2,8 @@ require 'rubocop'
 
 require_relative 'rubocop/rubocop_modified_runner'
 require_relative 'rubocop/runner'
+require_relative 'rubocop/issue'
+require_relative 'rubocop/categorizer'
 
 module Inquisition
   module Rubocop
