@@ -6,3 +6,7 @@
   message: 'ActiveStorage::Attachment has missing presence validation, details: name, record_type, record_id, blob_id'
 - severity: :low
   message: 'ActiveStorage::Blob has missing presence validation, details: key, filename, byte_size, checksum'
+- severity: :low
+  message: 'projects has unindexed foreign keys, details: user_id'
+- severity: :low
+  message: 'projects has missing foreign keys, details: user_id'

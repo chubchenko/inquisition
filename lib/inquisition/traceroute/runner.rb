@@ -33,7 +33,7 @@ module Inquisition
         Issue.new(
           path: nil,
           line: nil,
-          severity: :low,
+          severity: ::Inquisition::Severity::LOW,
           message: message,
           runner: self
         )

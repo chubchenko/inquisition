@@ -1,2 +1,4 @@
 - severity: :low
-  message: "You have not index in table `active_storage_attachments`, column `[\"record_id\", \"record_type\"]`"
+  message: 'The following column(s) `record_id`, `record_type` from the `active_storage_attachments` table probably should be indexed'
+- severity: :low
+  message: 'The following column(s) `user_id` from the `projects` table probably should be indexed'
