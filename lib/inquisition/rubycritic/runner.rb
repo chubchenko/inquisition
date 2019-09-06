@@ -1,46 +1,50 @@
 require 'rubycritic/analysers_runner'
-require 'inquisition/rubycritic/analysers/reek'
-require 'inquisition/rubycritic/analysers/flay'
-require 'inquisition/rubycritic/analysers/flog'
+
+require_relative 'analysers/reek'
+require_relative 'analysers/flay'
+require_relative 'analysers/flog'
 
 module Inquisition
   module Rubycritic
     class Runner < ::Inquisition::Runner
-      ANALYSERS = {
-        Analysers::Flay => :duplication,
-        Analysers::Flog => :complexity,
-        Analysers::Reek => :complexity
-      }.freeze
+      ANALYSERS = [
+        Analysers::Flay,
+        Analysers::Flog,
+        Analysers::Reek
+      ].freeze
 
       def call
-        run_analyzers
-        @issues
+        issues = []
+
+        analysed_modules.map(&:smells).flatten.each do |smell|
+          issues << smell.locations.map do |location|
+            issue_for(smell, location)
+          end
+        end
+
+        issues.flatten
       end
 
       private
 
-      def run_analyzers
-        ANALYSERS.each do |analyser_class, issue_category|
-          result = analyser_class.new(::RubyCritic::AnalysedModulesCollection.new([Rails.root])).run
-          smells = result.map(&:smells).flatten
-          compose_issues(smells, issue_category)
+      attr_reader :issues
+
+      def analysed_modules
+        @analysed_modules ||= begin
+          analysed_modules = ::RubyCritic::AnalysedModulesCollection.new([Rails.root])
+
+          ANALYSERS.each do |analyser_class|
+            analyser_instance = analyser_class.new(analysed_modules)
+            analyser_instance.run
+          end
+
+          analysed_modules
         end
       end
 
-      def compose_issues(smells, issue_category)
-        smells.each do |smell|
-          smell.locations.each { |location| @issues << create_issue(smell, location, issue_category) }
-        end
-      end
-
-      def create_issue(error, location_error, issue_category)
-        Inquisition::Issue.new(
-          severity: Severity::LOW,
-          category: issue_category,
-          path: location_error.pathname.relative_path_from(Rails.root).to_s,
-          line: location_error.line,
-          runner: self,
-          message: error.message
+      def issue_for(smell, location)
+        Issue.new(
+          Smell.new(smell, location).to_h.merge(runner: self)
         )
       end
     end
