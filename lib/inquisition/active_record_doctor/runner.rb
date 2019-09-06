@@ -24,7 +24,7 @@ module Inquisition
       def call
         TASKS.keys.each do |ard_task|
           ard_task.run.first.each do |table, column|
-            @issues << Issue.new(Vulnerability.new(ard_task, table, column).to_h.merge(runner: self))
+            @issues << Inquisition::Issue.new(Issue.new(ard_task, table, column).to_h.merge(runner: self))
           end
         end
         @issues

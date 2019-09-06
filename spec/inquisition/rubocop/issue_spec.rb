@@ -1,29 +1,25 @@
 RSpec.describe Inquisition::Rubocop::Issue do
   describe '#to_h' do
-    subject(:issue) { described_class.new(file, offense) }
+    subject(:issue) { described_class.new(options[:path], offense) }
 
-    let(:file) { 'db/schema.rb' }
-    let(:line) { 21 }
-    let(:message) { 'Style/WordArray: Use `%w` or `%W` for an array of words.' }
+    let(:options) do
+      {
+        severity: inquisition_severity,
+        message: 'Style/WordArray: Use `%w` or `%W` for an array of words.',
+        path: 'db/schema.rb',
+        line: 21,
+        category: :style
+      }
+    end
 
     let(:offense) do
       instance_double(
         RuboCop::Cop::Offense,
         severity: rubocop_severity,
-        message: message,
-        line: line,
+        message: options[:message],
+        line: options[:line],
         cop_name: 'Style/WordArray'
       )
-    end
-
-    let(:options) do
-      {
-        severity: inquisition_severity,
-        message: message,
-        path: file,
-        line: line,
-        category: :style
-      }
     end
 
     context 'when offence severity name is convention' do

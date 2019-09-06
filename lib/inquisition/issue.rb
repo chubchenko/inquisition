@@ -4,7 +4,6 @@ module Inquisition
 
     attr_reader :path, :line, :severity, :message, :category
 
-    # rubocop:disable Metrics/ParameterLists
     def initialize(path:, line:, severity:, message:, runner:, category:)
       @path = path
       @line = line
@@ -13,7 +12,6 @@ module Inquisition
       @severity = Severity.new(severity)
       @category = Category.new(category)
     end
-    # rubocop:enable Metrics/ParameterLists
 
     def ==(other)
       COMPARISON_ATTRIBUTES.all? do |attribute|

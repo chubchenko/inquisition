@@ -1,6 +1,6 @@
 module Inquisition
   module ActiveRecordDoctor
-    class Vulnerability
+    class Issue
       def initialize(task, table, column)
         @task = task
         @table = table

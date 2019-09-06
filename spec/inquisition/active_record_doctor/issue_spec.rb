@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::ActiveRecordDoctor::Vulnerability do
+RSpec.describe Inquisition::ActiveRecordDoctor::Issue do
   describe '#to_h' do
     subject(:vulnerability) { described_class.new(task, 'table', ['column#1', 'column#2']) }
 
