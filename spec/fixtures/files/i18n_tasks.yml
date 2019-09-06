@@ -1,7 +1,9 @@
 - path: 'app/controllers/application_controller.rb'
   line: 11
   severity: :low
+  category: :bug_risk
   message: 'missing key: missing_locale'
 - path: config/locales/en.yml
   severity: :low
+  category: :unused_code
   message: 'unused key: hello, value: Hello World'
