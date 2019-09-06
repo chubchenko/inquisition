@@ -10,7 +10,7 @@ module Inquisition
         end
 
         def issue_for(warning)
-          @issues << Issue.new(Vulnerability.new(warning).to_h.merge(runner: self))
+          @issues << Inquisition::Issue.new(Issue.new(warning.gem, warning.advisory).to_h.merge(runner: self))
         end
       end
     end
