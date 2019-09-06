@@ -73,3 +73,23 @@
   severity: :low
   category: :complexity
   message: 'has a flog score of 40'
+- path: 'db/migrate/20190801142755_create_users.rb'
+  line: 4
+  severity: :low
+  category: :complexity
+  message: "refers to 'table' more than self (maybe move it to another class?)"
+- path: 'db/migrate/20190801142755_create_users.rb'
+  line: 5
+  severity: :low
+  category: :complexity
+  message: "refers to 'table' more than self (maybe move it to another class?)"
+- path: 'db/migrate/20190801142756_create_projects.rb'
+  line: 4
+  severity: :low
+  category: :complexity
+  message: "refers to 'table' more than self (maybe move it to another class?)"
+- path: 'db/migrate/20190801142756_create_projects.rb'
+  line: 5
+  severity: :low
+  category: :complexity
+  message: "refers to 'table' more than self (maybe move it to another class?)"

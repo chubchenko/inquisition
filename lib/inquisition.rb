@@ -19,7 +19,6 @@ require 'inquisition/rails_best_practices/runner'
 require 'inquisition/rails_best_practices/issue'
 require 'inquisition/rails_best_practices/categorizer'
 require 'inquisition/rubocop'
-require 'inquisition/lol_dba/runner'
 require 'inquisition/fasterer/runner'
 require 'inquisition/rubycritic/runner'
 require 'inquisition/traceroute/runner'
@@ -28,6 +27,9 @@ require 'inquisition/factory_bot/factory_bot_modified_linter'
 
 require_relative 'inquisition/bundler/audit/vulnerability'
 require_relative 'inquisition/bundler/audit/runner'
+
+require_relative 'inquisition/lol_dba/missing_index'
+require_relative 'inquisition/lol_dba/runner'
 
 require_relative 'inquisition/outputter'
 require_relative 'inquisition/options'

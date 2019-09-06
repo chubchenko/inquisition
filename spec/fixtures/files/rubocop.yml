@@ -109,7 +109,37 @@
   category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
-  line: 31
+  line: 32
+  severity: :low
+  category: :style
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 33
+  severity: :low
+  category: :style
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 34
+  severity: :low
+  category: :style
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 37
+  severity: :low
+  category: :style
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 38
+  severity: :low
+  category: :style
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 39
+  severity: :low
+  category: :style
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 41
   severity: :low
   category: :style
   message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.'

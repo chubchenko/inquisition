@@ -33,8 +33,8 @@ module Inquisition
         Issue.new(
           path: nil,
           line: nil,
-          severity: :low,
-          category: :unused_code,
+          severity: ::Inquisition::Severity::LOW,
+          category: ::Inquisition::Category::UNUSED_CODE,
           message: message,
           runner: self
         )
