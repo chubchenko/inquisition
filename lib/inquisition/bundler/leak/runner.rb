@@ -5,7 +5,7 @@ module Inquisition
     module Leak
       class Runner < ::Inquisition::Runner
         def call
-          ::Bundler::Plumber::Scanner.new.scan { |warning| issue_for(warning) }
+          ::Bundler::Plumber::Scanner.new(Rails.root.to_s).scan { |warning| issue_for(warning) }
           @issues
         end
 
