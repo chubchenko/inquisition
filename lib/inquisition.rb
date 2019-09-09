@@ -26,8 +26,8 @@ require 'inquisition/factory_bot/factory_bot_modified_linter'
 require_relative 'inquisition/bundler/audit/vulnerability'
 require_relative 'inquisition/bundler/audit/runner'
 
+require_relative 'inquisition/bundler/leak/vulnerability'
 require_relative 'inquisition/bundler/leak/runner'
-require_relative 'inquisition/bundler/leak/issue'
 
 require_relative 'inquisition/rails_best_practices/runner'
 require_relative 'inquisition/rails_best_practices/warning'

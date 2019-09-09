@@ -1,4 +1,4 @@
 - path: 'Gemfile.lock'
   severity: :low
   category: :performance
-  message: 'Memory leak in formatter middleware'
+  message: 'Memory Leak using Celluloid::Future'
