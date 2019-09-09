@@ -5,12 +5,11 @@ module Inquisition
     module Leak
       class Runner < ::Inquisition::Runner
         def call
-          ::Bundler::Plumber::Scanner.new(Rails.root.to_s).scan { |warning| issue_for(warning) }
-          @issues
+          ::Bundler::Plumber::Scanner.new(Rails.root.to_s).scan.map { |warning| issue_for(warning.advisory) }
         end
 
-        def issue_for(warning)
-          @issues << Inquisition::Issue.new(Issue.new(warning.gem, warning.advisory).to_h.merge(runner: self))
+        def issue_for(advisory)
+          Inquisition::Issue.new(Issue.new(advisory).to_h.merge(runner: self))
         end
       end
     end

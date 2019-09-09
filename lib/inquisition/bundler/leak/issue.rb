@@ -2,8 +2,7 @@ module Inquisition
   module Bundler
     module Leak
       class Issue
-        def initialize(leaked_gem, advisory)
-          @leaked_gem = leaked_gem
+        def initialize(advisory)
           @advisory = advisory
         end
 
@@ -11,7 +10,7 @@ module Inquisition
           {
             severity: :low,
             # category: :performance,
-            message: "#{leaked_gem.name} #{leaked_gem.version} - #{advisory.title}",
+            message: advisory.title,
             path: 'Gemfile.lock',
             line: nil
           }
@@ -19,7 +18,7 @@ module Inquisition
 
         private
 
-        attr_reader :leaked_gem, :advisory
+        attr_reader :advisory
       end
     end
   end
