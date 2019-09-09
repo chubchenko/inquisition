@@ -23,7 +23,7 @@ RSpec.describe Inquisition::Rubycritic::Smell do
         path: 'app/models/application_record.rb',
         line: 42,
         severity: Inquisition::Severity::LOW,
-        message: 'Similar code found in 2 nodes',
+        message: 'Similar code found in 2 nodes'
       }
     end
 
