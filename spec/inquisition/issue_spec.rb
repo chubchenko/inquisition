@@ -4,7 +4,7 @@ RSpec.describe Inquisition::Issue do
 
     let(:issue) do
       described_class.new(
-        severity: :high,
+        severity: Inquisition::Severity::HIGH,
         category: :style,
         path: 'show.html.erb',
         line: '10',
@@ -31,7 +31,7 @@ RSpec.describe Inquisition::Issue do
     context 'when at least one of the comparison attributes does not match' do
       let(:other) do
         described_class.new(
-          severity: :high,
+          severity: Inquisition::Severity::HIGH,
           category: :style,
           path: 'show.html.erb',
           line: '11',
@@ -49,7 +49,7 @@ RSpec.describe Inquisition::Issue do
 
     let(:issue) do
       described_class.new(
-        severity: :high,
+        severity: Inquisition::Severity::HIGH,
         category: :style,
         path: '_slimmer.html.slim',
         line: '6',
@@ -76,7 +76,7 @@ RSpec.describe Inquisition::Issue do
     context 'when at least one of the comparison attributes does not match' do
       let(:other) do
         described_class.new(
-          severity: :high,
+          severity: Inquisition::Severity::HIGH,
           category: :style,
           path: '_slimmer.html.slim',
           line: '7',

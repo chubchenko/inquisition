@@ -28,7 +28,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
         expect(runner.call).to match_array(
           [
             Inquisition::Issue.new(
-              severity: :low,
+              severity: Inquisition::Severity::LOW,
               category: :bug_risk,
               path: 'test',
               line: 1,
@@ -36,7 +36,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               runner: runner
             ),
             Inquisition::Issue.new(
-              severity: :low,
+              severity: Inquisition::Severity::LOW,
               category: :bug_risk,
               path: 'test',
               line: nil,
@@ -60,7 +60,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
         expect(runner.call).to match_array(
           [
             Inquisition::Issue.new(
-              severity: :low,
+              severity: Inquisition::Severity::LOW,
               category: :unused_code,
               path: 'test',
               line: nil,

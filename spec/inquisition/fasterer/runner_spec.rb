@@ -29,7 +29,7 @@ RSpec.describe Inquisition::Fasterer::Runner do
       it 'returns a collection of issues' do
         expect(runner_result).to contain_exactly(
           Inquisition::Issue.new(
-            severity: :low,
+            severity: Inquisition::Severity::LOW,
             category: :performance,
             line: offense.first.line_number,
             path: test_file,

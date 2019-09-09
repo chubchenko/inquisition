@@ -9,7 +9,7 @@ module Inquisition
 
       def to_h
         {
-          severity: :low,
+          severity: Severity::LOW,
           path: nil,
           line: nil,
           message: create_message,

@@ -30,7 +30,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
         Inquisition::Issue.new(
           path: nil,
           line: nil,
-          severity: :medium,
+          severity: Inquisition::Severity::MEDIUM,
           category: :security,
           message: 'Insecure Source URI found: http://rubygems.org/',
           runner: runner
@@ -62,7 +62,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
         Inquisition::Issue.new(
           path: nil,
           line: nil,
-          severity: :medium,
+          severity: Inquisition::Severity::MEDIUM,
           category: :security,
           message: 'Nested attributes rejection proc bypass in Active Record',
           runner: runner

@@ -1,17 +1,17 @@
 module Inquisition
   module RailsBestPractices
-    class Issue
+    class Warning
       def initialize(error)
         @error = error
       end
 
       def to_h
         {
-          category: Categorizer.find_category(error.type),
-          severity: :low,
-          message: error.message,
           path: error.short_filename,
-          line: error.line_number.to_i
+          line: error.line_number.to_i,
+          severity: Severity::LOW,
+          message: error.message.capitalize,
+          category: Categorizer.find_category(error.type)
         }
       end
 
