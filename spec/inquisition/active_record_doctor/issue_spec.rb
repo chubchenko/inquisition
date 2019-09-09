@@ -9,6 +9,8 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Issue do
       {
         category: Inquisition::ActiveRecordDoctor::Runner::TASKS[task],
         severity: Inquisition::Severity::LOW,
+        path: nil,
+        line: nil,
         message: message
       }
     end
