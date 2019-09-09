@@ -41,7 +41,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
         severity: Inquisition::Severity::LOW,
         path: file,
         message: message,
-        category: :security,
+        category: Inquisition::Category::SECURITY,
         line: 1,
         runner: nil
       )
@@ -52,7 +52,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
         severity: Inquisition::Severity::MEDIUM,
         path: file,
         message: message,
-        category: :style,
+        category: Inquisition::Category::STYLE,
         line: 2,
         runner: nil
       )
@@ -63,7 +63,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
         severity: Inquisition::Severity::HIGH,
         path: file,
         message: message,
-        category: :complexity,
+        category: Inquisition::Category::COMPLEXITY,
         line: 3,
         runner: nil
       )

@@ -40,7 +40,7 @@ module Inquisition
       def create_issue(key, node, file = nil, type = :missing)
         Inquisition::Issue.new(
           severity: Severity::LOW,
-          category: type == :missing ? :bug_risk : :unused_code,
+          category: type == :missing ? Category::BUG_RISK : Category::UNUSED_CODE,
           path: create_relative_path(file&.path || node.data[:path]),
           line: file&.line_num,
           message: type == :missing ? "missing key: #{key}" : "unused key: #{key}, value: #{node.value}",
