@@ -33,9 +33,9 @@ module Inquisition
         Issue.new(
           path: nil,
           line: nil,
-          severity: ::Inquisition::Severity::LOW,
-          category: ::Inquisition::Category::UNUSED_CODE,
+          severity: Severity::LOW,
           message: message,
+          category: Category::UNUSED_CODE,
           runner: self
         )
       end
