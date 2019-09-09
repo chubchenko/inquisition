@@ -71,10 +71,10 @@ RSpec.describe Inquisition::Rubocop::Runner do
 
     let(:offenses) { [{ file => [convention_offense] }, { file => [warning_offense] }, { file => [error_offense] }] }
     let(:issues) { [low_severity_issue, medium_severity_issue, high_severity_issue] }
-    let(:rubocop) { instance_double(Inquisition::Rubocop::RuboCopModifiedRunner) }
+    let(:rubocop) { instance_double(Inquisition::Rubocop::RubocopModifiedRunner) }
 
     before do
-      allow(Inquisition::Rubocop::RuboCopModifiedRunner).to receive(:new).and_return(rubocop)
+      allow(Inquisition::Rubocop::RubocopModifiedRunner).to receive(:new).and_return(rubocop)
       allow(rubocop).to receive(:run).and_return(offenses)
     end
 

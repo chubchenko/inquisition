@@ -2,7 +2,7 @@ module Inquisition
   module Rubocop
     class Runner < ::Inquisition::Runner
       def call
-        offenses = RuboCopModifiedRunner.new({}, ::Inquisition::Rubocop.configuration).run([Rails.root.to_s])
+        offenses = RubocopModifiedRunner.new({}, ::Inquisition::Rubocop.configuration).run([Rails.root.to_s])
         offenses.each { |offense| create_issues(offense) }
         @issues
       end
