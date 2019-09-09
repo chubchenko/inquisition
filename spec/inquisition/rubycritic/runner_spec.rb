@@ -26,7 +26,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:analysed_module) { [instance_double(RubyCritic::AnalysedModule, smells: [smell])] }
       let(:duplication_issue) do
         Inquisition::Issue.new(
-          severity: :low,
+          severity: Inquisition::Severity::LOW,
           category: :duplication,
           path: pathname,
           line: smell_location.line,
@@ -37,7 +37,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
 
       let(:complexity_issue) do
         Inquisition::Issue.new(
-          severity: :low,
+          severity: Inquisition::Severity::LOW,
           category: :complexity,
           path: pathname,
           line: smell_location.line,

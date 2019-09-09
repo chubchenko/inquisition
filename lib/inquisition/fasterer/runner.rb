@@ -32,7 +32,7 @@ module Inquisition
 
       def create_issue(error, file_error)
         Inquisition::Issue.new(
-          severity: :low,
+          severity: Severity::LOW,
           category: :performance,
           line: error.line_number,
           runner: self,

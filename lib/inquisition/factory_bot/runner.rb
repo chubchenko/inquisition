@@ -12,7 +12,7 @@ module Inquisition
       private
 
       def create_issues(error)
-        @issues << Inquisition::Issue.new(severity: :low, path: error.location, runner: self,
+        @issues << Inquisition::Issue.new(severity: Severity::LOW, path: error.location, runner: self,
                                           category: :bug_risk, message: error.message, line: nil)
       end
     end

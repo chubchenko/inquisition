@@ -39,7 +39,7 @@ module Inquisition
 
       def create_issue(key, node, file = nil, type = :missing)
         Inquisition::Issue.new(
-          severity: :low,
+          severity: Severity::LOW,
           category: type == :missing ? :bug_risk : :unused_code,
           path: create_relative_path(file&.path || node.data[:path]),
           line: file&.line_num,

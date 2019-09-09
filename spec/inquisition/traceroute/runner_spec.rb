@@ -25,7 +25,7 @@ RSpec.describe Inquisition::Traceroute::Runner do
         Inquisition::Issue.new(
           path: nil,
           line: nil,
-          severity: :low,
+          severity: Inquisition::Severity::LOW,
           category: :unused_code,
           message: 'Unused route: users#index',
           runner: runner
@@ -47,7 +47,7 @@ RSpec.describe Inquisition::Traceroute::Runner do
         Inquisition::Issue.new(
           path: nil,
           line: nil,
-          severity: :low,
+          severity: Inquisition::Severity::LOW,
           category: :unused_code,
           message: 'Unreachable action method: users#index2',
           runner: runner

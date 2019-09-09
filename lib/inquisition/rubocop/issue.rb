@@ -2,11 +2,11 @@ module Inquisition
   module Rubocop
     class Issue
       LEVELS = {
-        refactor: :low,
-        convention: :low,
-        warning: :medium,
-        error: :high,
-        fatal: :high
+        refactor: Severity::LOW,
+        convention: Severity::LOW,
+        warning: Severity::MEDIUM,
+        error: Severity::HIGH,
+        fatal: Severity::HIGH
       }.freeze
 
       def initialize(file, offense)

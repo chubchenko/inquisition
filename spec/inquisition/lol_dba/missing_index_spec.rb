@@ -41,7 +41,7 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
         {
           path: nil,
           line: nil,
-          severity: :low,
+          severity: Inquisition::Severity::LOW,
           category: :performance,
           message: message
         }
