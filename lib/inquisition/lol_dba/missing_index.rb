@@ -23,6 +23,7 @@ module Inquisition
           path: nil,
           line: nil,
           severity: ::Inquisition::Severity::LOW,
+          category: :performance,
           message: "The following column(s) #{columns} from the `#{table}` table probably should be indexed"
         }
       end

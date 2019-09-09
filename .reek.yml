@@ -9,6 +9,7 @@ detectors:
   TooManyStatements:
     exclude:
       - 'Inquisition::Options#define_options'
+      - 'Inquisition::Issue#initialize'
 
   Attribute:
     exclude:
@@ -17,3 +18,7 @@ detectors:
   UtilityFunction:
     exclude:
       - 'Inquisition::Executor::Version#call'
+
+  LongParameterList:
+    exclude:
+      - 'Inquisition::Issue#initialize'

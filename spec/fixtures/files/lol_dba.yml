@@ -1,4 +1,6 @@
 - severity: :low
+  category: :performance
   message: 'The following column(s) `record_id`, `record_type` from the `active_storage_attachments` table probably should be indexed'
 - severity: :low
+  category: :performance
   message: 'The following column(s) `user_id` from the `projects` table probably should be indexed'

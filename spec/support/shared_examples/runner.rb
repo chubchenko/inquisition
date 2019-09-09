@@ -9,6 +9,7 @@ RSpec.shared_examples 'runner' do |fixture_name|
           path: item['path'],
           line: item['line'],
           severity: item['severity'],
+          category: item['category'],
           message: item['message'],
           runner: runner
         )

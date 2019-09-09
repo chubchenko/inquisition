@@ -16,6 +16,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           path: nil,
           line: nil,
           severity: :low,
+          category: :performance,
           message: 'The following column(s) `user_id` from the `projects` table probably should be indexed',
           runner: runner
         )
@@ -42,6 +43,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           path: nil,
           line: nil,
           severity: :low,
+          category: :performance,
           message: message,
           runner: runner
         )

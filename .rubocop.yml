@@ -15,6 +15,10 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/inquisition/bundler/audit/runner_spec.rb'
 
+Metrics/ParameterLists:
+  Exclude:
+    - 'lib/inquisition/issue.rb'
+
 RSpec/ExampleLength:
   Max: 6
   Exclude:

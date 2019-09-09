@@ -34,6 +34,7 @@ module Inquisition
           path: nil,
           line: nil,
           severity: ::Inquisition::Severity::LOW,
+          category: ::Inquisition::Category::UNUSED_CODE,
           message: message,
           runner: self
         )

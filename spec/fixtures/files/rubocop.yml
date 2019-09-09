@@ -1,120 +1,150 @@
 - path: 'bin/setup'
   line: 3
   severity: :low
+  category: :style
   message: 'Style/MixinUsage: `include` is used at the top level. Use inside `class` or `module`.'
 - path: 'bin/update'
   line: 3
   severity: :low
+  category: :style
   message: 'Style/MixinUsage: `include` is used at the top level. Use inside `class` or `module`.'
 - path: 'db/schema.rb'
   line: 13
   severity: :low
+  category: :style
   message: 'Style/NumericLiterals: Use underscores(_) as thousands separator and separate every 3 digits with them.'
 - path: 'db/schema.rb'
   line: 14
   severity: :low
+  category: :style
   message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.'
 - path: 'db/schema.rb'
   line: 15
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 16
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 17
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 18
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 19
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 20
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 20
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 21
   severity: :low
+  category: :style
   message: 'Style/WordArray: Use `%w` or `%W` for an array of words.'
 - path: 'db/schema.rb'
   line: 21
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 21
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 21
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 24
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 25
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 26
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 27
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 28
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 29
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 29
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 32
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 33
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 34
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 37
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 38
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 39
   severity: :low
+  category: :style
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
   line: 41
   severity: :low
+  category: :style
   message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.'
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 2
   severity: :low
+  category: :complexity
   message: 'Metrics/MethodLength: Method has too many lines. [14/10]'

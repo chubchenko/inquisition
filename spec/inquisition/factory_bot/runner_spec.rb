@@ -31,6 +31,7 @@ RSpec.describe Inquisition::FactoryBot::Runner do
           path: factory,
           line: nil,
           severity: :low,
+          category: :bug_risk,
           message: 'factory error',
           runner: nil
         ),
@@ -38,6 +39,7 @@ RSpec.describe Inquisition::FactoryBot::Runner do
           path: factory,
           line: nil,
           severity: :low,
+          category: :bug_risk,
           message: 'factory trait error',
           runner: nil
         )
