@@ -16,7 +16,7 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
           line: nil,
           severity: ::Inquisition::Severity::LOW,
           category: Inquisition::Category::PERFORMANCE,
-          message: "The following column(s) `user_id` from the `projects` table probably should be indexed"
+          message: 'The following column(s) `user_id` from the `projects` table probably should be indexed'
         }
       end
 
@@ -27,7 +27,7 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
       let(:arguments) do
         {
           table: 'active_storage_attachments',
-          columns: ['record_id', 'record_type']
+          columns: %w[record_id record_type]
         }
       end
 

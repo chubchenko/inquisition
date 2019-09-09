@@ -66,9 +66,7 @@ RSpec.describe Inquisition::Outputter::Loader do
 
         expect(fanout).to have_received(:register_listener).with(
           Inquisition::Outputter::Progress,
-          :example_passed,
-          :example_failed,
-          :stop
+          :example_passed, :example_failed, :stop
         )
       end
     end
