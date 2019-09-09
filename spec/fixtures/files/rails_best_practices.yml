@@ -1,12 +1,15 @@
 - path: 'app/views/layouts/application.html.erb'
   line: 13
   severity: :low
-  message: 'not use time_ago_in_words'
+  message: 'Not use time_ago_in_words'
+  category: :style
 - path: 'db/schema.rb'
   line: 15
   severity: :low
-  message: 'always add db index (active_storage_attachments => [record_id, record_type])'
+  message: 'Always add db index (active_storage_attachments => [record_id, record_type])'
+  category: :performance
 - path: 'db/schema.rb'
   line: 32
   severity: :low
-  message: 'always add db index (projects => [user_id])'
+  message: 'Always add db index (projects => [user_id])'
+  category: :performance

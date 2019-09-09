@@ -9,7 +9,7 @@ module Inquisition
         def to_h
           {
             severity: :low,
-            # category: :performance,
+            category: :performance,
             message: advisory.title,
             path: 'Gemfile.lock',
             line: nil

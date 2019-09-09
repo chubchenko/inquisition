@@ -22,8 +22,9 @@ module Inquisition
         {
           path: nil,
           line: nil,
-          severity: ::Inquisition::Severity::LOW,
-          message: "The following column(s) #{columns} from the `#{table}` table probably should be indexed"
+          severity: Severity::LOW,
+          message: "The following column(s) #{columns} from the `#{table}` table probably should be indexed",
+          category: Category::PERFORMANCE
         }
       end
 

@@ -1,13 +1,14 @@
 module Inquisition
   class Category
-    SECURITY = :security
     STYLE = :style
-    PERFOMANCE = :perfomance
-    COMPATIBILITY = :compatibility
-    UNUSED_CODE = :unused_code
     DUPLICATION = :duplication
+    UNUSED_CODE = :unused_code
+    COMPLEXITY = :complexity
+    PERFORMANCE = :performance
+    BUG_RISK = :bug_risk
+    SECURITY = :security
 
-    NAMES = [SECURITY, STYLE, PERFOMANCE, COMPATIBILITY, UNUSED_CODE, DUPLICATION].freeze
+    NAMES = [STYLE, DUPLICATION, UNUSED_CODE, COMPLEXITY, PERFORMANCE, BUG_RISK, SECURITY].freeze
 
     attr_reader :name
 
@@ -22,5 +23,9 @@ module Inquisition
     end
 
     alias eql? ==
+
+    def hash
+      name.hash
+    end
   end
 end

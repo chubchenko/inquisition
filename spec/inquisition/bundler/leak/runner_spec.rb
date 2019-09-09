@@ -12,7 +12,7 @@ RSpec.describe Inquisition::Bundler::Leak::Runner do
     let(:issue) do
       Inquisition::Issue.new(
         line: nil,
-        # category: :perfomance,
+        category: :performance,
         severity: :low,
         path: 'Gemfile.lock',
         message: 'Memory leak in formatter middleware',

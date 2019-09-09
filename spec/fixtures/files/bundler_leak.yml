@@ -1,3 +1,4 @@
 - path: 'Gemfile.lock'
   severity: :low
+  category: :performance
   message: 'Memory leak in formatter middleware'

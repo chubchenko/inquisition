@@ -15,12 +15,14 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
           path: nil,
           line: nil,
           severity: ::Inquisition::Severity::LOW,
+          category: :performance,
           message: "The following column(s) `user_id` from the `projects` table probably should be indexed"
         }
       end
 
       it { expect(missing_index.to_h).to include(options) }
     end
+
     context 'when there is no composite index on the columns in the table' do
       let(:arguments) do
         {
@@ -39,7 +41,8 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
         {
           path: nil,
           line: nil,
-          severity: :low,
+          severity: Inquisition::Severity::LOW,
+          category: :performance,
           message: message
         }
       end
