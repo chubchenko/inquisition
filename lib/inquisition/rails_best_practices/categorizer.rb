@@ -2,7 +2,7 @@ module Inquisition
   module RailsBestPractices
     class Categorizer
       MATCH_TABLE = {
-        complexity: [
+        Category::COMPLEXITY => [
           'RailsBestPractices::Reviews::AddModelVirtualAttributeReview',
           'RailsBestPractices::Reviews::DryBundlerInCapistranoReview',
           'RailsBestPractices::Reviews::IsolateSeedDataReview',
@@ -20,7 +20,7 @@ module Inquisition
           'RailsBestPractices::Reviews::UseObserverReview',
           'RailsBestPractices::Reviews::UseScopeAccessReview'
         ],
-        style: [
+        Category::STYLE => [
           'RailsBestPractices::Lexicals::LongLineCheck',
           'RailsBestPractices::Lexicals::RemoveTabCheck',
           'RailsBestPractices::Lexicals::RemoveTrailingWhitespaceCheck',
@@ -35,27 +35,27 @@ module Inquisition
           'RailsBestPractices::Reviews::UseSayWithTimeInMigrationsReview',
           'RailsBestPractices::Reviews::SimplifyRenderInViewsReview'
         ],
-        bug_risk: [
+        Category::BUG_RISK => [
           'RailsBestPractices::Reviews::CheckSaveReturnValueReview',
           'RailsBestPractices::Reviews::DefaultScopeIsEvilReview',
           'RailsBestPractices::Reviews::NotRescueExceptionReview',
           'RailsBestPractices::Reviews::CheckDestroyReturnValueReview'
         ],
-        unused_code: [
+        Category::UNUSED_CODE => [
           'RailsBestPractices::Reviews::RemoveUnusedMethodsInControllersReview',
           'RailsBestPractices::Reviews::RemoveEmptyHelpersReview',
           'RailsBestPractices::Reviews::RemoveUnusedMethodsInHelpersReview',
           'RailsBestPractices::Reviews::RemoveUnusedMethodsInModelsReview'
         ],
-        performance: [
+        Category::PERFORMANCE => [
           'RailsBestPractices::Reviews::AlwaysAddDbIndexReview',
           'RailsBestPractices::Reviews::UseTurboSprocketsRails3Review'
         ],
-        security: [
+        Category::SECURITY => [
           'RailsBestPractices::Reviews::ProtectMassAssignmentReview',
           'RailsBestPractices::Reviews::NotUseDefaultRouteReview'
         ],
-        duplication: ['RailsBestPractices::Reviews::UseBeforeFilterReview']
+        Category::DUPLICATION => ['RailsBestPractices::Reviews::UseBeforeFilterReview']
       }.freeze
 
       def self.find_category(error_type)

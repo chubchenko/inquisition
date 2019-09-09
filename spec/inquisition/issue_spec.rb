@@ -5,7 +5,7 @@ RSpec.describe Inquisition::Issue do
     let(:issue) do
       described_class.new(
         severity: Inquisition::Severity::HIGH,
-        category: :style,
+        category: Inquisition::Category::STYLE,
         path: 'show.html.erb',
         line: '10',
         message: 'Unescaped parameter value',
@@ -32,7 +32,7 @@ RSpec.describe Inquisition::Issue do
       let(:other) do
         described_class.new(
           severity: Inquisition::Severity::HIGH,
-          category: :style,
+          category: Inquisition::Category::STYLE,
           path: 'show.html.erb',
           line: '11',
           message: 'Unescaped parameter value',
@@ -50,7 +50,7 @@ RSpec.describe Inquisition::Issue do
     let(:issue) do
       described_class.new(
         severity: Inquisition::Severity::HIGH,
-        category: :style,
+        category: Inquisition::Category::STYLE,
         path: '_slimmer.html.slim',
         line: '6',
         message: 'Unescaped parameter value',
@@ -77,7 +77,7 @@ RSpec.describe Inquisition::Issue do
       let(:other) do
         described_class.new(
           severity: Inquisition::Severity::HIGH,
-          category: :style,
+          category: Inquisition::Category::STYLE,
           path: '_slimmer.html.slim',
           line: '7',
           message: 'Unescaped parameter value',

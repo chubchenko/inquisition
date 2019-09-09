@@ -2,16 +2,16 @@ module Inquisition
   module Rubocop
     class Categorizer
       SPECIFIC_MATCH_TABLE = {
-        'Bundler/DuplicatedGem' => :duplication,
-        'Bundler/InsecureProtocolSource' => :security,
-        'Metrics/LineLength' => :style,
-        'Migrations/RemoveIndex' => :performance
+        'Bundler/DuplicatedGem' => Category::DUPLICATION,
+        'Bundler/InsecureProtocolSource' => Category::SECURITY,
+        'Metrics/LineLength' => Category::STYLE,
+        'Migrations/RemoveIndex' => Category::PERFORMANCE
       }.freeze
 
       COMMON_MATCH_TABLE = {
-        'Security' => :security,
-        'Metrics' => :complexity,
-        'Performance' => :performance
+        'Security' => Category::SECURITY,
+        'Metrics' => Category::COMPLEXITY,
+        'Performance' => Category::PERFORMANCE
       }.freeze
 
       def self.find_category(cop_name)
@@ -20,7 +20,7 @@ module Inquisition
         cop_module = cop_name.split('/')[0]
         return COMMON_MATCH_TABLE[cop_module] if COMMON_MATCH_TABLE.key?(cop_module)
 
-        :style
+        Category::STYLE
       end
     end
   end
