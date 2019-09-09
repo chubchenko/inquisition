@@ -87,7 +87,31 @@
   severity: :low
   message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
 - path: 'db/schema.rb'
-  line: 31
+  line: 32
+  severity: :low
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 33
+  severity: :low
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 34
+  severity: :low
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 37
+  severity: :low
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 38
+  severity: :low
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 39
+  severity: :low
+  message: "Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols."
+- path: 'db/schema.rb'
+  line: 41
   severity: :low
   message: 'Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.'
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
