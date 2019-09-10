@@ -20,15 +20,14 @@ RSpec.describe Inquisition::Bundler::Leak::Runner do
     end
 
     context 'when there is unpatched gem' do
-      let(:test_gem) { instance_double(Bundler::LazySpecification) }
+      let(:gem) { instance_double(Bundler::LazySpecification) }
       let(:advisory) { instance_double(Bundler::Plumber::Advisory, title: 'Memory leak in formatter middleware') }
-      let(:unpatched_gem) { Bundler::Plumber::Scanner::UnpatchedGem.new(test_gem, advisory) }
-
+      let(:unpatched_gem) { Bundler::Plumber::Scanner::UnpatchedGem.new(gem, advisory) }
       let(:issue) do
         Inquisition::Issue.new(
           line: nil,
           category: Inquisition::Category::PERFORMANCE,
-          severity: Inquisition::Severity::LOW,
+          severity: Inquisition::Severity::MEDIUM,
           path: Inquisition::Bundler::Leak::Vulnerability::GEMFILE,
           message: 'Memory leak in formatter middleware',
           runner: nil
@@ -39,8 +38,13 @@ RSpec.describe Inquisition::Bundler::Leak::Runner do
         allow(scanner).to receive(:scan).and_return([unpatched_gem].to_enum)
       end
 
-      it do
-        expect(runner.call).to match_array([issue])
+      it 'returns a collection of issues' do
+        expect(runner.call).to contain_exactly(issue)
+      end
+
+      it 'updates the ruby-advisory-db' do
+        runner.call
+
         expect(Bundler::Plumber::Database).to have_received(:update!).with(quiet: true)
       end
     end
