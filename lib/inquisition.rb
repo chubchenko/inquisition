@@ -14,7 +14,6 @@ require 'inquisition/active_record_doctor/runner'
 require 'inquisition/active_record_doctor/issue'
 require 'inquisition/brakeman/vulnerability'
 require 'inquisition/brakeman/runner'
-require 'inquisition/fasterer/runner'
 require 'inquisition/rubocop'
 require 'inquisition/fasterer/runner'
 require 'inquisition/traceroute/runner'
@@ -24,6 +23,9 @@ require 'inquisition/factory_bot/factory_bot_modified_linter'
 
 require_relative 'inquisition/bundler/audit/vulnerability'
 require_relative 'inquisition/bundler/audit/runner'
+
+require_relative 'inquisition/bundler/leak/vulnerability'
+require_relative 'inquisition/bundler/leak/runner'
 
 require_relative 'inquisition/rails_best_practices/runner'
 require_relative 'inquisition/rails_best_practices/warning'
