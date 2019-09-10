@@ -12,26 +12,14 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/BlockLength:
-  Exclude:
-    - 'spec/inquisition/bundler/audit/runner_spec.rb'
+  ExcludedMethods:
+    - describe
+    - context
 
-Metrics/ParameterLists:
+RSpec/DescribeClass:
   Exclude:
-    - 'lib/inquisition/issue.rb'
+    - spec/inquisition/tasks/**/*_spec.rb
 
-RSpec/ExampleLength:
-  Max: 6
+RSpec/FilePath:
   Exclude:
-    - 'spec/**/*.rb'
-
-RSpec/MessageSpies:
-  Exclude:
-    - 'spec/inquisition/bundler/audit/runner_spec.rb'
-
-Metrics/MethodLength:
-  Exclude:
-    - 'lib/inquisition/options.rb'
-
-RSpec/MultipleExpectations:
-  Exclude:
-    - 'spec/**/*.rb'
+    - spec/integration/**/*_spec.rb

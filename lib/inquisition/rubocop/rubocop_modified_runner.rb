@@ -1,6 +1,6 @@
 module Inquisition
   module Rubocop
-    class RuboCopModifiedRunner < ::RuboCop::Runner
+    class RubocopModifiedRunner < ::RuboCop::Runner
       attr_reader :issues
 
       def initialize(options, config_store)

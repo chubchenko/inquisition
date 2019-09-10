@@ -17,7 +17,6 @@ require 'inquisition/brakeman/runner'
 require 'inquisition/rails_best_practices/runner'
 require 'inquisition/rubocop'
 require 'inquisition/fasterer/runner'
-require 'inquisition/rubycritic/runner'
 require 'inquisition/traceroute/runner'
 require 'inquisition/i18n_tasks/runner'
 require 'inquisition/factory_bot/runner'
@@ -35,6 +34,9 @@ require_relative 'inquisition/rails_best_practices/categorizer'
 
 require_relative 'inquisition/lol_dba/missing_index'
 require_relative 'inquisition/lol_dba/runner'
+
+require_relative 'inquisition/rubycritic/smell'
+require_relative 'inquisition/rubycritic/runner'
 
 require_relative 'inquisition/outputter'
 require_relative 'inquisition/options'

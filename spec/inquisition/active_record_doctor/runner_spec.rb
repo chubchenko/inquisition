@@ -11,7 +11,7 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
 
   describe '#call' do
     it 'returns issues array with specific message' do
-      stub_const('Inquisition::ActiveRecordDoctor::Runner::TASKS', ard_task => :performance)
+      stub_const('Inquisition::ActiveRecordDoctor::Runner::TASKS', ard_task => Inquisition::Category::PERFORMANCE)
       expect(runner.call.first.message).to eq(message)
     end
   end

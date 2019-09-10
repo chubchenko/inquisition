@@ -2,57 +2,201 @@ RSpec.describe Inquisition::Rubycritic::Runner do
   include_examples 'enablable', 'rubycritic'
 
   describe '#call' do
-    subject(:runner_result) { described_class.new.call }
+    subject(:runner) { described_class.new }
 
-    let(:analyser_reek) { instance_double(Inquisition::Rubycritic::Analysers::Reek) }
-    let(:analyser_flay) { instance_double(Inquisition::Rubycritic::Analysers::Flay) }
-    let(:analyser_flog) { instance_double(Inquisition::Rubycritic::Analysers::Flog) }
-
-    let(:smell) { instance_double(RubyCritic::Smell, locations: [smell_location], message: 'test message') }
-    let(:smell_location) { instance_double(RubyCritic::Location, line: 1, pathname: Rails.root + pathname) }
-    let(:pathname) { 'app/controllers/application_controller.rb' }
+    let(:analysed_modules) { instance_double(RubyCritic::AnalysedModulesCollection) }
 
     before do
-      allow(Inquisition::Rubycritic::Analysers::Reek).to receive(:new).and_return(analyser_reek)
-      allow(Inquisition::Rubycritic::Analysers::Flay).to receive(:new).and_return(analyser_flay)
-      allow(Inquisition::Rubycritic::Analysers::Flog).to receive(:new).and_return(analyser_flog)
-
-      [analyser_reek, analyser_flay, analyser_flog].each do |analyser|
-        allow(analyser).to receive(:run).and_return(analysed_module)
-      end
+      allow(analysed_modules).to receive(:map).and_yield(analysed_module)
+      allow(RubyCritic::AnalysedModulesCollection).to receive(:new).with([Rails.root]).and_return(analysed_modules)
     end
 
-    context 'when runner returns errors' do
-      let(:analysed_module) { [instance_double(RubyCritic::AnalysedModule, smells: [smell])] }
-      let(:duplication_issue) do
-        Inquisition::Issue.new(
-          severity: Inquisition::Severity::LOW,
-          category: :duplication,
-          path: pathname,
-          line: smell_location.line,
-          runner: nil,
-          message: smell.message
+    context 'when there are no issues' do
+      let(:flay) { instance_double(Inquisition::Rubycritic::Analysers::Flay) }
+      let(:flog) { instance_double(Inquisition::Rubycritic::Analysers::Flog) }
+      let(:reek) { instance_double(Inquisition::Rubycritic::Analysers::Reek) }
+
+      let(:analysed_module) do
+        instance_double(
+          RubyCritic::AnalysedModule,
+          pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')),
+          path: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')).to_s,
+          smells: []
         )
       end
 
-      let(:complexity_issue) do
+      before do
+        allow(flay).to receive(:run)
+        allow(flog).to receive(:run)
+        allow(reek).to receive(:run)
+
+        allow(Inquisition::Rubycritic::Analysers::Flay).to receive(:new).with(analysed_modules).and_return(flay)
+        allow(Inquisition::Rubycritic::Analysers::Flog).to receive(:new).with(analysed_modules).and_return(flog)
+        allow(Inquisition::Rubycritic::Analysers::Reek).to receive(:new).with(analysed_modules).and_return(reek)
+      end
+
+      it { expect(runner.call).to be_empty }
+    end
+
+    context 'when there are `flay` issues' do
+      let(:flay) { instance_double(Inquisition::Rubycritic::Analysers::Flay) }
+      let(:analysed_module) do
+        instance_double(
+          RubyCritic::AnalysedModule,
+          pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')),
+          path: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')).to_s,
+          smells: [smell]
+        )
+      end
+      let(:smell) do
+        instance_double(
+          RubyCritic::Smell,
+          context: 'Similar code',
+          message: 'found in 2 nodes',
+          analyser: 'flay',
+          locations: [
+            instance_double(
+              RubyCritic::Location,
+              line: 35,
+              pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb'))
+            ),
+            instance_double(
+              RubyCritic::Location,
+              line: 42,
+              pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb'))
+            )
+          ]
+        )
+      end
+      let(:issues) do
+        [
+          Inquisition::Issue.new(
+            path: 'app/models/application_record.rb',
+            line: 35,
+            severity: Inquisition::Severity::LOW,
+            message: 'Similar code found in 2 nodes',
+            category: Inquisition::Category::DUPLICATION,
+            runner: runner
+          ),
+          Inquisition::Issue.new(
+            path: 'app/models/application_record.rb',
+            line: 42,
+            severity: Inquisition::Severity::LOW,
+            message: 'Similar code found in 2 nodes',
+            category: Inquisition::Category::DUPLICATION,
+            runner: runner
+          )
+        ]
+      end
+
+      before do
+        stub_const('Inquisition::Rubycritic::Runner::ANALYSERS', [Inquisition::Rubycritic::Analysers::Flay])
+
+        allow(flay).to receive(:run)
+        allow(Inquisition::Rubycritic::Analysers::Flay).to receive(:new).with(analysed_modules).and_return(flay)
+      end
+
+      it 'returns a collection of issues' do
+        expect(runner.call).to match_array(issues)
+      end
+    end
+
+    context 'when there are `flog` issues' do
+      let(:flog) { instance_double(Inquisition::Rubycritic::Analysers::Flog) }
+      let(:analysed_module) do
+        instance_double(
+          RubyCritic::AnalysedModule,
+          pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')),
+          path: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')).to_s,
+          smells: [smell]
+        )
+      end
+      let(:smell) do
+        instance_double(
+          RubyCritic::Smell,
+          context: 'ApplicationRecord#test_flog',
+          message: 'has a flog score of 40',
+          analyser: 'flog',
+          locations: [
+            instance_double(
+              RubyCritic::Location,
+              line: 14,
+              pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb'))
+            )
+          ]
+        )
+      end
+      let(:issue) do
         Inquisition::Issue.new(
+          path: 'app/models/application_record.rb',
+          line: 14,
           severity: Inquisition::Severity::LOW,
-          category: :complexity,
-          path: pathname,
-          line: smell_location.line,
-          runner: nil,
-          message: smell.message
+          message: 'ApplicationRecord#test_flog has a flog score of 40',
+          category: Inquisition::Category::COMPLEXITY,
+          runner: runner
         )
       end
 
-      it { is_expected.to match_array([duplication_issue, complexity_issue, complexity_issue]) }
+      before do
+        stub_const('Inquisition::Rubycritic::Runner::ANALYSERS', [Inquisition::Rubycritic::Analysers::Flog])
+
+        allow(flog).to receive(:run)
+        allow(Inquisition::Rubycritic::Analysers::Flog).to receive(:new).with(analysed_modules).and_return(flog)
+      end
+
+      it 'returns a collection of issues' do
+        expect(runner.call).to contain_exactly(issue)
+      end
     end
 
-    context 'when runner success' do
-      let(:analysed_module) { [instance_double(RubyCritic::AnalysedModule, smells: [])] }
+    context 'when there are `reek` issues' do
+      let(:reek) { instance_double(Inquisition::Rubycritic::Analysers::Reek) }
+      let(:analysed_module) do
+        instance_double(
+          RubyCritic::AnalysedModule,
+          pathname: Pathname.new(Rails.root.join('app', 'controllers', 'application_controller.rb')),
+          path: Pathname.new(Rails.root.join('app', 'controllers', 'application_controller.rb')).to_s,
+          smells: [smell]
+        )
+      end
+      let(:smell) do
+        instance_double(
+          RubyCritic::Smell,
+          context: 'ApplicationController#test_fasterer',
+          message: "doesn't depend on instance state (maybe move it to another class?)",
+          analyser: 'reek',
+          locations: [
+            instance_double(
+              RubyCritic::Location,
+              line: 9,
+              pathname: Pathname.new(Rails.root.join('app', 'controllers', 'application_controller.rb'))
+            )
+          ]
+        )
+      end
+      let(:issue) do
+        Inquisition::Issue.new(
+          path: 'app/controllers/application_controller.rb',
+          line: 9,
+          severity: Inquisition::Severity::LOW,
+          runner: runner,
+          category: Inquisition::Category::COMPLEXITY,
+          message: <<-MESSAGE.squish
+            ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)
+          MESSAGE
+        )
+      end
 
-      it { is_expected.to be_empty }
+      before do
+        stub_const('Inquisition::Rubycritic::Runner::ANALYSERS', [Inquisition::Rubycritic::Analysers::Reek])
+
+        allow(reek).to receive(:run)
+        allow(Inquisition::Rubycritic::Analysers::Reek).to receive(:new).with(analysed_modules).and_return(reek)
+      end
+
+      it 'returns a collection of issues' do
+        expect(runner.call).to contain_exactly(issue)
+      end
     end
   end
 end
