@@ -36,8 +36,8 @@ module Inquisition
 
       def generators
         [
-          Html::IssuesListBuilder.new(@collection),
-          Html::OverviewBuilder.new(@collection)
+          HTML::IssuesListBuilder.new(@collection),
+          HTML::OverviewBuilder.new(@collection)
         ]
       end
 

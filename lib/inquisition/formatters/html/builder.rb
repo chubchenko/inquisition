@@ -1,6 +1,6 @@
 module Inquisition
   module Formatters
-    module Html
+    module HTML
       class Builder
         def initialize(collection)
           @collection = collection

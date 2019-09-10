@@ -1,6 +1,6 @@
 module Inquisition
   module Formatters
-    module Html
+    module HTML
       class IssuesListBuilder < Builder
         def file_name
           'issues_list.html'

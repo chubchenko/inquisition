@@ -4,7 +4,7 @@ require 'inquisition/formatters/html/overview/coverage_builder'
 
 module Inquisition
   module Formatters
-    module Html
+    module HTML
       class OverviewBuilder < Builder
         def file_name
           'overview.html'
