@@ -12,13 +12,18 @@ module Inquisition
         end
 
         def call
-          ::Bundler::Plumber::Scanner.new(Rails.root).scan.map { |warning| issue_for(warning.advisory) }
+          ::Bundler::Plumber::Scanner.new(Rails.root).scan.map { |warning| issue_for(warning) }
         end
 
         private
 
-        def issue_for(advisory)
-          Inquisition::Issue.new(Vulnerability.new(advisory).to_h.merge(runner: self))
+        def issue_for(warning)
+          case warning
+          when ::Bundler::Plumber::Scanner::UnpatchedGem
+            Inquisition::Issue.new(Vulnerability.new(warning.advisory).to_h.merge(runner: self))
+          else
+            raise ArgumentError, "Unknown type: #{warning.class}"
+          end
         end
       end
     end
