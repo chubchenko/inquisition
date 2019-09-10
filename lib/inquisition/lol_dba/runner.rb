@@ -4,28 +4,22 @@ module Inquisition
   module LolDba
     class Runner < ::Inquisition::Runner
       def call
-        @errors = ::LolDba::IndexFinder.check_for_indexes
-        compose_issues
-        @issues
+        ::LolDba::IndexFinder.check_for_indexes.map do |table, set|
+          decompose(table, set)
+        end.flatten
       end
 
       private
 
-      def compose_issues
-        @errors.map { |table, index_arr| create_issue_with_every_index(table, index_arr) }.flatten
+      def decompose(table, set)
+        set.map do |columns|
+          issue_for(table, columns)
+        end
       end
 
-      def create_issue_with_every_index(table, index_arr)
-        index_arr.map { |index| @issues << create_issue(table, index) }
-      end
-
-      def create_issue(table, index)
+      def issue_for(table, columns)
         Inquisition::Issue.new(
-          severity: :low,
-          line: nil,
-          runner: self,
-          path: nil,
-          message: "You have not index in table `#{table}`, column `#{index}`"
+          MissingIndex.new(table: table, columns: columns).to_h.merge(runner: self)
         )
       end
     end

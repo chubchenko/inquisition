@@ -6,9 +6,12 @@ RSpec.describe Inquisition::Fasterer::Runner do
 
     let(:test_file) { 'app/controllers/application_controller.rb' }
     let(:instance_file_traverser) { instance_double(Inquisition::Fasterer::FileTraverser) }
-    let(:instance_analyzer) { instance_double(Fasterer::Analyzer, file_path: "#{Rails.root}/#{test_file}", errors: offense_collector) }
     let(:offense_collector) { instance_double('Fasterer::Analyzer::OffenseCollector', offenses: offense) }
     let(:offense) { [instance_double(Fasterer::Offense, explanation: 'error', line_number: 1)] }
+
+    let(:instance_analyzer) do
+      instance_double(Fasterer::Analyzer, file_path: "#{Rails.root}/#{test_file}", errors: offense_collector)
+    end
 
     before do
       allow(Inquisition::Fasterer::FileTraverser).to receive(:new).and_return(instance_file_traverser)
@@ -26,7 +29,8 @@ RSpec.describe Inquisition::Fasterer::Runner do
       it 'returns a collection of issues' do
         expect(runner_result).to contain_exactly(
           Inquisition::Issue.new(
-            severity: :low,
+            severity: Inquisition::Severity::LOW,
+            category: Inquisition::Category::PERFORMANCE,
             line: offense.first.line_number,
             path: test_file,
             message: offense.first.explanation,

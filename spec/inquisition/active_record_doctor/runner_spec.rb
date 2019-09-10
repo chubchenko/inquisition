@@ -1,5 +1,3 @@
-require 'active_record_doctor/tasks'
-
 RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
   let(:runner) { described_class.new }
   let(:ard_task) { ActiveRecordDoctor::Tasks::UnindexedForeignKeys }
@@ -9,11 +7,12 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
     'unindexed_table has unindexed foreign keys, details: unindexed_column_1, unindexed_column_1'
   end
 
+  before { allow(ard_task).to receive(:run).and_return([warning, true]) }
+
   describe '#call' do
     it 'returns issues array with specific message' do
-      expect(ActiveRecordDoctor::Tasks::Base).to receive(:subclasses).and_return([ard_task])
-      expect(ard_task).to receive(:run).and_return([warning, true])
-      expect(runner.call.first.instance_variable_get(:@message)).to eq(message)
+      stub_const('Inquisition::ActiveRecordDoctor::Runner::TASKS', ard_task => Inquisition::Category::PERFORMANCE)
+      expect(runner.call.first.message).to eq(message)
     end
   end
 

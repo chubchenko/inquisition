@@ -28,14 +28,16 @@ RSpec.describe Inquisition::I18nTasks::Runner do
         expect(runner.call).to match_array(
           [
             Inquisition::Issue.new(
-              severity: :low,
+              severity: Inquisition::Severity::LOW,
+              category: Inquisition::Category::BUG_RISK,
               path: 'test',
               line: 1,
               message: 'missing key: test.key',
               runner: runner
             ),
             Inquisition::Issue.new(
-              severity: :low,
+              severity: Inquisition::Severity::LOW,
+              category: Inquisition::Category::BUG_RISK,
               path: 'test',
               line: nil,
               message: 'missing key: test.key2',
@@ -58,7 +60,8 @@ RSpec.describe Inquisition::I18nTasks::Runner do
         expect(runner.call).to match_array(
           [
             Inquisition::Issue.new(
-              severity: :low,
+              severity: Inquisition::Severity::LOW,
+              category: Inquisition::Category::UNUSED_CODE,
               path: 'test',
               line: nil,
               message: 'unused key: test.key, value: test',

@@ -8,12 +8,13 @@ detectors:
 
   TooManyStatements:
     exclude:
-      - 'Inquisition::Options#define_options'
+      - initialize
+      - Inquisition::Options#define_options
 
   Attribute:
     exclude:
-      - 'Inquisition::Configuration#output'
+      - Inquisition::Configuration#output
 
   UtilityFunction:
     exclude:
-      - 'Inquisition::Executor::Version#call'
+      - Inquisition::Executor::Version#call

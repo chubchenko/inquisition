@@ -2,75 +2,46 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
   include_examples 'enablable', 'rails_best_practices'
 
   describe '#call' do
-    subject(:call_runner) { described_class.new.call }
+    subject(:runner) { described_class.new }
 
-    let(:instance_analyzer) { instance_double(RailsBestPractices::Analyzer, errors: []) }
-    let(:errors_analyzer) do
-      [
-        instance_double(
-          'RailsBestPractices::Core::Error',
-          short_filename: 'test_file',
-          line_number: '1',
-          message: 'test_message'
-        )
-      ]
-    end
+    let(:analyzer) { instance_double(RailsBestPractices::Analyzer) }
 
     before do
-      allow(RailsBestPractices::Analyzer).to receive(:new).and_return(instance_analyzer)
-      allow(instance_analyzer).to receive(:analyze).and_return(true)
+      allow(analyzer).to receive(:analyze)
+      allow(RailsBestPractices::Analyzer).to receive(:new).with(Rails.root, 'silent' => true).and_return(analyzer)
     end
 
-    context 'when call runner and it return errors' do
-      before { allow(instance_analyzer).to receive(:errors).and_return(errors_analyzer) }
+    context 'when there are no issues' do
+      before do
+        allow(analyzer).to receive(:errors).and_return([])
+      end
+
+      it { expect(runner.call).to be_empty }
+    end
+
+    context 'when there is at least 1 issue' do
+      let(:issue) do
+        Inquisition::Issue.new(
+          path: 'config/initializers/backtrace_silencers.rb',
+          line: 6,
+          severity: Inquisition::Severity::LOW,
+          message: 'Line is longer than 111 characters (112 characters)',
+          category: Inquisition::Category::STYLE,
+          runner: runner
+        )
+      end
+      let(:error) do
+        instance_double(RailsBestPractices::Core::Error,
+                        short_filename: 'config/initializers/backtrace_silencers.rb',
+                        line_number: '6',
+                        message: 'line is longer than 111 characters (112 characters)',
+                        type: 'RailsBestPractices::Lexicals::LongLineCheck')
+      end
+
+      before { allow(analyzer).to receive(:errors).and_return([error]) }
 
       it 'returns a collection of issues' do
-        expect(call_runner).to contain_exactly(
-          Inquisition::Issue.new(
-            severity: :low,
-            line: 1,
-            runner: nil,
-            path: errors_analyzer.first.short_filename,
-            message: errors_analyzer.first.message
-          )
-        )
-      end
-    end
-
-    context 'when call runner without errors' do
-      it { is_expected.to be_empty }
-    end
-  end
-
-  describe 'private method #config_path' do
-    let(:analyzer) { instance_double(RailsBestPractices::Analyzer, errors: []) }
-
-    before do
-      allow(RailsBestPractices::Analyzer).to receive(:new).and_return(analyzer)
-      allow(analyzer).to receive(:analyze).and_return(true)
-    end
-
-    context 'when user config exist' do
-      before do
-        allow(File).to receive(:exist?).and_return(true)
-        described_class.new.call
-      end
-
-      it do
-        expect(::RailsBestPractices::Analyzer).to have_received(:new)
-          .with(Rails.root, 'silent' => true, 'config' => 'config/rails_best_practices.yml')
-      end
-    end
-
-    context 'when user config not exist' do
-      before do
-        allow(File).to receive(:exist?).and_return(false)
-        described_class.new.call
-      end
-
-      it do
-        expect(::RailsBestPractices::Analyzer).to have_received(:new)
-          .with(Rails.root, 'silent' => true, 'config' => File.join(Inquisition.root, 'config/rails_best_practices/config.yml'))
+        expect(runner.call).to contain_exactly(issue)
       end
     end
   end

@@ -24,4 +24,22 @@ RSpec.describe Inquisition::Category do
       it { is_expected.to be_falsy }
     end
   end
+
+  describe '#hash' do
+    subject { category.hash == other.hash }
+
+    let(:category) { described_class.new(:security) }
+
+    context 'when a name match' do
+      let(:other) { described_class.new(:security) }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context 'when a name does not match' do
+      let(:other) { described_class.new(:style) }
+
+      it { is_expected.to be_falsy }
+    end
+  end
 end

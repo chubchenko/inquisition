@@ -1,8 +1,18 @@
 - severity: :low
+  category: :bug_risk
   message: 'active_storage_attachments has missing foreign keys, details: blob_id'
 - severity: :low
-  message: 'active_storage_attachments has unindexed foreign keys, details: record_id'
+  category: :bug_risk
+  message: 'projects has missing foreign keys, details: user_id'
 - severity: :low
+  category: :bug_risk
   message: 'ActiveStorage::Attachment has missing presence validation, details: name, record_type, record_id, blob_id'
 - severity: :low
+  category: :bug_risk
   message: 'ActiveStorage::Blob has missing presence validation, details: key, filename, byte_size, checksum'
+- severity: :low
+  category: :performance
+  message: 'active_storage_attachments has unindexed foreign keys, details: record_id'
+- severity: :low
+  category: :performance
+  message: 'projects has unindexed foreign keys, details: user_id'

@@ -1,60 +1,95 @@
 - path: 'app/controllers/application_controller.rb'
   line: 9
   severity: :low
-  message: "doesn't depend on instance state (maybe move it to another class?)"
+  message: "ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 4
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 5
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 6
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 7
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 9
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 13
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 14
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 15
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 17
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 18
   severity: :low
-  message: "refers to 'table' more than self (maybe move it to another class?)"
+  message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
 - path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb'
   line: 2
   severity: :low
-  message: 'has approx 12 statements'
+  message: 'CreateActiveStorageTables#change has approx 12 statements'
+  category: :complexity
 - path: 'app/models/application_record.rb'
   line: 35
   severity: :low
-  message: 'found in 2 nodes'
+  message: 'Similar code found in 2 nodes'
+  category: :duplication
 - path: 'app/models/application_record.rb'
   line: 42
   severity: :low
-  message: 'found in 2 nodes'
+  message: 'Similar code found in 2 nodes'
+  category: :duplication
 - path: 'app/models/application_record.rb'
   line: 14
   severity: :low
-  message: 'has a flog score of 40'
+  message: 'ApplicationRecord#test_flog has a flog score of 40'
+  category: :complexity
+- path: 'db/migrate/20190801142755_create_users.rb'
+  line: 4
+  severity: :low
+  message: "CreateUsers#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
+- path: 'db/migrate/20190801142755_create_users.rb'
+  line: 5
+  severity: :low
+  message: "CreateUsers#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
+- path: 'db/migrate/20190801142756_create_projects.rb'
+  line: 4
+  severity: :low
+  message: "CreateProjects#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
+- path: 'db/migrate/20190801142756_create_projects.rb'
+  line: 5
+  severity: :low
+  message: "CreateProjects#change refers to 'table' more than self (maybe move it to another class?)"
+  category: :complexity
