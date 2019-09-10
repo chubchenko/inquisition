@@ -17,11 +17,12 @@ module Inquisition
               <script type="text/javascript">
                 var category_percentage = [
                   #{percentage(@categorized_issues[:security])},
-                  #{percentage(@categorized_issues[:style])},
+                  #{percentage(@categorized_issues[:bug_risk])},
                   #{percentage(@categorized_issues[:performance])},
-                  #{percentage(@categorized_issues[:compatibility])},
+                  #{percentage(@categorized_issues[:complexity])},
                   #{percentage(@categorized_issues[:unused_code])},
-                  #{percentage(@categorized_issues[:duplication])}
+                  #{percentage(@categorized_issues[:duplication])},
+                  #{percentage(@categorized_issues[:style])}
                 ];
               </script>
             JS
@@ -30,14 +31,14 @@ module Inquisition
           private
 
           def sort_by_categories
-            @categorized_issues = { security: [], style: [], performance: [], compatibility: [],
-                                    unused_code: [], duplication: [] } # remove when category will be added
-
-            # @categorized_issues = @collection.group_by(&:category)
+            grouped_issues = @collection.group_by(&:category)
+            @categorized_issues = Hash[grouped_issues.map { |category, issues| [category.name, issues] }]
           end
 
           def percentage(category)
-            # category.count * 100 / @collection.count
+            return (category.count * 100.00 / @collection.count).round(1) if category
+
+            0
           end
         end
       end

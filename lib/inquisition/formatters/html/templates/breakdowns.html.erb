@@ -16,22 +16,25 @@
 
       <div class="mt-4 text-left small">
         <span class="mr-6">
-          <p></p><i class="fas fa-circle text-danger"></i> Security - <%= @categorized_issues[:security].count %></p>
+          <p></p><i class="fas fa-circle text-danger"></i> Security - <%= @categorized_issues[:security]&.count || 0 %></p>
         </span>
         <span class="mr-6">
-          <p><i class="fas fa-circle text-success"></i> Style - <%= @categorized_issues[:style].count %></p>
+          <p><i class="fas fa-circle text-warning"></i> Bug risk - <%= @categorized_issues[:bug_risk]&.count || 0 %></p>
         </span>
         <span class="mr-6">
-          <p><i class="fas fa-circle text-info"></i> Performance - <%= @categorized_issues[:performance].count %></p>
+          <p><i class="fas fa-circle text-info"></i> Performance - <%= @categorized_issues[:performance]&.count || 0 %></p>
         </span>
         <span class="mr-6">
-          <p><i class="fas fa-circle text-warning"></i> Compatibility - <%= @categorized_issues[:compatibility].count %></p>
+          <p><i class="fas fa-circle text-success"></i> Complexity - <%= @categorized_issues[:complexity]&.count || 0 %></p>
         </span>
         <span class="mr-6">
-          <p><i class="fas fa-circle text-primary"></i> Unused Code - <%= @categorized_issues[:unused_code].count %></p>
+          <p><i class="fas fa-circle text-primary"></i> Unused Code - <%= @categorized_issues[:unused_code]&.count || 0 %></p>
         </span>
         <span class="mr-6">
-          <p><i class="fas fa-circle text-secondary"></i> Duplication - <%= @categorized_issues[:duplication].count %></p>
+          <p><i class="fas fa-circle text-secondary"></i> Duplication - <%= @categorized_issues[:duplication]&.count || 0 %></p>
+        </span>
+        <span class="mr-6">
+          <p><i class="fas fa-circle text-success"></i> Style - <%= @categorized_issues[:style]&.count || 0 %></p>
         </span>
       </div>
     </div>
