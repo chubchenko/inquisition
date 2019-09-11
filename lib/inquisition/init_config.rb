@@ -3,7 +3,8 @@ module Inquisition
     module_function
 
     def result
-      create_config ? sucess : fail
+      create_config
+      File.exist?(Rails.root, '.inquisition.yml') ? sucess : fail
     end
 
     def create_config
