@@ -19,13 +19,14 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.4.0'
+
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'pry', '~> 0.12'
+  spec.add_development_dependency 'pry', '~> 0.12.2'
   spec.add_development_dependency 'reek', '~> 5.0'
-  spec.add_development_dependency 'rspec-rails'
-  spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'simplecov-lcov'
+  spec.add_development_dependency 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
+  spec.add_development_dependency 'simplecov', '~> 0.17.0'
 
   spec.add_dependency 'active_record_doctor', '~> 1.6'
   spec.add_dependency 'brakeman', '~> 4.6'
