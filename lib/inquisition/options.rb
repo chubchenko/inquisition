@@ -40,6 +40,10 @@ module Inquisition
       @parser.on_tail('-h', '--help', 'You are looking at it.') do
         @options[:executor] = Executor::Help.new(@parser)
       end
+
+      @parser.on_tail('-i', '--init', 'Initialize config file.') do
+        @options[:executor] = Executor::InitConfig.new
+      end
     end
   end
 end

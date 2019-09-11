@@ -15,5 +15,13 @@ module Inquisition
         0
       end
     end
+
+    InitConfig = Class.new do
+      def call(output = Configuration.instance.output)
+        output.puts(Inquisition::InitConfig.result)
+
+        0
+      end
+    end
   end
 end
