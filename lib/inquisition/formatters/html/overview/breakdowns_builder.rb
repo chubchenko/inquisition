@@ -37,8 +37,8 @@ module Inquisition
             @collection.group_by(&:category)
           end
 
-          def percentage(category)
-            return (category.count * 100.00 / @collection.count).round(1) if category
+          def percentage(issues)
+            return (issues.count * 100.00 / @collection.count).round(1) if issues
 
             0
           end
