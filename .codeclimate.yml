@@ -1,4 +1,4 @@
-version: "2"
+version: '2'
 
 checks:
   similar-code:
@@ -9,6 +9,6 @@ checks:
 plugins:
   rubocop:
     enabled: true
-    channel: rubocop-0-71
+    channel: rubocop-0-74
   reek:
     enabled: true
