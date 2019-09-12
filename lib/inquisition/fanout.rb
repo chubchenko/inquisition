@@ -24,7 +24,6 @@ module Inquisition
         issues = yield self if block_given?
       ensure
         stop(issues || [])
-        issues || []
       end
 
       issues || []

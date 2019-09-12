@@ -1,14 +1,14 @@
-RSpec.describe Inquisition::Outputter::HtmlOutput::Formatter do
+RSpec.describe Inquisition::Outputter::HTML::Generator do
   describe '#call' do
     let(:runner) { Inquisition::Runner.new }
     let(:issue) do
       instance_double(
         Inquisition::Issue,
-        path: '',
-        line: '',
+        path: 'app/controllers/application_controller.rb',
+        line: 5,
         severity: Inquisition::Severity::LOW,
         category: instance_double(Inquisition::Category, name: :security),
-        message: '',
+        message: "ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)",
         runner: runner
       )
     end
@@ -18,7 +18,7 @@ RSpec.describe Inquisition::Outputter::HtmlOutput::Formatter do
 
     after { FileUtils.rm_r(report_directory) }
 
-    it do
+    it 'generates report with html files' do
       formatter.call
       report_content.each { |file| expect(File).to exist("#{report_directory}/#{file}") }
     end

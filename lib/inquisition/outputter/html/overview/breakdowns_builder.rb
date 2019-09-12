@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module HtmlOutput
+    class HTML
       module Overview
         class BreakdownsBuilder < Builder
           def file_name
@@ -10,15 +10,7 @@ module Inquisition
           def js_chart
             <<~JS
               <script type="text/javascript">
-                var category_percentage = [
-                  #{percentage(categorized_issues[:security])},
-                  #{percentage(categorized_issues[:bug_risk])},
-                  #{percentage(categorized_issues[:performance])},
-                  #{percentage(categorized_issues[:complexity])},
-                  #{percentage(categorized_issues[:unused_code])},
-                  #{percentage(categorized_issues[:duplication])},
-                  #{percentage(categorized_issues[:style])}
-                ];
+                var category_percentage = #{percents_per_category};
               </script>
             JS
           end
@@ -33,14 +25,19 @@ module Inquisition
 
           private
 
+          def percents_per_category
+            Inquisition::Category::NAMES.map { |category| percentage(categorized_issues[category]) }
+          end
+
           def group_issues
             @collection.group_by(&:category)
           end
 
           def percentage(issues)
-            return (issues.count * 100.00 / @collection.count).round(1) if issues
+            # return 0 if issues.empty?
+            return 0 unless issues
 
-            0
+            (issues.count * 100.0 / @collection.count).round(2)
           end
         end
       end

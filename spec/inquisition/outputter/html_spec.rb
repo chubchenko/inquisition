@@ -1,18 +1,20 @@
-RSpec.describe Inquisition::Outputter::HTML do
-  let(:formatter) { instance_double(Inquisition::Outputter::HtmlOutput::Formatter) }
-  let(:html) { described_class.new('') }
+RSpec.describe Inquisition::Outputter::HTML do #create remove meth in outp class
+  let(:generator) { instance_double(Inquisition::Outputter::HTML::Generator) }
+  let(:html) { described_class.new(nil) }
+
+  before do
+    Inquisition::Configuration.instance.loader.add(html)
+  end
 
   describe '#stop' do
     before do
-      allow(formatter).to receive(:call)
-      allow(Inquisition::Outputter::HtmlOutput::Formatter).to receive(:new).and_return(formatter)
-      Inquisition::Configuration.instance.loader.add(html)
+      allow(generator).to receive(:call)
+      allow(Inquisition::Outputter::HTML::Generator).to receive(:new).and_return(generator)
       Inquisition::Configuration.instance.fanout.around
     end
 
-    it 'calls instance of html formatter' do
-      expect(Inquisition::Outputter::HtmlOutput::Formatter).to have_received(:new)
-      expect(formatter).to have_received(:call)
+    it 'calls instance of html generator' do
+      expect(generator).to have_received(:call)
     end
   end
 end

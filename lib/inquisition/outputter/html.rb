@@ -6,7 +6,7 @@ module Inquisition
       def initialize(_output); end
 
       def stop(issues)
-        HtmlOutput::Formatter.new(issues).call
+        Generator.new(issues).call
       end
     end
   end

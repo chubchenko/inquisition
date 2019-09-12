@@ -4,7 +4,7 @@ require_relative 'overview/coverage_builder'
 
 module Inquisition
   module Outputter
-    module HtmlOutput
+    class HTML
       class OverviewBuilder < Builder
         def file_name
           'overview.html'

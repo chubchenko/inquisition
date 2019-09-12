@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module HtmlOutput
+    class HTML
       class Builder
         def initialize(collection)
           @collection = collection

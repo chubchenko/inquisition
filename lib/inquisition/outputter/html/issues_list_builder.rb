@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module HtmlOutput
+    class HTML
       class IssuesListBuilder < Builder
         def file_name
           'issues_list.html'

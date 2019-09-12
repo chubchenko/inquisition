@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module HtmlOutput
+    class HTML
       module Overview
         class MainFieldBuilder < Builder
           def file_name
@@ -12,7 +12,7 @@ module Inquisition
           end
 
           def percentage(issues)
-            (issues.count * 100.00 / @collection.count).round(1)
+            (issues.count * 100.0 / @collection.count).round(2)
           end
         end
       end

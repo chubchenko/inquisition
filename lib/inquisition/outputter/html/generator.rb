@@ -5,8 +5,8 @@ require_relative 'issues_list_builder'
 
 module Inquisition
   module Outputter
-    module HtmlOutput
-      class Formatter
+    class HTML
+      class Generator
         def initialize(collection)
           @collection = collection
         end

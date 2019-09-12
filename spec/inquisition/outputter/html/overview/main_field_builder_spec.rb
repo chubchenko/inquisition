@@ -1,14 +1,14 @@
-RSpec.describe Inquisition::Outputter::HtmlOutput::Overview::MainFieldBuilder do
+RSpec.describe Inquisition::Outputter::HTML::Overview::MainFieldBuilder do
   subject(:builder) { described_class.new(collection) }
 
   let(:issue) do
     instance_double(
       Inquisition::Issue,
-      path: '',
-      line: '',
+      path: 'app/controllers/application_controller.rb',
+      line: 5,
       severity: Inquisition::Severity::LOW,
       category: instance_double(Inquisition::Category, name: :security),
-      message: '',
+      message: "ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)",
       runner: instance_double(Inquisition::Runner)
     )
   end

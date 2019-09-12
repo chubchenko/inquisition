@@ -1,14 +1,14 @@
-RSpec.describe Inquisition::Outputter::HtmlOutput::Overview::BreakdownsBuilder do
+RSpec.describe Inquisition::Outputter::HTML::Overview::BreakdownsBuilder do
   subject(:builder) { described_class.new(collection) }
 
   let(:security_issue) do
     instance_double(
       Inquisition::Issue,
-      path: '',
-      line: '',
+      path: 'app/controllers/application_controller.rb',
+      line: 5,
       severity: Inquisition::Severity::LOW,
       category: instance_double(Inquisition::Category, name: :security),
-      message: '',
+      message: "ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)",
       runner: instance_double(Inquisition::Runner)
     )
   end
@@ -16,11 +16,11 @@ RSpec.describe Inquisition::Outputter::HtmlOutput::Overview::BreakdownsBuilder d
   let(:bug_risk_issue) do
     instance_double(
       Inquisition::Issue,
-      path: '',
-      line: '',
+      path: 'db/migrate/20190801142754_create_active_storage_tables.active_storage.rb',
+      line: 9,
       severity: Inquisition::Severity::LOW,
       category: instance_double(Inquisition::Category, name: :bug_risk),
-      message: '',
+      message: "CreateActiveStorageTables#change refers to 'table' more than self (maybe move it to another class?)",
       runner: instance_double(Inquisition::Runner)
     )
   end

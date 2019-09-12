@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module HtmlOutput
+    class HTML
       module Overview
         class CoverageBuilder < Builder
           def file_name

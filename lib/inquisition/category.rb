@@ -8,7 +8,7 @@ module Inquisition
     BUG_RISK = :bug_risk
     SECURITY = :security
 
-    NAMES = [STYLE, DUPLICATION, UNUSED_CODE, COMPLEXITY, PERFORMANCE, BUG_RISK, SECURITY].freeze
+    NAMES = [SECURITY, BUG_RISK, PERFORMANCE, COMPLEXITY, UNUSED_CODE, DUPLICATION, STYLE].freeze
 
     attr_reader :name
 
