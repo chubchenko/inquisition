@@ -42,7 +42,7 @@ module Inquisition
       end
 
       @parser.on_tail('-i', '--init', 'Initialize config file.') do
-        @options[:executor] = Executor::InitConfig.new
+        @options[:executor] = Executor::Initialize.new
       end
     end
   end

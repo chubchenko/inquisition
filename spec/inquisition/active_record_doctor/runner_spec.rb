@@ -1,4 +1,6 @@
 RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
+  include_examples 'enablable', :active_record_doctor
+
   let(:runner) { described_class.new }
   let(:ard_task) { ActiveRecordDoctor::Tasks::UnindexedForeignKeys }
   let(:warning) { { 'unindexed_table' => %w[unindexed_column_1 unindexed_column_1] } }
@@ -15,6 +17,4 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
       expect(runner.call.first.message).to eq(message)
     end
   end
-
-  include_examples 'enablable', 'active_record_doctor'
 end

@@ -9,7 +9,6 @@ require 'inquisition/runner'
 require 'inquisition/version'
 require 'inquisition/logger'
 require 'inquisition/railtie'
-require 'inquisition/init_config'
 
 require 'inquisition/active_record_doctor/runner'
 require 'inquisition/active_record_doctor/issue'

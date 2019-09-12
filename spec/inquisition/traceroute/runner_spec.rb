@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Traceroute::Runner do
-  include_examples 'enablable', 'traceroute'
+  include_examples 'enablable', :traceroute
 
   describe '#call' do
     subject(:runner) { described_class.new }

@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::LolDba::Runner do
-  include_examples 'enablable', 'lol_dba'
+  include_examples 'enablable', :lol_dba
 
   describe '#call' do
     subject(:runner) { described_class.new }
