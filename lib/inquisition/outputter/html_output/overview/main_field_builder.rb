@@ -1,6 +1,6 @@
 module Inquisition
-  module Formatters
-    module HTML
+  module Outputter
+    module HtmlOutput
       module Overview
         class MainFieldBuilder < Builder
           def file_name

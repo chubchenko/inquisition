@@ -58,4 +58,4 @@ module Inquisition
   end
 end
 
-require 'inquisition/formatters/html_formatter'
+require 'inquisition/outputter/html_output/formatter'

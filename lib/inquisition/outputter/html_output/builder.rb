@@ -1,6 +1,6 @@
 module Inquisition
-  module Formatters
-    module HTML
+  module Outputter
+    module HtmlOutput
       class Builder
         def initialize(collection)
           @collection = collection
@@ -17,7 +17,7 @@ module Inquisition
         private
 
         def template_path
-          File.join(Inquisition.root, 'lib/inquisition/formatters/html/templates', "#{file_name}.erb")
+          File.join(Inquisition.root, 'views', "#{file_name}.erb")
         end
 
         def file_name

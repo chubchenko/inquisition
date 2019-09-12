@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Formatters::HtmlFormatter do
+RSpec.describe Inquisition::Outputter::HtmlOutput::Formatter do
   describe '#call' do
     let(:runner) { Inquisition::Runner.new }
     let(:issue) do

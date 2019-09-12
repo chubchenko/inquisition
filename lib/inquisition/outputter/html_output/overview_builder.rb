@@ -1,10 +1,10 @@
-require 'inquisition/formatters/html/overview/main_field_builder'
-require 'inquisition/formatters/html/overview/breakdowns_builder'
-require 'inquisition/formatters/html/overview/coverage_builder'
+require_relative 'overview/main_field_builder'
+require_relative 'overview/breakdowns_builder'
+require_relative 'overview/coverage_builder'
 
 module Inquisition
-  module Formatters
-    module HTML
+  module Outputter
+    module HtmlOutput
       class OverviewBuilder < Builder
         def file_name
           'overview.html'

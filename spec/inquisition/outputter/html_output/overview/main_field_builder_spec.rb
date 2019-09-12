@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Formatters::HTML::Overview::MainFieldBuilder do
+RSpec.describe Inquisition::Outputter::HtmlOutput::Overview::MainFieldBuilder do
   subject(:builder) { described_class.new(collection) }
 
   let(:issue) do

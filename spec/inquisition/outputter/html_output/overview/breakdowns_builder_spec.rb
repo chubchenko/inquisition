@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Formatters::HTML::Overview::BreakdownsBuilder do
+RSpec.describe Inquisition::Outputter::HtmlOutput::Overview::BreakdownsBuilder do
   subject(:builder) { described_class.new(collection) }
 
   let(:security_issue) do
