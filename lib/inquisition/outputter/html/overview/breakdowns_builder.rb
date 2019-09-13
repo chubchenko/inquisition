@@ -15,27 +15,20 @@ module Inquisition
             JS
           end
 
-          def categorized_issues
-            @categorized_issues ||= Hash[
-              group_issues.map do |category, issues|
-                [category.name, issues]
-              end
-            ]
-          end
-
           private
 
           def percents_per_category
-            Inquisition::Category::NAMES.map { |category| percentage(categorized_issues[category]) }
+            group_issues
+            Inquisition::Category::NAMES.map { |category| percentage(@categorized_issues[category]) }
           end
 
           def group_issues
-            @collection.group_by(&:category)
+            grouped_issues = @collection.group_by { |issue| issue.category.name }
+            @categorized_issues = Hash.new([]).update(grouped_issues)
           end
 
           def percentage(issues)
-            # return 0 if issues.empty?
-            return 0 unless issues
+            return 0 if issues.empty?
 
             (issues.count * 100.0 / @collection.count).round(2)
           end
