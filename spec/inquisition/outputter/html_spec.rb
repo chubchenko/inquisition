@@ -1,10 +1,10 @@
-RSpec.describe Inquisition::Outputter::HTML do #create remove meth in outp class
+RSpec.describe Inquisition::Outputter::HTML do
   let(:generator) { instance_double(Inquisition::Outputter::HTML::Generator) }
   let(:html) { described_class.new(nil) }
 
-  before do
-    Inquisition::Configuration.instance.loader.add(html)
-  end
+  before { Inquisition::Configuration.instance.loader.add(html) }
+
+  after { Inquisition::Configuration.instance.loader.remove(html) }
 
   describe '#stop' do
     before do

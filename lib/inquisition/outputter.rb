@@ -27,6 +27,11 @@ module Inquisition
         register(outputter_class.new(output))
       end
 
+      def remove(outputter_to_remove)
+        @collection.delete(outputter_to_remove) if Loader.collection.key?(outputter_to_remove.class)
+        @fanout.remove_listener(outputter_to_remove, *Loader.collection.fetch(outputter_to_remove.class))
+      end
+
       def prepare_default
         @fanout.prepare_default(self)
       end
