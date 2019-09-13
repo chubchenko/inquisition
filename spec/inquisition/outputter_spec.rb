@@ -41,6 +41,22 @@ RSpec.describe Inquisition::Outputter::Loader do
     end
   end
 
+  describe '#remove' do
+    let(:html) { Inquisition::Outputter::HTML.new(nil) }
+
+    before do
+      allow(fanout).to receive(:register_listener)
+      allow(fanout).to receive(:deregister_listener)
+      loader.add(html)
+    end
+
+    it 'removes an outputter from collection' do
+      expect do
+        loader.remove(html)
+      end.to change { loader.collection.count }.from(1).to(0)
+    end
+  end
+
   describe '#prepare_default' do
     before { allow(fanout).to receive(:prepare_default) }
 

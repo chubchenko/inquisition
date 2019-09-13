@@ -28,8 +28,9 @@ module Inquisition
       end
 
       def remove(outputter_to_remove)
-        @collection.delete(outputter_to_remove) if Loader.collection.key?(outputter_to_remove.class)
-        @fanout.remove_listener(outputter_to_remove, *Loader.collection.fetch(outputter_to_remove.class))
+        return deregister(outputter_to_remove) if Loader.collection.key?(outputter_to_remove.class)
+
+        raise ArgumentError, "Outputter #{outputter_to_remove} unknown"
       end
 
       def prepare_default
@@ -53,6 +54,11 @@ module Inquisition
         @collection << outputter
 
         @fanout.register_listener(outputter, *Loader.collection.fetch(outputter.class))
+      end
+
+      def deregister(outputter_to_remove)
+        @collection.delete(outputter_to_remove)
+        @fanout.deregister_listener(outputter_to_remove, *Loader.collection.fetch(outputter_to_remove.class))
       end
     end
   end

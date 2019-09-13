@@ -17,7 +17,7 @@ module Inquisition
       true
     end
 
-    def remove_listener(outputter, *events)
+    def deregister_listener(outputter, *events)
       events.each do |event|
         @listeners[event.to_sym].delete?(outputter)
       end
