@@ -13,7 +13,7 @@ module Inquisition
 
         def call
           create_directories
-          copy_assets
+          Rake::Task[:assets_compilation].invoke
           create_files
         end
 
@@ -21,10 +21,6 @@ module Inquisition
 
         def create_directories
           FileUtils.mkdir_p(report_directory)
-        end
-
-        def copy_assets
-          FileUtils.cp_r(assets_directory, report_directory)
         end
 
         def create_files
@@ -40,10 +36,6 @@ module Inquisition
             IssuesListBuilder.new(@collection),
             OverviewBuilder.new(@collection)
           ]
-        end
-
-        def assets_directory
-          File.join(Inquisition.root, 'assets')
         end
 
         def report_directory
