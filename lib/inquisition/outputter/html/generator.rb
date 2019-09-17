@@ -14,6 +14,7 @@ module Inquisition
         def call
           create_directories
           Rake::Task[:assets_compilation].invoke
+          copy_fonts
           create_files
         end
 
@@ -21,6 +22,10 @@ module Inquisition
 
         def create_directories
           FileUtils.mkdir_p(report_directory)
+        end
+
+        def copy_fonts
+          FileUtils.cp_r(fonts_directory, user_public_directory)
         end
 
         def create_files
@@ -36,6 +41,14 @@ module Inquisition
             IssuesListBuilder.new(@collection),
             OverviewBuilder.new(@collection)
           ]
+        end
+
+        def fonts_directory
+          File.join(Inquisition.root, 'assets', 'css', 'vendor', 'fontawesome-free', 'webfonts')
+        end
+
+        def user_public_directory
+          File.join(Rails.root, 'public', 'inquisition', 'webfonts')
         end
 
         def report_directory

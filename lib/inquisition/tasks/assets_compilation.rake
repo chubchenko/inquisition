@@ -2,7 +2,7 @@ require 'sprockets'
 require 'fileutils'
 
 ASSETS_DIR = File.join(Inquisition.root, 'assets')
-PUBLIC_DIR = File.join(Rails.root, 'public', 'inquisition')
+PUBLIC_DIR = File.join(Rails.root, 'public', 'inquisition', 'precompiled')
 COMPILATED = ['application.js', 'application.css'].freeze
 
 task assets_compilation: :environment do
