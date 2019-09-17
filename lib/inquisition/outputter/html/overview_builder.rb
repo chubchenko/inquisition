@@ -11,15 +11,15 @@ module Inquisition
         end
 
         def main_field
-          Overview::MainFieldBuilder.new(@collection)
+          Overview::MainFieldBuilder.new(collection)
         end
 
         def breakdowns
-          Overview::BreakdownsBuilder.new(@collection)
+          Overview::BreakdownsBuilder.new(collection)
         end
 
         def coverage
-          Overview::CoverageBuilder.new(@collection)
+          Overview::CoverageBuilder.new(collection)
         end
       end
     end

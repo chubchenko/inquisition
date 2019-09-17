@@ -23,14 +23,14 @@ module Inquisition
           end
 
           def group_issues
-            grouped_issues = @collection.group_by { |issue| issue.category.name }
+            grouped_issues = collection.group_by { |issue| issue.category.name }
             @categorized_issues = Hash.new([]).update(grouped_issues)
           end
 
           def percentage(issues)
             return 0 if issues.empty?
 
-            (issues.count * 100.0 / @collection.count).round(2)
+            (issues.count * 100.0 / collection.count).round(2)
           end
         end
       end

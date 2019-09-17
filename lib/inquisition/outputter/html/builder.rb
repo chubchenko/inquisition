@@ -16,6 +16,8 @@ module Inquisition
 
         private
 
+        attr_reader :collection
+
         def template_path
           File.join(Inquisition.root, 'views', "#{file_name}.erb")
         end
