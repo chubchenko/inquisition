@@ -14,13 +14,23 @@ RSpec.describe Inquisition::Outputter::HTML::Generator do
     end
     let(:formatter) { described_class.new([issue]) }
     let(:report_directory) { File.join(Rails.root, 'inquisition') }
+    let(:compiled_assets_directory) { File.join(Rails.root, 'public', 'inquisition') }
     let(:report_content) { ['issues_list.html', 'overview.html'] }
+    let(:compiled_assets) { ['application.js', 'application.css'] }
 
-    after { FileUtils.rm_r(report_directory) }
+    after do
+      FileUtils.rm_r(report_directory)
+      # FileUtils.rm_r(compiled_assets_directory)
+    end
+
+    before { formatter.call }
 
     it 'generates report with html files' do
-      formatter.call
       report_content.each { |file| expect(File).to exist("#{report_directory}/#{file}") }
+    end
+
+    it 'generates folder with compiled assets' do
+      compiled_assets.each { |file| expect(File).to exist("#{compiled_assets_directory}/#{file}") }
     end
   end
 end
