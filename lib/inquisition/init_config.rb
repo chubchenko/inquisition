@@ -4,7 +4,7 @@ module Inquisition
 
     def result
       create_config
-      File.exist?(Rails.root, '.inquisition.yml') ? sucess : fail
+      File.exist?(Rails.root, '.inquisition.yml') ? success : failure
     end
 
     def create_config
@@ -19,11 +19,11 @@ module Inquisition
       Inquisition::Runner.descendants.map { |runner| runner.badge.to_s }
     end
 
-    def sucess
+    def success
       'Config file was created successfully'
     end
 
-    def fail
+    def failure
       'Something went wrong'
     end
   end
