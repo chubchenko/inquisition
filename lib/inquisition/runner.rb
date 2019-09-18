@@ -17,14 +17,22 @@ module Inquisition
     end
 
     def run(fanout)
-      issues = call
+      @issues = call
+      fanout.example_passed(self) if success?
+      fanout.example_failed(self) if failure?
+      @issues
+    end
 
-      if issues.empty?
-        fanout.example_passed(self)
-      else
-        fanout.example_failed(self)
-      end
-      issues
+    private
+
+    attr_reader :issues
+
+    def success?
+      @issues.empty?
+    end
+
+    def failure?
+      @issues.any?
     end
   end
 end

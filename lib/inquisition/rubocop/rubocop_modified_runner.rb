@@ -16,7 +16,7 @@ module Inquisition
       def process_file(file)
         file_started(file)
         offenses = file_offenses(file)
-        @issues << { ::RuboCop::PathUtil.relative_path(file, Rails.root.to_s) => offenses } if offenses.any?
+        issues << { ::RuboCop::PathUtil.relative_path(file, Rails.root.to_s) => offenses } if offenses.any?
         offenses
       end
 

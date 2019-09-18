@@ -11,7 +11,7 @@ module Inquisition
         @base_task.config = load_config_file unless File.exist?(File.join(Rails.root, USER_CONFIG_PATH))
         parse_missing_keys
         parse_unused_keys
-        @issues.flatten
+        issues.flatten
       end
 
       private
@@ -25,16 +25,16 @@ module Inquisition
       def parse_missing_keys
         base_task.missing_keys.keys.each do |key, node|
           files = node.data[:occurrences]
-          @issues << if files
-                       files.map { |file| create_issue(key, node, file, :missing) }
-                     else
-                       create_issue(key, node, nil, :missing)
-                     end
+          issues << if files
+                      files.map { |file| create_issue(key, node, file, :missing) }
+                    else
+                      create_issue(key, node, nil, :missing)
+                    end
         end
       end
 
       def parse_unused_keys
-        base_task.unused_keys.keys.each { |key, node| @issues << create_issue(key, node, nil, :unused) }
+        base_task.unused_keys.keys.each { |key, node| issues << create_issue(key, node, nil, :unused) }
       end
 
       def create_issue(key, node, file = nil, type = :missing)
