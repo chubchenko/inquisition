@@ -1,11 +1,16 @@
 RSpec.describe Inquisition::InitConfig do
   let(:config_file) { File.join(Rails.root, '.inquisition.yml') }
+  let(:runners) do
+    Inquisition::Runner.descendants.select { |runner| runner.to_s.include?('Runner') }
+  end
+
+  before { allow(described_class).to receive(:runners).and_return(runners) }
 
   describe '.runners' do
-    let(:runners) { Inquisition::Runner.descendants.map { |runner| runner.badge.to_s } }
-
     it 'returns all available runners' do
-      expect(described_class.runners).to eql(runners)
+      described_class.runners.each do |runner|
+        expect(Inquisition.constants).to include(runner.to_s.split('::')[1].to_sym)
+      end
     end
   end
 
