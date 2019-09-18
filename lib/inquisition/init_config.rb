@@ -4,7 +4,7 @@ module Inquisition
 
     def result
       create_config
-      File.exist?(Rails.root, '.inquisition.yml') ? success : failure
+      File.exist?(File.join(Rails.root, '.inquisition.yml')) ? success : failure
     end
 
     def create_config

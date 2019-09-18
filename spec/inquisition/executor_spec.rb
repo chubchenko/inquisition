@@ -30,3 +30,22 @@ RSpec.describe Inquisition::Executor::Help do
     end
   end
 end
+
+RSpec.describe Inquisition::Executor::InitConfig do
+  let(:output) { instance_double(StringIO) }
+
+  before do
+    allow(output).to receive(:puts)
+    allow(Inquisition::Runner).to receive(:descendants).and_return([Inquisition::Brakeman::Runner])
+  end
+
+  describe '#call' do
+    it { expect(described_class.new.call(output)).to be_zero }
+
+    it do
+      described_class.new.call(output)
+
+      expect(output).to have_received(:puts).with(Inquisition::InitConfig.result)
+    end
+  end
+end
