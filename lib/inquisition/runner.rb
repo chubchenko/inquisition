@@ -32,7 +32,7 @@ module Inquisition
     end
 
     def failure?
-      @issues.any?
+      !success?
     end
   end
 end
