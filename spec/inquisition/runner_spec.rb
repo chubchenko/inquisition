@@ -17,6 +17,8 @@ RSpec.describe Inquisition::Runner do
 
       before { allow(fanout).to receive(:example_passed) }
 
+      after { described_class.collection.delete(runner.class) }
+
       it do
         runner.run(fanout)
 
@@ -34,6 +36,8 @@ RSpec.describe Inquisition::Runner do
       end
 
       before { allow(fanout).to receive(:example_failed) }
+
+      after { described_class.collection.delete(runner.class) }
 
       it do
         runner.run(fanout)

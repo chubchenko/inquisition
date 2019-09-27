@@ -16,7 +16,7 @@ RSpec.describe Inquisition::Configuration do
         )
       end
 
-      it { expect(configuration.to_h).to eq('plugins' => { 'reek' => { 'enabled' => true } }, 'verbose' => false) }
+      it { expect(configuration.to_h).to eq(plugins: { reek: { enabled: true } }, verbose: false) }
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Inquisition::Configuration do
     it 'creates directory' do
       configuration.output_path
 
-      expect(Dir.exist?(File.join(Rails.root, 'inquisition'))).to be true
+      expect(Dir).to exist(File.join(Rails.root, 'inquisition'))
     end
   end
 end

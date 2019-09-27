@@ -13,4 +13,10 @@ RSpec.describe Inquisition::Badge do
 
     it { expect(badge.to_s).to eq('rubocop') }
   end
+
+  describe '#to_sym' do
+    subject(:badge) { described_class.new('rubocop') }
+
+    it { expect(badge.to_sym).to eq(:rubocop) }
+  end
 end
