@@ -1,4 +1,6 @@
 RSpec.describe Inquisition::I18nTasks::Runner do
+  include_examples 'enablable', :i18n_tasks
+
   describe '#call' do
     subject(:runner) { described_class.new }
 

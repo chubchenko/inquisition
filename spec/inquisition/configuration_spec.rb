@@ -16,7 +16,7 @@ RSpec.describe Inquisition::Configuration do
         )
       end
 
-      it { expect(configuration.to_h).to eq('plugins' => { 'reek' => { 'enabled' => true } }, 'verbose' => false) }
+      it { expect(configuration.to_h).to eq(plugins: { reek: { enabled: true } }, verbose: false) }
     end
   end
 

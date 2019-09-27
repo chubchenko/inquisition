@@ -41,10 +41,10 @@ RSpec.describe Inquisition::Options do
   end
 
   %w[-i --init].each do |option|
-    it 'sets the `:executor` option with the `InitConfig` invocation' do
+    it 'sets the `:executor` option with the `Initialize` invocation' do
       options = described_class.parse([option])
 
-      expect(options.options[:executor]).to be_instance_of(Inquisition::Executor::InitConfig)
+      expect(options.options[:executor]).to be_instance_of(Inquisition::Executor::Initialize)
     end
   end
 end

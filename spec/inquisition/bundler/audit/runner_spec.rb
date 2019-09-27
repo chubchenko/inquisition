@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Bundler::Audit::Runner do
-  include_examples 'enablable', 'bundler_audit'
+  include_examples 'enablable', :bundler_audit
 
   describe '#call' do
     subject(:runner) { described_class.new }
