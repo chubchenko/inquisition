@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Rubocop::Runner do
-  include_examples 'enablable', 'rubocop'
+  include_examples 'enablable', :rubocop
 
   describe '#call' do
     let(:runner) { described_class.new }

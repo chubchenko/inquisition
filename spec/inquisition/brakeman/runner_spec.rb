@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Brakeman::Runner do
-  include_examples 'enablable', 'brakeman'
+  include_examples 'enablable', :brakeman
 
   describe '#call' do
     subject(:runner) { described_class.new }

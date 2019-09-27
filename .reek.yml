@@ -5,6 +5,7 @@ detectors:
   NestedIterators:
     ignore_iterators:
       - around
+      - open
 
   TooManyStatements:
     exclude:
@@ -18,3 +19,7 @@ detectors:
   UtilityFunction:
     exclude:
       - Inquisition::Executor::Version#call
+
+  DuplicateMethodCall:
+    exclude:
+      - Inquisition::DeepSymbolizeKeys#_deep_symbolize_keys_in_object

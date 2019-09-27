@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::RailsBestPractices::Runner do
-  include_examples 'enablable', 'rails_best_practices'
+  include_examples 'enablable', :rails_best_practices
 
   describe '#call' do
     subject(:runner) { described_class.new }
