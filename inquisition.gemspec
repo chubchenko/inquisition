@@ -43,4 +43,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop-rspec', '~> 1.35'
   spec.add_dependency 'rubycritic', '~> 4.1'
   spec.add_dependency 'traceroute', '~> 0.8'
+
+  spec.add_runtime_dependency 'launchy', '~> 2.4', '>= 2.4.3'
 end

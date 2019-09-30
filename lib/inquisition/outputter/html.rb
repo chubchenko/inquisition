@@ -1,3 +1,5 @@
+require_relative 'html/builder'
+
 module Inquisition
   module Outputter
     class HTML
@@ -6,7 +8,7 @@ module Inquisition
       def initialize(_output); end
 
       def stop(issues)
-        Generator.new(issues).call
+        Builder.call(issues)
       end
     end
   end

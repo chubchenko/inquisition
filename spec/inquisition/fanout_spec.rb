@@ -27,16 +27,6 @@ RSpec.describe Inquisition::Fanout do
     end
   end
 
-  describe '#deregister_listener' do
-    before { fanout.register_listener(outputter, :example_passed) }
-
-    it 'removes outputter events from listeners' do
-      expect do
-        fanout.deregister_listener(outputter, :example_passed)
-      end.to change { fanout.listeners_for(:example_passed).count }.from(1).to(0)
-    end
-  end
-
   describe '#around' do
     before { fanout.register_listener(outputter, :start, :stop) }
 

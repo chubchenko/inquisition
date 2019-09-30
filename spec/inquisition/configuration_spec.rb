@@ -59,4 +59,14 @@ RSpec.describe Inquisition::Configuration do
       end.not_to change(configuration.collection, :count)
     end
   end
+
+  describe '#output_path' do
+    after { FileUtils.rm_rf(configuration.output_path) }
+
+    it 'creates directory' do
+      configuration.output_path
+
+      expect(Dir.exist?(File.join(Rails.root, 'inquisition'))).to be true
+    end
+  end
 end

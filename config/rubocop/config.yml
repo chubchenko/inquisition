@@ -3,7 +3,7 @@ require:
   - rubocop-performance
   - rubocop-rspec
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Metrics/LineLength:

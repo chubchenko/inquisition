@@ -5,7 +5,7 @@ require:
 AllCops:
   TargetRubyVersion: 2.4
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Metrics/LineLength:
