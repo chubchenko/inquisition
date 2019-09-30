@@ -8,7 +8,7 @@ module Inquisition
       end
 
       def enabled?
-        Configuration.instance.to_h.dig('plugins', badge.to_s, 'enabled') || false
+        Configuration.instance.to_h.dig(:plugins, badge.to_sym, :enabled) || false
       end
     end
 
@@ -24,6 +24,7 @@ module Inquisition
       else
         fanout.example_failed(self)
       end
+
       issues
     end
   end

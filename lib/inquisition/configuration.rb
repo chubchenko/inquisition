@@ -1,17 +1,23 @@
 require 'yaml'
 require 'singleton'
 
+require_relative 'ext/deep_symbolize_keys'
+
+using Inquisition::DeepSymbolizeKeys
+
 module Inquisition
   class Configuration
     include Singleton
 
+    DOTFILE = '.inquisition.yml'.freeze
+
     attr_accessor :output
 
-    def initialize(path = '.inquisition.yml')
+    def initialize(path = DOTFILE)
       @output = $stdout
       @options =
         if File.exist?(path)
-          YAML.load_file(path)
+          YAML.load_file(path).deep_symbolize_keys
         else
           {}
         end
@@ -22,7 +28,7 @@ module Inquisition
     end
 
     def verbose?
-      @options.fetch('verbose') { false }
+      @options.fetch(:verbose) { false }
     end
 
     def loader

@@ -10,7 +10,7 @@ RSpec.shared_examples 'enablable' do |badge|
       let(:configuration) { instance_double(Inquisition::Configuration) }
 
       before do
-        allow(configuration).to receive(:to_h).and_return('plugins' => { badge => { 'enabled' => false } })
+        allow(configuration).to receive(:to_h).and_return(plugins: { badge => { enabled: false } })
         allow(Inquisition::Configuration).to receive(:instance).and_return(configuration)
       end
 
@@ -21,7 +21,7 @@ RSpec.shared_examples 'enablable' do |badge|
       let(:configuration) { instance_double(Inquisition::Configuration) }
 
       before do
-        allow(configuration).to receive(:to_h).and_return('plugins' => { badge => { 'enabled' => true } })
+        allow(configuration).to receive(:to_h).and_return(plugins: { badge => { enabled: true } })
         allow(Inquisition::Configuration).to receive(:instance).and_return(configuration)
       end
 
