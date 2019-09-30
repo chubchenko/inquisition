@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Rubycritic::Runner do
-  include_examples 'enablable', 'rubycritic'
+  include_examples 'enablable', :rubycritic
 
   describe '#call' do
     subject(:runner) { described_class.new }

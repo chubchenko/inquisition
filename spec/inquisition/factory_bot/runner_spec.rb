@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::FactoryBot::Runner do
-  include_examples 'enablable', 'factory_bot'
+  include_examples 'enablable', :factory_bot
 
   describe '#call' do
     let(:runner) { described_class.new }

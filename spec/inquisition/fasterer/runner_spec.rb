@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Fasterer::Runner do
-  include_examples 'enablable', 'fasterer'
+  include_examples 'enablable', :fasterer
 
   describe '#call' do
     subject(:runner_result) { described_class.new.call }

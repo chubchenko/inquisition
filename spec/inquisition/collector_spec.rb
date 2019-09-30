@@ -81,6 +81,8 @@ RSpec.describe Inquisition::Collector do
         end
       end
 
+      after { Inquisition::Runner.collection.delete(dummy) }
+
       it { is_expected.to eq(1) }
     end
 
@@ -98,6 +100,8 @@ RSpec.describe Inquisition::Collector do
           end
         end
       end
+
+      after { Inquisition::Runner.collection.delete(dummy) }
 
       it { is_expected.to be_zero }
     end

@@ -1,5 +1,5 @@
 RSpec.describe Inquisition::Bundler::Leak::Runner do
-  include_examples 'enablable', 'bundler_leak'
+  include_examples 'enablable', :bundler_leak
 
   describe '#call' do
     subject(:runner) { described_class.new }
