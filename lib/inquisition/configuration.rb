@@ -6,6 +6,10 @@ require_relative 'ext/deep_symbolize_keys'
 
 using Inquisition::DeepSymbolizeKeys
 
+require_relative 'ext/deep_symbolize_keys'
+
+using Inquisition::DeepSymbolizeKeys
+
 module Inquisition
   class Configuration
     include Singleton
