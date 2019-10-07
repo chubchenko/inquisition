@@ -35,9 +35,7 @@ RSpec.describe Inquisition::Executor::Initialize do
   describe '#call' do
     let(:output) { StringIO.new }
 
-    after(:each) do
-      File.delete(File.join(Rails.root, '.inquisition.yml'))
-    end
+    after { File.delete(File.join(Rails.root, '.inquisition.yml')) }
 
     context 'when .inquisition.yml does not exist' do
       it do
@@ -52,32 +50,32 @@ RSpec.describe Inquisition::Executor::Initialize do
         described_class.new(output: output).call
 
         expect(IO.read(File.join(Rails.root, '.inquisition.yml'))).to eq(<<~YAML)
-        ---
-        :plugins:
-          :active_record_doctor:
-            :enabled: true
-          :brakeman:
-            :enabled: true
-          :rubocop:
-            :enabled: true
-          :fasterer:
-            :enabled: true
-          :traceroute:
-            :enabled: true
-          :i18n_tasks:
-            :enabled: true
-          :factory_bot:
-            :enabled: true
-          :bundler_audit:
-            :enabled: true
-          :bundler_leak:
-            :enabled: true
-          :rails_best_practices:
-            :enabled: true
-          :lol_dba:
-            :enabled: true
-          :rubycritic:
-            :enabled: true
+          ---
+          :plugins:
+            :active_record_doctor:
+              :enabled: true
+            :brakeman:
+              :enabled: true
+            :rubocop:
+              :enabled: true
+            :fasterer:
+              :enabled: true
+            :traceroute:
+              :enabled: true
+            :i18n_tasks:
+              :enabled: true
+            :factory_bot:
+              :enabled: true
+            :bundler_audit:
+              :enabled: true
+            :bundler_leak:
+              :enabled: true
+            :rails_best_practices:
+              :enabled: true
+            :lol_dba:
+              :enabled: true
+            :rubycritic:
+              :enabled: true
         YAML
       end
     end

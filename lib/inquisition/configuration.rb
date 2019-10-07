@@ -1,5 +1,10 @@
 require 'yaml'
 require 'singleton'
+require 'fileutils'
+
+require_relative 'ext/deep_symbolize_keys'
+
+using Inquisition::DeepSymbolizeKeys
 
 require_relative 'ext/deep_symbolize_keys'
 
@@ -29,6 +34,14 @@ module Inquisition
 
     def verbose?
       @options.fetch(:verbose) { false }
+    end
+
+    def output_path
+      @output_path ||= begin
+        output_path = File.join(Rails.root, 'inquisition'.freeze)
+        FileUtils.mkdir_p(output_path)
+        output_path
+      end
     end
 
     def loader

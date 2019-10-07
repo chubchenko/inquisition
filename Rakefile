@@ -18,3 +18,18 @@ desc 'Run all specs in spec directory (excluding plugin specs)'
 RSpec::Core::RakeTask.new(spec: 'app:db:test:prepare')
 
 task default: :spec
+
+namespace :assets do
+  desc 'Compile all the assets'
+  task :compile do
+    require 'sprockets'
+
+    assets = Sprockets::Environment.new
+
+    assets.append_path('assets/javascripts')
+    assets.append_path('assets/stylesheets')
+
+    assets['application.js'].write_to('public/application.js')
+    assets['application.css'].write_to('public/application.css')
+  end
+end

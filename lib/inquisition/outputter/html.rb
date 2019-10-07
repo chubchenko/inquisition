@@ -1,3 +1,5 @@
+require_relative 'html/builder'
+
 module Inquisition
   module Outputter
     class HTML
@@ -5,7 +7,9 @@ module Inquisition
 
       def initialize(_output); end
 
-      def stop(_issues); end
+      def stop(issues)
+        Builder.call(issues)
+      end
     end
   end
 end

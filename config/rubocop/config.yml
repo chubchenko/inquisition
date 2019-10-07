@@ -2,8 +2,16 @@ require:
   - rubocop-rails
   - rubocop-performance
   - rubocop-rspec
+  - rubocop-minitest
+  - rubocop-rake
 
-Documentation:
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+
+Style/Documentation:
   Enabled: false
 
 Metrics/LineLength:
