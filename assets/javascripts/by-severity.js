@@ -1,21 +1,21 @@
 $(function() {
-  return $('div[data-by-category]').each(function() {
+  return $('div[data-by-severity]').each(function() {
     var data;
-    data = $(this).data('by-category');
+    data = $(this).data('by-severity');
 
     Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
     Chart.defaults.global.defaultFontColor = '#858796';
 
-    var ctx = document.getElementById("by-category");
+    var ctx = document.getElementById("by-severity");
 
     var myPieChart = new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ["Security", "Bug risk", "Performance", "Complexity", "Unused Code", "Duplication", "Style"],
+        labels: ["Low", "Medium", "High"],
         datasets: [{
           data: data,
-          backgroundColor: ['#e74a3b', '#f6c23e', '#36b9cc', '#1cc88a', '#4e73df', '#858796', '#1cc88a'],
-          hoverBackgroundColor: ['#B03524', '#D6A339', '#40828F', '#3C835F', '#234EB7', '#5A5C68', '#3C835F'],
+          backgroundColor: ['#36b9cc', '#f6c23e', '#e74a3b'],
+          hoverBackgroundColor: ['#40828F', '#D6A339', '#B03524'],
           hoverBorderColor: "rgba(234, 236, 244, 1)",
         }],
       },
@@ -35,7 +35,7 @@ $(function() {
           display: false
         },
         cutoutPercentage: 80,
-      },
+      }
     });
   });
 });

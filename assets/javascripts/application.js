@@ -5,3 +5,4 @@
 //= require vendor/chart.min
 
 //= require by-category
+//= require by-severity

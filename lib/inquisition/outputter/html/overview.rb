@@ -4,6 +4,7 @@ module Inquisition
       class Overview
         autoload :ByCategory, 'inquisition/outputter/html/overview/by_category'
         autoload :ByExecutor, 'inquisition/outputter/html/overview/by_executor'
+        autoload :BySeverity, 'inquisition/outputter/html/overview/by_severity'
 
         attr_reader :collection
 
@@ -21,6 +22,10 @@ module Inquisition
 
         def by_executor
           Template.new('by_executor').render(ByExecutor.new(collection))
+        end
+
+        def by_severity
+          Template.new('by_severity').render(BySeverity.new(collection))
         end
       end
     end
