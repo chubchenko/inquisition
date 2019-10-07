@@ -52,7 +52,7 @@ RSpec.describe Inquisition::Outputter::HTML::Overview do
       allow(template).to receive(:render)
       allow(Inquisition::Outputter::HTML::Template).to receive(:new).and_return(template)
 
-      overview.by_executor
+      overview.by_severity
     end
 
     it do

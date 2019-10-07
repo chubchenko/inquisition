@@ -14,7 +14,7 @@ RSpec.describe Inquisition::Outputter::HTML::Overview::BySeverity do
     end
 
     it 'returns array of percentage for each severity' do
-      expect(by_category.breakdown).to match_array([100.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+      expect(by_category.breakdown).to match_array([0.0, 0.0, 100.0])
     end
   end
 
