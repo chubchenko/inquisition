@@ -2,6 +2,7 @@ module Inquisition
   module Outputter
     autoload :Progress, 'inquisition/outputter/progress'
     autoload :HTML, 'inquisition/outputter/html'
+    autoload :Documentation, 'inquisition/outputter/documentation'
 
     def self.declare(outputter, *events)
       Loader.collection[outputter] = events
@@ -11,6 +12,12 @@ module Inquisition
       def self.collection
         @collection ||= {}
       end
+
+      OUTPUTTER_TYPES = {
+        %w[p progress] => Outputter::Progress,
+        %w[h html] => Outputter::HTML,
+        %w[doc documentation] => Outputter::Documentation
+      }.freeze
 
       attr_reader :fanout, :collection
 
@@ -38,8 +45,7 @@ module Inquisition
       private
 
       def find_outputter(outputter_to_use)
-        return Outputter::Progress if %w[p progress].include?(outputter_to_use)
-        return Outputter::HTML if %w[h html].include?(outputter_to_use)
+        OUTPUTTER_TYPES.each { |key, value| return value if key.include?(outputter_to_use) }
 
         raise ArgumentError, "Outputter #{outputter_to_use} unknown"
       end

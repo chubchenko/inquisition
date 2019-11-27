@@ -44,6 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubycritic', '~> 4.1'
   spec.add_dependency 'traceroute', '~> 0.8'
 
+  spec.add_dependency 'puredocx', '~> 0.1.1'
   spec.add_dependency 'rubocop-minitest', '~> 0.2.1'
   spec.add_dependency 'rubocop-rake', '~> 0.3.0'
 
