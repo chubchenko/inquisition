@@ -3,13 +3,18 @@
   severity: :low
   message: 'Not use time_ago_in_words'
   category: :style
-- path: 'db/schema.rb'
-  line: 15
+- path: 'app/models/application_record.rb'
+  line: 14
   severity: :low
-  message: 'Always add db index (active_storage_attachments => [record_id, record_type])'
-  category: :performance
-- path: 'db/schema.rb'
-  line: 32
+  message: 'Remove unused methods (applicationrecord#test_flog)'
+  category: :unused_code
+- path: 'app/models/application_record.rb'
+  line: 35
   severity: :low
-  message: 'Always add db index (projects => [user_id])'
-  category: :performance
+  message: 'Remove unused methods (applicationrecord#test_flay_1)'
+  category: :unused_code
+- path: 'app/models/application_record.rb'
+  line: 42
+  severity: :low
+  message: 'Remove unused methods (applicationrecord#test_flay_2)'
+  category: :unused_code
