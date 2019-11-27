@@ -16,6 +16,9 @@ module Inquisition
         end
 
         def call
+          # TODO: temporary solution to fix spec
+          ::FileUtils.mkdir_p(Inquisition::Configuration.instance.output_path)
+
           package.serialize(path)
         end
 

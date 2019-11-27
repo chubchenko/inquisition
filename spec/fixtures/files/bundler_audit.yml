@@ -1,15 +1,21 @@
 - severity: :medium
   category: :security
   message: 'Insecure Source URI found: http://rubygems.org/'
+- severity: :medium
+  category: :security
+  message: 'XSS vulnerability in bootstrap'
 - severity: :low
   category: :security
   message: 'Kafo default_values.yaml Insecure Permissions Local Information Disclosure'
 - severity: :low
   category: :security
   message: 'Loofah XSS Vulnerability'
-- severity: :medium
+- severity: :low
   category: :security
-  message: 'XSS vulnerability in bootstrap'
+  message: 'Loofah XSS Vulnerability'
+- severity: :low
+  category: :security
+  message: 'Nokogiri gem, via libxslt, is affected by multiple vulnerabilities'
 - severity: :high
   category: :security
   message: 'smart_proxy_dynflow gem authentication bypass in Foreman remote execution feature'

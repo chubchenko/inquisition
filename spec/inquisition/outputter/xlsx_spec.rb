@@ -1,7 +1,13 @@
 RSpec.describe Inquisition::Outputter::XLSX do
-  let(:html) { described_class.new(nil) }
+  let(:xlsx) { described_class.new(nil) }
 
-  before { Inquisition::Configuration.instance.loader.add(html) }
+  around do |example|
+    Inquisition::Configuration.instance.loader.add(xlsx)
+
+    example.run
+
+    Inquisition::Configuration.instance.loader.remove(xlsx)
+  end
 
   describe '#stop' do
     before do
