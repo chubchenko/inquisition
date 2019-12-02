@@ -20,6 +20,7 @@ module Inquisition
       }.freeze
 
       private_constant :OUTPUTTER_TYPES
+
       attr_reader :fanout, :collection
 
       def initialize(fanout: Fanout.new)
