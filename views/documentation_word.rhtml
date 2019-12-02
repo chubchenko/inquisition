@@ -114,14 +114,14 @@
       <div class="">
         <span class="subtitle"><a id="programming_languages_and_their_versions">Programming languages and their versions</a></span>
         <ul class="mt--5">
-          <li>Ruby 2.3.8</li>
+          <li><%= "Ruby #{RUBY_VERSION}" %></li>
         </ul>
       </div>
 
       <div class="">
         <span class="subtitle"><a id="frameworks_and_their_versions">Frameworks and their versions</a></span>
         <ul class="mt--5">
-          <li>Ruby on rails 2.4.3</li>
+          <li><%= "Ruby on rails #{Rails.version}" %></li>
         </ul>
       </div>
 
@@ -135,9 +135,9 @@
       <div class="">
         <span class="subtitle"><a id="databases_data_storages_and_their_versions">Databases, data storages, and their versions</a></span>
         <ul class="mt--5">
-          <li>PostgreSQL 9.6</li>
-          <li>Redis 9.6</li>
-          <li>...</li>
+          <% Rails.configuration.database_configuration.each do |env, db_data| %>
+            <li><%= "#{env.capitalize}: #{db_data['adapter']}" %></li>
+          <% end %>
         </ul>
       </div>
 
