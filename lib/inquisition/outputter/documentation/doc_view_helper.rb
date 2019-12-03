@@ -1,7 +1,7 @@
 module Inquisition
   module Outputter
-    module Presenters
-      class DocumentationPresenter
+    module Documentation
+      class DocViewHelper
         def produce
           binding
         end

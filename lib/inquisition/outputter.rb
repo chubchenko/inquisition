@@ -2,7 +2,7 @@ module Inquisition
   module Outputter
     autoload :Progress, 'inquisition/outputter/progress'
     autoload :HTML, 'inquisition/outputter/html'
-    autoload :Documentation, 'inquisition/outputter/documentation'
+    autoload :Doc, 'inquisition/outputter/doc'
 
     def self.declare(outputter, *events)
       Loader.collection[outputter] = events
@@ -16,9 +16,10 @@ module Inquisition
       OUTPUTTER_TYPES = {
         %w[p progress] => Outputter::Progress,
         %w[h html] => Outputter::HTML,
-        %w[doc documentation] => Outputter::Documentation
+        %w[doc documentation] => Outputter::Doc
       }.freeze
 
+      private_constant :OUTPUTTER_TYPES
       attr_reader :fanout, :collection
 
       def initialize(fanout: Fanout.new)
