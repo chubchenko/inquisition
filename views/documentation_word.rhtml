@@ -54,7 +54,7 @@
   <body>
     <div class='title-page'>
       <h1 class='title-doc'><%= Rails.application.class.parent_name %></h1>
-      <h2 class='date-creation'><%= "#{Date.today.day.ordinalize} #{Date::MONTHNAMES[Date.today.month]} #{Date.today.year}" %></h2>
+      <h2 class='date-creation'><%= date_today %></h2>
     </div>
     <br style="page-break-before: always">
     <div class='content-page'>
@@ -144,17 +144,18 @@
       <div class="">
         <span class="subtitle"><a id="monitoring_exceptions_tracking_tools">Monitoring/exceptions tracking tools</a></span>
         <ul class="mt--5">
-          <li>Airbrake</li>
-          <li>...</li>
+          <% define_exists_gems(MONITORING_SERVICES).each do |gem| %>
+          <li><%= gem %></li>
+          <% end %>
         </ul>
       </div>
 
       <div class="">
         <span class="subtitle"><a id="workers_background_jobs_and_tools_to_support_background_jobs">Workers, background jobs and tools to support background jobs</a></span>
         <ul class="mt--5">
-          <li>resque</li>
-          <li>whenever</li>
-          <li>...</li>
+          <% define_exists_gems(WORKERS_WITH_JOBS).each do |gem| %>
+          <li><%= gem %></li>
+          <% end %>
         </ul>
       </div>
       <br style="page-break-before: always">
@@ -162,36 +163,28 @@
       <div class="">
         <span class="subtitle"><a id="third_party_services_integrations">Third-party services/integrations</a></span>
         <ul class="mt--5">
-          <li>Mailgun</li>
-          <li>Google Tag Manager</li>
-          <li>Google OAuth 2.0</li>
-          <li>...</li>
+          <li>not implement</li>
         </ul>
       </div>
 
       <div class="">
         <span class="subtitle"><a id="hosting_platforms_services_tools">Hosting platforms, services, tools</a></span>
         <ul class="mt--5">
-          <li>Heroku</li>
-          <li>Heroku Postgres</li>
-          <li>...</li>
+          <li>not implement</li>
         </ul>
       </div>
 
       <div class="">
         <span class="subtitle"><a id="server_infrastructure_management_and_deployment_tools">Server infrastructure management and deployment tools</a></span>
         <ul class="mt--5">
-          <li>There is no instrument for CI/CD</li>
-          <li>Deploying with Git</li>
-          <li>...</li>
+          <li>not implement</li>
         </ul>
       </div>
 
       <div class="">
         <span class="subtitle"><a id="assets">Assets</a></span>
         <ul class="mt--5">
-          <li>JavaScript package management is absent;</li>
-          <li>...</li>
+          <li>not implement</li>
         </ul>
       </div>
     </div>
