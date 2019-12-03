@@ -10,7 +10,7 @@ RSpec.describe Inquisition::Outputter::Documentation do
 
     after { FileUtils.rm_rf(Dir[directory + full_file_name]) }
 
-    it 'create a docx file' do
+    it 'creates a docx file' do
       expect(File.exist?(directory + full_file_name)).to be true
     end
   end

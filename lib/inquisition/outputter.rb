@@ -13,6 +13,12 @@ module Inquisition
         @collection ||= {}
       end
 
+      OUTPUTTER_TYPES = {
+        %w[p progress] => Outputter::Progress,
+        %w[h html] => Outputter::HTML,
+        %w[doc documentation] => Outputter::Documentation
+      }.freeze
+
       attr_reader :fanout, :collection
 
       def initialize(fanout: Fanout.new)
@@ -37,12 +43,6 @@ module Inquisition
       end
 
       private
-
-      OUTPUTTER_TYPES = {
-        %w[p progress] => Outputter::Progress,
-        %w[h html] => Outputter::HTML,
-        %w[doc documentation] => Outputter::Documentation
-      }.freeze
 
       def find_outputter(outputter_to_use)
         OUTPUTTER_TYPES.each { |key, value| return value if key.include?(outputter_to_use) }

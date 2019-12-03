@@ -54,7 +54,7 @@
   <body>
     <div class='title-page'>
       <h1 class='title-doc'><%= Rails.application.class.parent_name %></h1>
-      <h2 class='date-creation'><%= "#{Date.today.day}th #{Date::MONTHNAMES[Date.today.month]} #{Date.today.year}" %></h2>
+      <h2 class='date-creation'><%= "#{Date.today.day.ordinalize} #{Date::MONTHNAMES[Date.today.month]} #{Date.today.year}" %></h2>
     </div>
     <br style="page-break-before: always">
     <div class='content-page'>
