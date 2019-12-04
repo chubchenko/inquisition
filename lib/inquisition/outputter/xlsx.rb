@@ -2,7 +2,7 @@ require_relative 'xlsx/builder'
 
 module Inquisition
   module Outputter
-    class Xlsx
+    class XLSX
       Outputter.declare(self, :stop)
 
       def initialize(_output); end
