@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module Documentation
+    module Docx
       class DocViewHelper
         def produce
           binding
