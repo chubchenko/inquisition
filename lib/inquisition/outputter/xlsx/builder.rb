@@ -1,34 +1,45 @@
 require 'caxlsx'
 
+require_relative 'file'
+
 module Inquisition
   module Outputter
-    class XLSX
+    class Xlsx
+      autoload :GemsInfo, 'inquisition/outputter/xlsx/gems_info'
+
       class Builder
-        attr_reader :package
+        WORKSHEET_NAME = 'Gems info'.freeze
 
         def self.call(collection)
           new(collection).call
         end
 
-        def initialize(collection)
-          @collection = collection
+        def initialize(_collection, file = File.new)
+          @file = file
           @package = Axlsx::Package.new
+          @presenter = Xlsx::GemsInfo.new.call
         end
 
         def call
-          package.serialize(path)
+          file.create_folder
+          fill_info
+          save_worksheet
         end
 
         private
 
-        def path
-          File.join(
-            Inquisition::Configuration.instance.output_path, filename + '.xlsx'
-          )
+        attr_reader :package, :presenter, :file
+
+        def fill_info
+          presenter.each { |info| worksheet.add_row(info.values) }
         end
 
-        def filename
-          [Rails.application.class.parent.name.underscore, Time.current.strftime('%d_%m_%y')].join('_')
+        def save_worksheet
+          package.serialize(file.path)
+        end
+
+        def worksheet
+          @worksheet ||= package.workbook.add_worksheet(name: WORKSHEET_NAME)
         end
       end
     end
