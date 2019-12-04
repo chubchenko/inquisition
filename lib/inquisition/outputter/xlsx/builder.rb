@@ -1,30 +1,35 @@
 require 'axlsx'
 
-require_relative 'file'
-
 module Inquisition
   module Outputter
-    class Xlsx
+    class XLSX
       class Builder
+        attr_reader :package
+
         def self.call(collection)
           new(collection).call
         end
 
-        def initialize(collection, file = File.new)
-          @file = file
+        def initialize(collection)
           @collection = collection
           @package = Axlsx::Package.new
         end
 
         def call
-          ::FileUtils.mkdir_p(@file.path.dirname)
-
-          package.serialize(@file.path)
+          package.serialize(path)
         end
 
         private
 
-        attr_reader :package
+        def path
+          File.join(
+            Inquisition::Configuration.instance.output_path, filename + '.xlsx'
+          )
+        end
+
+        def filename
+          [Rails.application.class.parent.name.underscore, Time.current.strftime('%d_%m_%y')].join('_')
+        end
       end
     end
   end
