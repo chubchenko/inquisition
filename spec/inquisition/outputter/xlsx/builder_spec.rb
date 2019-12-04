@@ -1,6 +1,4 @@
-RSpec.describe Inquisition::Outputter::XLSX::Builder do
-
-  after { FileUtils.rm_rf(Inquisition::Configuration.instance.output_path) }
+RSpec.describe Inquisition::Outputter::Xlsx::Builder do
 
   describe '.call' do
     before do
@@ -15,6 +13,7 @@ RSpec.describe Inquisition::Outputter::XLSX::Builder do
 
   describe '#call' do
     before { described_class.call([]) }
+    after { FileUtils.rm_rf(Inquisition::Configuration.instance.output_path) }
 
     it 'creates xlsx file' do
       filename = "dummy_#{Time.current.strftime('%d_%m_%y')}"

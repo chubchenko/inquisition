@@ -3,7 +3,7 @@ module Inquisition
     autoload :Progress, 'inquisition/outputter/progress'
     autoload :HTML, 'inquisition/outputter/html'
     autoload :Doc, 'inquisition/outputter/doc'
-    autoload :XLSX, 'inquisition/outputter/xlsx'
+    autoload :Xlsx, 'inquisition/outputter/xlsx'
 
     def self.declare(outputter, *events)
       Loader.collection[outputter] = events
@@ -54,9 +54,7 @@ module Inquisition
       private
 
       def find_outputter(outputter_to_use)
-        return Outputter::Progress if %w[p progress].include?(outputter_to_use)
-        return Outputter::HTML if %w[h html].include?(outputter_to_use)
-        return Outputter::XLSX if %w[h xlsx].include?(outputter_to_use)
+        OUTPUTTER_TO_USE_TABLE.each { |klass, keys| return klass if keys.include?(outputter_to_use) }
 
         raise ArgumentError, "Outputter #{outputter_to_use} unknown"
       end
