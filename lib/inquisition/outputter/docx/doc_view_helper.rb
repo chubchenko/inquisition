@@ -1,6 +1,6 @@
 module Inquisition
   module Outputter
-    module Documentation
+    module Docx
       class DocViewHelper
         ERROR_FIND_GEMS_MESSAGE = 'There is no one gem'.freeze
         MONITORING_SERVICES = %w[airbrake sentry-raven bugsnag rollbar raygun].freeze
