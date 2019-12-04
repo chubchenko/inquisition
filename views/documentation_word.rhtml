@@ -200,13 +200,11 @@
         <div class="">
           <span class="sub-subtitle"><a href="#brakeman">Brakeman</a></span>
           <ul class="mt--5">
-            <li>Cross-Site Scripting: 10</li>
-            <li>File Access: 6</li>
-            <li>Format Validation: 1</li>
-            <li>Mass Assignment: 2</li>
-            <li>SQL Injection: 6</li>
+            <% group_issues_by_column(collect_issues('brakeman'), :warning_type).each do |warning, issues| %>
+            <li><%= "#{warning}: #{issues.count}" %></li>
+            <% end %>
           </ul>
-          <span>There are 25 warnings and 8 of them are high. The full report can be found here.</span>
+          <span><%= "There are #{collect_issues('brakeman').count} warnings and #{take_issues_by_difficulty(collect_issues('brakeman'), :high).count} of them are high. The full report can be found here." %></span>
         </div>
 
         <div class="">

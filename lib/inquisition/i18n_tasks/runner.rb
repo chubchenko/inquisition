@@ -44,6 +44,7 @@ module Inquisition
           path: create_relative_path(file&.path || node.data[:path]),
           line: file&.line_num,
           message: type == :missing ? "missing key: #{key}" : "unused key: #{key}, value: #{node.value}",
+          warning_type: nil,
           runner: self
         )
       end

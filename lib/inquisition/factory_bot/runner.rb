@@ -13,7 +13,8 @@ module Inquisition
 
       def create_issues(error)
         @issues << Inquisition::Issue.new(severity: Severity::LOW, path: error.location, runner: self,
-                                          category: Category::BUG_RISK, message: error.message, line: nil)
+                                          category: Category::BUG_RISK, message: error.message, line: nil,
+                                          warning_type: nil)
       end
     end
   end

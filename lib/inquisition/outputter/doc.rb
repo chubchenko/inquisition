@@ -1,5 +1,5 @@
 require_relative 'html/template'
-require_relative 'documentation/doc_view_helper'
+require_relative 'docx/doc_view_helper'
 
 module Inquisition
   module Outputter
@@ -12,8 +12,8 @@ module Inquisition
         generate_doc(issues)
       end
 
-      def generate_doc(_issues)
-        documentation = HTML::Template.new('documentation_word').render(Documentation::DocViewHelper.new)
+      def generate_doc(issues)
+        documentation = HTML::Template.new('documentation_word').render(Docx::DocViewHelper.new(issues))
         File.open(path_to_word_file, 'w') { |file| file.write(documentation) }
       end
 
