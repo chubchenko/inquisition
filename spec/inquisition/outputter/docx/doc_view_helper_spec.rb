@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Documentation::DocViewHelper do
+RSpec.describe Inquisition::Outputter::Docx::DocViewHelper do
   subject(:define_exists_gems) { described_class.new.define_exists_gems(gems) }
 
   describe '#define_exists_gems' do
