@@ -27,15 +27,15 @@ module Inquisition
         end
 
         def collect_issues(runner_name)
-          issues.map { |issue| issue if runner_issue_exists?(issue, runner_name) }.compact
+          issues&.map { |issue| issue if runner_issue_exists?(issue, runner_name) }&.compact
         end
 
         def group_issues_by_column(issues, issue_type)
-          issues.group_by(&issue_type)
+          issues&.group_by(&issue_type)
         end
 
         def take_issues_by_difficulty(issues, difficulty)
-          issues.map { |issue| issue if issue.severity.name == difficulty }.compact
+          issues&.map { |issue| issue if issue.severity.name == difficulty }&.compact
         end
 
         private

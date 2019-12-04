@@ -11,7 +11,8 @@ RSpec.shared_examples 'runner' do |fixture_name|
           severity: item['severity'],
           category: item['category'],
           message: item['message'],
-          runner: runner
+          runner: runner,
+          warning_type: nil
         )
       end
     end

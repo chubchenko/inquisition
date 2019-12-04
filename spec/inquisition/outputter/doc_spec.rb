@@ -6,7 +6,13 @@ RSpec.describe Inquisition::Outputter::Doc do
     let(:directory) { Rails.root.to_s + '/inquisition' }
     let(:full_file_name) { "/Dummy_#{current_time}.docx" }
 
-    before { documentation.generate_doc(nil) }
+    before do
+      FileUtils.rm_rf(Dir[directory + full_file_name])
+      Inquisition::Configuration.instance.fanout.around do
+        []
+      end
+      documentation.generate_doc([])
+    end
 
     after { FileUtils.rm_rf(Dir[directory + full_file_name]) }
 
@@ -20,12 +26,12 @@ RSpec.describe Inquisition::Outputter::Doc do
       Inquisition::Configuration.instance.loader.add(documentation)
       allow(documentation).to receive(:generate_doc)
       Inquisition::Configuration.instance.fanout.around do
-        %w[a b c]
+        []
       end
     end
 
     it do
-      expect(documentation).to have_received(:generate_doc).with(%w[a b c])
+      expect(documentation).to have_received(:generate_doc).with([])
     end
   end
 end

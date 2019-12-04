@@ -33,7 +33,8 @@ RSpec.describe Inquisition::FactoryBot::Runner do
           severity: Inquisition::Severity::LOW,
           category: Inquisition::Category::BUG_RISK,
           message: 'factory error',
-          runner: nil
+          runner: nil,
+          warning_type: nil
         ),
         Inquisition::Issue.new(
           path: factory,
@@ -41,7 +42,8 @@ RSpec.describe Inquisition::FactoryBot::Runner do
           severity: Inquisition::Severity::LOW,
           category: Inquisition::Category::BUG_RISK,
           message: 'factory trait error',
-          runner: nil
+          runner: nil,
+          warning_type: nil
         )
       )
     end

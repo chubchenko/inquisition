@@ -34,7 +34,8 @@ RSpec.describe Inquisition::Fasterer::Runner do
             line: offense.first.line_number,
             path: test_file,
             message: offense.first.explanation,
-            runner: nil
+            runner: nil,
+            warning_type: nil
           )
         )
       end

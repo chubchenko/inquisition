@@ -9,7 +9,8 @@ RSpec.describe Inquisition::Issue do
         path: 'show.html.erb',
         line: '10',
         message: 'Unescaped parameter value',
-        runner: nil
+        runner: nil,
+        warning_type: nil
       )
     end
 
@@ -21,7 +22,8 @@ RSpec.describe Inquisition::Issue do
           path: issue.path,
           line: issue.line,
           message: issue.message,
-          runner: nil
+          runner: nil,
+          warning_type: nil
         )
       end
 
@@ -36,7 +38,8 @@ RSpec.describe Inquisition::Issue do
           path: 'show.html.erb',
           line: '11',
           message: 'Unescaped parameter value',
-          runner: nil
+          runner: nil,
+          warning_type: nil
         )
       end
 
@@ -54,7 +57,8 @@ RSpec.describe Inquisition::Issue do
         path: '_slimmer.html.slim',
         line: '6',
         message: 'Unescaped parameter value',
-        runner: nil
+        runner: nil,
+        warning_type: nil
       )
     end
 
@@ -66,7 +70,8 @@ RSpec.describe Inquisition::Issue do
           path: issue.path,
           line: issue.line,
           message: issue.message,
-          runner: nil
+          runner: nil,
+          warning_type: nil
         )
       end
 
@@ -81,7 +86,8 @@ RSpec.describe Inquisition::Issue do
           path: '_slimmer.html.slim',
           line: '7',
           message: 'Unescaped parameter value',
-          runner: nil
+          runner: nil,
+          warning_type: nil
         )
       end
 
