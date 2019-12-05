@@ -20,8 +20,7 @@ module Inquisition
           category: Categorizer.find_category(offense.cop_name),
           path: file,
           message: offense.message,
-          line: offense.line,
-          warning_type: nil
+          line: offense.line
         }
       end
 

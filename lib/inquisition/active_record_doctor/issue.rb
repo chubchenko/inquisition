@@ -13,8 +13,7 @@ module Inquisition
           path: nil,
           line: nil,
           message: create_message,
-          category: Runner::TASKS[task],
-          warning_type: nil
+          category: Runner::TASKS[task]
         }
       end
 

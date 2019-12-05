@@ -36,8 +36,7 @@ module Inquisition
           severity: Severity::LOW,
           message: message,
           category: Category::UNUSED_CODE,
-          runner: self,
-          warning_type: nil
+          runner: self
         )
       end
     end

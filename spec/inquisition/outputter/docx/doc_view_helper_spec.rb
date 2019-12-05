@@ -1,7 +1,7 @@
 RSpec.describe Inquisition::Outputter::Docx::DocViewHelper do
-  describe '#define_exists_gems' do
-    subject(:define_exists_gems) { described_class.new(nil).define_exists_gems(gems) }
+  subject(:define_exists_gems) { described_class.new(nil).define_exists_gems(gems) }
 
+  describe '#define_exists_gems' do
     let(:gems) { ['test_name_gem'] }
 
     before { allow(Gem).to receive(:loaded_specs).and_return(gem_specification) }

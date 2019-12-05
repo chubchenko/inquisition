@@ -1,37 +1,22 @@
 RSpec.describe Inquisition::Outputter::Doc do
-  let(:documentation) { described_class.new(nil) }
+  subject(:documentation) { described_class.new(nil) }
 
-  describe '#generate_doc' do
+  describe '#stop' do
     let(:current_time) { Time.now.strftime('%d_%m_%Y') }
-    let(:directory) { Rails.root.to_s + '/inquisition' }
+    let!(:directory) { Inquisition::Configuration.instance.output_path }
     let(:full_file_name) { "/Dummy_#{current_time}.docx" }
 
     before do
-      FileUtils.rm_rf(Dir[directory + full_file_name])
+      Inquisition::Configuration.instance.loader.add(documentation)
       Inquisition::Configuration.instance.fanout.around do
         []
       end
-      documentation.generate_doc([])
     end
 
     after { FileUtils.rm_rf(Dir[directory + full_file_name]) }
 
     it 'creates a docx file' do
-      expect(File.exist?(directory + full_file_name)).to be true
-    end
-  end
-
-  describe '#stop' do
-    before do
-      Inquisition::Configuration.instance.loader.add(documentation)
-      allow(documentation).to receive(:generate_doc)
-      Inquisition::Configuration.instance.fanout.around do
-        []
-      end
-    end
-
-    it do
-      expect(documentation).to have_received(:generate_doc).with([])
+      expect(File).to exist(directory + full_file_name)
     end
   end
 end

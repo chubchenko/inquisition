@@ -4,7 +4,7 @@ module Inquisition
 
     attr_reader :path, :line, :severity, :message, :category, :runner, :warning_type
 
-    def initialize(path:, line:, severity:, message:, category:, runner:, warning_type:)
+    def initialize(path:, line:, severity:, message:, category:, runner:, warning_type: nil)
       @path = path
       @line = line
       @runner = runner

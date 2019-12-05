@@ -12,8 +12,7 @@ module Inquisition
           line: location.line,
           severity: Inquisition::Severity::LOW,
           message: "#{smell.context} #{smell.message}",
-          category: category,
-          warning_type: nil
+          category: category
         }
       end
 

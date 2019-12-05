@@ -11,8 +11,7 @@ module Inquisition
           line: error.line_number.to_i,
           severity: Severity::LOW,
           message: error.message.capitalize,
-          category: Categorizer.find_category(error.type),
-          warning_type: nil
+          category: Categorizer.find_category(error.type)
         }
       end
 

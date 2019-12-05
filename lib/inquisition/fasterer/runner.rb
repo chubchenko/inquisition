@@ -37,8 +37,7 @@ module Inquisition
           line: error.line_number,
           runner: self,
           path: file_error,
-          message: error.explanation,
-          warning_type: nil
+          message: error.explanation
         )
       end
     end

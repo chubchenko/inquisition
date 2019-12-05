@@ -24,8 +24,7 @@ module Inquisition
           line: nil,
           severity: Severity::LOW,
           message: "The following column(s) #{columns} from the `#{table}` table probably should be indexed",
-          category: Category::PERFORMANCE,
-          warning_type: nil
+          category: Category::PERFORMANCE
         }
       end
 
