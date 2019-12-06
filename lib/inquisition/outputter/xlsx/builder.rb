@@ -28,7 +28,7 @@ module Inquisition
         end
 
         def filename
-          [Rails.application.class.parent.name.underscore, Time.current.strftime('%d_%m_%y')].join('_')
+          [Rails.application.class.parent.name.underscore, Date.current.strftime('%d_%m_%y')].join('_')
         end
       end
     end
