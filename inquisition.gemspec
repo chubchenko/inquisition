@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'brakeman', '~> 4.6'
   spec.add_dependency 'bundler-audit', '~> 0.6'
   spec.add_dependency 'bundler-leak', '~> 0.1'
-  spec.add_dependency 'caxlsx', '~> 3.0', '>= 3.0.1'
+  spec.add_dependency 'caxlsx'
   spec.add_dependency 'factory_bot', '~> 5.0'
   spec.add_dependency 'fasterer', '~> 0.6'
   spec.add_dependency 'i18n-tasks', '~> 0.9'
