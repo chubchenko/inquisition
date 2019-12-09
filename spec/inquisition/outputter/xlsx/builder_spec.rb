@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::XLSX::Builder do
+RSpec.describe Inquisition::Outputter::Xlsx::Builder do
   describe '.call' do
     let(:builder) { instance_double(described_class) }
 
@@ -12,12 +12,16 @@ RSpec.describe Inquisition::Outputter::XLSX::Builder do
   end
 
   describe '#call' do
-    before { described_class.call([]) }
+    subject(:builder) { described_class.new([]) }
+
+    before { builder.call }
+
     after { FileUtils.rm_rf(Inquisition::Configuration.instance.output_path) }
 
-    it 'creates xlsx file' do
-      filename = "dummy_#{Date.current.strftime('%d_%m_%y')}"
-      expect(File).to exist(File.join(Inquisition::Configuration.instance.output_path, filename + '.xlsx'))
+    it 'creates a xlsx file' do
+      expect(File).to exist(
+        File.join(Inquisition::Configuration.instance.output_path, 'DUMMY.xlsx')
+      )
     end
   end
 end

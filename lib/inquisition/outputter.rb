@@ -3,7 +3,7 @@ module Inquisition
     autoload :Progress, 'inquisition/outputter/progress'
     autoload :HTML, 'inquisition/outputter/html'
     autoload :Doc, 'inquisition/outputter/doc'
-    autoload :XLSX, 'inquisition/outputter/xlsx'
+    autoload :Xlsx, 'inquisition/outputter/xlsx'
 
     def self.declare(outputter, *events)
       Loader.collection[outputter] = events
@@ -18,7 +18,7 @@ module Inquisition
         Outputter::Progress => %w[p progress],
         Outputter::HTML => %w[h html],
         Outputter::Doc => %w[d doc],
-        Outputter::XLSX => %w[x xlsx]
+        Outputter::Xlsx => %w[x xlsx]
       }.freeze
       private_constant :OUTPUTTER_TO_USE_TABLE
 
