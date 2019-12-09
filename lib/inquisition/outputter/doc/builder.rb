@@ -1,30 +1,23 @@
-require 'caxlsx'
-
 require_relative 'file'
 
 module Inquisition
   module Outputter
-    class Xlsx
+    class Doc
       class Builder
         def self.call(collection)
           new(collection).call
         end
 
         def initialize(collection, file = File.new)
-          @file = file
           @collection = collection
-          @package = Axlsx::Package.new
+          @file = file
         end
 
         def call
           ::FileUtils.mkdir_p(@file.path.dirname)
 
-          package.serialize(@file.path)
+          ::File.open(@file.path, 'wb')
         end
-
-        private
-
-        attr_reader :package
       end
     end
   end

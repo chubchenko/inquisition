@@ -1,14 +1,14 @@
-require_relative 'xlsx/builder'
+require_relative 'doc/builder'
 
 module Inquisition
   module Outputter
-    class Xlsx
+    class Doc
       Outputter.declare(self, :stop)
 
       def initialize(_output); end
 
-      def stop(issues)
-        Builder.call(issues)
+      def stop(payload)
+        Builder.call(payload)
       end
     end
   end

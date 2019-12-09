@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Xlsx::Builder do
+RSpec.describe Inquisition::Outputter::Doc::Builder do
   describe '.call' do
     let(:builder) { instance_double(described_class) }
 
@@ -18,9 +18,9 @@ RSpec.describe Inquisition::Outputter::Xlsx::Builder do
 
     after { FileUtils.rm_rf(Inquisition::Configuration.instance.output_path) }
 
-    it 'creates a xlsx file' do
+    it 'creates a doc file' do
       expect(File).to exist(
-        File.join(Inquisition::Configuration.instance.output_path, 'DUMMY.xlsx')
+        File.join(Inquisition::Configuration.instance.output_path, 'DUMMY.docx')
       )
     end
   end
