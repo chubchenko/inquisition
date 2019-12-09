@@ -13,13 +13,13 @@ module Inquisition
         @collection ||= {}
       end
 
-      OUTPUTTER_TYPES = {
-        %w[p progress] => Outputter::Progress,
-        %w[h html] => Outputter::HTML,
-        %w[doc documentation] => Outputter::Doc
+      OUTPUTTER_TO_USE_TABLE = {
+        Outputter::Progress => %w[p progress],
+        Outputter::HTML => %w[h html],
+        Outputter::Doc => %w[d doc]
       }.freeze
+      private_constant :OUTPUTTER_TO_USE_TABLE
 
-      private_constant :OUTPUTTER_TYPES
       attr_reader :fanout, :collection
 
       def initialize(fanout: Fanout.new)
@@ -35,6 +35,12 @@ module Inquisition
         register(outputter_class.new(output))
       end
 
+      def remove(outputter_to_unuse)
+        return unregister(outputter_to_unuse) if Loader.collection.key?(outputter_to_unuse.class)
+
+        raise ArgumentError, "Outputter #{outputter_to_unuse} unknown"
+      end
+
       def prepare_default
         @fanout.prepare_default(self)
       end
@@ -46,7 +52,7 @@ module Inquisition
       private
 
       def find_outputter(outputter_to_use)
-        OUTPUTTER_TYPES.each { |key, value| return value if key.include?(outputter_to_use) }
+        OUTPUTTER_TO_USE_TABLE.each { |klass, keys| return klass if keys.include?(outputter_to_use) }
 
         raise ArgumentError, "Outputter #{outputter_to_use} unknown"
       end
@@ -55,6 +61,12 @@ module Inquisition
         @collection << outputter
 
         @fanout.register_listener(outputter, *Loader.collection.fetch(outputter.class))
+      end
+
+      def unregister(outputter)
+        @collection.delete(outputter)
+
+        @fanout.unregister_listener(outputter, *Loader.collection.fetch(outputter.class))
       end
     end
   end

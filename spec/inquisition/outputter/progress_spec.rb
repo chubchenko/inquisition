@@ -3,7 +3,13 @@ RSpec.describe Inquisition::Outputter::Progress do
 
   let(:output) { StringIO.new }
 
-  before { Inquisition::Configuration.instance.loader.add(progress) }
+  around do |example|
+    Inquisition::Configuration.instance.loader.add(progress)
+
+    example.run
+
+    Inquisition::Configuration.instance.loader.remove(progress)
+  end
 
   describe '#example_passed' do
     before { Inquisition::Configuration.instance.fanout.example_passed(Inquisition::NullPayload.new) }

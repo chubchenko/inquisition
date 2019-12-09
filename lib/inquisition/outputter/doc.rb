@@ -1,6 +1,4 @@
-require_relative 'html/template'
-require_relative 'docx/doc_view_helper'
-require_relative 'docx/doc_file_helper'
+require_relative 'doc/builder'
 
 module Inquisition
   module Outputter
@@ -9,10 +7,8 @@ module Inquisition
 
       def initialize(_output); end
 
-      def stop(_issues)
-        file_helper = Docx::DocFileHelper.new
-        documentation = HTML::Template.new('documentation_word').render(Docx::DocViewHelper.new)
-        File.open(file_helper.path_to_word_file, 'w') { |file| file.write(documentation) }
+      def stop(payload)
+        Builder.call(payload)
       end
     end
   end

@@ -1,22 +1,25 @@
 RSpec.describe Inquisition::Outputter::Doc do
-  subject(:documentation) { described_class.new(nil) }
+  let(:doc) { described_class.new(nil) }
+
+  around do |example|
+    Inquisition::Configuration.instance.loader.add(doc)
+
+    example.run
+
+    Inquisition::Configuration.instance.loader.remove(doc)
+  end
 
   describe '#stop' do
-    let(:current_time) { Time.now.strftime('%d_%m_%Y') }
-    let!(:directory) { Inquisition::Configuration.instance.output_path }
-    let(:full_file_name) { "/Dummy_#{current_time}.docx" }
-
     before do
-      Inquisition::Configuration.instance.loader.add(documentation)
+      allow(Inquisition::Outputter::Doc::Builder).to receive(:call)
+
       Inquisition::Configuration.instance.fanout.around do
-        []
+        %w[a b c]
       end
     end
 
-    after { FileUtils.rm_rf(Dir[directory + full_file_name]) }
-
-    it 'creates a docx file' do
-      expect(File).to exist(directory + full_file_name)
+    it do
+      expect(Inquisition::Outputter::Doc::Builder).to have_received(:call).with(%w[a b c])
     end
   end
 end

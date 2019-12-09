@@ -17,6 +17,14 @@ module Inquisition
       true
     end
 
+    def unregister_listener(outputter, *events)
+      events.each do |event|
+        @listeners[event.to_sym].delete(outputter)
+      end
+
+      true
+    end
+
     def around
       start
 
