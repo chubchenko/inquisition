@@ -41,6 +41,30 @@ RSpec.describe Inquisition::Outputter::Loader do
     end
   end
 
+  describe '#remove' do
+    before do
+      allow(fanout).to receive(:register_listener)
+      allow(fanout).to receive(:unregister_listener)
+    end
+
+    it 'removes a outputter by the name' do
+      outputter = Inquisition::Outputter::Progress.new
+      loader.add(outputter)
+
+      expect do
+        loader.remove(outputter)
+      end.to change(loader.collection, :count).by(-1)
+    end
+
+    it 'raises ArgumentError if outputter is unknown' do
+      outputter = Class.new
+
+      expect do
+        loader.remove(outputter)
+      end.to raise_error(ArgumentError, "Outputter #{outputter} unknown")
+    end
+  end
+
   describe '#prepare_default' do
     before { allow(fanout).to receive(:prepare_default) }
 

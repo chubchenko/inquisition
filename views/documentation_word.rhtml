@@ -135,17 +135,15 @@
       <div class="">
         <span class="subtitle"><a id="databases_data_storages_and_their_versions">Databases, data storages, and their versions</a></span>
         <ul class="mt--5">
-          <% Rails.configuration.database_configuration.each do |env, db_data| %>
-            <li><%= "#{env.capitalize}: #{db_data['adapter']}" %></li>
-          <% end %>
+          <li><%= Rails.configuration.database_configuration['default']['adapter'] %></li>
         </ul>
       </div>
 
       <div class="">
         <span class="subtitle"><a id="monitoring_exceptions_tracking_tools">Monitoring/exceptions tracking tools</a></span>
         <ul class="mt--5">
-          <% define_exists_gems(MONITORING_SERVICES).each do |gem| %>
-          <li><%= gem %></li>
+          <% monitoring_tools.each do |gem| %>
+          <%= gem.is_a?(Hash) ? gem[:exception] : "<li>#{gem.name} - #{gem.description}, link on gem - <a href=#{gem.link}>here</a></li><br>" %>
           <% end %>
         </ul>
       </div>
@@ -153,8 +151,8 @@
       <div class="">
         <span class="subtitle"><a id="workers_background_jobs_and_tools_to_support_background_jobs">Workers, background jobs and tools to support background jobs</a></span>
         <ul class="mt--5">
-          <% define_exists_gems(WORKERS_WITH_JOBS).each do |gem| %>
-          <li><%= gem %></li>
+          <% workers_with_jobs.each do |gem| %>
+          <%= gem.is_a?(Hash) ? gem[:exception] : "<li>#{gem.name} - <a href=#{gem.link}>here</a></li>" %>
           <% end %>
         </ul>
       </div>

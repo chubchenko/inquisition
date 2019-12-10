@@ -1,7 +1,13 @@
 RSpec.describe Inquisition::Outputter::HTML do
   let(:html) { described_class.new(nil) }
 
-  before { Inquisition::Configuration.instance.loader.add(html) }
+  around do |example|
+    Inquisition::Configuration.instance.loader.add(html)
+
+    example.run
+
+    Inquisition::Configuration.instance.loader.remove(html)
+  end
 
   describe '#stop' do
     before do
