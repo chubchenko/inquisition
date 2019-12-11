@@ -4,10 +4,16 @@ module Inquisition
   module Outputter
     class Xlsx
       class GemsInfo
+        attr_reader :collection
+
         OUTDATED = 'Outdated'.freeze
         HOMEPAGE_URI = 'homepage_uri'.freeze
         VERSION = 'version'.freeze
         FILTRED_ENVIRONMENTS = %i[default].freeze
+
+        def initialize(collection)
+          @collection = collection
+        end
 
         def call
           prepare_info
@@ -17,13 +23,18 @@ module Inquisition
 
         def prepare_info
           collect_gems_info.map do |info|
+            binding.pry
+            # detailed_status = GemDetailedStatus.new(info).call
+
             {
               name: info[:bundler].name,
               homepage: info.dig(:rubygems, HOMEPAGE_URI),
               current_version: current_version(info),
               latest_version: latest_version(info),
               status: latest_version(info) > current_version(info) ? OUTDATED : nil,
-              environment: environment(info)
+              environment: environment(info),
+              detailed_status: nil,
+              color: nil
             }
           end
         end

@@ -33,7 +33,8 @@ RSpec.describe Inquisition::Outputter::Xlsx::GemsInfo do
 
     describe 'returned structure' do
       it 'match hash structure' do
-        expect(info_subject.first).to include(:name, :homepage, :current_version, :latest_version, :status, :environment)
+        expect(info_subject.first).to include(:name, :homepage, :current_version, :latest_version, :status,
+                                              :environment, :detailed_status, :color)
       end
     end
   end

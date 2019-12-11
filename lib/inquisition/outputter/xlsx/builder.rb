@@ -6,6 +6,7 @@ module Inquisition
   module Outputter
     class Xlsx
       autoload :GemsInfo, 'inquisition/outputter/xlsx/gems_info'
+      autoload :GemDetailedInfo, 'inquisition/outputter/xlsx/gem_detailed_info'
 
       class Builder
         WORKSHEET_NAME = 'Gems info'.freeze
@@ -14,10 +15,10 @@ module Inquisition
           new(collection).call
         end
 
-        def initialize(_collection, file = File.new)
+        def initialize(collection, file = File.new)
           @file = file
           @package = Axlsx::Package.new
-          @presenter = Xlsx::GemsInfo.new.call
+          @presenter = Xlsx::GemsInfo.new(collection).call
         end
 
         def call
