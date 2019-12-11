@@ -1,7 +1,13 @@
+require 'date'
+
 module Inquisition
   module Outputter
     class Doc
       class Home
+        def initialize
+          @today = ::Date.today
+        end
+
         def produce
           binding
         end
@@ -13,12 +19,16 @@ module Inquisition
         def date
           @date ||= begin
             [
-              ::Date.today.day.ordinalize,
-              ::Date::MONTHNAMES[Date.today.month],
-              ::Date.today.year
+              today.day.ordinalize,
+              ::Date::MONTHNAMES[today.month],
+              today.year
             ].join(' ')
           end
         end
+
+        private
+
+        attr_reader :today
       end
     end
   end
