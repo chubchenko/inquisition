@@ -1,24 +1,28 @@
-RSpec.describe Inquisition::Outputter::Xlsx::GemsInfo do
+require 'pry'
+include Helpers::GemInfoHelper
+
+RSpec.describe Inquisition::Outputter::Xlsx::Gem do
   describe '#call' do
-    subject(:info_subject) { described_class.new.call }
-    let(:gem_info) { info_subject.detect { |info| info[:name] == gem_name } }
+    subject(:info_subject) { described_class.new(info) }
 
     describe 'status value' do
       context 'when current version less than latest version' do
-        let(:gem_name) { 'rails' }
+        let(:info) { gem_info(outdated: true) }
 
         it 'build rails outdated info' do
-          expect(gem_info[:status]).to eq(Inquisition::Outputter::Xlsx::GemsInfo::OUTDATED)
+          expect(info_subject.status).to eq(Inquisition::Outputter::Xlsx::Gem::OUTDATED)
         end
       end
     end
 
     describe 'environment value' do
       context 'when gem in default group' do
-        let(:gem_name) { 'puma' }
+        let(:info) { gem_info(default_group: true) }
+
+        before { allow(::Gem::Dependency).to receive(:groups) { [:default] } }
 
         it 'match hash structure' do
-          expect(gem_info[:environment]).to eq('')
+          expect(info_subject.environment).to eq('')
         end
       end
 

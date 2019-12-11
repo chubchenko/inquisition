@@ -1,12 +1,11 @@
 require 'axlsx'
 
 require_relative 'file'
+require_relative 'gem_set'
 
 module Inquisition
   module Outputter
     class Xlsx
-      autoload :GemsInfo, 'inquisition/outputter/xlsx/gems_info'
-
       class Builder
         WORKSHEET_NAME = 'Gems info'.freeze
 
