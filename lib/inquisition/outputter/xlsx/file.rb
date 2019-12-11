@@ -4,25 +4,24 @@ module Inquisition
       class File
         DEFAULT_EXTNAME = '.xlsx'.freeze
 
-        def initialize
-          @name = [Rails.application.class.parent.name.underscore, Time.current.strftime('%d_%m_%y')].join('_')
+        def initialize(output_path = ::Inquisition.configuration.output_path)
+          @name = ::Rails.application.class.parent_name.underscore.upcase
+          @output_path = output_path
         end
 
         def path
           @path ||= begin
+            ::FileUtils.mkdir_p(output_path)
+
             ::Pathname.new(
-              ::File.join(::Inquisition::Configuration.instance.output_path, name + DEFAULT_EXTNAME)
+              ::File.join(output_path, name + DEFAULT_EXTNAME)
             )
           end
         end
 
-        def create_folder
-          ::FileUtils.mkdir_p(path.dirname)
-        end
-
         private
 
-        attr_reader :name
+        attr_reader :name, :output_path
       end
     end
   end

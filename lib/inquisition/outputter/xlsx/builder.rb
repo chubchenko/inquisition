@@ -20,7 +20,6 @@ module Inquisition
         end
 
         def call
-          file.create_folder
           fill_info
           save_worksheet
         end

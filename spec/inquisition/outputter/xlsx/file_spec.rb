@@ -3,9 +3,8 @@ RSpec.describe Inquisition::Outputter::Xlsx::File do
 
   describe '#path' do
     it 'returns file path' do
-      filename = "dummy_#{Time.current.strftime('%d_%m_%y')}"
       expect(file.path).to eq(
-        Pathname(File.join(Inquisition::Configuration.instance.output_path, filename + '.xlsx'))
+        Pathname(File.join(Inquisition::Configuration.instance.output_path, 'DUMMY.xlsx'))
       )
     end
   end
