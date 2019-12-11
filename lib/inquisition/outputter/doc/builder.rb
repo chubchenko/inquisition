@@ -1,4 +1,6 @@
 require_relative 'file'
+require_relative 'template'
+require_relative 'layout'
 
 module Inquisition
   module Outputter
@@ -14,9 +16,9 @@ module Inquisition
         end
 
         def call
-          ::FileUtils.mkdir_p(@file.path.dirname)
-
-          ::File.open(@file.path, 'wb')
+          ::File.open(@file.path, 'wb') do |file|
+            file.puts(Template.new('layout').render(Layout.new))
+          end
         end
       end
     end

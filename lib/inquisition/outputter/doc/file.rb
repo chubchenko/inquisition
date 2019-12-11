@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Inquisition
   module Outputter
     class Doc
@@ -10,6 +12,8 @@ module Inquisition
 
         def path
           @path ||= begin
+            ::FileUtils.mkdir_p(::Inquisition::Configuration.instance.output_path)
+
             ::Pathname.new(
               ::File.join(::Inquisition::Configuration.instance.output_path, name + DEFAULT_EXTNAME)
             )
