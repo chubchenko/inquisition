@@ -12,7 +12,7 @@ RSpec.shared_examples 'runner' do |fixture_name|
           category: item['category'],
           message: item['message'],
           runner: runner,
-          warning_type: nil
+          aditional_data: nil
         )
       end
     end

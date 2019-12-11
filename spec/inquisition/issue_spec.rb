@@ -10,7 +10,7 @@ RSpec.describe Inquisition::Issue do
         line: '10',
         message: 'Unescaped parameter value',
         runner: nil,
-        warning_type: nil
+        aditional_data: nil
       )
     end
 
@@ -23,7 +23,7 @@ RSpec.describe Inquisition::Issue do
           line: issue.line,
           message: issue.message,
           runner: nil,
-          warning_type: nil
+          aditional_data: nil
         )
       end
 
@@ -39,7 +39,7 @@ RSpec.describe Inquisition::Issue do
           line: '11',
           message: 'Unescaped parameter value',
           runner: nil,
-          warning_type: nil
+          aditional_data: nil
         )
       end
 
@@ -58,7 +58,7 @@ RSpec.describe Inquisition::Issue do
         line: '6',
         message: 'Unescaped parameter value',
         runner: nil,
-        warning_type: nil
+        aditional_data: nil
       )
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Inquisition::Issue do
           line: issue.line,
           message: issue.message,
           runner: nil,
-          warning_type: nil
+          aditional_data: nil
         )
       end
 
@@ -87,7 +87,7 @@ RSpec.describe Inquisition::Issue do
           line: '7',
           message: 'Unescaped parameter value',
           runner: nil,
-          warning_type: nil
+          aditional_data: nil
         )
       end
 

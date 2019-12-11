@@ -36,7 +36,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               line: 1,
               message: 'missing key: test.key',
               runner: runner,
-              warning_type: nil
+              aditional_data: nil
             ),
             Inquisition::Issue.new(
               severity: Inquisition::Severity::LOW,
@@ -45,7 +45,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               line: nil,
               message: 'missing key: test.key2',
               runner: runner,
-              warning_type: nil
+              aditional_data: nil
             )
           ]
         )
@@ -70,7 +70,7 @@ RSpec.describe Inquisition::I18nTasks::Runner do
               line: nil,
               message: 'unused key: test.key, value: test',
               runner: runner,
-              warning_type: nil
+              aditional_data: nil
             )
           ]
         )

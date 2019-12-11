@@ -19,7 +19,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           category: Inquisition::Category::PERFORMANCE,
           message: 'The following column(s) `user_id` from the `projects` table probably should be indexed',
           runner: runner,
-          warning_type: nil
+          aditional_data: nil
         )
       end
 
@@ -47,7 +47,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           category: Inquisition::Category::PERFORMANCE,
           message: message,
           runner: runner,
-          warning_type: nil
+          aditional_data: nil
         )
       end
 

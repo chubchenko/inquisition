@@ -88,16 +88,21 @@ RSpec.describe Inquisition::Outputter::Doc::ViewHelper do
     end
   end
 
-  describe '#group_issues_by_column' do
-    subject(:group_issues_by_column) { described_class.new(nil).group_issues_by_column(issues, :message) }
+  describe '#group_brakeman_issues_by_warnings' do
+    subject(:group_brakeman_issues_by_warnings) { described_class.new(issues).group_brakeman_issues_by_warnings }
 
-    let(:issues) { [brakeman_issue, active_record_doctor_issue] }
-    let(:brakeman_issue) { instance_double(Inquisition::Issue, message: 'test') }
-    let(:active_record_doctor_issue) { instance_double(Inquisition::Issue, message: 'test1') }
-    let(:result_method_call) { { 'test' => [brakeman_issue], 'test1' => [active_record_doctor_issue] } }
+    let(:issues) { [brakeman_issue, brakeman_issue1] }
+    let(:brakeman_issue) { instance_double(Inquisition::Issue, aditional_data: warning, runner: brakeman_runner) }
+    let(:brakeman_issue1) { instance_double(Inquisition::Issue, aditional_data: warning, runner: brakeman_runner) }
+    let(:result_method_call) { { 'test' => [brakeman_issue, brakeman_issue1] } }
+    let(:brakeman_runner) { instance_double(Inquisition::Brakeman::Runner) }
+    let(:warning) { instance_double('Brakeman::Warning', warning_type: 'test') }
+    let(:badge) { instance_double('Inquisition::Badge', name: 'brakeman') }
+
+    before { allow(Inquisition::Badge).to receive(:for).and_return(badge) }
 
     it 'returns grouped issues by column' do
-      expect(group_issues_by_column).to eq(result_method_call)
+      expect(group_brakeman_issues_by_warnings).to eq(result_method_call)
     end
   end
 end

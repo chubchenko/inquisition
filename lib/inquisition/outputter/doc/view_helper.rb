@@ -31,8 +31,8 @@ module Inquisition
           issues&.map { |issue| issue if runner_issue_exists?(issue, runner_name) }&.compact
         end
 
-        def group_issues_by_column(issues, issue_type)
-          issues&.group_by(&issue_type)
+        def group_brakeman_issues_by_warnings
+          collect_issues('brakeman')&.group_by { |issue| issue.aditional_data.warning_type }
         end
 
         def take_issues_by_difficulty(issues, difficulty)
