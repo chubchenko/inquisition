@@ -1,24 +1,28 @@
-RSpec.describe Inquisition::Outputter::Docx::DocViewHelper do
-  subject(:define_exists_gems) { described_class.new(nil).define_exists_gems(gems) }
-
-  describe '#define_exists_gems' do
-    let(:gems) { ['test_name_gem'] }
+RSpec.describe Inquisition::Outputter::Doc::ViewHelper do
+  describe '#workers_with_jobs' do
+    subject(:workers_with_jobs) { described_class.new(nil).workers_with_jobs }
 
     before { allow(Gem).to receive(:loaded_specs).and_return(gem_specification) }
 
     context 'when gems exists in rails app' do
+      let(:params_const) { { gems: ['test_name_gem'] } }
       let(:gem_specification) { { 'test_name_gem' => 'object' } }
 
+      before { stub_const('Inquisition::Outputter::Doc::TechnologyStack::WORKERS_WITH_JOBS', params_const) }
+
       it 'returns exists gem' do
-        expect(define_exists_gems).to eq([gems.first])
+        expect(workers_with_jobs.first).to be_kind_of(Inquisition::Outputter::Doc::GemDetails)
       end
     end
 
     context 'when gems not exists in rails app' do
+      let(:params_const) { { gems: ['test_name_gem'], exception: 'error' } }
       let(:gem_specification) { {} }
 
+      before { stub_const('Inquisition::Outputter::Doc::TechnologyStack::WORKERS_WITH_JOBS', params_const) }
+
       it 'returns message about not exists gem' do
-        expect(define_exists_gems).to eq([described_class::ERROR_FIND_GEMS_MESSAGE])
+        expect(workers_with_jobs).to eq([{ exception: 'error' }])
       end
     end
   end

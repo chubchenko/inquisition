@@ -30,7 +30,7 @@ module Inquisition
       @parser.on('-f', '--format FORMATTER', 'Choose a formatter',
                  '  [p]rogress (default)',
                  '  [h]tml',
-                 '  [doc]umentation') do |value|
+                 '  [d]oc') do |value|
         Configuration.instance.loader.add(value)
       end
 

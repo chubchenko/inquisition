@@ -1,21 +1,22 @@
+require_relative 'technology_stack'
+require_relative 'gem_details'
+
 module Inquisition
   module Outputter
-    module Docx
-      class DocViewHelper
-        ERROR_FIND_GEMS_MESSAGE = 'There is no one gem'.freeze
-        MONITORING_SERVICES = %w[airbrake sentry-raven bugsnag rollbar raygun].freeze
-        WORKERS_WITH_JOBS = %w[sidekiq resque whenever delayed_job beanstalkd bunny delayed_job_active_record
-                               sneakers sucker_punch baskburner que queue_classic].freeze
-
+    class Doc
+      class ViewHelper
         attr_reader :issues
 
         def initialize(issues)
           @issues = issues
         end
 
-        def define_exists_gems(gems)
-          exist_gems = gems.map { |name_gem| name_gem if gem_exists?(name_gem) }
-          exist_gems.any? ? exist_gems.compact : [ERROR_FIND_GEMS_MESSAGE]
+        def workers_with_jobs
+          define_exists_gems(TechnologyStack::WORKERS_WITH_JOBS)
+        end
+
+        def monitoring_tools
+          define_exists_gems(TechnologyStack::MONITORING_SERVICES).push(*performance_tools)
         end
 
         def produce
@@ -42,6 +43,15 @@ module Inquisition
 
         def runner_issue_exists?(issue, runner_name)
           Inquisition::Badge.for(issue.runner.class.name).name == runner_name
+        end
+
+        def performance_tools
+          define_exists_gems(TechnologyStack::MONITORING_PERFORMANCE_SERVICES)
+        end
+
+        def define_exists_gems(data)
+          exist_gems = data[:gems].map { |gem| GemDetails.new(gem, data[:description]) if gem_exists?(gem) }
+          exist_gems.any? ? exist_gems.compact : [{ exception: data[:exception] }]
         end
 
         def gem_exists?(gem)

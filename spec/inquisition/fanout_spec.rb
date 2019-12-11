@@ -27,6 +27,15 @@ RSpec.describe Inquisition::Fanout do
     end
   end
 
+  describe '#unregister_listener' do
+    before { fanout.register_listener(outputter, :example_passed) }
+
+    it 'unregister listener' do
+      fanout.unregister_listener(outputter, :example_passed)
+      expect(fanout.listeners_for(:example_passed)).to match_array([])
+    end
+  end
+
   describe '#around' do
     before { fanout.register_listener(outputter, :start, :stop) }
 
