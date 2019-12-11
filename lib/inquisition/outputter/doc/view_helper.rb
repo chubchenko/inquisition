@@ -35,6 +35,13 @@ module Inquisition
           collect_issues('brakeman')&.group_by { |issue| issue.aditional_data.warning_type }
         end
 
+        def group_bundler_audit_issues
+          collect_issues('bundler_audit')&.group_by do |issue|
+            gem = GemDetails.new(issue.aditional_data.gem.name)
+            { name: gem.name, link: gem.link }
+          end
+        end
+
         def take_issues_by_difficulty(issues, difficulty)
           issues&.map { |issue| issue if issue.severity.name == difficulty }&.compact
         end
