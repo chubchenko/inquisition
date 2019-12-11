@@ -44,7 +44,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
         category: Inquisition::Category::SECURITY,
         line: 1,
         runner: nil,
-        warning_type: nil
+        aditional_data: nil
       )
     end
 
@@ -56,7 +56,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
         category: Inquisition::Category::STYLE,
         line: 2,
         runner: nil,
-        warning_type: nil
+        aditional_data: nil
       )
     end
 
@@ -68,7 +68,7 @@ RSpec.describe Inquisition::Rubocop::Runner do
         category: Inquisition::Category::COMPLEXITY,
         line: 3,
         runner: nil,
-        warning_type: nil
+        aditional_data: nil
       )
     end
 
