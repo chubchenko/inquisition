@@ -40,4 +40,8 @@ RSpec.describe Inquisition do
       )
     end
   end
+
+  describe '.configuration' do
+    it { expect(described_class.configuration).to eq(Inquisition::Configuration.instance) }
+  end
 end

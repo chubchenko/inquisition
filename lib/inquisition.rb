@@ -56,4 +56,8 @@ module Inquisition
   def self.root
     File.dirname(__dir__)
   end
+
+  def self.configuration
+    Configuration.instance
+  end
 end

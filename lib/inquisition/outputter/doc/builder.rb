@@ -1,6 +1,6 @@
 require_relative 'file'
-require_relative '../html/template'
-require_relative 'view_helper'
+require_relative 'template'
+require_relative 'templates/layout'
 
 module Inquisition
   module Outputter
@@ -16,10 +16,9 @@ module Inquisition
         end
 
         def call
-          ::FileUtils.mkdir_p(@file.path.dirname)
-
-          documentation = HTML::Template.new('documentation_word').render(ViewHelper.new)
-          ::File.open(@file.path, 'w') { |file| file.write(documentation) }
+          ::File.open(@file.path, 'wb') do |file|
+            file.puts(Template.new('layout').render(Templates::Layout.new))
+          end
         end
       end
     end
