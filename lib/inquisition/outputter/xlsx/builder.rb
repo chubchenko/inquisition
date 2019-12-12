@@ -1,4 +1,4 @@
-require 'caxlsx'
+require 'axlsx'
 
 require_relative 'file'
 
