@@ -27,7 +27,8 @@ RSpec.describe Inquisition::RailsBestPractices::Runner do
           severity: Inquisition::Severity::LOW,
           message: 'Line is longer than 111 characters (112 characters)',
           category: Inquisition::Category::STYLE,
-          runner: runner
+          runner: runner,
+          aditional_data: nil
         )
       end
       let(:error) do

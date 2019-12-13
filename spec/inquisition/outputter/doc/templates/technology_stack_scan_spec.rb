@@ -5,8 +5,8 @@ RSpec.describe Inquisition::Outputter::Doc::Templates::TechnologyStackScan do
     before { allow(Gem).to receive(:loaded_specs).and_return(gem_specification) }
 
     context 'when gems exists in rails app' do
-      let(:params_const) { { gems: ['test_name_gem'] } }
-      let(:gem_specification) { { 'test_name_gem' => 'object' } }
+      let(:params_const) { { gems: ['rails'] } }
+      let(:gem_specification) { { 'rails' => 'object' } }
 
       before { stub_const('Inquisition::Outputter::Doc::TechnologyStack::WORKERS_WITH_JOBS', params_const) }
 

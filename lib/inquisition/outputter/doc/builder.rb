@@ -17,7 +17,7 @@ module Inquisition
 
         def call
           ::File.open(@file.path, 'wb') do |file|
-            file.puts(Template.new('layout').render(Templates::Layout.new))
+            file.puts(Template.new('layout').render(Templates::Layout.new(@collection)))
           end
         end
       end

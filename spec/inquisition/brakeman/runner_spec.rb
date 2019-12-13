@@ -13,7 +13,8 @@ RSpec.describe Inquisition::Brakeman::Runner do
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::HIGH,
-        message: 'Potentially dangerous key allowed for mass assignment'
+        message: 'Potentially dangerous key allowed for mass assignment',
+        aditional_data: 'Cross-Site Scripting'
       }
     end
 

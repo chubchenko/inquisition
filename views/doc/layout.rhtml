@@ -112,31 +112,10 @@
       <div class="security-issues-detection technology-page">
         <span class="subtitle"><a id="security_issues_detection">Security issues detection</a></span>
 
-        <div class="">
-          <span class="sub-subtitle"><a href="#brakeman">Brakeman</a></span>
-          <ul class="mt--5">
-            <li>Cross-Site Scripting: 10</li>
-            <li>File Access: 6</li>
-            <li>Format Validation: 1</li>
-            <li>Mass Assignment: 2</li>
-            <li>SQL Injection: 6</li>
-          </ul>
-          <span>There are 25 warnings and 8 of them are high. The full report can be found here.</span>
-        </div>
+        <%= brakeman %>
 
-        <div class="">
-          <div><span class="sub-subtitle"><a href="#patch_level_verification">Patch-level verification</a></span></div>
-          <span>There are 7 vulnerabilities for bundler and 2 of them are high.</span>
-          <ul class="mt--5">
-            <li>one of the issues related to the insecure source URI;</li>
-            <li>3 of them related to the Ruby on Rails gems stack;</li>
-            <li>2 of them related to the nokogiri which is most critical;</li>
-            <li>the last one related to the remote command execution via filename in the minimagick</li>
-            <li>SQL Injection: 6</li>
-          </ul>
-          <span>The full report can be found here.</span>
-        </div>
-
+        <%= patch_level_verification %>
+        
         <div class="">
           <span class="sub-subtitle"><a href="#security_checklist">Security checklist</a></span>
           <ul class="mt--5">
