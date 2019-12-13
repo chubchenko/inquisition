@@ -52,11 +52,7 @@
     </style>
   </head>
   <body>
-    <div class='title-page'>
-      <h1 class='title-doc'><%= Rails.application.class.parent_name %></h1>
-      <h2 class='date-creation'><%= date_today %></h2>
-    </div>
-    <br style="page-break-before: always">
+    <%= home %>
     <div class='content-page'>
       <br>
       <dl>
@@ -108,86 +104,7 @@
     </div>
     <br style="page-break-before: always">
 
-    <div class='technology-page'>
-      <h2><a id="technology_stack">Technology Stack</a></h2>
-
-      <div class="">
-        <span class="subtitle"><a id="programming_languages_and_their_versions">Programming languages and their versions</a></span>
-        <ul class="mt--5">
-          <li><%= "Ruby #{RUBY_VERSION}" %></li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="frameworks_and_their_versions">Frameworks and their versions</a></span>
-        <ul class="mt--5">
-          <li><%= "Ruby on rails #{Rails.version}" %></li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="offers_for_current_gem_list">Offers for current gem list</a></span>
-        <ul class="mt--5">
-          <li>...</li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="databases_data_storages_and_their_versions">Databases, data storages, and their versions</a></span>
-        <ul class="mt--5">
-          <li><%= Rails.configuration.database_configuration['default']['adapter'] %></li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="monitoring_exceptions_tracking_tools">Monitoring/exceptions tracking tools</a></span>
-        <ul class="mt--5">
-          <% monitoring_tools.each do |gem| %>
-          <%= gem.is_a?(Hash) ? gem[:exception] : "<li>#{gem.name} - #{gem.description}, link on gem - <a href=#{gem.link}>here</a></li><br>" %>
-          <% end %>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="workers_background_jobs_and_tools_to_support_background_jobs">Workers, background jobs and tools to support background jobs</a></span>
-        <ul class="mt--5">
-          <% workers_with_jobs.each do |gem| %>
-          <%= gem.is_a?(Hash) ? gem[:exception] : "<li>#{gem.name} - <a href=#{gem.link}>here</a></li>" %>
-          <% end %>
-        </ul>
-      </div>
-      <br style="page-break-before: always">
-
-      <div class="">
-        <span class="subtitle"><a id="third_party_services_integrations">Third-party services/integrations</a></span>
-        <ul class="mt--5">
-          <li>not implement</li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="hosting_platforms_services_tools">Hosting platforms, services, tools</a></span>
-        <ul class="mt--5">
-          <li>not implement</li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="server_infrastructure_management_and_deployment_tools">Server infrastructure management and deployment tools</a></span>
-        <ul class="mt--5">
-          <li>not implement</li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="assets">Assets</a></span>
-        <ul class="mt--5">
-          <li>not implement</li>
-        </ul>
-      </div>
-    </div>
-
-    <br style="page-break-before: always">
+    <%= technology_stack %>
 
     <div class='statistic-code-analisis technology-page'>
       <h2><a id="#static_code_analysis_and_automated_security_audit">Static code analysis and automated security audit</a></h2>
@@ -195,27 +112,10 @@
       <div class="security-issues-detection technology-page">
         <span class="subtitle"><a id="security_issues_detection">Security issues detection</a></span>
 
-        <div class="">
-          <span class="sub-subtitle"><a href="#brakeman">Brakeman</a></span>
-          <ul class="mt--5">
-            <% group_brakeman_issues_by_warnings.each do |warning, issues| %>
-            <li><%= "#{warning}: #{issues.count}" %></li>
-            <% end %>
-          </ul>
-          <span><%= "There are #{collect_issues('brakeman').count} warnings and #{take_issues_by_difficulty(collect_issues('brakeman'), :high).count} of them are high. The full report can be found here." %></span>
-        </div>
+        <%= brakeman %>
 
-        <div class="">
-          <div><span class="sub-subtitle"><a href="#patch_level_verification">Patch-level verification</a></span></div>
-          <span><%= "There are #{collect_issues('bundler_audit').count} vulnerabilities for bundler and #{take_issues_by_difficulty(collect_issues('bundler_audit'), :high).count} of them are high." %></span>
-          <ul class="mt--5">
-            <% group_bundler_audit_issues.each do |gem, issues| %>
-            <%="<li>#{issues.count} related to the <a href=#{gem[:link]}>#{gem[:name]}</a></li>" %>
-            <% end %>
-          </ul>
-          <span>The full report can be found <a href="#">here</a>.</span>
-        </div>
-
+        <%= patch_level_verification %>
+        
         <div class="">
           <span class="sub-subtitle"><a href="#security_checklist">Security checklist</a></span>
           <ul class="mt--5">
@@ -421,7 +321,5 @@
 
       ......
     </div>
-
-
   </body>
 </html>
