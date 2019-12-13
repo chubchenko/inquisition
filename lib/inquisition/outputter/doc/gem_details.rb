@@ -9,7 +9,7 @@ module Inquisition
         def initialize(name, description = '')
           @name = name
           @description = description
-          @link = Gems.info('rails')['source_code_uri']
+          @link = Gems.info(name)['source_code_uri']
         end
       end
     end
