@@ -12,6 +12,8 @@ module Inquisition
       raise ArgumentError, "Unknown severity: #{name}" unless NAMES.include?(name)
 
       @name = name
+
+      freeze
     end
 
     def ==(other)

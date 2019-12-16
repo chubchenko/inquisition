@@ -16,6 +16,8 @@ module Inquisition
       raise ArgumentError, "Unknown category: #{name}" unless NAMES.include?(name)
 
       @name = name
+
+      freeze
     end
 
     def ==(other)
