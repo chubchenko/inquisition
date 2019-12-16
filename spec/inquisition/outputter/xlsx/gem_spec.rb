@@ -1,44 +1,37 @@
-require 'pry'
-include Helpers::GemInfoHelper
-
 RSpec.describe Inquisition::Outputter::Xlsx::Gem do
-  describe '#call' do
-    subject(:info_subject) { described_class.new(info) }
+  subject(:gem) { described_class.new(spec, dependency) }
 
-    describe 'status value' do
-      context 'when current version less than latest version' do
-        let(:info) { gem_info(outdated: true) }
+  let(:spec) { OpenStruct.new(name: 'puma',homepage: 'http://puma.io') }
+  let(:dependency) { instance_double(Bundler::Dependency, groups: [:default]) }
 
-        it 'build rails outdated info' do
-          expect(info_subject.status).to eq(Inquisition::Outputter::Xlsx::Gem::OUTDATED)
-        end
-      end
+  describe '#to_a' do
+    before do
+      gem.version = Inquisition::Outputter::Xlsx::Version.new(
+        '3.4.1',
+        '4.0.1'
+      )
     end
 
-    describe 'environment value' do
-      context 'when gem in default group' do
-        let(:info) { gem_info(default_group: true) }
-
-        before { allow(::Gem::Dependency).to receive(:groups) { [:default] } }
-
-        it 'match hash structure' do
-          expect(info_subject.environment).to eq('')
-        end
-      end
-
-      context 'when gem in development group' do
-        let(:gem_name) { 'simplecov' }
-
-        it 'match hash structure' do
-          expect(gem_info[:environment]).to eq('development')
-        end
-      end
+    it do
+      expect(gem.to_a).to match_array(
+        ['puma', 'http://puma.io', '3.4.1', '4.0.1', true, [:default], nil]
+      )
     end
+  end
 
-    describe 'returned structure' do
-      it 'match hash structure' do
-        expect(info_subject.first).to include(:name, :homepage, :current_version, :latest_version, :status, :environment)
-      end
-    end
+  describe '#name' do
+    it { expect(gem.name).to eq('puma') }
+  end
+
+  describe '#homepage' do
+    it { expect(gem.homepage).to eq('http://puma.io') }
+  end
+
+  describe '#env' do
+    it { expect(gem.env).to eq([:default]) }
+  end
+
+  describe '#status' do
+    it { expect(gem.status).to be nil }
   end
 end

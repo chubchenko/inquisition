@@ -11,8 +11,6 @@ module Inquisition
 
         def path
           @path ||= begin
-            ::FileUtils.mkdir_p(output_path)
-
             ::Pathname.new(
               ::File.join(output_path, name + DEFAULT_EXTNAME)
             )

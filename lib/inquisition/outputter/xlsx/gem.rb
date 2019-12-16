@@ -1,43 +1,53 @@
 module Inquisition
   module Outputter
     class Xlsx
-      class Gem
-        OUTDATED = 'Outdated'.freeze
-        HOMEPAGE_URI = 'homepage_uri'.freeze
-        VERSION = 'version'.freeze
-        FILTRED_ENVIRONMENTS = %i[default].freeze
+      class Gem < Row
+        attr_writer :version
 
-        def initialize(info)
-          @info = info
+        def initialize(spec, dependency)
+          @spec = spec
+          @dependency = dependency
+        end
+
+        def to_a
+          [
+            name,
+            homepage,
+            version.current.to_s,
+            version.latest.to_s,
+            version.outdated?,
+            env,
+            status
+          ]
         end
 
         def name
-          @name ||= gem_info[:bundler].name
+          @name ||= spec.name
         end
 
         def homepage
-          @homepage ||= info.dig(:rubygems, HOMEPAGE_URI)
+          @homepage ||= spec.homepage
         end
 
-        def current_version(gem_info)
-          @current_version ||= ::Gem.loaded_specs[gem_info[:bundler].name].version
+        def env
+          @env ||= dependency.groups
         end
 
-        def latest_version(gem_info)
-          @latest_version ||= gem_info.dig(:rubygems, VERSION)
+        def status; end
+
+        def ==(other)
+          hash == other.hash
         end
 
-        def status
-          @status ||= OUTDATED if ::Gem::Version.new(latest_version(info)) > current_version(info)
-        end
+        alias eql? ==
 
-        def environment
-          @environments ||= (gem_info[:bundler].groups - FILTRED_ENVIRONMENTS).join(', ')
+        def hash
+          to_a.hash
         end
 
         private
 
-        attr_reader :info
+        attr_reader :spec, :dependency, :version
       end
     end
   end
