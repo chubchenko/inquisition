@@ -48,6 +48,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rubocop-minitest', '~> 0.2.1'
   spec.add_dependency 'rubocop-rake', '~> 0.3.0'
-
-  spec.add_runtime_dependency 'launchy', '~> 2.4', '>= 2.4.3'
 end
