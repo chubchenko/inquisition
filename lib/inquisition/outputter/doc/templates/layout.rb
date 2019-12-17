@@ -4,6 +4,7 @@ require_relative 'brakeman'
 require_relative 'base_template'
 require_relative 'patch_level_verification'
 require_relative 'bottlenecks_detection'
+require_relative 'rubycritic'
 
 module Inquisition
   module Outputter
@@ -37,6 +38,12 @@ module Inquisition
           def bottlenecks_detection
             @bottlenecks_detection ||= begin
               Template.new('bottlenecks_detection').render(BottlenecksDetection.new(issues))
+            end
+          end
+
+          def rubycritic
+            @rubycritic ||= begin
+              Template.new('rubycritic').render(Rubycritic.new(issues))
             end
           end
         end

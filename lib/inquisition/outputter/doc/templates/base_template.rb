@@ -1,3 +1,5 @@
+require_relative '../gem_details'
+
 module Inquisition
   module Outputter
     class Doc
@@ -19,6 +21,10 @@ module Inquisition
 
           def take_issues_by_difficulty(issues, difficulty)
             issues&.map { |issue| issue if issue.severity.name == difficulty }&.compact
+          end
+
+          def data_gem(gem)
+            GemDetails.new(gem)
           end
 
           def gem_exists?(gem)
