@@ -9,8 +9,7 @@ RSpec.describe Inquisition::Outputter::HTML::Overview::BySeverity do
         severity: Inquisition::Severity::HIGH,
         message: 'Potentially dangerous key allowed for mass assignment',
         category: Inquisition::Category::SECURITY,
-        runner: Inquisition::Brakeman::Runner.new,
-        aditional_data: nil
+        runner: Inquisition::Brakeman::Runner.new
       )
     end
 

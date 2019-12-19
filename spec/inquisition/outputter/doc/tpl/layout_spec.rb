@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Doc::Templates::Layout do
+RSpec.describe Inquisition::Outputter::Doc::TPL::Layout do
   describe '#produce' do
     subject(:layout) { described_class.new(nil) }
 
@@ -20,27 +20,17 @@ RSpec.describe Inquisition::Outputter::Doc::Templates::Layout do
 
       it do
         expect(template).to have_received(:render).with(
-          instance_of(Inquisition::Outputter::Doc::Templates::Home)
+          instance_of(Inquisition::Outputter::Doc::TPL::Home)
         )
       end
     end
 
-    context 'when call #technology_stack template' do
-      before { layout.technology_stack }
+    context 'when call #security template' do
+      before { layout.security }
 
       it do
         expect(template).to have_received(:render).with(
-          instance_of(Inquisition::Outputter::Doc::Templates::TechnologyStackScan)
-        )
-      end
-    end
-
-    context 'when call #brakeman template' do
-      before { layout.brakeman }
-
-      it do
-        expect(template).to have_received(:render).with(
-          instance_of(Inquisition::Outputter::Doc::Templates::Brakeman)
+          instance_of(Inquisition::Outputter::Doc::TPL::Security)
         )
       end
     end

@@ -1,14 +1,19 @@
-RSpec.describe Inquisition::Outputter::Doc::Templates::TechnologyStackScan do
+RSpec.describe Inquisition::Outputter::Doc::TPL::TechnologyStackScan do
   describe '#workers_with_jobs' do
     subject(:workers_with_jobs) { described_class.new.workers_with_jobs }
 
     before { allow(Gem).to receive(:loaded_specs).and_return(gem_specification) }
 
     context 'when gems exists in rails app' do
-      let(:params_const) { { gems: ['rails'] } }
-      let(:gem_specification) { { 'rails' => 'object' } }
+      let(:gem) { 'rails' }
+      let(:params_const) { { gems: [gem] } }
+      let(:gem_specification) { { gem => 'object' } }
+      let(:gem_specification_data) { instance_double(Gem::Specification, homepage: 'test') }
 
-      before { stub_const('Inquisition::Outputter::Doc::TechnologyStack::WORKERS_WITH_JOBS', params_const) }
+      before do
+        allow(Gem::Specification).to receive(:find_by_name).with(gem).and_return(gem_specification_data)
+        stub_const('Inquisition::Outputter::Doc::Stack::TechnologyScan::WORKERS_WITH_JOBS', params_const)
+      end
 
       it 'returns exists gem' do
         expect(workers_with_jobs.first).to be_kind_of(Inquisition::Outputter::Doc::GemDetails)
@@ -19,7 +24,7 @@ RSpec.describe Inquisition::Outputter::Doc::Templates::TechnologyStackScan do
       let(:params_const) { { gems: ['test_name_gem'], exception: 'error' } }
       let(:gem_specification) { {} }
 
-      before { stub_const('Inquisition::Outputter::Doc::TechnologyStack::WORKERS_WITH_JOBS', params_const) }
+      before { stub_const('Inquisition::Outputter::Doc::Stack::TechnologyScan::WORKERS_WITH_JOBS', params_const) }
 
       it 'returns message about not exists gem' do
         expect(workers_with_jobs).to eq([{ exception: 'error' }])

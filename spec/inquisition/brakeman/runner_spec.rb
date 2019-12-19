@@ -14,7 +14,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
         line: 42,
         severity: Inquisition::Severity::HIGH,
         message: 'Potentially dangerous key allowed for mass assignment',
-        aditional_data: 'Cross-Site Scripting'
+        context: 'Cross-Site Scripting'
       }
     end
 
@@ -25,7 +25,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
 
       allow(Brakeman).to receive(:run)
         .with(app_path: Rails.root)
-        .and_return(instance_double(Brakeman::Tracker, warnings: [warning]))
+        .and_return(instance_double('Brakeman::Tracker', warnings: [warning]))
     end
 
     it 'returns a collection of issues' do

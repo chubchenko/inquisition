@@ -26,9 +26,9 @@ module Inquisition
         def issue_for(issue)
           case issue
           when ::Bundler::Audit::Scanner::InsecureSource
-            InsecureSource.new(issue).to_h.merge(runner: self)
+            InsecureSource.new(issue.source).to_h.merge(runner: self)
           when ::Bundler::Audit::Scanner::UnpatchedGem
-            UnpatchedGem.new(issue).to_h.merge(runner: self)
+            UnpatchedGem.new(issue.gem, issue.advisory).to_h.merge(runner: self)
           else
             raise ArgumentError, "Unknown type: #{issue.class}"
           end

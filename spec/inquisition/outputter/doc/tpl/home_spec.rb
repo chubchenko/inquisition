@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Doc::Templates::Home do
+RSpec.describe Inquisition::Outputter::Doc::TPL::Home do
   subject(:home) { described_class.new }
 
   describe '#name' do

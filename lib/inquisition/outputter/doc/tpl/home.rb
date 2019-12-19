@@ -3,7 +3,7 @@ require 'date'
 module Inquisition
   module Outputter
     class Doc
-      module Templates
+      module TPL
         class Home
           def initialize
             @today = ::Date.today

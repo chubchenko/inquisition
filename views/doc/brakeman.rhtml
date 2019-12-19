@@ -1,9 +1,19 @@
 <div class="">
-  <span class="sub-subtitle"><a href="#brakeman">Brakeman</a></span>
+  <span class="sub-subtitle">
+    <a href="#brakeman">
+      Brakeman
+    </a>
+  </span>
+
   <ul class="mt--5">
-    <% group_brakeman_issues_by_warnings.each do |warning, issues| %>
-    <li><%= "#{warning}: #{issues.count}" %></li>
+    <% issues.tally do |type, count| %>
+      <li>
+        <%= "#{type}: #{count}" %>
+      </li>
     <% end %>
   </ul>
-  <span><%= "There are #{collect_issues('brakeman').count} warnings and #{take_issues_by_difficulty(collect_issues('brakeman'), :high).count} of them are high. The full report can be found here." %></span>
+
+  <span>
+    <%= "There are #{issues.count} warnings and #{issues.high.count} of them are high. The full report can be found here." %>
+  </span>
 </div>

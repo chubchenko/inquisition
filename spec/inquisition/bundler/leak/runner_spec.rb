@@ -30,8 +30,7 @@ RSpec.describe Inquisition::Bundler::Leak::Runner do
           severity: Inquisition::Severity::MEDIUM,
           path: Inquisition::Bundler::Leak::Vulnerability::GEMFILE,
           message: 'Memory leak in formatter middleware',
-          runner: nil,
-          aditional_data: nil
+          runner: nil
         )
       end
 

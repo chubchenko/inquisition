@@ -2,16 +2,16 @@ module Inquisition
   class Issue
     COMPARISON_ATTRIBUTES = %i[path line severity message category].freeze
 
-    attr_reader :path, :line, :severity, :message, :category, :runner, :aditional_data
+    attr_reader :path, :line, :severity, :message, :category, :runner, :context
 
-    def initialize(path:, line:, severity:, message:, category:, runner:, aditional_data: nil)
+    def initialize(path:, line:, severity:, message:, category:, runner:, context: nil)
       @path = path
       @line = line
       @runner = runner
       @message = message
       @severity = Severity.new(severity)
       @category = Category.new(category)
-      @aditional_data = aditional_data
+      @context = context
     end
 
     def ==(other)
