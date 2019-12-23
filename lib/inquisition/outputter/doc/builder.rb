@@ -1,6 +1,6 @@
 require_relative 'file'
 require_relative 'template'
-require_relative 'layout'
+require_relative 'tpl/layout'
 
 module Inquisition
   module Outputter
@@ -17,7 +17,7 @@ module Inquisition
 
         def call
           ::File.open(@file.path, 'wb') do |file|
-            file.puts(Template.new('layout').render(Layout.new))
+            file.puts(Template.new('layout').render(TPL::Layout.new(@collection)))
           end
         end
       end
