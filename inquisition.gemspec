@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov', '~> 0.17.0'
   spec.add_development_dependency 'timecop', '~> 0.9.1'
 
-  spec.add_dependency 'active_record_doctor', '~> 1.6'
+  spec.add_dependency 'active_record_doctor', '~> 1.6.0'
   spec.add_dependency 'brakeman', '~> 4.6'
   spec.add_dependency 'bundler-audit', '~> 0.6'
   spec.add_dependency 'bundler-leak', '~> 0.1'
@@ -48,6 +48,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'rubocop-minitest', '~> 0.2.1'
   spec.add_dependency 'rubocop-rake', '~> 0.3.0'
-
-  spec.add_runtime_dependency 'launchy', '~> 2.4', '>= 2.4.3'
 end

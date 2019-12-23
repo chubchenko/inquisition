@@ -1,7 +1,6 @@
 module Inquisition
   module Outputter
     autoload :Progress, 'inquisition/outputter/progress'
-    autoload :HTML, 'inquisition/outputter/html'
     autoload :Doc, 'inquisition/outputter/doc'
     autoload :Xlsx, 'inquisition/outputter/xlsx'
 
@@ -16,7 +15,6 @@ module Inquisition
 
       OUTPUTTER_TO_USE_TABLE = {
         Outputter::Progress => %w[p progress],
-        Outputter::HTML => %w[h html],
         Outputter::Doc => %w[d doc],
         Outputter::Xlsx => %w[x xlsx]
       }.freeze
