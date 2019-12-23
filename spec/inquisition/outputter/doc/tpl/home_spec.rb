@@ -1,5 +1,9 @@
-RSpec.describe Inquisition::Outputter::Doc::Home do
+RSpec.describe Inquisition::Outputter::Doc::TPL::Home do
   subject(:home) { described_class.new }
+
+  describe '#produce' do
+    it { expect(home.produce).to be_an_instance_of(Binding) }
+  end
 
   describe '#name' do
     it { expect(home.name).to eq('DUMMY') }

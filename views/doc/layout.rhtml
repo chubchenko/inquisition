@@ -1,10 +1,316 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style media="screen">
+      a {
+        color: blue;
+      }
+      .subtitle {
+        font-size: 19px;
+        color: rgb(110, 115, 115);
+      }
+      .sub-subtitle {
+        margin-top: 12px;
+        font-size: 17px;
+        color: rgb(110, 115, 115);
+      }
+      .title-doc {
+        line-height: 400px;
+        vertical-align: middle;
+        text-align: center;
+      }
+      .date-creation {
+        text-align: center;
+        font-weight: normal;
+        font-size: 20px;
+      }
+      .content-page {
+        margin-left: 30px;
+      }
+      .mt-5 {
+        margin-top: 5px;
+      }
+      .technology-page {
+        margin-left: 40px;
+        margin-top: 20px;
+      }
+      .mb-5 {
+        margin-bottom: 5px
+      }
+      .mt--5 {
+        margin-top: -5px;
+      }
+    </style>
   </head>
   <body>
     <%= home %>
+    <br style="page-break-before: always">
+    <div class='content-page'>
+      <br>
+      <dl>
+        <dt><a href="#technology_stack">Technology Stack</a></dt>
+        <dd><a href="#programming_languages_and_their_versions">Programming languages and their versions</a></dd>
+        <dd><a href='#frameworks_and_their_versions'>Frameworks and their versions</a></dd>
+        <dd><a href='#offers_for_current_gem_list'>Offers for current gem list</a></dd>
+        <dd><a href='#databases_data_storages_and_their_versions'>Databases, data storages, and their versions</a></dd>
+        <dd><a href='#monitoring_exceptions_tracking_tools'>Monitoring/exceptions tracking tools</a></dd>
+        <dd><a href='#workers_background_jobs_and_tools_to_support_background_jobs'>Workers, background jobs and tools to support background jobs</a></dd>
+        <dd><a href='#third_party_services_integrations'>Third-party services/integrations</a></dd>
+        <dd><a href='#hosting_platforms_services_tools'>Hosting platforms, services, tools</a></dd>
+        <dd><a href='#server_infrastructure_management_and_deployment_tools'>Server infrastructure management and deployment tools</a></dd>
+        <dd><a href='#'>Assets</a></dd>
+      </dl>
+      <dl>
+        <dt><a href="#static_code_analysis_and_automated_security_audit">Static code analysis and automated security audit</a></dt>
+        <dd>
+          <dl>
+            <dt><a href="#security_issues_detection">Security issues detection</a></dt>
+            <dd><a href='#brakeman'>Brakeman</a></dd>
+            <dd><a href='#patch_level_verification'>Patch-level verification</a></dd>
+            <dd><a href='#security_checklist'>Security checklist</a></dd>
+            <dd><a href='#bottlenecks_detection'>Bottlenecks detection</a></dd>
+          </dl>
+        </dd>
+        <dd><a href='#structural_similarities_analysis_and_code_smell_detection'>Structural similarities analysis and code smell detection</a></dd>
+        <dd><a href='#autotest_quality'>Autotest quality</a></dd>
+        <dd><a href='#style_guides_checking'>Style guides checking</a></dd>
+        <dd><a href='#rails_code_quality_checking'>Rails code quality checking</a></dd>
+        <dd><a href='#database_structure_checking'>Database structure checking</a></dd>
+        <dd><a href='#deployment_and_servers_structure_management_checking'>Deployment and servers structure management checking</a></dd>
+      </dl>
+      <dl>
+        <dt><a href='#issues'>Issues</a></dt>
+        <dd><a href='#gemfile'>Gemfile</a></dd>
+        <dd><a href='#monitoring/exceptions tracking tool'>Monitoring/exceptions tracking tool</a></dd>
+        <dd><a href='#ci_cd'>CI/CD</a></dd>
+        <dd><a href='#assets'>Assets</a></dd>
+        <dd><a href='#autotest_quality'>Autotest quality</a></dd>
+        <dd><a href='#security'>Security</a></dd>
+        <dd><a href='#ruby_style'>Ruby Style</a></dd>
+        <dd><a href='#database'>Database</a></dd>
+        <dd><a href='#authorization'>Authorization</a></dd>
+      </dl>
+      <dl>
+        <dt><a href='#'>Issues priority proposal</a></dt>
+      </dl>
+    </div>
+    <br style="page-break-before: always">
+
+    <%= stack %>
 
     <br style="page-break-before: always">
+    <div class='statistic-code-analisis technology-page'>
+      <h2><a id="#static_code_analysis_and_automated_security_audit">Static code analysis and automated security audit</a></h2>
+
+      <div class="security-issues-detection technology-page">
+        <span class="subtitle"><a id="security_issues_detection">Security issues detection</a></span>
+
+        <%= 'security' %>
+
+        <div class="">
+          <span class="sub-subtitle"><a href="#security_checklist">Security checklist</a></span>
+          <ul class="mt--5">
+            <li>TWITTER_* environment variables are hardcoded in the source code;</li>
+            <li>the configuration of CSP is absent;</li>
+            <li>there is no access control gem (e.g.  pundit, action_policy)</li>
+          </ul>
+        </div>
+
+        <div class="">
+          <span class="sub-subtitle"><a href="#bottlenecks_detection">Bottlenecks detection</a></span>
+          <ul class="mt--5">
+            <li>there are 38 unoptimized queries. The full report can be found here;</li>
+            <li>there are 252 database issues. The full report can be found here</li>
+            <li>there are 19 columns that should be indexed. The full report can be found here;</li>
+            <li>
+              there are 10 recommendations to make the application faster (the full report can be found here). Where:
+              <ul type="circle">
+                <li>6 of them related to the Enumerable#detect vs Enumerable#select.first, the second one 4.84x slower than the first one;</li>
+                <li>...</li>
+                <li>...</li>
+                <li>...</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="">
+        <div class="mt-5">
+          <span class="subtitle"><a id="structural_similarities_analysis_and_code_smell_detection">Structural similarities analysis and code smell detection</a></span>
+        </div>
+        <span>All the code was analyzed by rubycritic. Average score/percent of cleanness 86.99. We grouped them by severity:</span>
+        <ul class="mt--5">
+          <li>
+            <span>High:</span>
+            <ul type="circle">
+              <li>51 places where is high 'complexity'. High 'complexity' can be directly translated to low readability, and that also means it's more difficult for new developers coming in and understanding what is going on;</li>
+              <li>23 places where there are unused parameters. Would be good to fix such issues because leaving dead code in a method can never improve the method and it makes the code confusing to read;</li>
+            </ul>
+          </li>
+          <li>
+            <span>Medium:</span>
+            <ul type="circle">
+              <li>65 place where occurs duplicate method call. Code which includes duplicate functionality is more difficult to support;</li>
+              <li>60 places where code fragment references another object more often than it references itself, or when several clients do the same series of manipulations on a particular type of object. It reduces the code's ability to communicate intent, also affects the design's flexibility;</li>
+              <li>...</li>
+            </ul>
+          </li>
+          <li>
+            <span>Low:</span>
+            <ul type="circle">
+              <li>29 places where there are at least one of the next problems too many constants, too many instance variables, too many methods;</li>
+              <li>493 places where there is an uncommunicative variable/parameter/method name. Poor names make it hard for the reader to build a mental picture of what's going on in the code.</li>
+            </ul>
+          </li>
+        </ul>
+        <span>The full report can be found here.</span>
+      </div>
+
+      <div class="">
+        <span class="subtitle"><a id="autotest_quality">Autotest quality</a></span>
+        <ul class="mt--5">
+          <li>simplecov is absent. Code coverage equal 32.79% according to simplecov;</li>
+          <li>there is a lack of controller specs (there are 28 controller classes and only 6 of them has tests which are not covered all cases);</li>
+          <li>...</li>
+        </ul>
+      </div>
+      <br style="page-break-before: always">
+
+      <div class="">
+        <span class="subtitle"><a id="style_guides_checking">Style guides checking</a></span>
+        <ul class="mt--5">
+          <li>
+            rubocop is present. Gem version is outdated and some of the new extensions are not used, such as:
+            <ul type="circle">
+              <li>rubocop-rspec</li>
+              <li>rubocop-rspec</li>
+            </ul>
+          </li>
+          <li>there are 18668 offenses was found in 376 files, according to rubocop-hq;</li>
+          <li>12912 of them could be autocorrected. The full report can be found here.</li>
+        </ul>
+      </div>
+
+      <div class="">
+        <span class="subtitle"><a id="rails_code_quality_checking">Rails code quality checking</a></span>
+        <ul class="mt--5">
+          <li>
+            there are 612 warnings according to the rails_best_practices (the full report can be found here). We grouped them by severity:
+            <ul>
+              <li>
+                <span>High:</span>
+                <ul type="circle">
+                  <li>24 of them related to the missing indexes in the database;</li>
+                  <li>137 related to the unused code;</li>
+                  <li>2 of them related to use model association;</li>
+                </ul>
+              </li>
+              <li>
+                <span>Medium:</span>
+                <ul type="circle">
+                  <li>24 of them related to the missing indexes in the database;</li>
+                  <li>137 related to the unused code;</li>
+                  <li>2 of them related to use model association;</li>
+                </ul>
+              </li>
+              <li>
+                <span>Low:</span>
+                <ul type="circle">
+                  <li>24 of them related to the missing indexes in the database;</li>
+                  <li>137 related to the unused code;</li>
+                  <li>2 of them related to use model association;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+
+          <li>there are 41 unused routes and 10 unreachable action methods. The full report can be found here</li>
+          <li>
+            the business logic is stored in the:
+            <ul>
+              <li>controllers</li>
+              <li>models</li>
+            </ul>
+          </li>
+          <li>
+            the finders logic are stored in the:
+            <ul>
+              <li>controllers</li>
+              <li>models</li>
+              <li>views</li>
+              <li>helpers</li>
+            </ul>
+          </li>
+          <li>
+            the complex creation logic is stored in the:
+            <ul>
+              <li>controllers</li>
+              <li>models</li>
+            </ul>
+          </li>
+          <li>
+            the application has fat
+            <ul>
+              <li>controllers</li>
+              <li>models</li>
+              <li>helpers</li>
+              <li>workers</li>
+            </ul>
+          </li>
+          <li>the application does not use internationalization;</li>
+          <li>technical documentation of the project is absent.</li>
+        </ul>
+      </div>
+
+      <div class="">
+        <span class="subtitle"><a id="database_structure_checking">Database structure checking</a></span>
+        <ul class="mt--5">
+          <li>
+            There are 252 database issues
+            <ul>
+              <li>28 unindexed foreign keys</li>
+              <li>99 missing foreign key constraints</li>
+              <li>...</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <div class="">
+        <span class="subtitle"><a id="deployment_and_servers_structure_management_checking">Deployment and servers structure management checking</a></span>
+        <ul class="mt--5">
+          <li>integration with CI server is absent;</li>
+          <li>the staging environment is absent;</li>
+          <li>there is no infrastructure as code approach.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class='technology-page'>
+      <h2><a id="issues">Issues</a></h2>
+
+      <div class="">
+        <span class="subtitle"><a id="gemfile">Gemfile</a></span>
+        <p>There are some gems that are not used and some of them can be removed. Also, there are few gems that are wrappers around javascript, such gems would be better to remove and use a javascript package manager instead. Based on the benchmarks some of the gems have a better alternative, it would be good to do such migration. In the end, I would recommend to specify a pessimistic version and use the gemfile group.</p>
+      </div>
+
+      Monitoring/exceptions tracking tool...
+      CI/CD...
+      Assets...
+      Autotest quality...
+      Security...
+      Ruby Style...
+      Database...
+    </div>
+
+    <br style="page-break-before: always">
+
+    <div class='technology-page'>
+      <h2><a id="issues">Issues priority proposal</a></h2>
+
+      ......
+    </div>
   </body>
 </html>
