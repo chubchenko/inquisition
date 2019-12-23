@@ -3,6 +3,10 @@ module Inquisition
     class Doc
       module TPL
         class Security < Base
+          def initialize(issues)
+            @issues = issues
+          end
+
           def brakeman
             @brakeman ||= begin
               Template.new('security/brakeman').render(Brakeman.call(@issues))

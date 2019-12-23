@@ -36,13 +36,9 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
           runner: runner
         )
       end
-      let(:gem) { instance_double(Bundler::LazySpecification) }
       let(:insecure_source) do
-        Bundler::Audit::Scanner::InsecureSource.new(source)
+        Bundler::Audit::Scanner::InsecureSource.new('http://rubygems.org/')
       end
-
-      let(:gem) { 'test' }
-      let(:source) { 'http://rubygems.org/' }
 
       before do
         allow(scanner).to receive(:scan).and_return(
