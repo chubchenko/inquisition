@@ -24,6 +24,8 @@ module Inquisition
       def call
         TASKS.each do |ard_task|
           ard_task.run.first.each do |table, column|
+            next unless table && column
+
             @issues << Inquisition::Issue.new(Issue.new(ard_task, table, column).to_h.merge(runner: self))
           end
         end
