@@ -1,22 +1,27 @@
-require_relative '../gem_details'
-require_relative 'stack'
-require_relative 'home'
 require_relative 'base'
+require_relative 'home'
+require_relative 'stack'
 require_relative 'security'
+# TODO: WTF?
+require_relative '../gem_details'
 
 module Inquisition
   module Outputter
     class Doc
       module TPL
         class Layout < Base
+          def initialize(issues)
+            @issues = issues
+          end
+
           def home
             @home ||= begin
               Template.new('home').render(Home.new)
             end
           end
 
-          def technology_stack
-            @technology_stack ||= begin
+          def stack
+            @stack ||= begin
               Template.new('stack').render(Stack.new)
             end
           end

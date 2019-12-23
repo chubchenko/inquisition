@@ -5,11 +5,7 @@ module Inquisition
   module Outputter
     class Doc
       module TPL
-        class Stack
-          def produce
-            binding
-          end
-
+        class Stack < Base
           def database_adapter
             Rails.configuration.database_configuration['default']['adapter']
           end

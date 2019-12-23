@@ -3,12 +3,6 @@ module Inquisition
     class Doc
       module TPL
         class Base
-          attr_reader :issues
-
-          def initialize(issues = [])
-            @issues = issues
-          end
-
           def produce
             binding
           end
