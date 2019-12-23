@@ -2,10 +2,7 @@ module Inquisition
   module Outputter
     class Doc
       module TPL
-        class Base
-          def produce
-            binding
-          end
+        class Stack < Base
         end
       end
     end

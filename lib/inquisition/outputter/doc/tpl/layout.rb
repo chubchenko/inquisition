@@ -1,5 +1,6 @@
-require_relative 'home'
 require_relative 'base'
+require_relative 'home'
+require_relative 'stack'
 
 module Inquisition
   module Outputter
@@ -12,15 +13,9 @@ module Inquisition
             end
           end
 
-          def technology_stack
-            @technology_stack ||= begin
+          def stack
+            @stack ||= begin
               Template.new('stack').render(Stack.new)
-            end
-          end
-
-          def security
-            @security ||= begin
-              Template.new('security').render(Security.new(@issues))
             end
           end
         end

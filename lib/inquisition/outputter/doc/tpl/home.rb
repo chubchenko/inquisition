@@ -4,13 +4,9 @@ module Inquisition
   module Outputter
     class Doc
       module TPL
-        class Home
+        class Home < Base
           def initialize
             @today = ::Date.today
-          end
-
-          def produce
-            binding
           end
 
           def name
