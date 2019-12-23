@@ -1,5 +1,6 @@
+require_relative '../gem_details'
+require_relative 'stack'
 require_relative 'home'
-require_relative 'technology_stack_scan'
 require_relative 'base'
 require_relative 'security'
 
@@ -16,13 +17,13 @@ module Inquisition
 
           def technology_stack
             @technology_stack ||= begin
-              Template.new('technology_stack').render(TechnologyStackScan.new)
+              Template.new('stack').render(Stack.new)
             end
           end
 
           def security
             @security ||= begin
-              Template.new('security').render(Security.new(issues))
+              Template.new('security').render(Security.new(@issues))
             end
           end
         end

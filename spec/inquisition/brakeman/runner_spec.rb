@@ -25,7 +25,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
 
       allow(Brakeman).to receive(:run)
         .with(app_path: Rails.root)
-        .and_return(instance_double('Brakeman::Tracker', warnings: [warning]))
+        .and_return(instance_double(Brakeman::Tracker, warnings: [warning]))
     end
 
     it 'returns a collection of issues' do

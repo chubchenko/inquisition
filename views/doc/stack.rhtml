@@ -32,18 +32,14 @@
   <div class="">
     <span class="subtitle"><a id="monitoring_exceptions_tracking_tools">Monitoring/exceptions tracking tools</a></span>
     <ul class="mt--5">
-      <% monitoring_tools.each do |gem| %>
-      <%= gem.is_a?(Hash) ? gem[:exception] : "<li>#{gem.name} - #{gem.description}, link on gem - <a href=#{gem.link}>here</a></li><br>" %>
-      <% end %>
+      <%= monitoring %>
     </ul>
   </div>
 
   <div class="">
     <span class="subtitle"><a id="workers_background_jobs_and_tools_to_support_background_jobs">Workers, background jobs and tools to support background jobs</a></span>
     <ul class="mt--5">
-      <% workers_with_jobs.each do |gem| %>
-      <%= gem.is_a?(Hash) ? gem[:exception] : "<li><a href=#{gem.link}>#{gem.name}</a></li>" %>
-      <% end %>
+      <%= workers %>
     </ul>
   </div>
   <br style="page-break-before: always">

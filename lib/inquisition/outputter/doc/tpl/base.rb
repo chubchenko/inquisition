@@ -3,7 +3,7 @@ module Inquisition
     class Doc
       module TPL
         class Base
-          attr_reader :issues, :filter
+          attr_reader :issues
 
           def initialize(issues = [])
             @issues = issues

@@ -6,7 +6,7 @@
   </span>
 
   <ul class="mt--5">
-    <% issues.tally do |type, count| %>
+    <% tally do |type, count| %>
       <li>
         <%= "#{type}: #{count}" %>
       </li>
@@ -14,6 +14,6 @@
   </ul>
 
   <span>
-    <%= "There are #{issues.count} warnings and #{issues.high.count} of them are high. The full report can be found here." %>
+    <%= "There are #{count} warnings and #{high.count} of them are high. The full report can be found here." %>
   </span>
 </div>
