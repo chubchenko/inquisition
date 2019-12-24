@@ -1,4 +1,6 @@
 RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Brakeman do
+  include_examples 'produce', described_class.new([])
+
   describe '.call' do
     let(:issue) do
       Inquisition::Issue.new(
@@ -28,12 +30,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Brakeman do
     end
 
     it { expect(described_class).to have_received(:new).with(wrapper) }
-  end
-
-  describe '#produce' do
-    let(:brakeman) { described_class.new([]) }
-
-    it { expect(brakeman.produce).to be_an_instance_of(Binding) }
   end
 
   describe Inquisition::Outputter::Doc::TPL::Security::Brakeman::Wrapper do

@@ -1,17 +1,15 @@
 RSpec.describe Inquisition::Outputter::Doc::TPL::Stack::Exception do
-  describe '#produce' do
-    it
-  end
+  include_examples 'produce', described_class.new
 
-  describe '#collection' do
-    it
-  end
+  include_examples 'collection'
 
-  describe '#empty?' do
-    it
-  end
+  include_examples 'empty?'
 
   describe '#trouble' do
-    it
+    subject(:trouble) { described_class.new.trouble }
+
+    it 'returns instance of NoExceptionPkg' do
+      expect(trouble).to be_an_instance_of(Inquisition::Outputter::Doc::TPL::Stack::NoExceptionPkg)
+    end
   end
 end

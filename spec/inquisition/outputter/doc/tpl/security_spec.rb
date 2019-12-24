@@ -1,9 +1,5 @@
 RSpec.describe Inquisition::Outputter::Doc::TPL::Security do
-  describe '#produce' do
-    subject(:layout) { described_class.new([]) }
-
-    it { expect(layout.produce).to be_an_instance_of(Binding) }
-  end
+  include_examples 'produce', described_class.new([])
 
   describe '#brakeman' do
     subject(:security) { described_class.new([]) }

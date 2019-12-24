@@ -14,11 +14,21 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Stack do
   end
 
   describe '#db' do
-    it
+    let(:adapter) { instance_double('ActiveRecord::ConnectionAdapters::PostgreSQLAdapter', adapter_name: 'test') }
+
+    before do
+      allow(ActiveRecord::Base).to receive(:connection).and_return(adapter)
+      allow(OpenStruct).to receive(:new).with(adapter_name: adapter.adapter_name)
+      stack.db
+    end
+
+    it 'returns instance of OpenStruct with db adapter' do
+      expect(OpenStruct).to have_received(:new).with(adapter_name: adapter.adapter_name)
+    end
   end
 
   describe '#jobs' do
-    subject(:stack) { described_class.new() }
+    subject(:stack) { described_class.new }
 
     let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
 
@@ -36,7 +46,35 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Stack do
     end
   end
 
-  describe '#exception_and_instrumentation' do
-    it
+  describe '#exception_and_instrumentation', skip: true do
+    subject(:stack) { described_class.new }
+
+    let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
+    let(:double_class) do
+      Class.new do
+        def produce
+          binding
+        end
+
+        def exception
+          Exception.new
+        end
+
+        def instrumentation
+          Instrumentation.new
+        end
+      end
+    end
+
+    before do
+      allow(Class).to receive(:new).and_return(double_class)
+      allow(template).to receive(:render).with(double_class)
+      allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
+      stack.exception_and_instrumentation
+    end
+
+    it do
+      expect(template).to have_received(:render).with(double_class)
+    end
   end
 end
