@@ -13,7 +13,7 @@ module Inquisition
             end
           end
 
-          def bundler_audit
+          def patch_level
             @bundler_audit ||= begin
               Template.new('security/patch_level').render(PatchLevel.call(@issues))
             end
