@@ -2,8 +2,6 @@ require_relative 'base'
 require_relative 'home'
 require_relative 'stack'
 require_relative 'security'
-# TODO: WTF?
-require_relative '../gem_details'
 
 module Inquisition
   module Outputter

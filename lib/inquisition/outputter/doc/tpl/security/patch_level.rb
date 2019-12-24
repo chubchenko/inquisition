@@ -7,8 +7,10 @@ module Inquisition
             class Wrapper < SimpleDelegator
               def group
                 group_by do |issue|
-                  # TODO: ....
-                  GemDetails.new(issue.context.name).to_h
+                  OpenStruct.new(
+                    name: issue.context.name,
+                    homepage: issue.context.__materialize__&.homepage
+                  )
                 end
               end
             end

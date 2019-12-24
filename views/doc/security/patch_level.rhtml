@@ -12,7 +12,7 @@
   <ul class="mt--5">
     <% collection.group.each do |gem, issues| %>
     <li>
-    <%="#{issues.count} related to the <a href=#{gem[:link]}>#{gem[:name]}</a>" %>
+    <%="#{issues.count} related to the <a href=#{gem.homepage}>#{gem.name}</a>" %>
     </li>
     <% end %>
   </ul>
