@@ -1,32 +1,47 @@
-require_relative 'tools/monitoring'
-require_relative 'tools/workers'
-
 module Inquisition
   module Outputter
     class Doc
       module TPL
         class Stack < Base
-          def database_adapter
-            Rails.configuration.database_configuration['default']['adapter']
-          end
-
           def ruby_version
             RUBY_VERSION
           end
 
-          def ruby_on_rails_version
+          def rails_version
             Rails.version
           end
 
-          def monitoring
-            @monitoring ||= begin
-              Template.new('stack/monitoring').render(Tools::Monitoring.new)
+          def db
+            @db ||= begin
+              OpenStruct.new(
+                adapter_name: ::ActiveRecord::Base.connection.adapter_name
+              )
             end
           end
 
-          def workers
-            @workers ||= begin
-              Template.new('stack/workers').render(Tools::Workers.new)
+          def jobs
+            @jobs || begin
+              Template.new('stack/jobs').render(Stack::Jobs.new)
+            end
+          end
+
+          def exception_and_instrumentation
+            @exception_and_instrumentation ||= begin
+              Template.new('stack/exception_and_instrumentation').render(
+                Class.new do
+                  def produce
+                    binding
+                  end
+
+                  def exception
+                    Exception.new
+                  end
+
+                  def instrumentation
+                    Instrumentation.new
+                  end
+                end.new
+              )
             end
           end
         end
@@ -34,3 +49,8 @@ module Inquisition
     end
   end
 end
+
+require_relative 'stack/collector'
+require_relative 'stack/jobs'
+require_relative 'stack/exception'
+require_relative 'stack/instrumentation'
