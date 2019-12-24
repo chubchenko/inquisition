@@ -10,6 +10,7 @@ module Inquisition
               define_method(name) do
                 memoizer = instance_variable_get("@#{name}")
                 return memoizer if memoizer
+
                 instance_variable_set("@#{name}", by_severity.fetch(name) { [].freeze })
               end
             end
