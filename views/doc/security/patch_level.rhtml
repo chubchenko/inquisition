@@ -7,12 +7,12 @@
     </span>
   </div>
   <span>
-    <%= "There are #{count} vulnerabilities for bundler and #{high.count} of them are high." %>
+    <%= "There are #{collection.count} vulnerabilities for bundler and #{collection.high.count} of them are high." %>
   </span>
   <ul class="mt--5">
-    <% group.each do |gem, issues| %>
+    <% collection.group.each do |gem, issues| %>
     <li>
-    <%="#{count} related to the <a href=#{gem[:link]}>#{gem[:name]}</a>" %>
+    <%="#{issues.count} related to the <a href=#{gem[:link]}>#{gem[:name]}</a>" %>
     </li>
     <% end %>
   </ul>

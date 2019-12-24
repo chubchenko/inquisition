@@ -15,7 +15,7 @@ module Inquisition
 
           def bundler_audit
             @bundler_audit ||= begin
-              Template.new('security/bundler_audit').render(BundlerAudit.call(@issues))
+              Template.new('security/patch_level').render(PatchLevel.call(@issues))
             end
           end
         end
@@ -24,5 +24,6 @@ module Inquisition
   end
 end
 
-require_relative 'security/bundler_audit'
+require_relative 'security/collector'
 require_relative 'security/brakeman'
+require_relative 'security/patch_level'

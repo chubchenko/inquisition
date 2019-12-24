@@ -3,18 +3,19 @@ module Inquisition
     class Doc
       module TPL
         class Security
-          class Brakeman
+          class PatchLevel
             class Wrapper < SimpleDelegator
-              def tally
-                group_by(&:context).each do |type, collection|
-                  yield(type, collection.count)
+              def group
+                group_by do |issue|
+                  # TODO: ....
+                  GemDetails.new(issue.context.name).to_h
                 end
               end
             end
 
             def self.call(issues)
               new(
-                Wrapper.new(Collector.new(issues, ::Inquisition::Brakeman::Runner).call)
+                Wrapper.new(Collector.new(issues, ::Inquisition::Bundler::Audit::Runner).call)
               )
             end
 
