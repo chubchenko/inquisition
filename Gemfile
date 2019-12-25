@@ -13,7 +13,7 @@ gemspec
 
 # Your gem is dependent on dev or edge Rails. Once you can lock this
 # dependency down to a specific version, move it to your gemspec.
-gem 'rails', '~> 5.2', '>= 5.2.3'
+gem 'rails', '~> 5.2', '>= 5.2.4.1'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
