@@ -1,5 +1,7 @@
 RSpec.describe Inquisition::Outputter::Doc::TPL::Stack::Instrumentation do
-  include_examples 'produce', described_class.new
+  include_examples 'produceable' do
+    subject(:tpl) { described_class.new }
+  end
 
   include_examples 'collection'
 

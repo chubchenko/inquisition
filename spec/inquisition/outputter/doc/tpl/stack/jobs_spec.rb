@@ -1,5 +1,7 @@
 RSpec.describe Inquisition::Outputter::Doc::TPL::Stack::Jobs do
-  include_examples 'produce', described_class.new
+  include_examples 'produceable' do
+    subject(:tpl) { described_class.new }
+  end
 
   describe '#collection' do
     subject(:collection) { described_class.new.collection }
