@@ -25,24 +25,16 @@ module Inquisition
             end
           end
 
-          def exception_and_instrumentation
-            @exception_and_instrumentation ||= begin
-              Template.new('stack/exception_and_instrumentation').render(
-                Class.new do
-                  def produce
-                    binding
-                  end
+          def exception
+            Template.new('stack/exception').render(
+              Exception.new
+            )
+          end
 
-                  def exception
-                    Exception.new
-                  end
-
-                  def instrumentation
-                    Instrumentation.new
-                  end
-                end.new
-              )
-            end
+          def instrumentation
+            Template.new('stack/instrumentation').render(
+              Instrumentation.new
+            )
           end
         end
       end
