@@ -18,8 +18,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           severity: Inquisition::Severity::LOW,
           category: Inquisition::Category::PERFORMANCE,
           message: 'The following column(s) `user_id` from the `projects` table probably should be indexed',
-          runner: runner,
-          aditional_data: nil
+          runner: runner
         )
       end
 
@@ -46,8 +45,7 @@ RSpec.describe Inquisition::LolDba::Runner do
           severity: Inquisition::Severity::LOW,
           category: Inquisition::Category::PERFORMANCE,
           message: message,
-          runner: runner,
-          aditional_data: nil
+          runner: runner
         )
       end
 

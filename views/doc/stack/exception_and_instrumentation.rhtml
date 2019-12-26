@@ -1,0 +1,37 @@
+<% exception.collection.each do |gem| %>
+  <li>
+    <span>
+      <%="<a href=#{gem.homepage}>#{gem.name}</a>"  %>
+     </span>
+    <span>
+      <%= "- #{gem.description}" %>
+     </span>
+  </li>
+<% end %>
+
+<% if exception.empty? %>
+  <li>
+    <span>
+      <%= exception.trouble %>
+    </span>
+ </li>
+<% end %>
+
+<% instrumentation.collection.each do |gem| %>
+  <li>
+    <span>
+      <%="<a href=#{gem.homepage}>#{gem.name}</a>"  %>
+     </span>
+    <span>
+      <%= "- #{gem.description}" %>
+     </span>
+  </li>
+<% end %>
+
+<% if instrumentation.empty? %>
+  <li>
+    <span>
+      <%= instrumentation.trouble %>
+    </span>
+ </li>
+<% end %>

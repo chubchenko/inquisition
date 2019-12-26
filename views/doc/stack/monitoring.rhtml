@@ -1,0 +1,18 @@
+<% monitoring do |gem| %>
+  <li>
+    <span>
+      <%="<a href=#{gem.homepage}>#{gem.name}</a>"  %>
+     </span>
+    <span>
+      <%= "- #{gem.description}" %>
+     </span>
+  </li>
+<% end %>
+
+<% trouble.each do |exception| %>
+  <div>
+    <span>
+      <%= exception %>
+    </span>
+  </div>
+<% end %>

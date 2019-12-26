@@ -7,7 +7,9 @@ RSpec.describe Inquisition::Fasterer::Runner do
     let(:test_file) { 'app/controllers/application_controller.rb' }
     let(:instance_file_traverser) { instance_double(Inquisition::Fasterer::FileTraverser) }
     let(:offense_collector) { instance_double('Fasterer::Analyzer::OffenseCollector', offenses: offense) }
-    let(:offense) { [instance_double(Fasterer::Offense, explanation: 'error', line_number: 1)] }
+    let(:offense) do
+      [instance_double(Fasterer::Offense, explanation: 'error', line_number: 1, offense_name: :gsub_vs_tr)]
+    end
 
     let(:instance_analyzer) do
       instance_double(Fasterer::Analyzer, file_path: "#{Rails.root}/#{test_file}", errors: offense_collector)
@@ -35,7 +37,7 @@ RSpec.describe Inquisition::Fasterer::Runner do
             path: test_file,
             message: offense.first.explanation,
             runner: nil,
-            aditional_data: nil
+            context: offense.first.offense_name
           )
         )
       end

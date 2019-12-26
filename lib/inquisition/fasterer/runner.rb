@@ -38,7 +38,7 @@ module Inquisition
           runner: self,
           path: file_error,
           message: error.explanation,
-          aditional_data: error
+          context: error.offense_name
         )
       end
     end

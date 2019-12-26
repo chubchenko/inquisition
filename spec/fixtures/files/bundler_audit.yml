@@ -16,6 +16,9 @@
 - severity: :low
   category: :security
   message: 'Nokogiri gem, via libxslt, is affected by multiple vulnerabilities'
+- severity: :low
+  message: 'Possible information leak / session hijack vulnerability'
+  category: :security
 - severity: :high
   category: :security
   message: 'smart_proxy_dynflow gem authentication bypass in Foreman remote execution feature'

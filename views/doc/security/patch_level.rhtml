@@ -1,0 +1,25 @@
+<div class="">
+  <div>
+    <span class="sub-subtitle">
+      <a href="#patch_level_verification">
+        Patch-level verification
+      </a>
+    </span>
+  </div>
+  <span>
+    <%= "There are #{collection.count} vulnerabilities for bundler and #{collection.high.count} of them are high." %>
+  </span>
+  <ul class="mt--5">
+    <% collection.group.each do |gem, issues| %>
+    <li>
+    <%="#{issues.count} related to the <a href=#{gem.homepage}>#{gem.name}</a>" %>
+    </li>
+    <% end %>
+  </ul>
+  <span>
+    The full report can be found
+    <a href="#">
+      here
+    </a>.
+</span>
+</div>

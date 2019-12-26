@@ -1,0 +1,14 @@
+<%= brakeman %>
+
+<%= patch_level %>
+
+<div class="">
+  <span class="sub-subtitle"><a href="#security_checklist">Security checklist</a></span>
+  <ul class="mt--5">
+    <li>TWITTER_* environment variables are hardcoded in the source code;</li>
+    <li>the configuration of CSP is absent;</li>
+    <li>there is no access control gem (e.g.  pundit, action_policy)</li>
+  </ul>
+</div>
+
+<%= bottlenecks_detection %>

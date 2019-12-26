@@ -96,7 +96,7 @@ RSpec.describe Inquisition::Outputter::Loader do
     end
 
     context 'when there is loaded outputter' do
-      before { loader.add('html') }
+      before { loader.add('doc') }
 
       it do
         expect do
