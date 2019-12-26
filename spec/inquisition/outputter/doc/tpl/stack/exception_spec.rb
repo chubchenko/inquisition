@@ -38,7 +38,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Stack::Exception do
 
     context 'when there is at least one used gem' do
       let(:collection) do
-        [OpenStruct.new(name: 'puma', homepage: 'http://puma.io', description: described_class::DESCRIPTION)]
+        [OpenStruct.new(name: 'airbrake', homepage: 'https://airbrake.io/', description: described_class::DESCRIPTION)]
       end
 
       it { is_expected.not_to be_empty }
