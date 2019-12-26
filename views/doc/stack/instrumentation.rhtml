@@ -1,0 +1,18 @@
+<% collection.each do |gem| %>
+  <li>
+    <span>
+      <%="<a href=#{gem.homepage}>#{gem.name}</a>"  %>
+     </span>
+    <span>
+      <%= "- #{gem.description}" %>
+     </span>
+  </li>
+<% end %>
+
+<% if empty? %>
+  <li>
+    <span>
+      <%= trouble %>
+    </span>
+ </li>
+<% end %>
