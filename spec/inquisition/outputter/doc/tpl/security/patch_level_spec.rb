@@ -4,62 +4,63 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::PatchLevel do
   end
 
   describe '.call' do
-    let(:issue) do
-      Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
-        path: 'app/controllers/users_controller.rb',
-        line: 42,
-        severity: Inquisition::Severity::HIGH,
-        message: 'Potentially dangerous key allowed for mass assignment',
-        context: 'Cross-Site Scripting',
-        runner: Inquisition::Bundler::Audit::Runner.new
-      )
-    end
+    let(:issue) { instance_double(Inquisition::Issue) }
     let(:collector) { instance_double(Inquisition::Outputter::Doc::TPL::Security::Collector) }
-    let(:wrapper) { instance_double(described_class::Wrapper) }
+    let(:wrapper) { instance_double(Inquisition::Outputter::Doc::TPL::Security::PatchLevel::Wrapper) }
 
     before do
-      allow(described_class::Wrapper).to receive(:new).and_return(wrapper)
+      allow(Inquisition::Outputter::Doc::TPL::Security::Collector).to receive(:new).and_return(collector)
+      allow(collector).to receive(:call).and_return([issue])
+      allow(Inquisition::Outputter::Doc::TPL::Security::PatchLevel::Wrapper).to receive(:new).and_return(wrapper)
       allow(described_class).to receive(:new)
 
       described_class.call([issue])
     end
 
     it do
-      expect(described_class::Wrapper).to have_received(:new).with(
-        [issue]
+      expect(Inquisition::Outputter::Doc::TPL::Security::Collector).to have_received(:new).with(
+        [issue], Inquisition::Bundler::Audit::Runner
       )
     end
 
-    it { expect(described_class).to have_received(:new).with(wrapper) }
+    it do
+      expect(
+        Inquisition::Outputter::Doc::TPL::Security::PatchLevel::Wrapper
+      ).to have_received(:new).with([issue])
+    end
+
+    it do
+      expect(
+        described_class
+      ).to have_received(:new).with(wrapper)
+    end
   end
 
   describe Inquisition::Outputter::Doc::TPL::Security::PatchLevel::Wrapper do
-    subject(:wrapper) { described_class.new([issue, issue]) }
-
-    let(:gem) { instance_double(Bundler::LazySpecification, name: 'test') }
-    let(:stub) { double(Bundler::StubSpecification, homepage: 'test') }
-    let(:struct) { double(OpenStruct, name: gem.name, homepage: stub.homepage) }
-    let(:result) { { struct => [issue, issue] } }
-    let(:issue) do
-      Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
-        path: 'app/controllers/users_controller.rb',
-        line: 42,
-        severity: Inquisition::Severity::HIGH,
-        message: 'Potentially dangerous key allowed for mass assignment',
-        context: gem,
-        runner: Inquisition::Bundler::Audit::Runner.new
-      )
-    end
-
-    before do
-      allow(OpenStruct).to receive(:new).with(name: gem.name, homepage: stub.homepage).and_return(struct)
-      allow(gem).to receive(:__materialize__).and_return(stub)
-    end
-
     describe '#group' do
-      it { expect(wrapper.group).to eq(result) }
+      subject(:wrapper) { described_class.new([issue, issue]) }
+
+      let(:issue) do
+        Inquisition::Issue.new(
+          path: nil,
+          line: nil,
+          severity: Inquisition::Severity::HIGH,
+          category: Inquisition::Category::SECURITY,
+          message: 'Loofah XSS Vulnerability',
+          runner: nil,
+          context: context
+        )
+      end
+      let(:context) do
+        instance_double(Bundler::LazySpecification,
+                        name: 'loofah',
+                        __materialize__: double(:__materialize__, homepage: 'https://github.com/flavorjones/loofah'))
+      end
+      let(:gem) do
+        OpenStruct.new(name: 'loofah', homepage: 'https://github.com/flavorjones/loofah')
+      end
+
+      it { expect(wrapper.group).to eq(gem => [issue, issue]) }
     end
   end
 end
