@@ -20,27 +20,23 @@ module Inquisition
           end
 
           def jobs
-            @jobs || begin
+            @jobs ||= begin
               Template.new('stack/jobs').render(Stack::Jobs.new)
             end
           end
 
-          def exception_and_instrumentation
-            @exception_and_instrumentation ||= begin
-              Template.new('stack/exception_and_instrumentation').render(
-                Class.new do
-                  def produce
-                    binding
-                  end
+          def exception
+            @exception ||= begin
+              Template.new('stack/exception').render(
+                Exception.new
+              )
+            end
+          end
 
-                  def exception
-                    Exception.new
-                  end
-
-                  def instrumentation
-                    Instrumentation.new
-                  end
-                end.new
+          def instrumentation
+            @instrumentation ||= begin
+              Template.new('stack/instrumentation').render(
+                Instrumentation.new
               )
             end
           end

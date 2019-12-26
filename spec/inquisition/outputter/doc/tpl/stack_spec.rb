@@ -46,35 +46,41 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Stack do
     end
   end
 
-  describe '#exception_and_instrumentation', skip: true do
+  describe '#exception' do
     subject(:stack) { described_class.new }
 
     let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
-    let(:double_class) do
-      Class.new do
-        def produce
-          binding
-        end
-
-        def exception
-          Exception.new
-        end
-
-        def instrumentation
-          Instrumentation.new
-        end
-      end
-    end
 
     before do
-      allow(Class).to receive(:new).and_return(double_class)
-      allow(template).to receive(:render).with(double_class)
+      allow(template).to receive(:render)
       allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
-      stack.exception_and_instrumentation
+
+      stack.exception
     end
 
     it do
-      expect(template).to have_received(:render).with(double_class)
+      expect(template).to have_received(:render).with(
+        instance_of(Inquisition::Outputter::Doc::TPL::Stack::Exception)
+      )
+    end
+  end
+
+  describe '#instrumentation' do
+    subject(:stack) { described_class.new }
+
+    let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
+
+    before do
+      allow(template).to receive(:render)
+      allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
+
+      stack.instrumentation
+    end
+
+    it do
+      expect(template).to have_received(:render).with(
+        instance_of(Inquisition::Outputter::Doc::TPL::Stack::Instrumentation)
+      )
     end
   end
 end

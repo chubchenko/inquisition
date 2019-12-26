@@ -7,9 +7,11 @@ module Inquisition
             class Wrapper < SimpleDelegator
               def group
                 group_by do |issue|
+                  context = issue.context
+
                   OpenStruct.new(
-                    name: issue.context.name,
-                    homepage: issue.context.__materialize__&.homepage
+                    name: context.name,
+                    homepage: context.__materialize__&.homepage
                   )
                 end
               end
