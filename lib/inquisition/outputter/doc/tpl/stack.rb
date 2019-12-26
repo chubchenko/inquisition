@@ -20,13 +20,13 @@ module Inquisition
           end
 
           def jobs
-            @jobs || begin
+            @jobs ||= begin
               Template.new('stack/jobs').render(Stack::Jobs.new)
             end
           end
 
           def exception
-            @exception || begin
+            @exception ||= begin
               Template.new('stack/exception').render(
                 Exception.new
               )
@@ -34,7 +34,7 @@ module Inquisition
           end
 
           def instrumentation
-            @instrumentation || begin
+            @instrumentation ||= begin
               Template.new('stack/instrumentation').render(
                 Instrumentation.new
               )
