@@ -26,15 +26,19 @@ module Inquisition
           end
 
           def exception
-            Template.new('stack/exception').render(
-              Exception.new
-            )
+            @exception || begin
+              Template.new('stack/exception').render(
+                Exception.new
+              )
+            end
           end
 
           def instrumentation
-            Template.new('stack/instrumentation').render(
-              Instrumentation.new
-            )
+            @instrumentation || begin
+              Template.new('stack/instrumentation').render(
+                Instrumentation.new
+              )
+            end
           end
         end
       end
