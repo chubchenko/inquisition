@@ -5,47 +5,38 @@
       a {
         color: blue;
       }
-
       .subtitle {
         font-size: 19px;
         color: rgb(110, 115, 115);
       }
-
       .sub-subtitle {
         margin-top: 12px;
         font-size: 17px;
         color: rgb(110, 115, 115);
       }
-
       .title-doc {
         line-height: 400px;
         vertical-align: middle;
         text-align: center;
       }
-
       .date-creation {
         text-align: center;
         font-weight: normal;
         font-size: 20px;
       }
-
       .content-page {
         margin-left: 30px;
       }
-
       .mt-5 {
         margin-top: 5px;
       }
-
       .technology-page {
         margin-left: 40px;
         margin-top: 20px;
       }
-
       .mb-5 {
         margin-bottom: 5px
       }
-
       .mt--5 {
         margin-top: -5px;
       }
@@ -53,6 +44,7 @@
   </head>
   <body>
     <%= home %>
+    <br style="page-break-before: always">
     <div class='content-page'>
       <br>
       <dl>
@@ -104,128 +96,20 @@
     </div>
     <br style="page-break-before: always">
 
-    <%= technology_stack %>
+    <%= stack %>
 
-    <div class='statistic-code-analisis technology-page'>
+    <br style="page-break-before: always">
+    <div class='statistic-code-analysis technology-page'>
       <h2><a id="#static_code_analysis_and_automated_security_audit">Static code analysis and automated security audit</a></h2>
 
       <div class="security-issues-detection technology-page">
         <span class="subtitle"><a id="security_issues_detection">Security issues detection</a></span>
 
-        <%= brakeman %>
-
-        <%= patch_level_verification %>
-
-        <div class="">
-          <span class="sub-subtitle"><a href="#security_checklist">Security checklist</a></span>
-          <ul class="mt--5">
-            <li>TWITTER_* environment variables are hardcoded in the source code;</li>
-            <li>the configuration of CSP is absent;</li>
-            <li>there is no access control gem (e.g.  pundit, action_policy)</li>
-          </ul>
-        </div>
-
-        <%= bottlenecks_detection %>
-      </div>
-
-      <%= rubycritic %>
-
-      <div class="">
-        <span class="subtitle"><a id="autotest_quality">Autotest quality</a></span>
-        <ul class="mt--5">
-          <li>simplecov is absent. Code coverage equal 32.79% according to simplecov;</li>
-          <li>there is a lack of controller specs (there are 28 controller classes and only 6 of them has tests which are not covered all cases);</li>
-          <li>...</li>
-        </ul>
+        <%= security %>
       </div>
       <br style="page-break-before: always">
 
-      <div class="">
-        <span class="subtitle"><a id="style_guides_checking">Style guides checking</a></span>
-        <ul class="mt--5">
-          <li>
-            rubocop is present. Gem version is outdated and some of the new extensions are not used, such as:
-            <ul type="circle">
-              <li>rubocop-rspec</li>
-              <li>rubocop-rspec</li>
-            </ul>
-          </li>
-          <li>there are 18668 offenses was found in 376 files, according to rubocop-hq;</li>
-          <li>12912 of them could be autocorrected. The full report can be found here.</li>
-        </ul>
-      </div>
-
-      <div class="">
-        <span class="subtitle"><a id="rails_code_quality_checking">Rails code quality checking</a></span>
-        <ul class="mt--5">
-          <li>
-            there are 612 warnings according to the rails_best_practices (the full report can be found here). We grouped them by severity:
-            <ul>
-              <li>
-                <span>High:</span>
-                <ul type="circle">
-                  <li>24 of them related to the missing indexes in the database;</li>
-                  <li>137 related to the unused code;</li>
-                  <li>2 of them related to use model association;</li>
-                </ul>
-              </li>
-              <li>
-                <span>Medium:</span>
-                <ul type="circle">
-                  <li>24 of them related to the missing indexes in the database;</li>
-                  <li>137 related to the unused code;</li>
-                  <li>2 of them related to use model association;</li>
-                </ul>
-              </li>
-              <li>
-                <span>Low:</span>
-                <ul type="circle">
-                  <li>24 of them related to the missing indexes in the database;</li>
-                  <li>137 related to the unused code;</li>
-                  <li>2 of them related to use model association;</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-
-          <li>there are 41 unused routes and 10 unreachable action methods. The full report can be found here</li>
-          <li>
-            the business logic is stored in the:
-            <ul>
-              <li>controllers</li>
-              <li>models</li>
-            </ul>
-          </li>
-          <li>
-            the finders logic are stored in the:
-            <ul>
-              <li>controllers</li>
-              <li>models</li>
-              <li>views</li>
-              <li>helpers</li>
-            </ul>
-          </li>
-          <li>
-            the complex creation logic is stored in the:
-            <ul>
-              <li>controllers</li>
-              <li>models</li>
-            </ul>
-          </li>
-          <li>
-            the application has fat
-            <ul>
-              <li>controllers</li>
-              <li>models</li>
-              <li>helpers</li>
-              <li>workers</li>
-            </ul>
-          </li>
-          <li>the application does not use internationalization;</li>
-          <li>technical documentation of the project is absent.</li>
-        </ul>
-      </div>
+      <%= analysis %>
 
       <div class="">
         <span class="subtitle"><a id="database_structure_checking">Database structure checking</a></span>

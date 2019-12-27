@@ -14,7 +14,7 @@ RSpec.describe Inquisition::Brakeman::Runner do
         line: 42,
         severity: Inquisition::Severity::HIGH,
         message: 'Potentially dangerous key allowed for mass assignment',
-        aditional_data: 'Cross-Site Scripting'
+        context: 'Cross-Site Scripting'
       }
     end
 

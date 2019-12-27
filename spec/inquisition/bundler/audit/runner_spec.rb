@@ -33,8 +33,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
           severity: Inquisition::Severity::MEDIUM,
           category: Inquisition::Category::SECURITY,
           message: 'Insecure Source URI found: http://rubygems.org/',
-          runner: runner,
-          aditional_data: nil
+          runner: runner
         )
       end
       let(:insecure_source) do
@@ -66,8 +65,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
           severity: Inquisition::Severity::MEDIUM,
           category: Inquisition::Category::SECURITY,
           message: 'Nested attributes rejection proc bypass in Active Record',
-          runner: runner,
-          aditional_data: nil
+          runner: runner
         )
       end
       let(:gem) { instance_double(Bundler::LazySpecification) }

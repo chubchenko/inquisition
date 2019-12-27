@@ -4,8 +4,6 @@ module Inquisition
       new(class_name.split('::')[1..-2].join('_').gsub(/([a-z\d])([A-Z])/, '\1_\2').downcase)
     end
 
-    attr_reader :name
-
     def initialize(name)
       @name = name
     end

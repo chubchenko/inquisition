@@ -4,7 +4,7 @@ RSpec.describe Inquisition::Outputter::Doc::Template do
 
     let(:erb) { instance_double(ERB) }
     let(:binding) { instance_double(Binding) }
-    let(:layout) { instance_double(Inquisition::Outputter::Doc::Templates::Layout) }
+    let(:layout) { instance_double(Inquisition::Outputter::Doc::TPL::Layout) }
 
     before do
       allow(layout).to receive(:produce).and_return(binding)

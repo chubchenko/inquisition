@@ -6,6 +6,7 @@ detectors:
     ignore_iterators:
       - around
       - open
+      - tap
 
   TooManyStatements:
     exclude:

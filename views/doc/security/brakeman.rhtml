@@ -1,0 +1,19 @@
+<div class="">
+  <span class="sub-subtitle">
+    <a href="#brakeman">
+      Brakeman
+    </a>
+  </span>
+
+  <ul class="mt--5">
+    <% collection.tally do |type, count| %>
+      <li>
+        <%= "#{type}: #{count}" %>
+      </li>
+    <% end %>
+  </ul>
+
+  <span>
+    <%= "There are #{collection.count} warnings and #{collection.high.count} of them are high. The full report can be found here." %>
+  </span>
+</div>

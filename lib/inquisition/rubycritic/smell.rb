@@ -13,7 +13,7 @@ module Inquisition
           severity: Inquisition::Severity::LOW,
           message: "#{smell.context} #{smell.message}",
           category: category,
-          aditional_data: smell
+          context: smell.type
         }
       end
 

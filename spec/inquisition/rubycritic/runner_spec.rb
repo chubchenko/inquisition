@@ -55,6 +55,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'Similar code',
           message: 'found in 2 nodes',
           analyser: 'flay',
@@ -81,7 +82,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
             message: 'Similar code found in 2 nodes',
             category: Inquisition::Category::DUPLICATION,
             runner: runner,
-            aditional_data: nil
+            context: smell
           ),
           Inquisition::Issue.new(
             path: 'app/models/application_record.rb',
@@ -90,7 +91,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
             message: 'Similar code found in 2 nodes',
             category: Inquisition::Category::DUPLICATION,
             runner: runner,
-            aditional_data: nil
+            context: smell
           )
         ]
       end
@@ -120,6 +121,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'ApplicationRecord#test_flog',
           message: 'has a flog score of 40',
           analyser: 'flog',
@@ -139,8 +141,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
           severity: Inquisition::Severity::LOW,
           message: 'ApplicationRecord#test_flog has a flog score of 40',
           category: Inquisition::Category::COMPLEXITY,
-          runner: runner,
-          aditional_data: nil
+          runner: runner
         )
       end
 
@@ -169,6 +170,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'ApplicationController#test_fasterer',
           message: "doesn't depend on instance state (maybe move it to another class?)",
           analyser: 'reek',
@@ -188,7 +190,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
           severity: Inquisition::Severity::LOW,
           runner: runner,
           category: Inquisition::Category::COMPLEXITY,
-          aditional_data: nil,
           message: <<-MESSAGE.squish
             ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)
           MESSAGE
@@ -220,6 +221,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'ApplicationRecord#test_flog',
           message: 'has a flog score of 40',
           analyser: 'flog',
@@ -240,7 +242,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
           message: 'ApplicationRecord#test_flog has a flog score of 40',
           category: Inquisition::Category::COMPLEXITY,
           runner: runner,
-          aditional_data: smell
+          context: smell.type
         )
       end
 

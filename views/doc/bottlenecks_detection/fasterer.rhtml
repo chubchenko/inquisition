@@ -1,0 +1,10 @@
+<li>
+  <%= "there are #{collection.count} recommendations to make the application faster (the full report can be found here). Where:" %>
+  <ul type="circle">
+    <% collection.group do |data, issues_count| %>
+      <li>
+        <%= "#{issues_count} of them related to the <a href=#{data[:link]}>#{data[:title]}</a>;" %>
+      </li>
+    <% end %>
+  </ul>
+</li>
