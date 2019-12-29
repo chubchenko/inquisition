@@ -17,7 +17,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
 
     it do
       expect(template).to have_received(:render).with(
-        instance_of(Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection::ActiveRecordDoctor)
+        instance_of(Inquisition::Outputter::Doc::TPL::BottlenecksDetection::ActiveRecordDoctor)
       )
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
 
     it do
       expect(template).to have_received(:render).with(
-        instance_of(Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection::Fasterer)
+        instance_of(Inquisition::Outputter::Doc::TPL::BottlenecksDetection::Fasterer)
       )
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
 
     it do
       expect(template).to have_received(:render).with(
-        instance_of(Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection::LolDba)
+        instance_of(Inquisition::Outputter::Doc::TPL::BottlenecksDetection::LolDba)
       )
     end
   end

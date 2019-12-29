@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection::Fasterer do
+RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection::Fasterer do
   include_examples 'produceable' do
     subject(:tpl) { described_class.new([]) }
   end
@@ -23,7 +23,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection:
     it { expect(described_class).to have_received(:new) }
   end
 
-  describe Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection::Fasterer::Wrapper do
+  describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection::Fasterer::Wrapper do
     describe '#group' do
       subject(:wrapper) do
         described_class.new([issue])
@@ -31,12 +31,12 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection:
 
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
+          path: 'app/controllers/application_controller.rb',
+          line: 6,
           severity: Inquisition::Severity::HIGH,
           category: Inquisition::Category::SECURITY,
           message: 'Using tr is faster than gsub',
-          runner: nil,
+          runner: Inquisition::Fasterer::Runner,
           context: :rescue_vs_respond_to
         )
       end
@@ -48,12 +48,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection:
             title: 'begin...rescue vs respond_to?'
           }
         }
-      end
-      let(:test_link) { 'https://github.com/JuanitoFatas/fast-ruby#' }
-
-      before do
-        stub_const("#{described_class}::EXPLENATIONS", explenations)
-        stub_const("#{described_class}::PATH", test_link)
       end
 
       it do

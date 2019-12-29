@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Doc::TPL::Security::BottlenecksDetection::LolDba do
+RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection::LolDba do
   include_examples 'produceable' do
     subject(:tpl) { described_class.new([]) }
   end
