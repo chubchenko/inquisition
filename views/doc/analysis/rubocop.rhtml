@@ -1,0 +1,28 @@
+<div class="">
+  <span class="subtitle"><a id="style_guides_checking">Style guides checking</a></span>
+  <ul class="mt--5">
+    <li>
+      <a href="<%= link %>">
+        Rubocop
+      </a>
+      <span>
+        is <%= contains_rubocop %>.
+      </span>
+        Gem version is outdated and some of the new extensions are not used, such as:
+      <ul type="circle">
+        <% extensions do |name, link| %>
+          <li>
+            <%= "<a href=#{link}>#{name}</a>" %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+    <li>
+      there are <%= collection.count %> offenses was found in <%= inspect_files %> files, according to
+      <a href="<%= link %>">
+        rubocop-hq
+      </a>;
+    </li>
+    <li><%= autocorrect_count %> of them could be autocorrected. The full report can be found here.</li>
+  </ul>
+</div>
