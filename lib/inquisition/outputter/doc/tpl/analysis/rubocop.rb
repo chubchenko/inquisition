@@ -30,12 +30,12 @@ module Inquisition
               binding
             end
 
-            def autocorrect_count
-              'not implement'
+            def autocorrect_issues
+              collection.group_by(&:context).fetch(:corrected, [])
             end
 
             def inspect_files
-              collection&.first&.runner&.modified_runner&.target_files&.count
+              collection&.first&.runner&.modified_runner&.target_files || []
             end
 
             def contains_rubocop

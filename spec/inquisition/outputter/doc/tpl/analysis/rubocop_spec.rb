@@ -77,16 +77,26 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Analysis::Rubocop do
   end
 
   describe '#inspect_files' do
-    subject(:inspect_files) { described_class.new([issue]).inspect_files }
+    subject(:inspect_files) { described_class.new(issues).inspect_files }
 
     let(:instance_modified_runner) do
       instance_double(Inquisition::Rubocop::RubocopModifiedRunner,
                       target_files: ['app/controllers/application_controller.rb'])
     end
 
-    before { allow(issue.runner).to receive(:modified_runner).and_return(instance_modified_runner) }
+    context 'when collection exists' do
+      let(:issues) { [issue] }
 
-    it { expect(inspect_files).to eq(1) }
+      before { allow(issue.runner).to receive(:modified_runner).and_return(instance_modified_runner) }
+
+      it { expect(inspect_files).to eq(instance_modified_runner.target_files) }
+    end
+
+    context 'when collection not exists' do
+      let(:issues) { [] }
+
+      it { expect(inspect_files).to eq([]) }
+    end
   end
 
   describe '#contains_rubocop' do
@@ -109,7 +119,31 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Analysis::Rubocop do
     end
   end
 
-  describe '#autocorrect_count' do
-    it
+  describe '#autocorrect_issues' do
+    subject(:autocorrect_issues) { described_class.new(issues).autocorrect_issues }
+
+    context 'when collection exists' do
+      let(:issues) { [issue, issue_autocorrect] }
+
+      let(:issue_autocorrect) do
+        Inquisition::Issue.new(
+          category: Inquisition::Category::SECURITY,
+          path: 'app/controllers/users_controller.rb',
+          line: 42,
+          severity: Inquisition::Severity::LOW,
+          message: 'Metrics/LineLength: Line is too long. [132/125]',
+          context: :corrected,
+          runner: Inquisition::Rubocop::Runner.new
+        )
+      end
+
+      it { expect(autocorrect_issues).to eq([issue_autocorrect]) }
+    end
+
+    context 'when collection not exists' do
+      let(:issues) { [] }
+
+      it { expect(autocorrect_issues).to eq([]) }
+    end
   end
 end

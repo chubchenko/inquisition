@@ -18,11 +18,11 @@
       </ul>
     </li>
     <li>
-      there are <%= collection.count %> offenses was found in <%= inspect_files %> files, according to
+      there are <%= collection.count %> offenses was found in <%= inspect_files.count %> files, according to
       <a href="<%= link %>">
         rubocop-hq
       </a>;
     </li>
-    <li><%= autocorrect_count %> of them could be autocorrected. The full report can be found here.</li>
+    <li><%= autocorrect_issues.count %> of them could be autocorrected. The full report can be found here.</li>
   </ul>
 </div>
