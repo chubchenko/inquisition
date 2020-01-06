@@ -1,4 +1,4 @@
-require 'bundler/audit/scanner'
+require_relative 'scanner'
 require 'bundler/audit/database'
 
 module Inquisition
@@ -20,7 +20,7 @@ module Inquisition
         private
 
         def auditor
-          @auditor ||= ::Bundler::Audit::Scanner.new(Rails.root)
+          @auditor ||= Scanner.new(Rails.root)
         end
 
         def issue_for(issue)
