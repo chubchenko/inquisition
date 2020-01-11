@@ -106,35 +106,11 @@
         <span class="subtitle"><a id="security_issues_detection">Security issues detection</a></span>
 
         <%= security %>
-
-        <div class="">
-          <span class="sub-subtitle"><a href="#security_checklist">Security checklist</a></span>
-          <ul class="mt--5">
-            <li>TWITTER_* environment variables are hardcoded in the source code;</li>
-            <li>the configuration of CSP is absent;</li>
-            <li>there is no access control gem (e.g.  pundit, action_policy)</li>
-          </ul>
-        </div>
-
-        <div class="">
-          <span class="sub-subtitle"><a href="#bottlenecks_detection">Bottlenecks detection</a></span>
-          <ul class="mt--5">
-            <li>there are 38 unoptimized queries. The full report can be found here;</li>
-            <li>there are 252 database issues. The full report can be found here</li>
-            <li>there are 19 columns that should be indexed. The full report can be found here;</li>
-            <li>
-              there are 10 recommendations to make the application faster (the full report can be found here). Where:
-              <ul type="circle">
-                <li>6 of them related to the Enumerable#detect vs Enumerable#select.first, the second one 4.84x slower than the first one;</li>
-                <li>...</li>
-                <li>...</li>
-                <li>...</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
       </div>
 
+      <%= bottleneck %>
+
+      <br style="page-break-before: always">
       <div class="">
         <div class="mt-5">
           <span class="subtitle"><a id="structural_similarities_analysis_and_code_smell_detection">Structural similarities analysis and code smell detection</a></span>

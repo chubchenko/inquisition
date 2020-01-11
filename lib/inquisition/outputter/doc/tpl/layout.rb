@@ -2,6 +2,7 @@ require_relative 'base'
 require_relative 'home'
 require_relative 'stack'
 require_relative 'security'
+require_relative 'bottleneck'
 
 module Inquisition
   module Outputter
@@ -27,6 +28,12 @@ module Inquisition
           def security
             @security ||= begin
               Template.new('security').render(Security.new(@issues))
+            end
+          end
+
+          def bottleneck
+            @bottleneck ||= begin
+              Template.new('bottleneck').render(TPL::Bottleneck.new(@issues))
             end
           end
         end
