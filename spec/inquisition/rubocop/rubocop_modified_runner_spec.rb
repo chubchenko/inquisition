@@ -13,10 +13,11 @@ RSpec.describe Inquisition::Rubocop::RubocopModifiedRunner do
     let(:issues) { ['issue file', ['issue body']] }
     let(:offense) { instance_double(RuboCop::Cop::Offense) }
     let(:offenses) { [{ file => [offense] }] }
+    let(:processed_source) { instance_double(RuboCop::ProcessedSource) }
 
     before do
       allow(runner).to receive(:find_target_files).and_return(target_files)
-      allow(runner).to receive(:file_offenses).with("#{Rails.root}/#{file}").and_return([offense])
+      allow(runner).to receive(:file_offense_with_autocorrect).with("#{Rails.root}/#{file}").and_return([offense])
       allow(offense).to receive(:disabled?).and_return([offense])
       allow(runner).to receive(:file_started).with("#{Rails.root}/#{file}")
     end
@@ -24,7 +25,7 @@ RSpec.describe Inquisition::Rubocop::RubocopModifiedRunner do
     it 'returns offenses' do
       expect(runner.run([Rails.root])).to eq(offenses)
       expect(runner).to have_received(:find_target_files)
-      expect(runner).to have_received(:file_offenses).with("#{Rails.root}/#{file}")
+      expect(runner).to have_received(:file_offense_with_autocorrect).with("#{Rails.root}/#{file}")
       expect(offense).to have_received(:disabled?)
       expect(runner).to have_received(:file_started).with("#{Rails.root}/#{file}")
     end

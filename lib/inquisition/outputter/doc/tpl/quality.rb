@@ -12,6 +12,12 @@ module Inquisition
               Template.new('quality/rubycritic').render(Rubycritic.call(@issues))
             end
           end
+
+          def rubocop
+            @rubocop ||= begin
+              Template.new('quality/rubocop').render(Rubocop.call(@issues))
+            end
+          end
         end
       end
     end
@@ -19,3 +25,4 @@ module Inquisition
 end
 
 require_relative 'quality/rubycritic'
+require_relative 'quality/rubocop'

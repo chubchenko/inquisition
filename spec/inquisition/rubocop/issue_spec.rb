@@ -8,7 +8,8 @@ RSpec.describe Inquisition::Rubocop::Issue do
         message: 'Style/WordArray: Use `%w` or `%W` for an array of words.',
         path: 'db/schema.rb',
         line: 21,
-        category: Inquisition::Category::STYLE
+        category: Inquisition::Category::STYLE,
+        context: :unsupported
       }
     end
 
@@ -18,7 +19,8 @@ RSpec.describe Inquisition::Rubocop::Issue do
         severity: rubocop_severity,
         message: options[:message],
         line: options[:line],
-        cop_name: 'Style/WordArray'
+        cop_name: 'Style/WordArray',
+        status: :unsupported
       )
     end
 
