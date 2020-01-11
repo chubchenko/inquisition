@@ -22,6 +22,7 @@ require 'inquisition/factory_bot/runner'
 require 'inquisition/factory_bot/factory_bot_modified_linter'
 
 require_relative 'inquisition/bundler/audit/vulnerability'
+require_relative 'inquisition/bundler/audit/auditor'
 require_relative 'inquisition/bundler/audit/runner'
 
 require_relative 'inquisition/bundler/leak/vulnerability'
