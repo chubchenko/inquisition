@@ -13,7 +13,8 @@ module Inquisition
           path: nil,
           line: nil,
           message: create_message,
-          category: Runner::TASKS[task]
+          category: Runner::TASKS[task],
+          context: task.to_s.split('::').last
         }
       end
 
