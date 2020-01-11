@@ -14,8 +14,7 @@ RSpec.describe Inquisition::RailsBestPractices::Warning do
         path: 'config/initializers/backtrace_silencers.rb',
         line: 6,
         severity: Inquisition::Severity::LOW,
-        message: 'Line is longer than 111 characters (112 characters)',
-        category: Inquisition::Category::STYLE
+        message: 'Line is longer than 111 characters (112 characters)'
       }
     end
 

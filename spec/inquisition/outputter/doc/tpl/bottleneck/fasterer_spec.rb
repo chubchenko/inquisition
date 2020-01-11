@@ -32,7 +32,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck::Fasterer do
           path: 'app/controllers/application_controller.rb',
           line: 6,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::PERFORMANCE,
           message: 'Using tr is faster than gsub',
           runner: Inquisition::Fasterer::Runner,
           context: :rescue_vs_respond_to

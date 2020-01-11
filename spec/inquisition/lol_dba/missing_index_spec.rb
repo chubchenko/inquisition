@@ -12,10 +12,7 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
 
       let(:options) do
         {
-          path: nil,
-          line: nil,
           severity: ::Inquisition::Severity::LOW,
-          category: Inquisition::Category::PERFORMANCE,
           message: 'The following column(s) `user_id` from the `projects` table probably should be indexed'
         }
       end
@@ -39,10 +36,7 @@ RSpec.describe Inquisition::LolDba::MissingIndex do
       end
       let(:options) do
         {
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::PERFORMANCE,
           message: message
         }
       end

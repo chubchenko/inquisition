@@ -29,17 +29,13 @@ RSpec.describe Inquisition::FactoryBot::Runner do
       expect(runner.call).to contain_exactly(
         Inquisition::Issue.new(
           path: factory,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::BUG_RISK,
           message: 'factory error',
           runner: nil
         ),
         Inquisition::Issue.new(
           path: factory,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::BUG_RISK,
           message: 'factory trait error',
           runner: nil
         )

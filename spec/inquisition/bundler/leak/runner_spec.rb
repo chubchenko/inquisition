@@ -25,12 +25,9 @@ RSpec.describe Inquisition::Bundler::Leak::Runner do
       let(:unpatched_gem) { Bundler::Plumber::Scanner::UnpatchedGem.new(gem, advisory) }
       let(:issue) do
         Inquisition::Issue.new(
-          line: nil,
-          category: Inquisition::Category::PERFORMANCE,
           severity: Inquisition::Severity::MEDIUM,
-          path: Inquisition::Bundler::Leak::Vulnerability::GEMFILE,
           message: 'Memory leak in formatter middleware',
-          runner: nil
+          runner: runner
         )
       end
 

@@ -20,11 +20,8 @@ module Inquisition
 
       def to_h
         {
-          path: nil,
-          line: nil,
           severity: Severity::LOW,
-          message: "The following column(s) #{columns} from the `#{table}` table probably should be indexed",
-          category: Category::PERFORMANCE
+          message: "The following column(s) #{columns} from the `#{table}` table probably should be indexed"
         }
       end
 

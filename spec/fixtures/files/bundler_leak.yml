@@ -1,4 +1,2 @@
-- path: 'Gemfile.lock'
-  severity: :medium
-  category: :performance
-  message: 'Memory Leak using Celluloid::Future'
+  - severity: :medium
+    message: 'Memory Leak using Celluloid::Future'

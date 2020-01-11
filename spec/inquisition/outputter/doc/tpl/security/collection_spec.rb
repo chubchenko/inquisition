@@ -13,7 +13,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collection do
         [
           issue,
           Inquisition::Issue.new(
-            category: Inquisition::Category::SECURITY,
             path: 'app/controllers/application_controller.rb',
             line: 6,
             severity: Inquisition::Severity::MEDIUM,
@@ -25,7 +24,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collection do
       end
       let(:issue) do
         Inquisition::Issue.new(
-          category: Inquisition::Category::SECURITY,
           path: 'app/controllers/users_controller.rb',
           line: 42,
           severity: Inquisition::Severity::HIGH,
@@ -51,7 +49,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collection do
         [
           issue,
           Inquisition::Issue.new(
-            category: Inquisition::Category::SECURITY,
             path: 'app/controllers/application_controller.rb',
             line: 6,
             severity: Inquisition::Severity::HIGH,
@@ -63,7 +60,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collection do
       end
       let(:issue) do
         Inquisition::Issue.new(
-          category: Inquisition::Category::SECURITY,
           path: 'app/controllers/users_controller.rb',
           line: 42,
           severity: Inquisition::Severity::MEDIUM,
@@ -89,7 +85,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collection do
         [
           issue,
           Inquisition::Issue.new(
-            category: Inquisition::Category::SECURITY,
             path: 'app/controllers/application_controller.rb',
             line: 6,
             severity: Inquisition::Severity::MEDIUM,
@@ -101,7 +96,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collection do
       end
       let(:issue) do
         Inquisition::Issue.new(
-          category: Inquisition::Category::SECURITY,
           path: 'app/controllers/users_controller.rb',
           line: 42,
           severity: Inquisition::Severity::LOW,

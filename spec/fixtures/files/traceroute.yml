@@ -1,42 +1,28 @@
 - severity: :low
-  category: :unused_code
   message: 'Unused route: users#index'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: application#test_fasterer'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: application#test_injection_brakeman'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#controller_path='
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#cookies'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#assigns'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#redirect_to_url'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#fixture_file_upload'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#request'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#response'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#params'
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#params='
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#request='
 - severity: :low
-  category: :unused_code
   message: 'Unreachable action method: action_view/test_case/test#response='

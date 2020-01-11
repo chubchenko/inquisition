@@ -80,7 +80,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
             line: 35,
             severity: Inquisition::Severity::LOW,
             message: 'Similar code found in 2 nodes',
-            category: Inquisition::Category::DUPLICATION,
             runner: runner,
             context: smell
           ),
@@ -89,7 +88,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
             line: 42,
             severity: Inquisition::Severity::LOW,
             message: 'Similar code found in 2 nodes',
-            category: Inquisition::Category::DUPLICATION,
             runner: runner,
             context: smell
           )
@@ -140,7 +138,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
           line: 14,
           severity: Inquisition::Severity::LOW,
           message: 'ApplicationRecord#test_flog has a flog score of 40',
-          category: Inquisition::Category::COMPLEXITY,
           runner: runner
         )
       end
@@ -189,7 +186,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
           line: 9,
           severity: Inquisition::Severity::LOW,
           runner: runner,
-          category: Inquisition::Category::COMPLEXITY,
           message: <<-MESSAGE.squish
             ApplicationController#test_fasterer doesn't depend on instance state (maybe move it to another class?)
           MESSAGE
@@ -240,7 +236,6 @@ RSpec.describe Inquisition::Rubycritic::Runner do
           line: 14,
           severity: Inquisition::Severity::LOW,
           message: 'ApplicationRecord#test_flog has a flog score of 40',
-          category: Inquisition::Category::COMPLEXITY,
           runner: runner,
           context: smell.type
         )

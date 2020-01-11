@@ -28,10 +28,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
     context 'when there is insecure source' do
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::MEDIUM,
-          category: Inquisition::Category::SECURITY,
           message: 'Insecure Source URI found: http://rubygems.org/',
           runner: runner
         )
@@ -60,10 +57,7 @@ RSpec.describe Inquisition::Bundler::Audit::Runner do
     context 'when there is unpatched gem' do
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::MEDIUM,
-          category: Inquisition::Category::SECURITY,
           message: 'Nested attributes rejection proc bypass in Active Record',
           runner: runner
         )

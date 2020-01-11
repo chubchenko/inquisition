@@ -31,11 +31,8 @@ module Inquisition
 
       def issue_for(message:)
         Issue.new(
-          path: nil,
-          line: nil,
           severity: Severity::LOW,
           message: message,
-          category: Category::UNUSED_CODE,
           runner: self
         )
       end
