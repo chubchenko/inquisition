@@ -4,7 +4,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
   describe '#call' do
     subject(:runner) { described_class.new }
 
-    let(:analysed_modules) { instance_double(RubyCritic::AnalysedModulesCollection) }
+    let(:analysed_modules) { instance_double(RubyCritic::AnalysedModulesCollection, score: 0) }
 
     before do
       allow(analysed_modules).to receive(:map).and_yield(analysed_module)
@@ -15,6 +15,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:flay) { instance_double(Inquisition::Rubycritic::Analysers::Flay) }
       let(:flog) { instance_double(Inquisition::Rubycritic::Analysers::Flog) }
       let(:reek) { instance_double(Inquisition::Rubycritic::Analysers::Reek) }
+      let(:complexity) { instance_double(Inquisition::Rubycritic::Analysers::Complexity) }
 
       let(:analysed_module) do
         instance_double(
@@ -29,10 +30,13 @@ RSpec.describe Inquisition::Rubycritic::Runner do
         allow(flay).to receive(:run)
         allow(flog).to receive(:run)
         allow(reek).to receive(:run)
+        allow(complexity).to receive(:run)
 
         allow(Inquisition::Rubycritic::Analysers::Flay).to receive(:new).with(analysed_modules).and_return(flay)
         allow(Inquisition::Rubycritic::Analysers::Flog).to receive(:new).with(analysed_modules).and_return(flog)
         allow(Inquisition::Rubycritic::Analysers::Reek).to receive(:new).with(analysed_modules).and_return(reek)
+        allow(Inquisition::Rubycritic::Analysers::Complexity).to receive(:new)
+          .with(analysed_modules).and_return(complexity)
       end
 
       it { expect(runner.call).to be_empty }
@@ -51,6 +55,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'Similar code',
           message: 'found in 2 nodes',
           analyser: 'flay',
@@ -76,7 +81,8 @@ RSpec.describe Inquisition::Rubycritic::Runner do
             severity: Inquisition::Severity::LOW,
             message: 'Similar code found in 2 nodes',
             category: Inquisition::Category::DUPLICATION,
-            runner: runner
+            runner: runner,
+            context: smell
           ),
           Inquisition::Issue.new(
             path: 'app/models/application_record.rb',
@@ -84,7 +90,8 @@ RSpec.describe Inquisition::Rubycritic::Runner do
             severity: Inquisition::Severity::LOW,
             message: 'Similar code found in 2 nodes',
             category: Inquisition::Category::DUPLICATION,
-            runner: runner
+            runner: runner,
+            context: smell
           )
         ]
       end
@@ -114,6 +121,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'ApplicationRecord#test_flog',
           message: 'has a flog score of 40',
           analyser: 'flog',
@@ -162,6 +170,7 @@ RSpec.describe Inquisition::Rubycritic::Runner do
       let(:smell) do
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'ApplicationController#test_fasterer',
           message: "doesn't depend on instance state (maybe move it to another class?)",
           analyser: 'reek',
@@ -192,6 +201,57 @@ RSpec.describe Inquisition::Rubycritic::Runner do
 
         allow(reek).to receive(:run)
         allow(Inquisition::Rubycritic::Analysers::Reek).to receive(:new).with(analysed_modules).and_return(reek)
+      end
+
+      it 'returns a collection of issues' do
+        expect(runner.call).to contain_exactly(issue)
+      end
+    end
+
+    context 'when there are call column `complexity` in issues' do
+      let(:complexity) { instance_double(Inquisition::Rubycritic::Analysers::Complexity) }
+      let(:analysed_module) do
+        instance_double(
+          RubyCritic::AnalysedModule,
+          pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')),
+          path: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb')).to_s,
+          smells: [smell]
+        )
+      end
+      let(:smell) do
+        instance_double(
+          RubyCritic::Smell,
+          type: 'HighComplexity',
+          context: 'ApplicationRecord#test_flog',
+          message: 'has a flog score of 40',
+          analyser: 'flog',
+          locations: [
+            instance_double(
+              RubyCritic::Location,
+              line: 14,
+              pathname: Pathname.new(Rails.root.join('app', 'models', 'application_record.rb'))
+            )
+          ]
+        )
+      end
+      let(:issue) do
+        Inquisition::Issue.new(
+          path: 'app/models/application_record.rb',
+          line: 14,
+          severity: Inquisition::Severity::LOW,
+          message: 'ApplicationRecord#test_flog has a flog score of 40',
+          category: Inquisition::Category::COMPLEXITY,
+          runner: runner,
+          context: smell.type
+        )
+      end
+
+      before do
+        stub_const('Inquisition::Rubycritic::Runner::ANALYSERS', [Inquisition::Rubycritic::Analysers::Complexity])
+
+        allow(complexity).to receive(:run)
+        allow(Inquisition::Rubycritic::Analysers::Complexity).to receive(:new)
+          .with(analysed_modules).and_return(complexity)
       end
 
       it 'returns a collection of issues' do

@@ -3,6 +3,7 @@ require 'rubycritic/analysers_runner'
 require_relative 'analysers/reek'
 require_relative 'analysers/flay'
 require_relative 'analysers/flog'
+require_relative 'analysers/complexity'
 
 module Inquisition
   module Rubycritic
@@ -10,8 +11,11 @@ module Inquisition
       ANALYSERS = [
         Analysers::Flay,
         Analysers::Flog,
-        Analysers::Reek
+        Analysers::Reek,
+        Analysers::Complexity
       ].freeze
+
+      attr_reader :common_score
 
       def call
         issues = []
@@ -37,6 +41,8 @@ module Inquisition
             analyser_instance = analyser_class.new(analysed_modules)
             analyser_instance.run
           end
+
+          @common_score = analysed_modules&.score
 
           analysed_modules
         end

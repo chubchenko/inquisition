@@ -6,6 +6,7 @@ RSpec.describe Inquisition::Rubycritic::Smell do
       [
         instance_double(
           RubyCritic::Smell,
+          type: 'HighComplexity',
           context: 'Similar code',
           message: 'found in 2 nodes',
           analyser: 'flay'
@@ -23,7 +24,8 @@ RSpec.describe Inquisition::Rubycritic::Smell do
         path: 'app/models/application_record.rb',
         line: 42,
         severity: Inquisition::Severity::LOW,
-        message: 'Similar code found in 2 nodes'
+        message: 'Similar code found in 2 nodes',
+        context: 'HighComplexity'
       }
     end
 
