@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
+RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
   include_examples 'produceable' do
     subject(:tpl) { described_class.new([]) }
   end
@@ -17,7 +17,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
 
     it do
       expect(template).to have_received(:render).with(
-        instance_of(Inquisition::Outputter::Doc::TPL::BottlenecksDetection::ActiveRecordDoctor)
+        instance_of(Inquisition::Outputter::Doc::TPL::Bottleneck::ActiveRecordDoctor)
       )
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
 
     it do
       expect(template).to have_received(:render).with(
-        instance_of(Inquisition::Outputter::Doc::TPL::BottlenecksDetection::Fasterer)
+        instance_of(Inquisition::Outputter::Doc::TPL::Bottleneck::Fasterer)
       )
     end
   end
@@ -55,7 +55,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection do
 
     it do
       expect(template).to have_received(:render).with(
-        instance_of(Inquisition::Outputter::Doc::TPL::BottlenecksDetection::LolDba)
+        instance_of(Inquisition::Outputter::Doc::TPL::Bottleneck::LolDba)
       )
     end
   end

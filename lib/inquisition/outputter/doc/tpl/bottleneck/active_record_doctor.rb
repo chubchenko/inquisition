@@ -2,7 +2,7 @@ module Inquisition
   module Outputter
     class Doc
       module TPL
-        class BottlenecksDetection
+        class Bottleneck
           class ActiveRecordDoctor
             def self.call(issues)
               new(Security::Collector.new(issues, ::Inquisition::ActiveRecordDoctor::Runner).call)

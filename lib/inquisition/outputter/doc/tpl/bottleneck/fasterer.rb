@@ -2,7 +2,7 @@ module Inquisition
   module Outputter
     class Doc
       module TPL
-        class BottlenecksDetection
+        class Bottleneck
           class Fasterer
             class Wrapper < SimpleDelegator
               PATH = 'https://github.com/JuanitoFatas/fast-ruby#'.freeze

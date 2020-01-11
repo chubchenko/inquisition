@@ -2,7 +2,7 @@ require_relative 'base'
 require_relative 'home'
 require_relative 'stack'
 require_relative 'security'
-require_relative 'bottlenecks_detection'
+require_relative 'bottleneck'
 
 module Inquisition
   module Outputter
@@ -31,9 +31,9 @@ module Inquisition
             end
           end
 
-          def bottlenecks_detection
-            @bottlenecks_detection ||= begin
-              Template.new('bottlenecks_detection').render(TPL::BottlenecksDetection.new(@issues))
+          def bottleneck
+            @bottleneck ||= begin
+              Template.new('bottleneck').render(TPL::Bottleneck.new(@issues))
             end
           end
         end

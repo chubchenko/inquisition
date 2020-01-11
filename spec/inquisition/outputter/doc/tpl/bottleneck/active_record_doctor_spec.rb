@@ -1,4 +1,4 @@
-RSpec.describe Inquisition::Outputter::Doc::TPL::BottlenecksDetection::ActiveRecordDoctor do
+RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck::ActiveRecordDoctor do
   include_examples 'produceable' do
     subject(:tpl) { described_class.new([]) }
   end
