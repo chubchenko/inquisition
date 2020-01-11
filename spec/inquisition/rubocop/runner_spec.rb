@@ -12,7 +12,8 @@ RSpec.describe Inquisition::Rubocop::Runner do
         severity: instance_double(RuboCop::Cop::Severity, name: :convention),
         message: message,
         line: 1,
-        cop_name: 'Security/Eval'
+        cop_name: 'Security/Eval',
+        status: :unsupported
       )
     end
 
@@ -22,7 +23,8 @@ RSpec.describe Inquisition::Rubocop::Runner do
         severity: instance_double(RuboCop::Cop::Severity, name: :warning),
         message: message,
         line: 2,
-        cop_name: 'Metrics/LineLength'
+        cop_name: 'Metrics/LineLength',
+        status: :unsupported
       )
     end
 
@@ -32,7 +34,8 @@ RSpec.describe Inquisition::Rubocop::Runner do
         severity: instance_double(RuboCop::Cop::Severity, name: :error),
         message: message,
         line: 3,
-        cop_name: 'Metrics/BlockLength'
+        cop_name: 'Metrics/BlockLength',
+        status: :unsupported
       )
     end
 
@@ -43,7 +46,8 @@ RSpec.describe Inquisition::Rubocop::Runner do
         message: message,
         category: Inquisition::Category::SECURITY,
         line: 1,
-        runner: nil
+        runner: nil,
+        context: :unsupported
       )
     end
 
@@ -54,7 +58,8 @@ RSpec.describe Inquisition::Rubocop::Runner do
         message: message,
         category: Inquisition::Category::STYLE,
         line: 2,
-        runner: nil
+        runner: nil,
+        context: :unsupported
       )
     end
 
@@ -65,7 +70,8 @@ RSpec.describe Inquisition::Rubocop::Runner do
         message: message,
         category: Inquisition::Category::COMPLEXITY,
         line: 3,
-        runner: nil
+        runner: nil,
+        context: :unsupported
       )
     end
 
