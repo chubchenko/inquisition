@@ -4,7 +4,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
   end
 
   describe '#active_record_doctor' do
-    subject(:security) { described_class.new([]) }
+    subject(:bottleneck) { described_class.new([]) }
 
     let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
 
@@ -12,7 +12,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
       allow(template).to receive(:render)
       allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
 
-      security.active_record_doctor
+      bottleneck.active_record_doctor
     end
 
     it do
@@ -23,7 +23,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
   end
 
   describe '#fasterer' do
-    subject(:security) { described_class.new([]) }
+    subject(:bottleneck) { described_class.new([]) }
 
     let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
 
@@ -31,7 +31,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
       allow(template).to receive(:render)
       allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
 
-      security.fasterer
+      bottleneck.fasterer
     end
 
     it do
@@ -42,7 +42,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
   end
 
   describe '#lol_dba' do
-    subject(:security) { described_class.new([]) }
+    subject(:bottleneck) { described_class.new([]) }
 
     let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
 
@@ -50,7 +50,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Bottleneck do
       allow(template).to receive(:render)
       allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
 
-      security.lol_dba
+      bottleneck.lol_dba
     end
 
     it do
