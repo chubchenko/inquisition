@@ -1,0 +1,32 @@
+<div class="">
+  <div class="mt-5">
+    <span class="subtitle"><a id="structural_similarities_analysis_and_code_smell_detection">Structural similarities analysis and code smell detection</a></span>
+  </div>
+  <span><%= "All the code was analyzed by <a href=#{link}>rubycritic</a>. Average score/percent of cleanness <b>#{score}</b>. We grouped them by severity:" %></span>
+  <ul class="mt--5">
+    <% collection.group do |severity, issues| %>
+    <li>
+      <span>
+        <%= "#{severity}:" %>
+      </span>
+      <ul type="circle">
+        <% types(issues) do |warning, count| %>
+          <li>
+            <span>
+              <%= "#{count} of them related to" %>
+            </span>
+            <span>
+              <b>
+                <%= warning %>
+              </b>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
+  <span>
+    The full report can be found <a href="#">here</a>.
+  </span>
+</div>

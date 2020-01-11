@@ -3,6 +3,7 @@ require_relative 'home'
 require_relative 'stack'
 require_relative 'security'
 require_relative 'bottleneck'
+require_relative 'quality'
 require_relative 'db'
 
 module Inquisition
@@ -35,6 +36,12 @@ module Inquisition
           def bottleneck
             @bottleneck ||= begin
               Template.new('bottleneck').render(TPL::Bottleneck.new(@issues))
+            end
+          end
+
+          def quality
+            @quality ||= begin
+              Template.new('quality').render(Quality.new(@issues))
             end
           end
 
