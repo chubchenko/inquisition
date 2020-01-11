@@ -1,0 +1,15 @@
+<div class="">
+  <span class="subtitle"><a id="database_structure_checking">Database structure checking</a></span>
+  <ul class="mt--5">
+    <li>
+      <%= "There are #{collection.count} database issues" %>
+      <ul>
+        <% collection.group do |warning, count| %>
+          <li>
+            <%= "#{count} #{warning}" %>
+          </li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+</div>

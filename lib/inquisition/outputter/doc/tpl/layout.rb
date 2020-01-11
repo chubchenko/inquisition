@@ -3,6 +3,7 @@ require_relative 'home'
 require_relative 'stack'
 require_relative 'security'
 require_relative 'bottleneck'
+require_relative 'db'
 
 module Inquisition
   module Outputter
@@ -34,6 +35,12 @@ module Inquisition
           def bottleneck
             @bottleneck ||= begin
               Template.new('bottleneck').render(TPL::Bottleneck.new(@issues))
+            end
+          end
+
+          def db
+            @db ||= begin
+              Template.new('db').render(TPL::DB.new(@issues))
             end
           end
         end
