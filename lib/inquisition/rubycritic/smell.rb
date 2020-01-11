@@ -12,7 +12,6 @@ module Inquisition
           line: location.line,
           severity: Inquisition::Severity::LOW,
           message: "#{smell.context} #{smell.message}",
-          category: category,
           context: smell.type
         }
       end
@@ -20,15 +19,6 @@ module Inquisition
       private
 
       attr_reader :smell, :location
-
-      def category
-        case smell.analyser
-        when 'flay'
-          Category::DUPLICATION
-        when 'flog', 'reek'
-          Category::COMPLEXITY
-        end
-      end
     end
   end
 end

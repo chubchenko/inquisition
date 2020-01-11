@@ -6,7 +6,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Brakeman do
   describe '.call' do
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::HIGH,
@@ -39,7 +38,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Brakeman do
 
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::HIGH,

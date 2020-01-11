@@ -9,7 +9,6 @@ RSpec.describe Inquisition::Brakeman::Runner do
     let(:vulnerability) { instance_double(Inquisition::Brakeman::Vulnerability, to_h: options) }
     let(:options) do
       {
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::HIGH,

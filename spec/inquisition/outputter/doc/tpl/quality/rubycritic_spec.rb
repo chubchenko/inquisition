@@ -6,7 +6,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubycritic do
   describe '.call' do
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::LOW,
@@ -40,7 +39,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubycritic do
 
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::LOW,
@@ -65,7 +63,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubycritic do
       let(:total_score) { 10 }
       let(:issue) do
         Inquisition::Issue.new(
-          category: Inquisition::Category::SECURITY,
           path: 'app/controllers/users_controller.rb',
           line: 42,
           severity: Inquisition::Severity::LOW,
@@ -110,7 +107,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubycritic do
 
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::LOW,

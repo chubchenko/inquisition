@@ -42,10 +42,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::PatchLevel do
 
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::HIGH,
-          category: Inquisition::Category::SECURITY,
           message: 'Loofah XSS Vulnerability',
           runner: nil,
           context: context

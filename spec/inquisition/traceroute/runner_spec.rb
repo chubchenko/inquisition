@@ -23,10 +23,7 @@ RSpec.describe Inquisition::Traceroute::Runner do
     context 'when there is one unused route' do
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::UNUSED_CODE,
           message: 'Unused route: users#index',
           runner: runner
         )
@@ -45,10 +42,7 @@ RSpec.describe Inquisition::Traceroute::Runner do
     context 'when there is one unreachable action method' do
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::UNUSED_CODE,
           message: 'Unreachable action method: users#index2',
           runner: runner
         )

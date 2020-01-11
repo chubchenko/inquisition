@@ -1,7 +1,7 @@
 RSpec.describe Inquisition::Outputter::Xlsx::Gem do
   subject(:gem) { described_class.new(spec, dependency) }
 
-  let(:spec) { OpenStruct.new(name: 'puma',homepage: 'http://puma.io') }
+  let(:spec) { OpenStruct.new(name: 'puma', homepage: 'http://puma.io') }
   let(:dependency) { instance_double(Bundler::Dependency, groups: [:default]) }
 
   describe '#to_a' do

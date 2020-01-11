@@ -12,7 +12,7 @@ RSpec.describe Inquisition::ActiveRecordDoctor::Runner do
     before { allow(ard_task).to receive(:run).and_return([warning, true]) }
 
     it 'returns issues array with specific message' do
-      stub_const('Inquisition::ActiveRecordDoctor::Runner::TASKS', ard_task => Inquisition::Category::PERFORMANCE)
+      stub_const('Inquisition::ActiveRecordDoctor::Runner::TASKS', [ard_task])
       expect(runner.call.first.message).to eq(message)
     end
   end

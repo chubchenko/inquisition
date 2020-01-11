@@ -13,10 +13,7 @@ RSpec.describe Inquisition::LolDba::Runner do
     context 'when there is no index on a column in a table' do
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::PERFORMANCE,
           message: 'The following column(s) `user_id` from the `projects` table probably should be indexed',
           runner: runner
         )
@@ -40,10 +37,7 @@ RSpec.describe Inquisition::LolDba::Runner do
       end
       let(:issue) do
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::LOW,
-          category: Inquisition::Category::PERFORMANCE,
           message: message,
           runner: runner
         )

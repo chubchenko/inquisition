@@ -5,7 +5,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collector do
     let(:klass) { Inquisition::Brakeman::Runner }
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::SECURITY,
         path: 'app/controllers/users_controller.rb',
         line: 42,
         severity: Inquisition::Severity::HIGH,
@@ -18,10 +17,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Security::Collector do
       [
         issue,
         Inquisition::Issue.new(
-          path: nil,
-          line: nil,
           severity: Inquisition::Severity::MEDIUM,
-          category: Inquisition::Category::SECURITY,
           message: 'Insecure Source URI found: http://rubygems.org/',
           runner: Inquisition::Bundler::Audit::Runner.new
         )

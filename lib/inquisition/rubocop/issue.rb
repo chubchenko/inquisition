@@ -17,7 +17,6 @@ module Inquisition
       def to_h
         {
           severity: LEVELS[offense.severity.name],
-          category: Categorizer.find_category(offense.cop_name),
           path: file,
           message: offense.message,
           line: offense.line,

@@ -10,10 +10,7 @@ module Inquisition
       def to_h
         {
           severity: Severity::LOW,
-          path: nil,
-          line: nil,
           message: create_message,
-          category: Runner::TASKS[task],
           context: task.to_s.split('::').last
         }
       end

@@ -6,10 +6,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::DB::ActiveRecordDoctor do
   describe '.call' do
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::BUG_RISK,
         severity: Inquisition::Severity::LOW,
-        path: nil,
-        line: nil,
         message: 'book_authors has missing foreign keys, details: book_id, author_id',
         context: 'MissingUniqueIndexes',
         runner: Inquisition::ActiveRecordDoctor::Runner.new
@@ -38,9 +35,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::DB::ActiveRecordDoctor do
 
     let(:issue) do
       Inquisition::Issue.new(
-        category: Inquisition::Category::BUG_RISK,
-        path: nil,
-        line: nil,
         severity: Inquisition::Severity::LOW,
         message: 'book_authors has missing foreign keys, details: book_id, author_id',
         context: 'MissingUniqueIndexes',

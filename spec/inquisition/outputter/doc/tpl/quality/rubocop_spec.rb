@@ -5,7 +5,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubocop do
 
   let(:issue) do
     Inquisition::Issue.new(
-      category: Inquisition::Category::SECURITY,
       path: 'app/controllers/users_controller.rb',
       line: 42,
       severity: Inquisition::Severity::LOW,
@@ -127,7 +126,6 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubocop do
 
       let(:issue_autocorrect) do
         Inquisition::Issue.new(
-          category: Inquisition::Category::SECURITY,
           path: 'app/controllers/users_controller.rb',
           line: 42,
           severity: Inquisition::Severity::LOW,
