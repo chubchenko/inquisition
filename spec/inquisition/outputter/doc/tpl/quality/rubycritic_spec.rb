@@ -89,7 +89,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality::Rubycritic do
     end
   end
 
-  describe 'link' do
+  describe '#link' do
     subject(:link) { described_class.new([]).link }
 
     let(:stack) { instance_double(Inquisition::Outputter::Doc::TPL::Stack::Collector) }

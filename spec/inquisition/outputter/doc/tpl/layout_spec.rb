@@ -59,4 +59,42 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Layout do
       )
     end
   end
+
+  describe '#quality' do
+    subject(:layout) { described_class.new([]) }
+
+    let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
+
+    before do
+      allow(template).to receive(:render)
+      allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
+
+      layout.quality
+    end
+
+    it do
+      expect(template).to have_received(:render).with(
+        instance_of(Inquisition::Outputter::Doc::TPL::Quality)
+      )
+    end
+  end
+
+  describe '#db' do
+    subject(:layout) { described_class.new([]) }
+
+    let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
+
+    before do
+      allow(template).to receive(:render)
+      allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
+
+      layout.db
+    end
+
+    it do
+      expect(template).to have_received(:render).with(
+        instance_of(Inquisition::Outputter::Doc::TPL::DB)
+      )
+    end
+  end
 end

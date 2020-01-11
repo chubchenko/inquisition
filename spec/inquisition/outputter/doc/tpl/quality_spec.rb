@@ -4,7 +4,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality do
   end
 
   describe '#rubycritic' do
-    subject(:security) { described_class.new([]) }
+    subject(:quality) { described_class.new([]) }
 
     let(:template) { instance_double(Inquisition::Outputter::Doc::Template) }
 
@@ -12,7 +12,7 @@ RSpec.describe Inquisition::Outputter::Doc::TPL::Quality do
       allow(template).to receive(:render)
       allow(Inquisition::Outputter::Doc::Template).to receive(:new).and_return(template)
 
-      security.rubycritic
+      quality.rubycritic
     end
 
     it do
