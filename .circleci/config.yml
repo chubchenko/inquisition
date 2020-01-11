@@ -216,6 +216,20 @@ jobs:
           key: ruby-2.6
       - rspec
 
+  ruby-2-7:
+    executor:
+      name: default
+      tag: "2.7"
+    steps:
+      - restore_cache:
+          key: checkout-{{ .Branch }}-{{ .Revision }}
+      - bundle-load-cache:
+          key: ruby-2.7
+      - bundle-install
+      - bundle-save-cache:
+          key: ruby-2.7
+      - rspec
+
   ruby-head:
     executor: default
     steps:
@@ -256,6 +270,10 @@ workflows:
           requires:
             - checkout
             - cc-setup-coverage
+      - ruby-2-7:
+          requires:
+            - checkout
+            - cc-setup-coverage
       - ruby-head:
           requires:
             - checkout
@@ -265,6 +283,7 @@ workflows:
             - ruby-2-4
             - ruby-2-5
             - ruby-2-6
+            - ruby-2-7
             - ruby-head
   nightly:
     triggers:
