@@ -1,0 +1,34 @@
+<div class="">
+  <span class="subtitle"><a id="rails_code_quality_checking">Rails code quality checking</a></span>
+    <ul class="mt--5">
+      <li>
+        there are <%= collection.count %> warnings according to the rails_best_practices (the full report can be found here). We grouped them by severity:
+        <% collection.group do |severity, issues| %>
+        <ul>
+          <li>
+            <span>
+              <%= "#{severity}:" %>
+            </span>
+            <ul type="circle">
+            <% types(issues) do |warning, count| %>
+              <li>
+                <span>
+                  <%= "#{count} of them related to" %>
+                </span>
+                <span>
+                  <b>
+                    <%= warning %>
+                  </b>
+                </span>
+              </li>
+            <% end %>
+            </ul>
+          </li>
+        </ul>
+        <% end %>
+      </li>
+    </ul>
+  <span>
+    The full report can be found <a href="#">here</a>.
+  </span>
+</div>
