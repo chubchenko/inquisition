@@ -1,21 +1,56 @@
 require:
-  - rubocop-rails
-  - rubocop-performance
-  - rubocop-rspec
-  - rubocop-minitest
-  - rubocop-rake
+  - "rubocop-performance"
+  - "rubocop-rails"
+  - "rubocop-rspec"
+  - "rubocop-rake"
 
 AllCops:
   Exclude:
-    - 'db/schema.rb'
-    - 'node_modules/**/*'
-    - 'vendor/**/*'
+    - "bin/*"
+    - "db/schema.rb"
+    - "node_modules/**/*"
+    - "vendor/**/*"
+  NewCops: enable
 
-Style/Documentation:
-  Enabled: false
+############### Layout ###############
 
 Layout/LineLength:
   Max: 120
 
-Style/FrozenStringLiteralComment:
+############### Style ###############
+
+Style/Documentation:
   Enabled: false
+
+############### Metrics ###############
+
+Metrics/AbcSize:
+  IgnoredMethods:
+    - "change"
+
+Metrics/BlockLength:
+  IgnoredMethods:
+    - "register"
+    - "describe"
+    - "shared_examples"
+    - "context"
+
+Metrics/MethodLength:
+  IgnoredMethods:
+    - "change"
+
+############### RSpec ###############
+
+RSpec/DescribeClass:
+  Exclude:
+    - "spec/acceptance/**/*"
+
+RSpec/ExampleLength:
+  Exclude:
+    - "spec/acceptance/**/*"
+  Max: 10
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - "spec/acceptance/**/*"
+  Max: 2
