@@ -11,7 +11,7 @@ module Inquisition
         {
           severity: Severity::LOW,
           message: create_message,
-          context: task.to_s.split('::').last
+          context: task.demodulize
         }
       end
 
@@ -20,7 +20,7 @@ module Inquisition
       attr_reader :task, :table, :column
 
       def create_message
-        issue_text = task.to_s.split('::').last.split(/(?=[A-Z])/).map(&:downcase).join(' ')
+        issue_text = task.demodulize.gsub(/([a-z]+)([A-Z])/, '\1 \2').downcase
         "#{table} has #{issue_text}, details: #{column ? column.join(', ') : 'n/a'}"
       end
     end

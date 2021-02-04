@@ -12,41 +12,10 @@
 
 <%= rubocop %>
 
+<%= rails_best_practices %>
+
 <div class="">
-  <span class="subtitle"><a id="rails_code_quality_checking">Rails code quality checking</a></span>
-  <ul class="mt--5">
-    <li>
-      there are 612 warnings according to the rails_best_practices (the full report can be found here). We grouped them by severity:
-      <ul>
-        <li>
-          <span>High:</span>
-          <ul type="circle">
-            <li>24 of them related to the missing indexes in the database;</li>
-            <li>137 related to the unused code;</li>
-            <li>2 of them related to use model association;</li>
-          </ul>
-        </li>
-        <li>
-          <span>Medium:</span>
-          <ul type="circle">
-            <li>24 of them related to the missing indexes in the database;</li>
-            <li>137 related to the unused code;</li>
-            <li>2 of them related to use model association;</li>
-          </ul>
-        </li>
-        <li>
-          <span>Low:</span>
-          <ul type="circle">
-            <li>24 of them related to the missing indexes in the database;</li>
-            <li>137 related to the unused code;</li>
-            <li>2 of them related to use model association;</li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-
-
-    <li>there are 41 unused routes and 10 unreachable action methods. The full report can be found here</li>
+  <li>there are 41 unused routes and 10 unreachable action methods. The full report can be found here</li>
     <li>
       the business logic is stored in the:
       <ul>
@@ -79,7 +48,10 @@
         <li>workers</li>
       </ul>
     </li>
-    <li>the application does not use internationalization;</li>
-    <li>technical documentation of the project is absent.</li>
-  </ul>
+    <li>
+      <ul>
+        <li>the application does not use internationalization;</li>
+        <li>technical documentation of the project is absent.</li>
+      </ul>
+    </li>
 </div>
