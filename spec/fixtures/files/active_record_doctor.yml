@@ -3,7 +3,9 @@
 - severity: :low
   message: 'projects has missing foreign keys, details: user_id'
 - severity: :low
-  message: 'ActiveStorage::Attachment has missing presence validation, details: name, record_type, record_id, blob_id'
+  message: 'projects has missing non null constraint, details: name, user_id'
+- severity: :low
+  message: 'ActiveStorage::Attachment has missing presence validation, details: name, record_type'
 - severity: :low
   message: 'ActiveStorage::Blob has missing presence validation, details: key, filename, byte_size, checksum'
 - severity: :low
