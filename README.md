@@ -1,3 +1,7 @@
+“This project is tested with BrowserStack.”
+
+
+
 [![CircleCI](https://circleci.com/gh/rubygarage/inquisition/tree/develop.svg?style=shield)](https://circleci.com/gh/rubygarage/inquisition/tree/develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/782f08cb5c7c04eeaf04/maintainability)](https://codeclimate.com/github/rubygarage/inquisition/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/782f08cb5c7c04eeaf04/test_coverage)](https://codeclimate.com/github/rubygarage/inquisition/test_coverage)
